@@ -1,6 +1,6 @@
 CREATE DATABASE FindYourSherutLeumiDB;
 
-DROP DATABASE FindYourSherutLeumiDB;
+-- DROP DATABASE FindYourSherutLeumiDB;
 
 USE FindYourSherutLeumiDB;
 
@@ -10,7 +10,7 @@ CREATE TABLE LevelUser(
     FOREIGN KEY (CoordinatorLevelID) REFERENCES Coordinator(CoordinatorID),
     FOREIGN KEY (ApplicantLevelID) REFERENCES Applicant(ApplicantID)
 );
-DROP TABLE LevelUser;
+-- DROP TABLE LevelUser;
 
 CREATE TABLE Applicant(
 	ApplicantID INT PRIMARY KEY AUTO_INCREMENT,
@@ -22,7 +22,7 @@ CREATE TABLE Applicant(
     Email NVARCHAR(40),
     ApplicantPassword CHAR(64)
 );
-DROP TABLE Applicant;
+-- DROP TABLE Applicant;
 
 CREATE TABLE Coordinator(
 	CoordinatorID INT PRIMARY KEY AUTO_INCREMENT,
@@ -35,7 +35,7 @@ CREATE TABLE Coordinator(
     OrganizationName NVARCHAR(40),
     ServiceID INT
 );
-DROP TABLE Coordinator;
+-- DROP TABLE Coordinator;
 
 CREATE TABLE Service(
 	ServiceID INT PRIMARY KEY AUTO_INCREMENT,
@@ -55,4 +55,39 @@ CREATE TABLE Service(
     CoordinatorID INT,
     FOREIGN KEY (CoordinatorID) REFERENCES Coordinator(CoordinatorID)
 );
-DROP TABLE Service;
+-- DROP TABLE Service;
+
+-- for testing
+INSERT INTO Service(ServiceName,OrganizationName,Category,Country,City,StreetName,StreetNum,HasApartment,
+    IsSecondYearOnly,IsMorningService,IsEveningService,DescriptionService,CoordinatorName)
+    VALUES('name1','organization1','cat1','country1','city1','streetname1',1,true,false,
+			true,false,'description1111111111111111111111','coordinator');
+
+-- procedure that calls all the services in the db
+DELIMITER $$
+CREATE PROCEDURE `getAllServices`()
+BEGIN
+    SELECT * FROM Service;
+END$$
+DELIMITER ;
+-- calls the procedure
+CALL `getAllServices`();
+
+-- procedure that adds service into the db
+DELIMITER $$
+CREATE PROCEDURE `insertServiceInfo`(IN p_ServiceName NVARCHAR(40), IN p_OrganizationName NVARCHAR(40),
+ IN p_Category NVARCHAR(50), IN p_Country NVARCHAR(30), IN p_City NVARCHAR(30), IN p_StreetName NVARCHAR(30),
+ IN p_StreetNum INT(10), IN p_HasApartment BOOLEAN, IN p_IsSecondYearOnly BOOLEAN, IN p_IsMorningService BOOLEAN,
+ IN p_IsEveningService BOOLEAN, IN p_DescriptionService NVARCHAR(200), IN p_CoordinatorName NVARCHAR(25))
+BEGIN
+    INSERT INTO Service(ServiceName,OrganizationName,Category,Country,City,StreetName,StreetNum,HasApartment,
+    IsSecondYearOnly,IsMorningService,IsEveningService,DescriptionService,CoordinatorName)
+    VALUES(p_ServiceName,p_OrganizationName,p_Category,p_Country,p_City,p_StreetName,p_StreetNum,p_HasApartment,
+    p_IsSecondYearOnly,p_IsMorningService,p_IsEveningService,p_DescriptionService,p_CoordinatorName);
+END$$
+DELIMITER ;
+
+-- calls the procedure
+CALL `insertServiceInfo`();
+
+
