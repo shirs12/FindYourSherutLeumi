@@ -68,7 +68,19 @@ BEGIN
     is_second_year_only,is_morning_service,is_evening_service,description_service,coordinator_name FROM service;
 END$$
 DELIMITER ;
-CALL `get_all_services`();
+CALL `get_all_services`(); -- test
+
+-- procedure that calls a specific service from the db
+DELIMITER $$
+CREATE PROCEDURE `get_service_by_id`(IN id INT)
+BEGIN
+	SELECT service_name,organization_name,category,country,city,street_name,
+			street_num,has_apartment,is_second_year_only,is_morning_service,
+			is_evening_service,description_service,coordinator_name
+	FROM service WHERE service_id = id;
+END$$
+DELIMITER ;
+CALL `get_service_by_id`(1); -- test
 
 -- procedure that adds service into the db
 DELIMITER $$
