@@ -72,7 +72,8 @@ SET SQL_SAFE_UPDATES = 1;
 DELIMITER $$
 CREATE PROCEDURE `getAllServices`()
 BEGIN
-    SELECT * FROM Service;
+    SELECT ServiceName,OrganizationName,Category,Country,City,StreetName,StreetNum,HasApartment,
+    IsSecondYearOnly,IsMorningService,IsEveningService,DescriptionService,CoordinatorName FROM Service;
 END$$
 DELIMITER ;
 CALL `getAllServices`();
