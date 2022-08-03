@@ -1,24 +1,15 @@
 const pool = require("../config/db");
 
+// calls a procedure that gets all the services in the db
 exports.getServices = async () => {
-    pool.getConnection((err, connection) => {
-    //     if(err) return console.error('error: ' + err.message);
-    //     console.log(`connected as id ` + connection.threadId); // not necessary
-    //     connection.query('CALL getAllServices()', (err,rows) => {
-    //         connection.release();
-    //         if(err) return console.log('error:' + err.message);
-    //         console.log('data recevied from db...');
-    //         console.log(rows);
-    //         return rows;
-    //     });
-    console.log("hello");
-    });
+    const [rows] = await pool.execute('CALL get_all_services()');
+    return rows;
+};
 
-    // pool.execute('CALL getAllServices()', (err,rows) => {
-    //     if(err) return console.log('error:' + err.message);
-    //     console.log("111");
-    //     return rows;
-    // });
-}
+// calls a procedure that gets specific service from db
+exports.getServiceId = async (id) => {
+    const [row, _] = await pool.execute('CALL get_service_by_id(?)', [id]);
+    return row[0];
+};
 
 
