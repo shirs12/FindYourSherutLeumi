@@ -4,8 +4,15 @@ const router = express.Router();
 
 // GET 
 router.route("/").get(serviceController.getAllServices)
-router.route("/:id").get(serviceController.getServiceById);
+router.route("/:id")
+      .get(serviceController.getServiceById)
+    //   .put(serviceController); // TODO
 
-router.post("/addService", serviceController.createNewService);
+// POST
+router.post("/add", serviceController.createNewService);
+
+// PUT
+
+// DELETE
 
 module.exports = router;
