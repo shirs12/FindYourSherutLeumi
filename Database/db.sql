@@ -84,7 +84,7 @@ CALL `get_service_by_id`(1); -- test
 
 -- procedure that adds service into the db
 DELIMITER $$
-CREATE PROCEDURE `insert_service_info`(IN p_service_name NVARCHAR(40), IN p_organization_name NVARCHAR(40),
+CREATE PROCEDURE `add_new_service`(IN p_service_name NVARCHAR(40), IN p_organization_name NVARCHAR(40),
  IN p_category NVARCHAR(50), IN p_country NVARCHAR(30), IN p_city NVARCHAR(30), IN p_street_name NVARCHAR(30),
  IN p_street_num INT(10), IN p_has_apartment BOOLEAN, IN p_is_second_year_only BOOLEAN, IN p_is_morning_service BOOLEAN,
  IN p_is_evening_service BOOLEAN, IN p_description_service NVARCHAR(200), IN p_coordinator_name NVARCHAR(25))
@@ -127,3 +127,5 @@ SET SQL_SAFE_UPDATES = 0;
 DELETE FROM Service WHERE service_name = 'name2';
 SET SQL_SAFE_UPDATES = 1;
 
+CALL add_new_service("והדרת פני זקן אשקלון","בת עמי [אמונה-אלומה]","קשישים","ישראל","אשקלון","הפרויקט פועל ברחבי העיר",
+				false,true,false,true,false,"אם הינך בת שירות הרוצה לקחת חלק בחוויה של מייסדי המדינה עם סיפורי גבורה של ניצולי שואה - מקומך איתנו. העשייה היא להאיר את עולמם של אלו שבזכותם אנחנו כאן. אנו מחפשים בת בוגרת, אחראית, אוהבת קשישים, סבלנית ורצינית. דרושות בנות עם רצון גדול לתרום והמון בגרות נפשית , מודעות רגשית ליכולות ולעצמן , מסוגלות להכיל , אבל גם ליצור קשר אישי וחם עם הקשישים.","ביבס שמרית");
