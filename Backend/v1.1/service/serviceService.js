@@ -18,8 +18,6 @@ exports.createService = async (
     city,street_name,street_num,has_apartment,is_second_year_only,
     is_morning_service,is_evening_service,description_service,
     coordinator_name) => {
-    console.log("createService"); // test
-    console.log(service_name); // test
     const newService = await pool.execute(
         'CALL add_new_service(?,?,?,?,?,?,?,?,?,?,?,?,?)',[
             service_name,organization_name,category,country,
@@ -27,7 +25,6 @@ exports.createService = async (
             is_morning_service,is_evening_service,description_service,
             coordinator_name
         ]);
-    console.log(newService);
     return newService;
 };
 
