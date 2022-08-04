@@ -29,5 +29,8 @@ exports.createService = async (
 };
 
 // put new update to a service from the db
+exports.updateService = async (id) => {
+    // TODO
+};
 
 

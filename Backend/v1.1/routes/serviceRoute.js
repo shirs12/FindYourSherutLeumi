@@ -6,12 +6,12 @@ const router = express.Router();
 router.route("/").get(serviceController.getAllServices)
 router.route("/:id")
       .get(serviceController.getServiceById)
-    //   .put(serviceController); // TODO
+      .put(serviceController.updateServiceById); // PUT 
 
 // POST
 router.post("/add", serviceController.createNewService);
 
-// PUT
+
 
 // DELETE
 

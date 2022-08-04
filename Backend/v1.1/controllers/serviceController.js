@@ -44,5 +44,7 @@ exports.createNewService = async (req, res, next) => {
 };
 
 // put new update to a service from the db
-
+exports.updateServiceById = async (req, res, next) => {
+    // TODO
+}
 
