@@ -64,7 +64,7 @@ CREATE TABLE service(
 DELIMITER $$
 CREATE PROCEDURE `get_all_services`()
 BEGIN
-    SELECT service_name,organization_name,category,country,city,street_name,street_num,has_apartment,
+    SELECT service_id,service_name,organization_name,category,country,city,street_name,street_num,has_apartment,
     is_second_year_only,is_morning_service,is_evening_service,description_service,coordinator_name FROM service;
 END$$
 DELIMITER ;
@@ -74,7 +74,7 @@ CALL `get_all_services`(); -- test
 DELIMITER $$
 CREATE PROCEDURE `get_service_by_id`(IN id INT)
 BEGIN
-	SELECT service_name,organization_name,category,country,city,street_name,
+	SELECT service_id,service_name,organization_name,category,country,city,street_name,
 			street_num,has_apartment,is_second_year_only,is_morning_service,
 			is_evening_service,description_service,coordinator_name
 	FROM service WHERE service_id = id;
@@ -93,6 +93,31 @@ BEGIN
     is_second_year_only,is_morning_service,is_evening_service,description_service,coordinator_name)
     VALUES(p_service_name, p_organization_name, p_category, p_country,p_city,p_street_name,p_street_num,p_has_apartment,
     p_is_second_year_only,p_is_morning_service,p_is_evening_service,p_description_service,p_coordinator_name);
+END$$
+DELIMITER ;
+
+-- procedure that updates service in db
+DELIMITER $$
+CREATE PROCEDURE `update_service`(IN id INT, IN p_service_name NVARCHAR(40), IN p_organization_name NVARCHAR(40),
+ IN p_category NVARCHAR(50), IN p_country NVARCHAR(30), IN p_city NVARCHAR(30), IN p_street_name NVARCHAR(30),
+ IN p_street_num INT(10), IN p_has_apartment BOOLEAN, IN p_is_second_year_only BOOLEAN, IN p_is_morning_service BOOLEAN,
+ IN p_is_evening_service BOOLEAN, IN p_description_service NVARCHAR(200), IN p_coordinator_name NVARCHAR(25))
+BEGIN
+    UPDATE service
+	SET service_name = p_service_name,
+    organization_name = p_organization_name,
+    category = p_category,
+    country = p_country,
+    city = p_city,
+    street_name = p_street_name,
+    street_num = p_street_num,
+    has_apartment = p_has_apartment,
+    is_second_year_only = p_is_second_year_only,
+    is_morning_service = p_is_morning_service,
+    is_evening_service = p_is_evening_service,
+    description_service = p_description_service,
+    coordinator_name = p_coordinator_name
+	WHERE service_id = id;
 END$$
 DELIMITER ;
 
@@ -128,4 +153,7 @@ DELETE FROM Service WHERE service_name = 'name2';
 SET SQL_SAFE_UPDATES = 1;
 
 CALL add_new_service("והדרת פני זקן אשקלון","בת עמי [אמונה-אלומה]","קשישים","ישראל","אשקלון","הפרויקט פועל ברחבי העיר",
-				false,true,false,true,false,"אם הינך בת שירות הרוצה לקחת חלק בחוויה של מייסדי המדינה עם סיפורי גבורה של ניצולי שואה - מקומך איתנו. העשייה היא להאיר את עולמם של אלו שבזכותם אנחנו כאן. אנו מחפשים בת בוגרת, אחראית, אוהבת קשישים, סבלנית ורצינית. דרושות בנות עם רצון גדול לתרום והמון בגרות נפשית , מודעות רגשית ליכולות ולעצמן , מסוגלות להכיל , אבל גם ליצור קשר אישי וחם עם הקשישים.","ביבס שמרית");
+				0,true,false,true,false,"אם הינך בת שירות הרוצה לקחת חלק בחוויה של מייסדי המדינה עם סיפורי גבורה של ניצולי שואה - מקומך איתנו. העשייה היא להאיר את עולמם של אלו שבזכותם אנחנו כאן. אנו מחפשים בת בוגרת, אחראית, אוהבת קשישים, סבלנית ורצינית. דרושות בנות עם רצון גדול לתרום והמון בגרות נפשית , מודעות רגשית ליכולות ולעצמן , מסוגלות להכיל , אבל גם ליצור קשר אישי וחם עם הקשישים.","ביבס שמרית");
+
+CALL update_service(13,"איגוד ערים לשמירת איכות הסביבה","בת עמי [אמונה-אלומה]","הדרכה","ישראל","חדרה","המסגר 3, אזור תעשיה דרומי",3,
+				true,false,true,false,"בנות השירות משתלבות בעבודה החינוכית של היחידה הסביבתית המקומית ואחראיות על הדרכות בגני ילדים, בבתי ספר ובמתנסים. הבנות מפעילות גינות קהילתיות, מובילות מועצות נוער ירוקות עירוניות ושותפות בהכנת הכשרות והשתלמויות לצוותים חינוכיים.","שוורץ אילה");
