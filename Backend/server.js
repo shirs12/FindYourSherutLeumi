@@ -7,6 +7,8 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 
 app.use("/services", require("./routes/serviceRoute"));
+app.use("/userLevel", require("./routes/userLevelRoute"));
+app.use("/applicant", require("./routes/applicantRoute"));
 
 app.use((err, req, res, next) => {
   console.log(err.stack);
