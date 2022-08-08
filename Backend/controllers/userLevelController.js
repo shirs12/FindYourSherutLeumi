@@ -35,7 +35,7 @@ exports.createNewLevelUser = async (req, res, next) => {
     }
 };
 
-// PUT - put new update to a service from the db
+// PUT - put new update to a level user from the db
 exports.updateLevelById = async (req, res, next) => {
     const id = req.params.id;
     const { level_name } = req.body;

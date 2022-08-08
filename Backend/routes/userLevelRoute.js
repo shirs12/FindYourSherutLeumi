@@ -5,9 +5,9 @@ const router = express.Router();
 // GET 
 router.route("/").get(userLevelController.getAllLevels);
 router.route("/:id")
-      .get(userLevelController.getLevelById)
-      .put(userLevelController.updateLevelById)
-      .delete(userLevelController.deleteLevelById);
+      .get(userLevelController.getLevelById) // GET by id
+      .put(userLevelController.updateLevelById) // PUT by id
+      .delete(userLevelController.deleteLevelById); // DELETE by id
 
 // POST
 router.post("/add", userLevelController.createNewLevelUser);
