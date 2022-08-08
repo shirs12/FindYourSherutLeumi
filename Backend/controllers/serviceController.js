@@ -1,6 +1,6 @@
 const pool = require("../config/db");
 
-// gets all services from db
+// GET - gets all services from db
 exports.getAllServices = async (req, res, next) => {
   try {
     const [services] = await pool.execute("CALL get_all_services()");
@@ -23,7 +23,7 @@ exports.getServiceById = async (req, res, next) => {
   }
 };
 
-// post new service to the db
+// POST - post new service to the db
 exports.createNewService = async (req, res, next) => {
   const {
     service_name,
@@ -66,7 +66,7 @@ exports.createNewService = async (req, res, next) => {
   }
 };
 
-// put new update to a service from the db
+// PUT - put new update to a service from the db
 exports.updateServiceById = async (req, res, next) => {
     const id = req.params.id;
     const {
@@ -111,10 +111,16 @@ exports.updateServiceById = async (req, res, next) => {
   }
 };
 
-// delete service from db by id
+// DELETE - delete service from db by id
 exports.deleteServiceById = async (req, res, next) => {
     const id = req.params.id;
-    // TODO
+  try {
+    const deleted = await pool.execute("CALL delete_service(?)", [id]);
+    res.status(200).json({ deleted });
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
 };
 
 
