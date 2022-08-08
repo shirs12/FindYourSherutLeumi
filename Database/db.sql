@@ -60,7 +60,8 @@ CREATE TABLE service(
 
 -- ................. procedures ...................
 
--- procedure that calls all the services in the db
+-- SERVICE
+-- procedure that calls all the services from db
 DELIMITER $$
 CREATE PROCEDURE `get_all_services`()
 BEGIN
@@ -70,7 +71,7 @@ END$$
 DELIMITER ;
 CALL `get_all_services`(); -- test
 
--- procedure that calls a specific service from the db
+-- procedure that calls a specific service from db
 DELIMITER $$
 CREATE PROCEDURE `get_service_by_id`(IN id INT)
 BEGIN
@@ -82,7 +83,7 @@ END$$
 DELIMITER ;
 CALL `get_service_by_id`(1); -- test
 
--- procedure that adds service into the db
+-- procedure that adds new service into the db
 DELIMITER $$
 CREATE PROCEDURE `add_new_service`(IN p_service_name NVARCHAR(40), IN p_organization_name NVARCHAR(40),
  IN p_category NVARCHAR(50), IN p_country NVARCHAR(30), IN p_city NVARCHAR(30), IN p_street_name NVARCHAR(30),
@@ -129,6 +130,64 @@ BEGIN
 END$$
 DELIMITER ;
 
+-- USER_LEVEL
+-- procedure that calls all the levels from db
+DELIMITER $$
+CREATE PROCEDURE `get_all_levels`()
+BEGIN
+    SELECT * FROM user_level;
+    END$$
+DELIMITER ;
+CALL `get_all_levels`(); -- test
+
+-- procedure that calls a specific level from db
+DELIMITER $$
+CREATE PROCEDURE `get_level_by_id`(IN id INT)
+BEGIN
+	SELECT * FROM user_level WHERE level_id = id;
+END$$
+DELIMITER ;
+CALL `get_level_by_id`(1); -- test
+
+-- procedure that adds new level into the db
+DELIMITER $$
+CREATE PROCEDURE `add_new_level`(IN p_name NVARCHAR(25))
+BEGIN
+    INSERT INTO user_level(level_name)
+    VALUES(p_name);
+END$$
+DELIMITER ;
+CALL `add_new_level`('test'); -- test
+
+-- procedure that updates level in db
+DELIMITER $$
+CREATE PROCEDURE `update_level`(IN id INT, IN p_name NVARCHAR(25))
+BEGIN
+    UPDATE user_level
+	SET level_name = p_name
+	WHERE level_id = id;
+END$$
+DELIMITER ;
+CALL `update_level`(id, 'test2'); -- test
+
+-- procedure that deletes level by id from db
+DELIMITER $$
+CREATE PROCEDURE `delete_level`(IN id INT)
+BEGIN
+    DELETE FROM user_level WHERE level_id = id;
+END$$
+DELIMITER ;
+CALL `delete_level`(3); -- test
+
+-- APPLICANT
+-- procedure that calls all the applicants from db
+DELIMITER $$
+CREATE PROCEDURE `get_all_applicants`()
+BEGIN
+    SELECT * FROM applicant;
+    END$$
+DELIMITER ;
+CALL `get_all_applicants`(); -- test
 
 -- ................. insert into ...................
 
