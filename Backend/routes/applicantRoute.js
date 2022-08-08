@@ -5,3 +5,6 @@ const router = express.Router();
 // GET 
 router.route("/").get(applicantController.getAllApplicants);
 
+
+
+module.exports = router;
