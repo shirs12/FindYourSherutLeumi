@@ -58,6 +58,44 @@ CREATE TABLE service(
 -- DROP TABLE service;
 
 
+-- ................. insert into ...................
+
+-- for testing
+
+-- user_level
+INSERT INTO user_level(level_name)
+VALUES('Applicant'),('Coordinator');
+SELECT * FROM user_level;
+
+-- applicant
+INSERT INTO applicant(first_name,last_name,phone_number,city,email,applicant_password)
+VALUES('דנה','לוי','0501223334','מודיעין','dana11@gmail.com','03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4'),
+	  ('שרה','אליהו','0525555566','מודיעין','sara78@gmail.com','0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c');
+
+-- coordinator
+INSERT INTO coordinator(first_name,last_name,phone_number,email,coordinator_password,organization_name)
+VALUES('יערה','רון כהן','050-7521671','YaelCohenAguda@gmail.com','8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92','האגודה להתנדבות'),
+	  ('שרית','ויזנר','054-2610679','SaritVisnerShilo@gmail.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','עמותת ש"ל לשירות לאומי');
+
+-- service
+INSERT INTO service(service_name,organization_name,category,country,city,street_name,street_num,has_apartment,
+    is_second_year_only,is_morning_service,is_evening_service,description_service,coordinator_name)
+    VALUES('מערך הסייבר הלאומי','האגודה להתנדבות','משרדי ממשלה','ישראל','באר שבע','באר שבע',0,false,false,
+			true,false,'תפקיד מסווג ומעניין במחלקה המגנה על כל מערך הסייבר.הגנה מפני פריצות והתקפות רשת במשרדי הממשלה ובמדינת ישראל.','רון כהן יערה'),
+		  ('מרכז רפואי רבין-בלינסון','שילה','בריאות','ישראל','פתח תקווה','פתח תקווה',39,true,false,
+			true,false,'ישנם מספר תפקידים בבית חולים בילינסון, ביניהם: מזכירה רפואית, סיעוד (סייעת אחות), תומכת רפואה. תפקיד משמעותי דינמי ומאתגר בתחום הרפואה. *נדרש 5 יח"ל בביולוגיה, פיזיקה או כימיה.','שרית ויזנר');
+SET SQL_SAFE_UPDATES = 0;
+DELETE FROM Service WHERE service_name = 'name2';
+SET SQL_SAFE_UPDATES = 1;
+
+CALL add_new_service("והדרת פני זקן אשקלון","בת עמי [אמונה-אלומה]","קשישים","ישראל","אשקלון","הפרויקט פועל ברחבי העיר",
+				0,true,false,true,false,"אם הינך בת שירות הרוצה לקחת חלק בחוויה של מייסדי המדינה עם סיפורי גבורה של ניצולי שואה - מקומך איתנו. העשייה היא להאיר את עולמם של אלו שבזכותם אנחנו כאן. אנו מחפשים בת בוגרת, אחראית, אוהבת קשישים, סבלנית ורצינית. דרושות בנות עם רצון גדול לתרום והמון בגרות נפשית , מודעות רגשית ליכולות ולעצמן , מסוגלות להכיל , אבל גם ליצור קשר אישי וחם עם הקשישים.","ביבס שמרית");
+
+CALL update_service(13,"איגוד ערים לשמירת איכות הסביבה","בת עמי [אמונה-אלומה]","הדרכה","ישראל","חדרה","המסגר 3, אזור תעשיה דרומי",3,
+				true,false,true,false,"בנות השירות משתלבות בעבודה החינוכית של היחידה הסביבתית המקומית ואחראיות על הדרכות בגני ילדים, בבתי ספר ובמתנסים. הבנות מפעילות גינות קהילתיות, מובילות מועצות נוער ירוקות עירוניות ושותפות בהכנת הכשרות והשתלמויות לצוותים חינוכיים.","שוורץ אילה");
+
+
+
 -- ................. procedures ...................
 
 -- SERVICE
@@ -184,43 +222,63 @@ CALL `delete_level`(3); -- test
 DELIMITER $$
 CREATE PROCEDURE `get_all_applicants`()
 BEGIN
-    SELECT * FROM applicant;
+    SELECT first_name,last_name,phone_number,
+		city,email,applicant_password
+    FROM applicant;
     END$$
 DELIMITER ;
 CALL `get_all_applicants`(); -- test
 
--- ................. insert into ...................
+-- procedure that calls a specific applicant from db
+DELIMITER $$
+CREATE PROCEDURE `get_applicant_by_id`(IN id INT)
+BEGIN
+	SELECT first_name,last_name,phone_number,
+		city,email,applicant_password
+    FROM applicant WHERE applicant_id = id;
+END$$
+DELIMITER ;
+CALL `get_applicant_by_id`(2); -- test
 
--- for testing
+-- procedure that adds new applicant into the db
+DELIMITER $$
+CREATE PROCEDURE `add_new_applicant`(IN p_first_name NVARCHAR(25),
+    IN p_last_name NVARCHAR(25),IN p_phone_number NVARCHAR(13),
+    IN p_city NVARCHAR(25),IN p_email NVARCHAR(40),IN p_applicant_password CHAR(64))
+BEGIN
+    INSERT INTO applicant(first_name,last_name,phone_number,city,email,applicant_password)
+    VALUES(p_first_name,p_last_name,p_phone_number,p_city,p_email,p_applicant_password);
+END$$
+DELIMITER ;
+CALL `add_new_applicant`('אור','אליה','0503758493','ראש העין','orEli123@gmail.com','481f6cc0511143ccdd7e2d1b1b94faf0a700a8b49cd13922a70b5ae28acaa8c5'); -- test
 
--- user_level
-INSERT INTO user_level(level_name)
-VALUES('Applicant'),('Coordinator');
-SELECT * FROM user_level;
+-- procedure that updates applicant in db
+DELIMITER $$
+CREATE PROCEDURE `update_applicant`(IN id INT,IN p_first_name NVARCHAR(25),
+    IN p_last_name NVARCHAR(25),IN p_phone_number NVARCHAR(13),
+    IN p_city NVARCHAR(25),IN p_email NVARCHAR(40),IN p_applicant_password CHAR(64))
+BEGIN
+    UPDATE applicant
+	SET first_name = p_first_name,
+    last_name = p_last_name,
+    phone_number = p_phone_number,
+    city = p_city,
+    email = p_email,
+    applicant_password = p_applicant_password
+	WHERE applicant_id = id;
+END$$
+DELIMITER ;
+CALL `update_applicant`(6,'אביה','אליה','0503758483','ראש העין','orEli123@gmail.com','481f6cc0511143ccdd7e2d1b1b94faf0a700a8b49cd13922a70b5ae28acaa8c5');
 
--- applicant
-INSERT INTO applicant(first_name,last_name,phone_number,city,email,applicant_password)
-VALUES('דנה','לוי','0501223334','מודיעין','dana11@gmail.com','03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4'),
-	  ('שרה','אליהו','0525555566','מודיעין','sara78@gmail.com','0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c');
+-- procedure that deletes applicant by id from db
+DELIMITER $$
+CREATE PROCEDURE `delete_applicant`(IN id INT)
+BEGIN
+    DELETE FROM applicant WHERE applicant_id = id;
+END$$
+DELIMITER ;
+CALL `delete_applicant`(6); -- test
 
--- coordinator
-INSERT INTO coordinator(first_name,last_name,phone_number,email,coordinator_password,organization_name)
-VALUES('יערה','רון כהן','050-7521671','YaelCohenAguda@gmail.com','8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92','האגודה להתנדבות'),
-	  ('שרית','ויזנר','054-2610679','SaritVisnerShilo@gmail.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','עמותת ש"ל לשירות לאומי');
 
--- service
-INSERT INTO service(service_name,organization_name,category,country,city,street_name,street_num,has_apartment,
-    is_second_year_only,is_morning_service,is_evening_service,description_service,coordinator_name)
-    VALUES('מערך הסייבר הלאומי','האגודה להתנדבות','משרדי ממשלה','ישראל','באר שבע','באר שבע',0,false,false,
-			true,false,'תפקיד מסווג ומעניין במחלקה המגנה על כל מערך הסייבר.הגנה מפני פריצות והתקפות רשת במשרדי הממשלה ובמדינת ישראל.','רון כהן יערה'),
-		  ('מרכז רפואי רבין-בלינסון','שילה','בריאות','ישראל','פתח תקווה','פתח תקווה',39,true,false,
-			true,false,'ישנם מספר תפקידים בבית חולים בילינסון, ביניהם: מזכירה רפואית, סיעוד (סייעת אחות), תומכת רפואה. תפקיד משמעותי דינמי ומאתגר בתחום הרפואה. *נדרש 5 יח"ל בביולוגיה, פיזיקה או כימיה.','שרית ויזנר');
-SET SQL_SAFE_UPDATES = 0;
-DELETE FROM Service WHERE service_name = 'name2';
-SET SQL_SAFE_UPDATES = 1;
 
-CALL add_new_service("והדרת פני זקן אשקלון","בת עמי [אמונה-אלומה]","קשישים","ישראל","אשקלון","הפרויקט פועל ברחבי העיר",
-				0,true,false,true,false,"אם הינך בת שירות הרוצה לקחת חלק בחוויה של מייסדי המדינה עם סיפורי גבורה של ניצולי שואה - מקומך איתנו. העשייה היא להאיר את עולמם של אלו שבזכותם אנחנו כאן. אנו מחפשים בת בוגרת, אחראית, אוהבת קשישים, סבלנית ורצינית. דרושות בנות עם רצון גדול לתרום והמון בגרות נפשית , מודעות רגשית ליכולות ולעצמן , מסוגלות להכיל , אבל גם ליצור קשר אישי וחם עם הקשישים.","ביבס שמרית");
 
-CALL update_service(13,"איגוד ערים לשמירת איכות הסביבה","בת עמי [אמונה-אלומה]","הדרכה","ישראל","חדרה","המסגר 3, אזור תעשיה דרומי",3,
-				true,false,true,false,"בנות השירות משתלבות בעבודה החינוכית של היחידה הסביבתית המקומית ואחראיות על הדרכות בגני ילדים, בבתי ספר ובמתנסים. הבנות מפעילות גינות קהילתיות, מובילות מועצות נוער ירוקות עירוניות ושותפות בהכנת הכשרות והשתלמויות לצוותים חינוכיים.","שוורץ אילה");
