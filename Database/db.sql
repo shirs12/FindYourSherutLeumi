@@ -121,6 +121,14 @@ BEGIN
 END$$
 DELIMITER ;
 
+-- procedure that deletes service by id from db
+DELIMITER $$
+CREATE PROCEDURE `delete_service`(IN id INT)
+BEGIN
+    DELETE FROM service WHERE service_id = id;
+END$$
+DELIMITER ;
+
 
 -- ................. insert into ...................
 
