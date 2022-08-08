@@ -1,2 +1,2 @@
 # FindYourSherutLeumi
-Final project 
+Final project - Android, NodeJS, MySQL
