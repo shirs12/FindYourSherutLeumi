@@ -279,6 +279,16 @@ END$$
 DELIMITER ;
 CALL `delete_applicant`(6); -- test
 
-
+-- COORDINATOR
+-- procedure that calls all the coordinators from db
+DELIMITER $$
+CREATE PROCEDURE `get_all_coordinators`()
+BEGIN
+    SELECT coordinator_id,first_name,last_name,phone_number,
+	email,coordinator_password,organization_name
+    FROM coordinator;
+    END$$
+DELIMITER ;
+CALL `get_all_coordinators`();
 
 
