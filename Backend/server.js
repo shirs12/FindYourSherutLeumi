@@ -9,6 +9,7 @@ app.use(express.json());
 app.use("/services", require("./routes/serviceRoute"));
 app.use("/userLevels", require("./routes/userLevelRoute"));
 app.use("/applicants", require("./routes/applicantRoute"));
+app.use("/coordinator", require("./routes/coordinatorRoute"));
 
 app.use((err, req, res, next) => {
   console.log(err.stack);
