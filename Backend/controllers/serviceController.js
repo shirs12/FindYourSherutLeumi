@@ -31,8 +31,7 @@ exports.createNewService = async (req, res, next) => {
     category,
     country,
     city,
-    street_name,
-    street_num,
+    address,
     has_apartment,
     is_second_year_only,
     is_morning_service,
@@ -42,15 +41,14 @@ exports.createNewService = async (req, res, next) => {
   } = req.body;
   try {
     const service = await pool.execute(
-      "CALL add_new_service(?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      "CALL add_new_service(?,?,?,?,?,?,?,?,?,?,?,?)",
       [
         service_name,
         organization_name,
         category,
         country,
         city,
-        street_name,
-        street_num,
+        address,
         has_apartment,
         is_second_year_only,
         is_morning_service,
@@ -68,25 +66,24 @@ exports.createNewService = async (req, res, next) => {
 
 // PUT - put new update to a service from the db
 exports.updateServiceById = async (req, res, next) => {
-    const id = req.params.id;
-    const {
-        service_name,
-        organization_name,
-        category,
-        country,
-        city,
-        street_name,
-        street_num,
-        has_apartment,
-        is_second_year_only,
-        is_morning_service,
-        is_evening_service,
-        description_service,
-        coordinator_name,
-      } = req.body;
-      try {
+  const id = req.params.id;
+  const {
+    service_name,
+    organization_name,
+    category,
+    country,
+    city,
+    address,
+    has_apartment,
+    is_second_year_only,
+    is_morning_service,
+    is_evening_service,
+    description_service,
+    coordinator_name,
+  } = req.body;
+  try {
     const service = await pool.execute(
-      "CALL update_service(?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      "CALL update_service(?,?,?,?,?,?,?,?,?,?,?,?,?)",
       [
         id,
         service_name,
@@ -94,8 +91,7 @@ exports.updateServiceById = async (req, res, next) => {
         category,
         country,
         city,
-        street_name,
-        street_num,
+        address,
         has_apartment,
         is_second_year_only,
         is_morning_service,
@@ -113,7 +109,7 @@ exports.updateServiceById = async (req, res, next) => {
 
 // DELETE - delete service from db by id
 exports.deleteServiceById = async (req, res, next) => {
-    const id = req.params.id;
+  const id = req.params.id;
   try {
     const deleted = await pool.execute("CALL delete_service(?)", [id]);
     res.status(200).json({ deleted });
@@ -122,5 +118,3 @@ exports.deleteServiceById = async (req, res, next) => {
     next(err);
   }
 };
-
-
