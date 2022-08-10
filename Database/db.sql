@@ -94,6 +94,11 @@ CALL add_new_service("והדרת פני זקן אשקלון","בת עמי [אמ�
 CALL update_service(13,"איגוד ערים לשמירת איכות הסביבה","בת עמי [אמונה-אלומה]","הדרכה","ישראל","חדרה","המסגר 3, אזור תעשיה דרומי",3,
 				true,false,true,false,"בנות השירות משתלבות בעבודה החינוכית של היחידה הסביבתית המקומית ואחראיות על הדרכות בגני ילדים, בבתי ספר ובמתנסים. הבנות מפעילות גינות קהילתיות, מובילות מועצות נוער ירוקות עירוניות ושותפות בהכנת הכשרות והשתלמויות לצוותים חינוכיים.","שוורץ אילה");
 
+-- ---------------- for safe deleting --------------
+
+SET SQL_SAFE_UPDATES = 0;
+DROP PROCEDURE get_all_coordinators;
+SET SQL_SAFE_UPDATES = 1;
 
 
 -- ................. procedures ...................
@@ -291,4 +296,43 @@ BEGIN
 DELIMITER ;
 CALL `get_all_coordinators`();
 
+-- procedure that calls a specific coordinator from db
+DELIMITER $$
+CREATE PROCEDURE `get_coordinator_by_id`(IN id INT)
+BEGIN
+	SELECT coordinator_id,first_name,last_name,phone_number,
+	email,coordinator_password,organization_name
+    FROM coordinator WHERE coordinator_id = id;
+END$$
+DELIMITER ;
+CALL `get_applicant_by_id`(2); -- test
 
+-- procedure that adds new coordinator into the db
+DELIMITER $$
+CREATE PROCEDURE `add_new_coordinator`(IN p_first_name NVARCHAR(25),p_last_name NVARCHAR(25),
+    p_phone_number NVARCHAR(13),p_email NVARCHAR(40),p_coordinator_password CHAR(64),
+    p_organization_name NVARCHAR(40))
+BEGIN
+    INSERT INTO coordinator(first_name,last_name,phone_number,email,coordinator_password,organization_name)
+    VALUES(p_first_name,p_last_name,p_phone_number,p_email,p_coordinator_password,p_organization_name);
+END$$
+DELIMITER ;
+CALL `add_new_coordinator`('אילה','שוורץ','0528990468','ayalas@bat-ami.org.il','8bb0cf6eb9b17d0f7d22b456f121257dc1254e1f01665370476383ea776df414','בת עמי [אמונה-אלומה]'); -- test
+
+-- procedure that updates coordinator in db
+DELIMITER $$
+CREATE PROCEDURE `update_coordinator`(IN id INT,IN p_first_name NVARCHAR(25),p_last_name NVARCHAR(25),
+    p_phone_number NVARCHAR(13),p_email NVARCHAR(40),p_coordinator_password CHAR(64),
+    p_organization_name NVARCHAR(40))
+BEGIN
+    UPDATE coordinator
+	SET first_name = p_first_name,
+    last_name = p_last_name,
+    phone_number = p_phone_number,
+    email = p_email,
+    coordinator_password = p_coordinator_password,
+    organization_name = p_organization_name
+	WHERE coordinator_id = id;
+END$$
+DELIMITER ;
+CALL `update_coordinator`('אילה','שוורץ','0528990468','ayalas@bat-ami.org.il','8bb0cf6eb9b17d0f7d22b456f121257dc1254e1f01665370476383ea776df414','בת עמי [אמונה-אלומה]'); -- test
