@@ -44,8 +44,7 @@ CREATE TABLE service(
     category NVARCHAR(50),
     country NVARCHAR(30) NOT NULL,
     city NVARCHAR(30) NOT NULL,
-    street_name NVARCHAR(30) NOT NULL,
-    street_num INT(10),
+    address NVARCHAR(30) NOT NULL,
     has_apartment BOOLEAN,
     is_second_year_only BOOLEAN,
     is_morning_service BOOLEAN,
@@ -78,26 +77,26 @@ VALUES('יערה','רון כהן','050-7521671','YaelCohenAguda@gmail.com','8d96
 	  ('שרית','ויזנר','054-2610679','SaritVisnerShilo@gmail.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','עמותת ש"ל לשירות לאומי');
 
 -- service
-INSERT INTO service(service_name,organization_name,category,country,city,street_name,street_num,has_apartment,
+INSERT INTO service(service_name,organization_name,category,country,city,address,has_apartment,
     is_second_year_only,is_morning_service,is_evening_service,description_service,coordinator_name)
-    VALUES('מערך הסייבר הלאומי','האגודה להתנדבות','משרדי ממשלה','ישראל','באר שבע','באר שבע',0,false,false,
+    VALUES('מערך הסייבר הלאומי','האגודה להתנדבות','משרדי ממשלה','ישראל','באר שבע','באר שבע',false,false,
 			true,false,'תפקיד מסווג ומעניין במחלקה המגנה על כל מערך הסייבר.הגנה מפני פריצות והתקפות רשת במשרדי הממשלה ובמדינת ישראל.','רון כהן יערה'),
-		  ('מרכז רפואי רבין-בלינסון','שילה','בריאות','ישראל','פתח תקווה','פתח תקווה',39,true,false,
+		  ('מרכז רפואי רבין-בלינסון','שילה','בריאות','ישראל','פתח תקווה','זבוטינסקי 39',true,false,
 			true,false,'ישנם מספר תפקידים בבית חולים בילינסון, ביניהם: מזכירה רפואית, סיעוד (סייעת אחות), תומכת רפואה. תפקיד משמעותי דינמי ומאתגר בתחום הרפואה. *נדרש 5 יח"ל בביולוגיה, פיזיקה או כימיה.','שרית ויזנר');
 SET SQL_SAFE_UPDATES = 0;
 DELETE FROM Service WHERE service_name = 'name2';
 SET SQL_SAFE_UPDATES = 1;
 
 CALL add_new_service("והדרת פני זקן אשקלון","בת עמי [אמונה-אלומה]","קשישים","ישראל","אשקלון","הפרויקט פועל ברחבי העיר",
-				0,true,false,true,false,"אם הינך בת שירות הרוצה לקחת חלק בחוויה של מייסדי המדינה עם סיפורי גבורה של ניצולי שואה - מקומך איתנו. העשייה היא להאיר את עולמם של אלו שבזכותם אנחנו כאן. אנו מחפשים בת בוגרת, אחראית, אוהבת קשישים, סבלנית ורצינית. דרושות בנות עם רצון גדול לתרום והמון בגרות נפשית , מודעות רגשית ליכולות ולעצמן , מסוגלות להכיל , אבל גם ליצור קשר אישי וחם עם הקשישים.","ביבס שמרית");
+				true,false,true,false,"אם הינך בת שירות הרוצה לקחת חלק בחוויה של מייסדי המדינה עם סיפורי גבורה של ניצולי שואה - מקומך איתנו. העשייה היא להאיר את עולמם של אלו שבזכותם אנחנו כאן. אנו מחפשים בת בוגרת, אחראית, אוהבת קשישים, סבלנית ורצינית. דרושות בנות עם רצון גדול לתרום והמון בגרות נפשית , מודעות רגשית ליכולות ולעצמן , מסוגלות להכיל , אבל גם ליצור קשר אישי וחם עם הקשישים.","ביבס שמרית");
 
-CALL update_service(13,"איגוד ערים לשמירת איכות הסביבה","בת עמי [אמונה-אלומה]","הדרכה","ישראל","חדרה","המסגר 3, אזור תעשיה דרומי",3,
+CALL update_service(4,"איגוד ערים לשמירת איכות הסביבה","בת עמי [אמונה-אלומה]","הדרכה","ישראל","חדרה","המסגר 3, אזור תעשיה דרומי",
 				true,false,true,false,"בנות השירות משתלבות בעבודה החינוכית של היחידה הסביבתית המקומית ואחראיות על הדרכות בגני ילדים, בבתי ספר ובמתנסים. הבנות מפעילות גינות קהילתיות, מובילות מועצות נוער ירוקות עירוניות ושותפות בהכנת הכשרות והשתלמויות לצוותים חינוכיים.","שוורץ אילה");
 
 -- ---------------- for safe deleting --------------
 
 SET SQL_SAFE_UPDATES = 0;
-DROP PROCEDURE get_all_coordinators;
+DROP PROCEDURE get_all_services;
 SET SQL_SAFE_UPDATES = 1;
 
 
@@ -108,7 +107,7 @@ SET SQL_SAFE_UPDATES = 1;
 DELIMITER $$
 CREATE PROCEDURE `get_all_services`()
 BEGIN
-    SELECT service_id,service_name,organization_name,category,country,city,street_name,street_num,has_apartment,
+    SELECT service_id,service_name,organization_name,category,country,city,address,has_apartment,
     is_second_year_only,is_morning_service,is_evening_service,description_service,coordinator_name FROM service;
 END$$
 DELIMITER ;
@@ -118,8 +117,8 @@ CALL `get_all_services`(); -- test
 DELIMITER $$
 CREATE PROCEDURE `get_service_by_id`(IN id INT)
 BEGIN
-	SELECT service_id,service_name,organization_name,category,country,city,street_name,
-			street_num,has_apartment,is_second_year_only,is_morning_service,
+	SELECT service_id,service_name,organization_name,category,country,city,address,
+		has_apartment,is_second_year_only,is_morning_service,
 			is_evening_service,description_service,coordinator_name
 	FROM service WHERE service_id = id;
 END$$
@@ -129,13 +128,13 @@ CALL `get_service_by_id`(1); -- test
 -- procedure that adds new service into the db
 DELIMITER $$
 CREATE PROCEDURE `add_new_service`(IN p_service_name NVARCHAR(40), IN p_organization_name NVARCHAR(40),
- IN p_category NVARCHAR(50), IN p_country NVARCHAR(30), IN p_city NVARCHAR(30), IN p_street_name NVARCHAR(30),
- IN p_street_num INT(10), IN p_has_apartment BOOLEAN, IN p_is_second_year_only BOOLEAN, IN p_is_morning_service BOOLEAN,
+ IN p_category NVARCHAR(50), IN p_country NVARCHAR(30), IN p_city NVARCHAR(30), IN p_address NVARCHAR(30),
+ IN p_has_apartment BOOLEAN, IN p_is_second_year_only BOOLEAN, IN p_is_morning_service BOOLEAN,
  IN p_is_evening_service BOOLEAN, IN p_description_service NVARCHAR(200), IN p_coordinator_name NVARCHAR(25))
 BEGIN
-    INSERT INTO service(service_name,organization_name,category,country,city,street_name,street_num,has_apartment,
+    INSERT INTO service(service_name,organization_name,category,country,city,address,has_apartment,
     is_second_year_only,is_morning_service,is_evening_service,description_service,coordinator_name)
-    VALUES(p_service_name, p_organization_name, p_category, p_country,p_city,p_street_name,p_street_num,p_has_apartment,
+    VALUES(p_service_name, p_organization_name, p_category, p_country,p_city,p_address,p_has_apartment,
     p_is_second_year_only,p_is_morning_service,p_is_evening_service,p_description_service,p_coordinator_name);
 END$$
 DELIMITER ;
@@ -143,8 +142,8 @@ DELIMITER ;
 -- procedure that updates service in db
 DELIMITER $$
 CREATE PROCEDURE `update_service`(IN id INT, IN p_service_name NVARCHAR(40), IN p_organization_name NVARCHAR(40),
- IN p_category NVARCHAR(50), IN p_country NVARCHAR(30), IN p_city NVARCHAR(30), IN p_street_name NVARCHAR(30),
- IN p_street_num INT(10), IN p_has_apartment BOOLEAN, IN p_is_second_year_only BOOLEAN, IN p_is_morning_service BOOLEAN,
+ IN p_category NVARCHAR(50), IN p_country NVARCHAR(30), IN p_city NVARCHAR(30), IN p_address NVARCHAR(30),
+ IN p_has_apartment BOOLEAN, IN p_is_second_year_only BOOLEAN, IN p_is_morning_service BOOLEAN,
  IN p_is_evening_service BOOLEAN, IN p_description_service NVARCHAR(200), IN p_coordinator_name NVARCHAR(25))
 BEGIN
     UPDATE service
@@ -153,8 +152,7 @@ BEGIN
     category = p_category,
     country = p_country,
     city = p_city,
-    street_name = p_street_name,
-    street_num = p_street_num,
+    address = p_address,
     has_apartment = p_has_apartment,
     is_second_year_only = p_is_second_year_only,
     is_morning_service = p_is_morning_service,
@@ -336,3 +334,16 @@ BEGIN
 END$$
 DELIMITER ;
 CALL `update_coordinator`('אילה','שוורץ','0528990468','ayalas@bat-ami.org.il','8bb0cf6eb9b17d0f7d22b456f121257dc1254e1f01665370476383ea776df414','בת עמי [אמונה-אלומה]'); -- test
+
+-- procedure that deletes coordinator by id from db
+DELIMITER $$
+CREATE PROCEDURE `delete_coordinator`(IN id INT)
+BEGIN
+    DELETE FROM coordinator WHERE coordinator_id = id;
+END$$
+DELIMITER ;
+CALL `delete_coordinator`(6); -- test
+
+
+
+
