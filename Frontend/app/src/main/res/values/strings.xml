@@ -6,4 +6,5 @@
     <string name="password">Password</string>
     <string name="password_hint">password…</string>
     <string name="login_btn">sign in</string>
+    <string name="sign_up_clickable">Sign Up</string>
 </resources>
