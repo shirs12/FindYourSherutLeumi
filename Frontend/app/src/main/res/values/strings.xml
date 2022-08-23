@@ -5,5 +5,5 @@
     <string name="email_hint">email…</string>
     <string name="password">Password</string>
     <string name="password_hint">password…</string>
-    <string name="login_btn">login</string>
+    <string name="login_btn">sign in</string>
 </resources>

@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="79dp"
             android:layout_margin="30dp"
-            android:src="@drawable/logo" />
+            android:src="@drawable/logo6" />
 
         <TextView
             android:id="@+id/sign_in_title"
@@ -26,7 +26,7 @@
             android:layout_marginTop="10dp"
             android:text="@string/sign_in"
             android:textAlignment="center"
-            android:textColor="#ADD8E6"
+            android:textColor="@color/blue_green"
             android:textSize="28sp"
             android:textStyle="bold" />
 
@@ -38,7 +38,7 @@
             android:layout_marginTop="35dp"
             android:layout_marginRight="50dp"
             android:text="@string/email"
-            android:textColor="@color/light_blue"
+            android:textColor="@color/blue_green"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -64,7 +64,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginRight="50dp"
             android:text="@string/password"
-            android:textColor="@color/light_blue"
+            android:textColor="@color/blue_green"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -88,7 +88,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="50dp"
-            android:backgroundTint="@color/light_blue"
+            android:backgroundTint="@color/blue_green"
             android:text="@string/login_btn" />
 
 
