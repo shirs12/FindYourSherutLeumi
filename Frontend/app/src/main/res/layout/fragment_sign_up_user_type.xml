@@ -45,12 +45,14 @@
             android:textStyle="bold" />
 
         <Spinner
+            android:id="@+id/user_type_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="120dp"
             android:layout_marginEnd="100dp"
+            android:minHeight="48dp"
             android:spinnerMode="dropdown"
-            />
+            tools:ignore="SpeakableTextPresentCheck" />
 
 
     </LinearLayout>

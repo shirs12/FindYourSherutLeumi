@@ -35,4 +35,6 @@ public class SignUpUserTypeFragment extends Fragment {
         // TODO: Use the ViewModel
     }
 
+
+
 }
