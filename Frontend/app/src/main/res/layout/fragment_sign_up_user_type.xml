@@ -18,6 +18,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginRight="30dp"
             android:layout_marginBottom="15dp"
+            android:contentDescription="@string/logo"
             android:src="@drawable/logo" />
 
         <TextView
@@ -34,17 +35,19 @@
             android:id="@+id/user_type_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="120dp"
+            android:layout_marginStart="120dp"
             android:layout_marginTop="80dp"
-            android:layout_marginRight="100dp"
+            android:layout_marginEnd="100dp"
             android:text="@string/user_type"
             android:textColor="@color/light_blue"
             android:textSize="20sp"
             android:textStyle="bold" />
 
-<!--        <Spinner-->
-<!--            android:layout_width=""-->
-<!--            android:layout_height=""-->
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="120dp"
+            android:layout_marginEnd="100dp" />
 
 
     </LinearLayout>

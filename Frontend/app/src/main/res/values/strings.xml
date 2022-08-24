@@ -8,4 +8,5 @@
     <string name="login_btn">sign in</string>
     <string name="sign_up">Sign Up</string>
     <string name="user_type">User type</string>
+    <string name="logo">logo</string>
 </resources>
