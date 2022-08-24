@@ -102,7 +102,7 @@
             android:layout_marginBottom="40dp"
             android:clickable="true"
             android:minHeight="48dp"
-            android:text="@string/sign_up_clickable"
+            android:text="@string/sign_up"
             android:textSize="17sp"
             android:textStyle="bold" />
 <!--            android:onClick="signUp"-->
