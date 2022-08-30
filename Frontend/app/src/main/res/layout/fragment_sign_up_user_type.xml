@@ -25,34 +25,36 @@
             android:id="@+id/sign_up_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="60dp"
             android:text="@string/sign_up"
             android:textAlignment="center"
             android:textColor="@color/light_blue"
             android:textSize="28sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/user_type_title"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="120dp"
-            android:layout_marginTop="80dp"
-            android:layout_marginEnd="100dp"
-            android:layout_marginBottom="10dp"
-            android:text="@string/user_type"
-            android:textColor="@color/light_blue"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:layout_height="54dp"
+            android:gravity="center|center_vertical"
+            android:orientation="horizontal">
 
-        <Spinner
-            android:id="@+id/user_type_spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="120dp"
-            android:layout_marginEnd="100dp"
-            android:minHeight="48dp"
-            android:spinnerMode="dropdown"
-            tools:ignore="SpeakableTextPresentCheck" />
+            <TextView
+                android:id="@+id/user_type_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/user_type"
+                android:textColor="@color/light_blue"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/user_type_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:spinnerMode="dropdown"
+                tools:ignore="SpeakableTextPresentCheck" />
+        </LinearLayout>
 
 
     </LinearLayout>
