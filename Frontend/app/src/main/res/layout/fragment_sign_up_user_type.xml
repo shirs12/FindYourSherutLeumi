@@ -41,7 +41,8 @@
             <TextView
                 android:id="@+id/user_type_title"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="43dp"
+                android:gravity="center"
                 android:text="@string/user_type"
                 android:textColor="@color/light_blue"
                 android:textSize="20sp"
