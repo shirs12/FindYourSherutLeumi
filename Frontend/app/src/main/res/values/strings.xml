@@ -9,6 +9,7 @@
     <string name="sign_up">Sign Up</string>
     <string name="user_type">User type</string>
     <string name="logo">logo</string>
+    <string name="next_btn">next</string>
 
     <string-array name="user_types_array">
         <item>Applicant</item>
