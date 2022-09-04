@@ -1,5 +1,7 @@
 require("dotenv").config();
 
+const http = require('http');
+const hostname = '127.0.0.1';
 const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -20,5 +22,13 @@ app.use((err, req, res, next) => {
     massage: "Somthing went wrong...",
   });
 });
+
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.end();
+});
+server.listen(PORT, hostname, () => {
+  console.log(`server running at http://${hostname}:${PORT}/`);
+})
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}...`));
