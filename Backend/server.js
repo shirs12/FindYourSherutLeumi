@@ -23,6 +23,10 @@ app.use((err, req, res, next) => {
   });
 });
 
+app.use("/login", (req, res) => {
+  // TODO: a methods that login the user, (option: by select procedure)
+});
+
 const server = http.createServer((req, res) => {
   res.statusCode = 200;
   res.end();
