@@ -1,5 +1,7 @@
 package com.example.findyoursherutleumi.models;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Applicant {
     private final int id;
     private String firstName;
