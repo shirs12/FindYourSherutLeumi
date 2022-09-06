@@ -8,9 +8,17 @@
     tools:context=".MainActivity"
     >
 
-    <Button
-        android:id="@+id/button1"
+<!--    <Button-->
+<!--        android:id="@+id/button1"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Button" />-->
+
+    <fragment
+        android:id="@+id/login_fragment"
+        android:name="com.example.findyoursherutleumi.fragments.LoginFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Button" />
+        android:layout_height="match_parent"
+        tools:layout="@layout/fragment_login" />
+
 </LinearLayout>
