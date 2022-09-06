@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
                     if(response.isSuccessful()) {
                         Log.e(TAG, "onResponse: code : " + response.code());
                         assert response.body() != null;
-                        Log.e(TAG, "onResponse: " + response.body().get(0));
+                        Log.e(TAG, "onResponse: " + response.body().get(1));
                     }
                 }
 
