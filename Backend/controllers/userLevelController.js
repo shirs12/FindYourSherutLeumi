@@ -4,7 +4,7 @@ const pool = require("../config/db");
 exports.getAllLevels = async (req, res, next) => {
   try {
     const [levels] = await pool.execute("CALL get_all_levels()");
-    res.status(200).json({ levels });
+    res.status(200).json(levels[0]);
   } catch (err) {
     console.log(err);
     next(err);
@@ -16,7 +16,7 @@ exports.getLevelById = async (req, res, next) => {
   const id = req.params.id;
   try {
     const [level, _] = await pool.execute("CALL get_level_by_id(?)", [id]);
-    res.status(200).json({ level });
+    res.status(200).json(level[0]);
   } catch (err) {
     console.log(err);
     next(err);
@@ -44,7 +44,7 @@ exports.updateLevelById = async (req, res, next) => {
       id,
       level_name,
     ]);
-    res.status(201).json({ level });
+    res.status(201).json(level[0]);
   } catch (err) {
     console.log(err);
     next(err);
@@ -56,7 +56,7 @@ exports.deleteLevelById = async (req, res, next) => {
   const id = req.params.id;
   try {
     const deleted = await pool.execute("CALL delete_level(?)", [id]);
-    res.status(200).json({ deleted });
+    res.status(200).json(deleted[0]);
   } catch (err) {
     console.log(err);
     next(err);

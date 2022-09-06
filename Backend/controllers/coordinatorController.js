@@ -4,7 +4,7 @@ const pool = require("../config/db");
 exports.getAllCoordinators = async (req, res, next) => {
   try {
     const [coordinators] = await pool.execute("CALL get_all_coordinators()");
-    res.status(200).json({ coordinators });
+    res.status(200).json(coordinators[0]);
   } catch (err) {
     console.log(err);
     next(err);
@@ -19,7 +19,7 @@ exports.getCoordinatorById = async (req, res, next) => {
       "CALL get_coordinator_by_id(?)",
       [id]
     );
-    res.status(200).json({ coordinator });
+    res.status(200).json(coordinator[0]);
   } catch (err) {
     console.log(err);
     next(err);
@@ -79,7 +79,7 @@ exports.updateCoordinatorById = async (req, res, next) => {
         organization_name,
       ]
     );
-    res.status(201).json({ coordinator });
+    res.status(201).json(coordinator[0]);
   } catch (err) {
     console.log(err);
     next(err);
@@ -91,7 +91,7 @@ exports.deleteCoordinatorById = async (req, res, next) => {
   const id = req.params.id;
   try {
     const deleted = await pool.execute("CALL delete_coordinator(?)", [id]);
-    res.status(200).json({ deleted });
+    res.status(200).json(deleted[0]);
   } catch (err) {
     console.log(err);
     next(err);

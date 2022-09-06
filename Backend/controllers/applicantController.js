@@ -4,7 +4,7 @@ const pool = require("../config/db");
 exports.getAllApplicants = async (req, res, next) => {
   try {
     const [applicants] = await pool.execute("CALL get_all_applicants()");
-    res.status(200).json({ applicants });
+    res.status(200).json(applicants[0]);
   } catch (err) {
     console.log(err);
     next(err);
@@ -18,7 +18,8 @@ exports.getApplicantById = async (req, res, next) => {
     const [applicant, _] = await pool.execute("CALL get_applicant_by_id(?)", [
       id,
     ]);
-    res.status(200).json({ applicant });
+    res.status(200).json(applicant[0]);
+    console.log(applicant[0]);
   } catch (err) {
     console.log(err);
     next(err);
@@ -63,7 +64,7 @@ exports.updateApplicantById = async (req, res, next) => {
       "CALL update_applicant(?,?,?,?,?,?,?)",
       [id, first_name, last_name, phone_number, city, email, applicant_password]
     );
-    res.status(201).json({ applicant });
+    res.status(201).json(applicant[0]);
   } catch (err) {
     console.log(err);
     next(err);
@@ -75,7 +76,7 @@ exports.deleteApplicantById = async (req, res, next) => {
   const id = req.params.id;
   try {
     const deleted = await pool.execute("CALL delete_applicant(?)", [id]);
-    res.status(200).json({ deleted });
+    res.status(200).json(deleted[0]);
   } catch (err) {
     console.log(err);
     next(err);

@@ -4,7 +4,7 @@ const pool = require("../config/db");
 exports.getAllServices = async (req, res, next) => {
   try {
     const [services] = await pool.execute("CALL get_all_services()");
-    res.status(200).json({ services });
+    res.status(200).json(services[0]);
   } catch (err) {
     console.log(err);
     next(err);
@@ -16,7 +16,7 @@ exports.getServiceById = async (req, res, next) => {
   const id = req.params.id;
   try {
     const [service, _] = await pool.execute("CALL get_service_by_id(?)", [id]);
-    res.status(200).json({ service });
+    res.status(200).json(service[0]);
   } catch (err) {
     console.log(err);
     next(err);
@@ -100,7 +100,7 @@ exports.updateServiceById = async (req, res, next) => {
         coordinator_name,
       ]
     );
-    res.status(201).json({ service });
+    res.status(201).json(service[0]);
   } catch (err) {
     console.log(err);
     next(err);
@@ -112,7 +112,7 @@ exports.deleteServiceById = async (req, res, next) => {
   const id = req.params.id;
   try {
     const deleted = await pool.execute("CALL delete_service(?)", [id]);
-    res.status(200).json({ deleted });
+    res.status(200).json(deleted[0]);
   } catch (err) {
     console.log(err);
     next(err);

@@ -1,9 +1,8 @@
 require("dotenv").config();
 
-const http = require('http');
-const hostname = '127.0.0.1';
 const express = require("express");
 const app = express();
+app.use(express.urlencoded({ extended: true }));
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
@@ -28,4 +27,5 @@ app.use((err, req, res, next) => {
 // });
 
 
-app.listen(PORT, () => console.log(`Listening on port ${PORT}...`));
+// app.listen(PORT, () => console.log(`Listening on port ${PORT}...`));
+module.exports = app;
