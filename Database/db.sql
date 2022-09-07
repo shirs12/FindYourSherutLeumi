@@ -243,6 +243,14 @@ END$$
 DELIMITER ;
 CALL `get_applicant_by_id`(2); -- test
 
+-- procedure that calls a specific applicant from db by email
+DELIMITER $$
+CREATE PROCEDURE `get_applicant_by_email`(IN applicant_email NVARCHAR(40))
+BEGIN
+	SELECT * FROM applicant WHERE email = applicant_email;
+END$$
+DELIMITER ;
+
 -- procedure that adds new applicant into the db
 DELIMITER $$
 CREATE PROCEDURE `add_new_applicant`(IN p_first_name NVARCHAR(25),
@@ -305,6 +313,14 @@ END$$
 DELIMITER ;
 CALL `get_applicant_by_id`(2); -- test
 
+-- procedure that calls a specific coordinator from db by email
+DELIMITER $$
+CREATE PROCEDURE `get_coordinator_by_email`(IN coordinator_email NVARCHAR(40))
+BEGIN
+	SELECT * FROM coordinator WHERE email = coordinator_email;
+END$$
+DELIMITER ;
+
 -- procedure that adds new coordinator into the db
 DELIMITER $$
 CREATE PROCEDURE `add_new_coordinator`(IN p_first_name NVARCHAR(25),p_last_name NVARCHAR(25),
@@ -343,7 +359,5 @@ BEGIN
 END$$
 DELIMITER ;
 CALL `delete_coordinator`(6); -- test
-
-
 
 
