@@ -18,7 +18,7 @@ import com.example.findyoursherutleumi.R;
 
 public class SignUpUserTypeFragment extends Fragment {
 
-    private SignUpUserTypeViewModel mViewModel;
+//    private SignUpUserTypeViewModel mViewModel;
 
     public static SignUpUserTypeFragment newInstance() {
         return new SignUpUserTypeFragment();
@@ -29,16 +29,20 @@ public class SignUpUserTypeFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sign_up_user_type, container, false);
         Spinner spinner = (Spinner) view.findViewById(R.id.user_type_spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.user_types_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
 
         return view;
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(SignUpUserTypeViewModel.class);
-        // TODO: Use the ViewModel
-    }
+//    @Override
+//    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+//        super.onActivityCreated(savedInstanceState);
+//        mViewModel = new ViewModelProvider(this).get(SignUpUserTypeViewModel.class);
+//        // TODO: Use the ViewModel
+//    }
 
 //
 //    // Create an ArrayAdapter using the string array and a default spinner layout
