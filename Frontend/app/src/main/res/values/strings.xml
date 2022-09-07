@@ -10,6 +10,16 @@
     <string name="user_type">Choose User type</string>
     <string name="logo">logo</string>
     <string name="next_btn">next</string>
+    <string name="coordinator_sign_up">Coordinator Sign Up</string>
+    <string name="submit_btn">submit</string>
+    <string name="first_name">First Name</string>
+    <string name="first_name_hint">first name…</string>
+    <string name="last_name">Last Name</string>
+    <string name="last_name_hint">last name…</string>
+    <string name="organization">Organization</string>
+    <string name="organization_hint">organization…</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="phone_number_hint">phone number…</string>
 
     <string-array name="user_types_array">
         <item>Applicant</item>
