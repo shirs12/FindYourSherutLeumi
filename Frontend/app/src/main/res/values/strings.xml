@@ -20,6 +20,9 @@
     <string name="organization_hint">organization…</string>
     <string name="phone_number">Phone Number</string>
     <string name="phone_number_hint">phone number…</string>
+    <string name="applicant_sign_up">Applicant Sign Up</string>
+    <string name="city">City</string>
+    <string name="city_hint">city…</string>
 
     <string-array name="user_types_array">
         <item>Applicant</item>
