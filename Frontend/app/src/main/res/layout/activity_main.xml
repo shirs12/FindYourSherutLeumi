@@ -14,11 +14,10 @@
 <!--        android:layout_height="wrap_content"-->
 <!--        android:text="Button" />-->
 
-    <fragment
-        android:id="@+id/login_fragment"
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
         android:name="com.example.findyoursherutleumi.fragments.LoginFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout="@layout/fragment_login" />
-
+        android:layout_height="wrap_content" />
 </LinearLayout>

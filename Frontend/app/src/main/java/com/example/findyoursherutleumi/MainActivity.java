@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import com.example.findyoursherutleumi.database.APIClient;
 import com.example.findyoursherutleumi.database.APIInterface;
+import com.example.findyoursherutleumi.fragments.LoginFragment;
 import com.example.findyoursherutleumi.models.Applicant;
 
 import java.util.List;
@@ -27,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
 
 //        button1 = findViewById(R.id.button1);
 //        apiInterface = APIClient.getInstance().create(APIInterface.class);
