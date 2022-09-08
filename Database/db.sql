@@ -360,4 +360,18 @@ END$$
 DELIMITER ;
 CALL `delete_coordinator`(6); -- test
 
+-------------------------------- general procedures ---------------------------------
+
+-- this procedure finds user(applicant or coordinator) by email address
+DELIMITER $$
+CREATE PROCEDURE `get_user_by_email`(IN p_email NVARCHAR(40))
+BEGIN
+	SELECT * FROM applicant
+	WHERE email = p_email
+	UNION
+	SELECT * FROM coordinator
+	WHERE email = p_email;
+END$$
+DELIMITER ;
+
 
