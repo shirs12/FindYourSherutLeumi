@@ -366,12 +366,13 @@ CALL `delete_coordinator`(6); -- test
 DELIMITER $$
 CREATE PROCEDURE `get_user_by_email`(IN p_email NVARCHAR(40))
 BEGIN
-	SELECT * FROM applicant
+	SELECT first_name,last_name,phone_number,email,u_password FROM coordinator
 	WHERE email = p_email
 	UNION
-	SELECT * FROM coordinator
+	SELECT first_name,last_name,phone_number,email,u_password FROM applicant
 	WHERE email = p_email;
 END$$
 DELIMITER ;
+
 
 
