@@ -18,7 +18,7 @@ CREATE TABLE applicant(
     phone_number NVARCHAR(13) UNIQUE,
     city NVARCHAR(25),
     email NVARCHAR(40),
-    applicant_password CHAR(64) NOT NULL,
+    u_password CHAR(64) NOT NULL,
     level_user_id INT DEFAULT 1,
     FOREIGN KEY (level_user_id) REFERENCES user_level(level_id)
 );
@@ -30,7 +30,7 @@ CREATE TABLE coordinator(
     last_name NVARCHAR(25) NOT NULL,
     phone_number NVARCHAR(13) UNIQUE,
 	email NVARCHAR(40) NOT NULL,
-    coordinator_password CHAR(64),
+    u_password CHAR(64) NOT NULL,
     organization_name NVARCHAR(40),
     level_user_id INT DEFAULT 2,
     FOREIGN KEY (level_user_id) REFERENCES user_level(level_id)
@@ -67,12 +67,12 @@ VALUES('Applicant'),('Coordinator');
 SELECT * FROM user_level;
 
 -- applicant
-INSERT INTO applicant(first_name,last_name,phone_number,city,email,applicant_password)
+INSERT INTO applicant(first_name,last_name,phone_number,city,email,u_password)
 VALUES('דנה','לוי','0501223334','מודיעין','dana11@gmail.com','03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4'),
 	  ('שרה','אליהו','0525555566','מודיעין','sara78@gmail.com','0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c');
 
 -- coordinator
-INSERT INTO coordinator(first_name,last_name,phone_number,email,coordinator_password,organization_name)
+INSERT INTO coordinator(first_name,last_name,phone_number,email,u_password,organization_name)
 VALUES('יערה','רון כהן','050-7521671','YaelCohenAguda@gmail.com','8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92','האגודה להתנדבות'),
 	  ('שרית','ויזנר','054-2610679','SaritVisnerShilo@gmail.com','ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f','עמותת ש"ל לשירות לאומי');
 
@@ -226,7 +226,7 @@ DELIMITER $$
 CREATE PROCEDURE `get_all_applicants`()
 BEGIN
     SELECT first_name,last_name,phone_number,
-		city,email,applicant_password
+		city,email,u_password
     FROM applicant;
     END$$
 DELIMITER ;
@@ -237,7 +237,7 @@ DELIMITER $$
 CREATE PROCEDURE `get_applicant_by_id`(IN id INT)
 BEGIN
 	SELECT first_name,last_name,phone_number,
-		city,email,applicant_password
+		city,email,u_password
     FROM applicant WHERE applicant_id = id;
 END$$
 DELIMITER ;
@@ -255,10 +255,10 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE `add_new_applicant`(IN p_first_name NVARCHAR(25),
     IN p_last_name NVARCHAR(25),IN p_phone_number NVARCHAR(13),
-    IN p_city NVARCHAR(25),IN p_email NVARCHAR(40),IN p_applicant_password CHAR(64))
+    IN p_city NVARCHAR(25),IN p_email NVARCHAR(40),IN p_u_password CHAR(64))
 BEGIN
-    INSERT INTO applicant(first_name,last_name,phone_number,city,email,applicant_password)
-    VALUES(p_first_name,p_last_name,p_phone_number,p_city,p_email,p_applicant_password);
+    INSERT INTO applicant(first_name,last_name,phone_number,city,email,u_password)
+    VALUES(p_first_name,p_last_name,p_phone_number,p_city,p_email,p_u_password);
 END$$
 DELIMITER ;
 CALL `add_new_applicant`('אור','אליה','0503758493','ראש העין','orEli123@gmail.com','481f6cc0511143ccdd7e2d1b1b94faf0a700a8b49cd13922a70b5ae28acaa8c5'); -- test
@@ -267,7 +267,7 @@ CALL `add_new_applicant`('אור','אליה','0503758493','ראש העין','orE
 DELIMITER $$
 CREATE PROCEDURE `update_applicant`(IN id INT,IN p_first_name NVARCHAR(25),
     IN p_last_name NVARCHAR(25),IN p_phone_number NVARCHAR(13),
-    IN p_city NVARCHAR(25),IN p_email NVARCHAR(40),IN p_applicant_password CHAR(64))
+    IN p_city NVARCHAR(25),IN p_email NVARCHAR(40),IN p_u_password CHAR(64))
 BEGIN
     UPDATE applicant
 	SET first_name = p_first_name,
@@ -275,7 +275,7 @@ BEGIN
     phone_number = p_phone_number,
     city = p_city,
     email = p_email,
-    applicant_password = p_applicant_password
+    u_password = p_u_password
 	WHERE applicant_id = id;
 END$$
 DELIMITER ;
@@ -296,7 +296,7 @@ DELIMITER $$
 CREATE PROCEDURE `get_all_coordinators`()
 BEGIN
     SELECT coordinator_id,first_name,last_name,phone_number,
-	email,coordinator_password,organization_name
+	email,u_password,organization_name
     FROM coordinator;
     END$$
 DELIMITER ;
@@ -307,7 +307,7 @@ DELIMITER $$
 CREATE PROCEDURE `get_coordinator_by_id`(IN id INT)
 BEGIN
 	SELECT coordinator_id,first_name,last_name,phone_number,
-	email,coordinator_password,organization_name
+	email,u_password,organization_name
     FROM coordinator WHERE coordinator_id = id;
 END$$
 DELIMITER ;
@@ -324,11 +324,11 @@ DELIMITER ;
 -- procedure that adds new coordinator into the db
 DELIMITER $$
 CREATE PROCEDURE `add_new_coordinator`(IN p_first_name NVARCHAR(25),p_last_name NVARCHAR(25),
-    p_phone_number NVARCHAR(13),p_email NVARCHAR(40),p_coordinator_password CHAR(64),
+    p_phone_number NVARCHAR(13),p_email NVARCHAR(40),p_u_password CHAR(64),
     p_organization_name NVARCHAR(40))
 BEGIN
-    INSERT INTO coordinator(first_name,last_name,phone_number,email,coordinator_password,organization_name)
-    VALUES(p_first_name,p_last_name,p_phone_number,p_email,p_coordinator_password,p_organization_name);
+    INSERT INTO coordinator(first_name,last_name,phone_number,email,u_password,organization_name)
+    VALUES(p_first_name,p_last_name,p_phone_number,p_email,p_u_password,p_organization_name);
 END$$
 DELIMITER ;
 CALL `add_new_coordinator`('אילה','שוורץ','0528990468','ayalas@bat-ami.org.il','8bb0cf6eb9b17d0f7d22b456f121257dc1254e1f01665370476383ea776df414','בת עמי [אמונה-אלומה]'); -- test
@@ -336,7 +336,7 @@ CALL `add_new_coordinator`('אילה','שוורץ','0528990468','ayalas@bat-ami.
 -- procedure that updates coordinator in db
 DELIMITER $$
 CREATE PROCEDURE `update_coordinator`(IN id INT,IN p_first_name NVARCHAR(25),p_last_name NVARCHAR(25),
-    p_phone_number NVARCHAR(13),p_email NVARCHAR(40),p_coordinator_password CHAR(64),
+    p_phone_number NVARCHAR(13),p_email NVARCHAR(40),p_u_password CHAR(64),
     p_organization_name NVARCHAR(40))
 BEGIN
     UPDATE coordinator
@@ -344,7 +344,7 @@ BEGIN
     last_name = p_last_name,
     phone_number = p_phone_number,
     email = p_email,
-    coordinator_password = p_coordinator_password,
+    u_password = p_u_password,
     organization_name = p_organization_name
 	WHERE coordinator_id = id;
 END$$
