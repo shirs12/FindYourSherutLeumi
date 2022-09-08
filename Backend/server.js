@@ -12,6 +12,8 @@ app.use("/userLevels", require("./routes/userLevelRoute"));
 app.use("/applicants", require("./routes/applicantRoute"));
 app.use("/coordinators", require("./routes/coordinatorRoute"));
 
+app.use("/login", require("./routes/generalRoute"));
+
 app.use((err, req, res, next) => {
   console.log(err.stack);
   console.log(err.name);
@@ -21,10 +23,6 @@ app.use((err, req, res, next) => {
     massage: "Somthing went wrong...",
   });
 });
-
-// app.use("/login", (req, res) => {
-//   // TODO: a methods that login the user, (option: by select procedure)
-// });
 
 
 // app.listen(PORT, () => console.log(`Listening on port ${PORT}...`));

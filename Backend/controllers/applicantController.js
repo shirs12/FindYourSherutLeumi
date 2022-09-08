@@ -34,12 +34,12 @@ exports.createNewApplicant = async (req, res, next) => {
     phone_number,
     city,
     email,
-    applicant_password,
+    u_password,
   } = req.body;
   try {
     const applicant = await pool.execute(
       "CALL add_new_applicant(?,?,?,?,?,?)",
-      [first_name, last_name, phone_number, city, email, applicant_password]
+      [first_name, last_name, phone_number, city, email, u_password]
     );
     res.status(201).json({ applicant });
   } catch (err) {
@@ -57,12 +57,12 @@ exports.updateApplicantById = async (req, res, next) => {
     phone_number,
     city,
     email,
-    applicant_password,
+    u_password,
   } = req.body;
   try {
     const applicant = await pool.execute(
       "CALL update_applicant(?,?,?,?,?,?,?)",
-      [id, first_name, last_name, phone_number, city, email, applicant_password]
+      [id, first_name, last_name, phone_number, city, email, u_password]
     );
     res.status(201).json(applicant[0]);
   } catch (err) {

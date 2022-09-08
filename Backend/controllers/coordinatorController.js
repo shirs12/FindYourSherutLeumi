@@ -33,7 +33,7 @@ exports.createNewCoordinator = async (req, res, next) => {
     last_name,
     phone_number,
     email,
-    coordinator_password,
+    u_password,
     organization_name,
   } = req.body;
   try {
@@ -44,7 +44,7 @@ exports.createNewCoordinator = async (req, res, next) => {
         last_name,
         phone_number,
         email,
-        coordinator_password,
+        u_password,
         organization_name,
       ]
     );
@@ -63,7 +63,7 @@ exports.updateCoordinatorById = async (req, res, next) => {
     last_name,
     phone_number,
     email,
-    coordinator_password,
+    u_password,
     organization_name,
   } = req.body;
   try {
@@ -75,7 +75,7 @@ exports.updateCoordinatorById = async (req, res, next) => {
         last_name,
         phone_number,
         email,
-        coordinator_password,
+        u_password,
         organization_name,
       ]
     );
@@ -97,3 +97,4 @@ exports.deleteCoordinatorById = async (req, res, next) => {
     next(err);
   }
 };
+
