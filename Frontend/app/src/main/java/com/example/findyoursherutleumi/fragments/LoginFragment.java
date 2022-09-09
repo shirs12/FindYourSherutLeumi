@@ -57,21 +57,15 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (view.getId() == R.id.sign_in_btn){
-                    JSONObject paramObject = new JSONObject();
-                    try {
-                        paramObject.put("email", inputEmail.toString());
-                        paramObject.put("password", inputPassword.toString());
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    Call<User> call = apiInterface.authenticateUser(paramObject.toString());
+                    Call<User> call = apiInterface.authenticateUser(inputEmail.toString(), inputPassword.toString());
                     call.enqueue(new Callback<User>() {
                         @Override
                         public void onResponse(Call<User> call, Response<User> response) {
                             if(!response.isSuccessful()) {
                                 System.out.println("1");
                                 System.out.println(response.body());
-                                System.out.println(paramObject);
+                                System.out.println(inputEmail.toString());
+                                System.out.println(inputPassword.toString());
                                 Toast.makeText(getContext(), "Connection Failed. try again later...", Toast.LENGTH_SHORT).show();
                             }else {
                                 Fragment newFragment = new HomePageFragment();
