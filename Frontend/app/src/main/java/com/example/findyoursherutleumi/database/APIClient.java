@@ -2,6 +2,7 @@ package com.example.findyoursherutleumi.database;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.findyoursherutleumi.models.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -22,6 +23,12 @@ public class APIClient extends AppCompatActivity {
                     .build();
         }
         return instance;
+    }
+
+    public static User getUserService(){
+        User userService = getInstance().create(User.class);
+
+        return userService;
     }
 
 

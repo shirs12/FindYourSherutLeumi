@@ -57,15 +57,11 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (view.getId() == R.id.sign_in_btn){
-                    Call<User> call = apiInterface.authenticateUser(inputEmail.toString(), inputPassword.toString());
+                    Call<User> call = apiInterface.authenticateUser(inputEmail.getText().toString(), inputPassword.getText().toString());
                     call.enqueue(new Callback<User>() {
                         @Override
                         public void onResponse(Call<User> call, Response<User> response) {
                             if(!response.isSuccessful()) {
-                                System.out.println("1");
-                                System.out.println(response.body());
-                                System.out.println(inputEmail.toString());
-                                System.out.println(inputPassword.toString());
                                 Toast.makeText(getContext(), "Connection Failed. try again later...", Toast.LENGTH_SHORT).show();
                             }else {
                                 Fragment newFragment = new HomePageFragment();
@@ -78,7 +74,6 @@ public class LoginFragment extends Fragment {
 
                         @Override
                         public void onFailure(Call<User> call, Throwable t) {
-                            System.out.println("2");
                             Toast.makeText(getContext(), "Connection Failed. try again later...", Toast.LENGTH_SHORT).show();
                         }
                     });
