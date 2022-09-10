@@ -25,13 +25,17 @@ exports.authenticateUser = async (req, res, next) => {
     console.log(user);
     console.log(user.u_password);
     if(user != undefined){
-        const isvalid = bcrypt.compare(password, user.u_password);
-        if(isvalid){
-            res.status(200).json(user);
-        }
-        else res.status(204).json("Email and password does not match");
+        const isvalid = await bcrypt.compare(password, user.u_password).then((valid) => {
+          if(valid){
+              res.status(200).json(user);
+          } else {
+              res.status(401).json("Email and password does not match"); 
+              console.log("code 401");
+          }
+        })
+      .catch((err) => next(err)); 
     }
-    else res.status(206).json("Email does not exist");
+    else res.status(401).json("Email does not exist");
   } catch (err) {
     console.log(err);
     next(err);
