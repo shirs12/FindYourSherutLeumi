@@ -39,8 +39,7 @@ exports.createNewApplicant = async (req, res, next) => {
   } = req.body;
   try {
       const hash_password = await bcrypt.hash(u_password, 12);
-
-    const applicant = await pool.execute(
+      const applicant = await pool.execute(
       "CALL add_new_applicant(?,?,?,?,?,?)",
       [first_name, last_name, phone_number, city, email, hash_password]
     );

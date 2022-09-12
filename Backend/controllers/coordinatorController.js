@@ -37,12 +37,8 @@ exports.createNewCoordinator = async (req, res, next) => {
     u_password,
     organization_name,
   } = req.body;
-  const hash_password = '';
-  bcrypt.hash(u_password, 12, function(err, hash) {
-    try{hash_password = hash;}
-    catch{console.log(err);}
-});
   try {
+    const hash_password = await bcrypt.hash(u_password, 12);
     const coordinator = await pool.execute(
       "CALL add_new_coordinator(?,?,?,?,?,?)",
       [
