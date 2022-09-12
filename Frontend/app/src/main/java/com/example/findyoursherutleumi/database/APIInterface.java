@@ -21,11 +21,29 @@ public interface APIInterface {
     @GET("applicants/{id}")
     Call<Applicant> getApplicantById(@Path("id") int id);
 
-
     @POST("login")
     @FormUrlEncoded
     Call<User> authenticateUser(@Field("email") String email,
                                 @Field("u_password") String password);
+
+    @POST("applicants/add")
+    @FormUrlEncoded
+    Call<Applicant> createNewApplicant(@Field("first_name") String firstName,
+                                       @Field("last_name") String lastName,
+                                       @Field("phone_number") String phoneNumber,
+                                       @Field("city") String city,
+                                       @Field("email") String email,
+                                       @Field("u_password") String password);
+
+    @POST("coordinators/add")
+    @FormUrlEncoded
+    Call<Applicant> createNewCoordinator(@Field("first_name") String firstName,
+                                       @Field("last_name") String lastName,
+                                       @Field("phone_number") String phoneNumber,
+                                       @Field("email") String email,
+                                       @Field("u_password") String password,
+                                       @Field("organization_name") String organizationName);
+
 
 
 

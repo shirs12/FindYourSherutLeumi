@@ -64,6 +64,9 @@ public class LoginFragment extends Fragment {
                             if(!response.isSuccessful()) {
                                 Toast.makeText(getContext(), "Connection Failed. try again later...", Toast.LENGTH_SHORT).show();
                             }else {
+                                inputEmail.getText().clear();
+                                inputPassword.getText().clear();
+
                                 Fragment newFragment = new HomePageFragment();
                                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                                 transaction.replace(R.id.fragmentContainerView, newFragment);

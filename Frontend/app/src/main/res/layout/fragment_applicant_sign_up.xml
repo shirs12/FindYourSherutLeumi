@@ -97,32 +97,6 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/city_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="50dp"
-                    android:layout_marginTop="35dp"
-                    android:layout_marginRight="50dp"
-                    android:text="@string/city"
-                    android:textColor="@color/light_blue"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/city_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="50dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="50dp"
-                    android:backgroundTint="@color/light_gray"
-                    android:ems="10"
-                    android:hint="@string/city_hint"
-                    android:inputType="text"
-                    android:minHeight="48dp"
-                    android:textSize="16sp" />
-
-                <TextView
                     android:id="@+id/phone_number_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -148,6 +122,32 @@
                     android:minHeight="48dp"
                     android:textSize="16sp"
                     tools:ignore="TextFields" />
+
+                <TextView
+                    android:id="@+id/city_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginRight="50dp"
+                    android:text="@string/city"
+                    android:textColor="@color/light_blue"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/city_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="50dp"
+                    android:backgroundTint="@color/light_gray"
+                    android:ems="10"
+                    android:hint="@string/city_hint"
+                    android:inputType="text"
+                    android:minHeight="48dp"
+                    android:textSize="16sp" />
 
 
                 <TextView
