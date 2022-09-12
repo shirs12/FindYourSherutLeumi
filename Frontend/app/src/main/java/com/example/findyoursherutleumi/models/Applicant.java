@@ -20,7 +20,7 @@ public class Applicant {
     @SerializedName("email")
     @Expose
     private String email;
-    @SerializedName("applicant_password")
+    @SerializedName("u_password")
     @Expose
     private String applicantPassword;
 

@@ -1,7 +1,6 @@
 package com.example.findyoursherutleumi.fragments;
 
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 
@@ -9,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +19,6 @@ import com.example.findyoursherutleumi.R;
 import com.example.findyoursherutleumi.database.APIClient;
 import com.example.findyoursherutleumi.database.APIInterface;
 import com.example.findyoursherutleumi.models.Applicant;
-import com.example.findyoursherutleumi.models.User;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,7 +26,6 @@ import retrofit2.Response;
 
 public class ApplicantSignUpFragment extends Fragment {
 
-//    private ApplicantSignUpViewModel mViewModel;
     APIInterface apiInterface;
 
     EditText firstNameInput;
@@ -98,7 +94,7 @@ public class ApplicantSignUpFragment extends Fragment {
 
                             @Override
                             public void onFailure(Call<Applicant> call, Throwable t) {
-
+                                Toast.makeText(getContext(), "Connection Failed. try again later...", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -119,13 +115,6 @@ public class ApplicantSignUpFragment extends Fragment {
         }
         return true;
     }
-
-//    @Override
-//    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-//        super.onActivityCreated(savedInstanceState);
-//        mViewModel = new ViewModelProvider(this).get(ApplicantSignUpViewModel.class);
-//        // TODO: Use the ViewModel
-//    }
 
 
 

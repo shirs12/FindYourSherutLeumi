@@ -1,6 +1,7 @@
 package com.example.findyoursherutleumi.database;
 
 import com.example.findyoursherutleumi.models.Applicant;
+import com.example.findyoursherutleumi.models.Coordinator;
 import com.example.findyoursherutleumi.models.User;
 
 import java.util.List;
@@ -37,12 +38,12 @@ public interface APIInterface {
 
     @POST("coordinators/add")
     @FormUrlEncoded
-    Call<Applicant> createNewCoordinator(@Field("first_name") String firstName,
-                                       @Field("last_name") String lastName,
-                                       @Field("phone_number") String phoneNumber,
-                                       @Field("email") String email,
-                                       @Field("u_password") String password,
-                                       @Field("organization_name") String organizationName);
+    Call<Coordinator> createNewCoordinator(@Field("first_name") String firstName,
+                                           @Field("last_name") String lastName,
+                                           @Field("phone_number") String phoneNumber,
+                                           @Field("email") String email,
+                                           @Field("u_password") String password,
+                                           @Field("organization_name") String organizationName);
 
 
 

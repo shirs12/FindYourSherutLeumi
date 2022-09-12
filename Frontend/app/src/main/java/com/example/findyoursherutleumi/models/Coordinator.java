@@ -20,7 +20,7 @@ public class Coordinator {
     @SerializedName("email")
     @Expose
     private String email;
-    @SerializedName("coordinator_password")
+    @SerializedName("u_password")
     @Expose
     private String coordinatorPassword;
     @SerializedName("organization_name")
