@@ -1,4 +1,5 @@
 const pool = require("../config/db");
+const bcrypt = require("bcrypt");
 
 // GET - gets all coordinators from db
 exports.getAllCoordinators = async (req, res, next) => {
@@ -36,6 +37,11 @@ exports.createNewCoordinator = async (req, res, next) => {
     u_password,
     organization_name,
   } = req.body;
+  const hash_password = '';
+  bcrypt.hash(u_password, 12, function(err, hash) {
+    try{hash_password = hash;}
+    catch{console.log(err);}
+});
   try {
     const coordinator = await pool.execute(
       "CALL add_new_coordinator(?,?,?,?,?,?)",
@@ -44,7 +50,7 @@ exports.createNewCoordinator = async (req, res, next) => {
         last_name,
         phone_number,
         email,
-        u_password,
+        hash_password,
         organization_name,
       ]
     );

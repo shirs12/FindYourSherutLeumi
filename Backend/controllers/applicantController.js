@@ -1,4 +1,5 @@
 const pool = require("../config/db");
+const bcrypt = require("bcrypt");
 
 // GET - gets all applicants from db
 exports.getAllApplicants = async (req, res, next) => {
@@ -37,9 +38,11 @@ exports.createNewApplicant = async (req, res, next) => {
     u_password,
   } = req.body;
   try {
+      const hash_password = await bcrypt.hash(u_password, 12);
+
     const applicant = await pool.execute(
       "CALL add_new_applicant(?,?,?,?,?,?)",
-      [first_name, last_name, phone_number, city, email, u_password]
+      [first_name, last_name, phone_number, city, email, hash_password]
     );
     res.status(201).json({ applicant });
   } catch (err) {
