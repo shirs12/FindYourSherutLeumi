@@ -113,6 +113,15 @@ END$$
 DELIMITER ;
 CALL `get_all_services`(); -- test
 
+-- procedure that calls all the services partialy from db
+DELIMITER $$
+CREATE PROCEDURE `get_all_services_partialy`()
+BEGIN
+    SELECT service_id,service_name,organization_name,category,country,city,description_service FROM service;
+END$$
+DELIMITER ;
+CALL `get_all_services_partialy`(); -- test
+
 -- procedure that calls a specific service from db
 DELIMITER $$
 CREATE PROCEDURE `get_service_by_id`(IN id INT)
