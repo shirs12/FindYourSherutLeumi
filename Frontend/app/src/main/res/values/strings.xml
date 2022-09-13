@@ -23,6 +23,8 @@
     <string name="applicant_sign_up">Applicant Sign Up</string>
     <string name="city">City</string>
     <string name="city_hint">city…</string>
+    <string name="search_bar">Search</string>
+    <string name="no_result">No Result</string>
 
     <string-array name="user_types_array">
         <item>Applicant</item>

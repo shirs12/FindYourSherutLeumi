@@ -100,6 +100,4 @@ public class LoginFragment extends Fragment {
         });
         return view;
     }
-
-
 }
