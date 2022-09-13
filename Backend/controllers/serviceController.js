@@ -11,6 +11,17 @@ exports.getAllServices = async (req, res, next) => {
   }
 };
 
+// gets all services partialy from db
+exports.getAllServicesPartially = async (req, res, next) => {
+  try {
+    const [services] = await pool.execute("CALL get_all_services_partially()");
+    res.status(200).json(services[0]);
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
+};
+
 // gets specific service from db
 exports.getServiceById = async (req, res, next) => {
   const id = req.params.id;
