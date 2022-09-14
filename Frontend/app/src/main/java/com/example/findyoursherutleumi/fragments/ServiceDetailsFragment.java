@@ -17,7 +17,7 @@ import com.example.findyoursherutleumi.R;
 
 public class ServiceDetailsFragment extends Fragment {
 
-    private ServiceDetailsViewModel mViewModel;
+//    private ServiceDetailsViewModel mViewModel;
     private int serviceId;
     TextView serviceIdTitle;
 
@@ -31,11 +31,12 @@ public class ServiceDetailsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_service_details, container, false);
         serviceIdTitle = view.findViewById(R.id.service_id_title);
 
-//        Bundle bundle = this.getArguments();
+//        Bundle bundle = new Bundle();
+//        bundle = getArguments();
 //        if (bundle != null) {
-//            int myInt = bundle.getInt("serviceId", serviceId);
+//            serviceId = bundle.getInt("id");
+//            serviceIdTitle.setText(serviceId);
 //        }
-//        serviceIdTitle.setText(serviceId);
         return view;
     }
 
