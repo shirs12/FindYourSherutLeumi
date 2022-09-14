@@ -2,6 +2,7 @@ package com.example.findyoursherutleumi.database;
 
 import com.example.findyoursherutleumi.models.Applicant;
 import com.example.findyoursherutleumi.models.Coordinator;
+import com.example.findyoursherutleumi.models.ServicePartial;
 import com.example.findyoursherutleumi.models.User;
 
 import java.util.List;
@@ -21,6 +22,9 @@ public interface APIInterface {
 
     @GET("applicants/{id}")
     Call<Applicant> getApplicantById(@Path("id") int id);
+
+    @GET("services")
+    Call<List<ServicePartial>> getAllServicesPartially();
 
     @POST("login")
     @FormUrlEncoded

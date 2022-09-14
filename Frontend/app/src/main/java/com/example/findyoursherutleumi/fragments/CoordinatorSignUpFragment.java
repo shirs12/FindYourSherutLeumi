@@ -100,11 +100,9 @@ public class CoordinatorSignUpFragment extends Fragment {
                             }
                         });
                     }
-
                 }
             }
         });
-
         return view;
     }
 

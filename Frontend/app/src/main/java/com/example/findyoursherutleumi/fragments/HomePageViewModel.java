@@ -1,7 +1,29 @@
 package com.example.findyoursherutleumi.fragments;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.findyoursherutleumi.models.ServicePartial;
+import com.example.findyoursherutleumi.repositories.ServicesPartialRepository;
+
+import java.util.List;
+
 public class HomePageViewModel extends ViewModel {
-    // TODO: Implement the ViewModel
+
+    private MutableLiveData<List<ServicePartial>> servicesPartialLst;
+    private ServicesPartialRepository repository;
+
+    public void init(){
+        if (servicesPartialLst != null)
+            return;
+        repository = ServicesPartialRepository.getInstance();
+        servicesPartialLst = repository.getServices();
+        System.out.println(repository.getServices());
+    }
+    public LiveData<List<ServicePartial>> getServices(){
+        System.out.println("vm:    " + servicesPartialLst.getValue());
+        return servicesPartialLst;
+    }
+
 }
