@@ -31,12 +31,10 @@ public class ServiceDetailsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_service_details, container, false);
         serviceIdTitle = view.findViewById(R.id.service_id_title);
 
-//        Bundle bundle = new Bundle();
-//        bundle = getArguments();
-//        if (bundle != null) {
-//            serviceId = bundle.getInt("id");
-//            serviceIdTitle.setText(serviceId);
-//        }
+        serviceId = getArguments().getInt("id");
+        System.out.println(serviceId);
+        serviceIdTitle.setText(String.valueOf(serviceId));
+
         return view;
     }
 
