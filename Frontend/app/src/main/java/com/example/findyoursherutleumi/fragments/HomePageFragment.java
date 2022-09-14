@@ -38,6 +38,16 @@ public class HomePageFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home_page, container, false);
         recyclerView = view.findViewById(R.id.services_lst);
         mViewModel = new ViewModelProvider(this).get(HomePageViewModel.class);
+
+        mViewModel.init();
+        mViewModel.getServices().observe(getViewLifecycleOwner(), new Observer<List<ServicePartial>>() {
+            @Override
+            public void onChanged(List<ServicePartial> servicePartials) {
+                servicesAdapter.updateServicesList(servicePartials);
+            }
+        });
+        initRecyclerView();
+
         return view;
     }
 
@@ -48,20 +58,20 @@ public class HomePageFragment extends Fragment {
         recyclerView.setAdapter(servicesAdapter);
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        mViewModel.init();
-        mViewModel.getServices().observe(this.getViewLifecycleOwner(), new Observer<List<ServicePartial>>() {
-            @SuppressLint("NotifyDataSetChanged")
-            @Override
-            public void onChanged(List<ServicePartial> servicePartials) {
-                servicesAdapter.notifyDataSetChanged();
-            }
-        });
-        initRecyclerView();
-    }
+//    @Override
+//    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+//        super.onActivityCreated(savedInstanceState);
+//
+//        mViewModel.init();
+////        mViewModel.getServices().observe(this.getViewLifecycleOwner(), new Observer<List<ServicePartial>>() {
+////            @SuppressLint("NotifyDataSetChanged")
+////            @Override
+////            public void onChanged(List<ServicePartial> servicePartials) {
+////                servicesAdapter.updateServicesList(servicePartials);
+////            }
+////        });
+////        initRecyclerView();
+////    }
 
 
 }

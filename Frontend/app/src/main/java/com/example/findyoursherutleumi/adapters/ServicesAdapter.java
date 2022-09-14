@@ -1,5 +1,6 @@
 package com.example.findyoursherutleumi.adapters;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,7 @@ import java.util.List;
 public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHolder> {
 
     private final LayoutInflater inflater;
-    private final List<ServicePartial> servicesLst;
+    private List<ServicePartial> servicesLst;
 
     public ServicesAdapter(LayoutInflater inflater, List<ServicePartial> servicesLst){
         this.inflater = inflater;
@@ -41,7 +42,14 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return 0;
+        return servicesLst.size();
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void updateServicesList(final List<ServicePartial> servicesLst) {
+        this.servicesLst.clear();
+        this.servicesLst = servicesLst;
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
