@@ -19,10 +19,8 @@ public class HomePageViewModel extends ViewModel {
             return;
         repository = ServicesPartialRepository.getInstance();
         servicesPartialLst = repository.getServices();
-        System.out.println("vm1:    " + repository.getServices().getValue());
     }
     public LiveData<List<ServicePartial>> getServices(){
-        System.out.println("vm2:    " + servicesPartialLst.getValue());
         return servicesPartialLst;
     }
 

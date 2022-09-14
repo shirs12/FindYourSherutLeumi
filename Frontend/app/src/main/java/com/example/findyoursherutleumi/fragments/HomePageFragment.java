@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.findyoursherutleumi.R;
 import com.example.findyoursherutleumi.adapters.ServicesAdapter;
@@ -36,18 +37,18 @@ public class HomePageFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_page, container, false);
-        recyclerView = view.findViewById(R.id.services_lst);
         mViewModel = new ViewModelProvider(this).get(HomePageViewModel.class);
 
         mViewModel.init();
+        recyclerView = view.findViewById(R.id.services_lst);
         mViewModel.getServices().observe(getViewLifecycleOwner(), new Observer<List<ServicePartial>>() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onChanged(List<ServicePartial> servicePartials) {
-                servicesAdapter.updateServicesList(servicePartials);
+                servicesAdapter.notifyDataSetChanged();
             }
         });
         initRecyclerView();
-
         return view;
     }
 
@@ -57,21 +58,5 @@ public class HomePageFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(servicesAdapter);
     }
-
-//    @Override
-//    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-//        super.onActivityCreated(savedInstanceState);
-//
-//        mViewModel.init();
-////        mViewModel.getServices().observe(this.getViewLifecycleOwner(), new Observer<List<ServicePartial>>() {
-////            @SuppressLint("NotifyDataSetChanged")
-////            @Override
-////            public void onChanged(List<ServicePartial> servicePartials) {
-////                servicesAdapter.updateServicesList(servicePartials);
-////            }
-////        });
-////        initRecyclerView();
-////    }
-
 
 }

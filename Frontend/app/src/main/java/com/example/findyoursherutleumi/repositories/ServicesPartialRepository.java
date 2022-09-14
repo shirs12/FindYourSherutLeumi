@@ -1,5 +1,7 @@
 package com.example.findyoursherutleumi.repositories;
 
+import android.widget.Button;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
@@ -19,6 +21,7 @@ public class ServicesPartialRepository {
 
     private static ServicesPartialRepository instance;
     private final ArrayList<ServicePartial> dataSet = new ArrayList<>();
+    private Button detailsBtn;
 
     APIInterface apiInterface;
 
@@ -32,7 +35,6 @@ public class ServicesPartialRepository {
         setServices();
         MutableLiveData<List<ServicePartial>> data = new MutableLiveData<>();
         data.setValue(dataSet);
-        System.out.println("repooooo2: " + data.getValue());
         return data;
     }
 
@@ -47,17 +49,12 @@ public class ServicesPartialRepository {
                 assert response.body() != null;
                 dataSet.clear();
                 dataSet.addAll(response.body());
-                //TODO: delete prints
-                System.out.println(response.body());
-                System.out.println(response.code());
-                System.out.println(dataSet);
             }
             @Override
             public void onFailure(@NonNull Call<List<ServicePartial>> call, @NonNull Throwable t) {
                 System.out.println("failed");
             }
         });
-        System.out.println("repooooo1: " + dataSet);
     }
 
 
