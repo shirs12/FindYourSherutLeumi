@@ -8,7 +8,7 @@
     tools:context=".fragments.HomePageFragment">
 
     <ImageView
-        android:id="@+id/logo_home_page_view"
+        android:id="@+id/logo_service_details_view"
         android:layout_width="236dp"
         android:layout_height="63dp"
         android:layout_marginBottom="15dp"

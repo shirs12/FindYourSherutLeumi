@@ -22,7 +22,7 @@
             android:src="@drawable/logo" />
 
         <TextView
-            android:id="@+id/applicant_sign_up_title"
+            android:id="@+id/service_details_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"

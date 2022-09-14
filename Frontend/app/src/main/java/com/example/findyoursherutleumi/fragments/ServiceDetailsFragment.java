@@ -19,7 +19,7 @@ public class ServiceDetailsFragment extends Fragment {
 
 //    private ServiceDetailsViewModel mViewModel;
     private int serviceId;
-    TextView serviceIdTitle;
+//    TextView serviceIdTitle;
 
     public static ServiceDetailsFragment newInstance() {
         return new ServiceDetailsFragment();
@@ -29,11 +29,11 @@ public class ServiceDetailsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_service_details, container, false);
-        serviceIdTitle = view.findViewById(R.id.service_id_title);
+//        serviceIdTitle = view.findViewById(R.id.service_id_title);
 
-        serviceId = getArguments().getInt("id");
-        System.out.println(serviceId);
-        serviceIdTitle.setText(String.valueOf(serviceId));
+//        serviceId = getArguments().getInt("id");
+//        System.out.println(serviceId);
+//        serviceIdTitle.setText(String.valueOf(serviceId));
 
         return view;
     }

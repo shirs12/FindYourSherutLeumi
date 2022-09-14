@@ -1,23 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.ServiceDetailsFragment">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Service Details"
-        android:textSize="34sp" />
+        android:layout_margin="10dp"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/service_id_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="30dp"
-        android:numeric="integer"
-        android:text="TextView"
-        android:textSize="60sp" />
+        <ImageView
+            android:id="@+id/logo_service_details_view"
+            android:layout_width="236dp"
+            android:layout_height="63dp"
+            android:layout_marginBottom="15dp"
+            android:contentDescription="@string/logo"
+            android:src="@drawable/logo" />
+
+        <TextView
+            android:id="@+id/service_details_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="20dp"
+            android:paddingStart="7dp"
+            android:paddingEnd="7dp"
+            android:text="Service Title"
+            android:textAlignment="textStart"
+            android:textColor="@color/light_blue"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/service_details_card"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardBackgroundColor="@color/light_blue">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                tools:ignore="SpeakableTextPresentCheck">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/organization_title_details"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@color/white"
+                            android:padding="5dp"
+                            android:text="@string/organization"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textView8"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@color/white"
+                            android:padding="5dp"
+                            android:text="TextView" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/category_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/category" />
+
+                    <TextView
+                        android:id="@+id/country_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/country" />
+
+                    <TextView
+                        android:id="@+id/city_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/city" />
+
+                    <TextView
+                        android:id="@+id/address_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/address" />
+
+                    <TextView
+                        android:id="@+id/has_apartment_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/has_apartment" />
+
+                    <TextView
+                        android:id="@+id/is_second_year_only_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/is_second_year_only" />
+
+                    <TextView
+                        android:id="@+id/is_morning_service_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/is_morning_service" />
+
+                    <TextView
+                        android:id="@+id/is_evening_service_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/is_evening_service" />
+
+                    <TextView
+                        android:id="@+id/description_service"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/description" />
+
+                    <TextView
+                        android:id="@+id/coordinator_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/coordinator" />
+
+                    <TextView
+                        android:id="@+id/coordinator_contact"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/coordinator_contact" />
+
+
+                </LinearLayout>
+            </ScrollView>
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
 
 </FrameLayout>
