@@ -22,10 +22,13 @@ public class Coordinator {
     private String email;
     @SerializedName("u_password")
     @Expose
-    private String coordinatorPassword;
+    private String uPassword;
     @SerializedName("organization_name")
     @Expose
     private String organizationName;
+    @SerializedName("level_user_id")
+    @Expose
+    private Integer levelUserId;
 
     public Integer getCoordinatorId() {
         return coordinatorId;
@@ -67,12 +70,12 @@ public class Coordinator {
         this.email = email;
     }
 
-    public String getCoordinatorPassword() {
-        return coordinatorPassword;
+    public String getuPassword() {
+        return uPassword;
     }
 
-    public void setCoordinatorPassword(String coordinatorPassword) {
-        this.coordinatorPassword = coordinatorPassword;
+    public void setuPassword(String uPassword) {
+        this.uPassword = uPassword;
     }
 
     public String getOrganizationName() {
@@ -83,15 +86,13 @@ public class Coordinator {
         this.organizationName = organizationName;
     }
 
-    @Override
-    public String toString() {
-        return "Coordinator{" +
-                "coordinatorId=" + coordinatorId +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", email='" + email + '\'' +
-                ", organizationName='" + organizationName + '\'' +
-                '}';
+    public Integer getLevelUserId() {
+        return levelUserId;
     }
+
+    public void setLevelUserId(Integer levelUserId) {
+        this.levelUserId = levelUserId;
+    }
+
 }
+

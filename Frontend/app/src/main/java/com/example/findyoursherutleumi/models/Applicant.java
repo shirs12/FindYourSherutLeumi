@@ -5,6 +5,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class Applicant {
 
+    @SerializedName("applicant_id")
+    @Expose
+    private Integer applicantId;
     @SerializedName("first_name")
     @Expose
     private String firstName;
@@ -22,7 +25,14 @@ public class Applicant {
     private String email;
     @SerializedName("u_password")
     @Expose
-    private String applicantPassword;
+    private String uPassword;
+    @SerializedName("level_user_id")
+    @Expose
+    private Integer levelUserId;
+
+    public Integer getApplicantId() {
+        return applicantId;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -64,18 +74,16 @@ public class Applicant {
         this.email = email;
     }
 
-    public void setApplicantPassword(String applicantPassword) {
-        this.applicantPassword = applicantPassword;
+    public String getUPassword() {
+        return uPassword;
     }
 
-    @Override
-    public String toString() {
-        return "Applicant{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", city='" + city + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+    public void setUPassword(String uPassword) {
+        this.uPassword = uPassword;
     }
+
+    public Integer getLevelUserId() {
+        return levelUserId;
+    }
+
 }

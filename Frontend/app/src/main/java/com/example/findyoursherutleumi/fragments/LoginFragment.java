@@ -27,6 +27,8 @@ import retrofit2.Response;
 
 public class LoginFragment extends Fragment {
 
+    private int userTypeId;
+
     Button signInBtn;
     EditText inputEmail;
     EditText inputPassword;

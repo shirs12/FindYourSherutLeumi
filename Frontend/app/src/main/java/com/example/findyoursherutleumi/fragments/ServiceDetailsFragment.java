@@ -28,7 +28,6 @@ import retrofit2.Response;
 
 public class ServiceDetailsFragment extends Fragment {
 
-//    private ServiceDetailsViewModel mViewModel;
     private int serviceId;
 
     TextView serviceTxt;
@@ -124,36 +123,6 @@ public class ServiceDetailsFragment extends Fragment {
                 System.out.println(t.getMessage());
             }
         });
-
-//        call.enqueue(new Callback<Coordinator>() {
-//            @SuppressLint("SetTextI18n")
-//            @Override
-//            public void onResponse(Call<Coordinator> call, Response<Coordinator> response) {
-//                if (!response.isSuccessful()){
-//                    Toast.makeText(getContext(), "Response from server Failed. try again later...", Toast.LENGTH_SHORT).show();
-//                } else {
-//                    assert response.body() != null;
-//                    coordinatorNameTxt.setText(response.body().getFirstName() + " " + response.body().getLastName());
-//                    coordinatorContactTxt.setText(response.body().getPhoneNumber());
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Coordinator> call, Throwable t) {
-//                Toast.makeText(getContext(), "Connection Failed. try again later... ", Toast.LENGTH_SHORT).show();
-//                System.out.println(t.getMessage());
-//            }
-//        });
-
-
-
-//        serviceIdTitle = view.findViewById(R.id.service_id_title);
-
-//        serviceId = getArguments().getInt("id");
-//        System.out.println(serviceId);
-//        serviceIdTitle.setText(String.valueOf(serviceId));
-
-
 
         return view;
     }
