@@ -35,6 +35,7 @@ public class HomePageFragment extends Fragment {
     private HomePageViewModel mViewModel;
     RecyclerView recyclerView;
     ServicesAdapter servicesAdapter;
+    Button addServiceBtn;
 
     public static HomePageFragment newInstance() {
         return new HomePageFragment();
@@ -46,6 +47,8 @@ public class HomePageFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home_page, container, false);
         mViewModel = new ViewModelProvider(this).get(HomePageViewModel.class);
         setHasOptionsMenu(true);
+        addServiceBtn = view.findViewById(R.id.add_service_btn);
+        // TODO: button visible/gone if coordinator/applicant
 
         assert getArguments() != null;
         userTypeId = getArguments().getInt("id");
