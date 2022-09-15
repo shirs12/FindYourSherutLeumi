@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,16 +21,19 @@ import com.example.findyoursherutleumi.fragments.HomePageFragment;
 import com.example.findyoursherutleumi.fragments.ServiceDetailsFragment;
 import com.example.findyoursherutleumi.models.ServicePartial;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHolder> {
+public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHolder> implements Filterable {
 
     private final LayoutInflater inflater;
     private List<ServicePartial> servicesLst;
+    private List<ServicePartial> servicesLstSearch;
 
     public ServicesAdapter(LayoutInflater inflater, List<ServicePartial> servicesLst){
         this.inflater = inflater;
         this.servicesLst = servicesLst;
+        servicesLstSearch = new ArrayList<>(servicesLst);
     }
 
     @NonNull
@@ -76,7 +81,6 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
     public void updateServicesList(final List<ServicePartial> mServicesLst) {
         this.servicesLst.clear();
         this.servicesLst = mServicesLst;
-//        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -93,4 +97,38 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
 
         }
     }
+
+    @Override
+    public Filter getFilter() {
+        return servicesFiltered;
+    }
+
+    private Filter servicesFiltered = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            List<ServicePartial> filteredList = new ArrayList<>();
+            if (charSequence == null || charSequence.length() == 0){
+                filteredList.addAll(servicesLstSearch);
+            } else {
+                String filterPattern = charSequence.toString().toLowerCase().trim();
+                for (ServicePartial item : servicesLstSearch){
+                    if (item.getServiceName().toLowerCase().contains(filterPattern)){
+                        filteredList.add(item);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+
+            return results;
+        }
+
+        @SuppressLint("NotifyDataSetChanged")
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            servicesLstSearch.clear();
+            servicesLstSearch.addAll((List) filterResults.values);
+            notifyDataSetChanged();
+        }
+    };
 }
