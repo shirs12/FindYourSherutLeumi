@@ -47,7 +47,6 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
         int id = servicesLst.get(position).getServiceId();
         System.out.println("adapterrr:   " + id);
         holder.detailsBtn.setOnClickListener(new View.OnClickListener() {
-//            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onClick(View view) {
                 if (view.getId() == holder.detailsBtn.findViewById(R.id.show_details_btn).getId()) {
@@ -63,7 +62,6 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
                             .replace(R.id.fragmentContainerView, newFragment)
                             .addToBackStack(null)
                             .commit();
-//                    notifyDataSetChanged();
                 }
             }
         });

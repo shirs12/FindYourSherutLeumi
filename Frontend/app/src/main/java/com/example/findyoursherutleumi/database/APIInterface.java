@@ -2,6 +2,7 @@ package com.example.findyoursherutleumi.database;
 
 import com.example.findyoursherutleumi.models.Applicant;
 import com.example.findyoursherutleumi.models.Coordinator;
+import com.example.findyoursherutleumi.models.Service;
 import com.example.findyoursherutleumi.models.ServicePartial;
 import com.example.findyoursherutleumi.models.User;
 
@@ -22,6 +23,9 @@ public interface APIInterface {
 
     @GET("applicants/{id}")
     Call<Applicant> getApplicantById(@Path("id") int id);
+
+    @GET("services/{id}")
+    Call<Service> getServiceById(@Path("id") int id);
 
     @GET("services")
     Call<List<ServicePartial>> getAllServicesPartially();
