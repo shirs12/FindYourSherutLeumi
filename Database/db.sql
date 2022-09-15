@@ -309,12 +309,10 @@ CALL `get_all_coordinators`();
 DELIMITER $$
 CREATE PROCEDURE `get_coordinator_by_id`(IN id INT)
 BEGIN
-	SELECT coordinator_id,first_name,last_name,phone_number,
-	email,u_password,organization_name
-    FROM coordinator WHERE coordinator_id = id;
+	SELECT * FROM coordinator WHERE coordinator_id = id;
 END$$
 DELIMITER ;
-CALL `get_applicant_by_id`(2); -- test
+CALL `get_coordinator_by_id`(2); -- test
 
 -- procedure that calls a specific coordinator from db by email
 DELIMITER $$
@@ -376,6 +374,5 @@ BEGIN
 	WHERE email = p_email;
 END$$
 DELIMITER ;
-
 
 
