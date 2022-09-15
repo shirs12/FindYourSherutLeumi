@@ -35,17 +35,19 @@
             android:textSize="28sp"
             android:textStyle="bold" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/service_details_card"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:cardBackgroundColor="@color/light_blue">
+            android:background="@color/light_blue"
+            android:fillViewport="true"
+            android:padding="10dp"
+            tools:ignore="SpeakableTextPresentCheck">
 
-            <ScrollView
+            <androidx.cardview.widget.CardView
+                android:id="@+id/service_details_card"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="10dp"
-                tools:ignore="SpeakableTextPresentCheck">
+                app:cardBackgroundColor="@color/light_blue">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -56,13 +58,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="5dp"
+                        android:background="@drawable/rounded_corners"
                         android:orientation="horizontal">
 
                         <TextView
                             android:id="@+id/organization_title_details"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@color/white"
                             android:padding="5dp"
                             android:text="@string/organization"
                             android:textStyle="bold" />
@@ -72,82 +74,277 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:background="@color/white"
                             android:padding="5dp"
                             android:text="TextView" />
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/category_title"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/category" />
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/rounded_corners"
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/country_title"
+                        <TextView
+                            android:id="@+id/category_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text="@string/category"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textView9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="5dp"
+                            android:text="TextView" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/country" />
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/rounded_corners"
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/city_title"
+                        <TextView
+                            android:id="@+id/country_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text="@string/country"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textView10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="5dp"
+                            android:text="TextView" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/city" />
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/rounded_corners"
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/address_title"
+                        <TextView
+                            android:id="@+id/city_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text="@string/city"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textView11"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="5dp"
+                            android:text="TextView" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/address" />
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/rounded_corners"
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/has_apartment_title"
+                        <TextView
+                            android:id="@+id/address_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text="@string/address"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textView12"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="5dp"
+                            android:text="TextView" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/has_apartment" />
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/rounded_corners"
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/is_second_year_only_title"
+                        <TextView
+                            android:id="@+id/has_apartment_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text="@string/has_apartment"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textView13"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="5dp"
+                            android:text="TextView" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/is_second_year_only" />
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/rounded_corners"
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/is_morning_service_title"
+                        <TextView
+                            android:id="@+id/is_second_year_only_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text="@string/is_second_year_only"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textView14"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="5dp"
+                            android:text="TextView" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/is_morning_service" />
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/rounded_corners"
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/is_evening_service_title"
+                        <TextView
+                            android:id="@+id/is_morning_service_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text="@string/is_morning_service"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textView15"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="5dp"
+                            android:text="TextView" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/is_evening_service" />
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/rounded_corners"
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/description_service"
+                        <TextView
+                            android:id="@+id/is_evening_service_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text="@string/is_evening_service"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textView16"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="5dp"
+                            android:text="TextView" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/description" />
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/rounded_corners"
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/coordinator_name"
+                        <TextView
+                            android:id="@+id/description_service"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text="@string/description"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textView17"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="5dp"
+                            android:text="TextView" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/coordinator" />
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/rounded_corners"
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/coordinator_contact"
+                        <TextView
+                            android:id="@+id/coordinator_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text="@string/coordinator"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textView18"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="5dp"
+                            android:text="TextView" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/coordinator_contact" />
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/rounded_corners"
+                        android:orientation="horizontal">
 
+                        <TextView
+                            android:id="@+id/coordinator_contact"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text="@string/coordinator_contact"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/textView19"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="5dp"
+                            android:text="TextView" />
+                    </LinearLayout>
 
                 </LinearLayout>
-            </ScrollView>
-        </androidx.cardview.widget.CardView>
-
+            </androidx.cardview.widget.CardView>
+        </ScrollView>
 
     </LinearLayout>
 
