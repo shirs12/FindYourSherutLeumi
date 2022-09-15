@@ -241,9 +241,7 @@ CALL `get_all_applicants`(); -- test
 DELIMITER $$
 CREATE PROCEDURE `get_applicant_by_id`(IN id INT)
 BEGIN
-	SELECT first_name,last_name,phone_number,
-		city,email,u_password
-    FROM applicant WHERE applicant_id = id;
+	SELECT * FROM applicant WHERE applicant_id = id;
 END$$
 DELIMITER ;
 CALL `get_applicant_by_id`(2); -- test
