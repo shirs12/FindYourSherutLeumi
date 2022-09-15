@@ -34,10 +34,6 @@ public class Coordinator {
         return coordinatorId;
     }
 
-    public void setCoordinatorId(Integer coordinatorId) {
-        this.coordinatorId = coordinatorId;
-    }
-
     public String getFirstName() {
         return firstName;
     }
@@ -70,11 +66,11 @@ public class Coordinator {
         this.email = email;
     }
 
-    public String getuPassword() {
+    public String getUPassword() {
         return uPassword;
     }
 
-    public void setuPassword(String uPassword) {
+    public void setUPassword(String uPassword) {
         this.uPassword = uPassword;
     }
 
@@ -89,10 +85,6 @@ public class Coordinator {
     public Integer getLevelUserId() {
         return levelUserId;
     }
-
-    public void setLevelUserId(Integer levelUserId) {
-        this.levelUserId = levelUserId;
-    }
-
+    
 }
 
