@@ -2,6 +2,7 @@ package com.example.findyoursherutleumi.fragments;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import com.example.findyoursherutleumi.R;
 import com.example.findyoursherutleumi.database.APIClient;
 import com.example.findyoursherutleumi.database.APIInterface;
+import com.example.findyoursherutleumi.models.Coordinator;
 import com.example.findyoursherutleumi.models.Service;
 
 import retrofit2.Call;
@@ -28,6 +30,7 @@ public class ServiceDetailsFragment extends Fragment {
 
 //    private ServiceDetailsViewModel mViewModel;
     private int serviceId;
+
     TextView serviceTxt;
     TextView organizationTxt;
     TextView categoryTxt;
@@ -79,9 +82,6 @@ public class ServiceDetailsFragment extends Fragment {
                 if (!response.isSuccessful())
                     Toast.makeText(getContext(), "Response from server Failed. try again later...", Toast.LENGTH_SHORT).show();
                 else {
-                    System.out.println(response.body());
-                    System.out.println(response.code());
-
                     assert response.body() != null;
                     serviceTxt.setText(response.body().getServiceName());
                     organizationTxt.setText(response.body().getOrganizationName());
@@ -94,6 +94,27 @@ public class ServiceDetailsFragment extends Fragment {
                     isMorningServiceTxt.setText(response.body().getIsMorningService() ? "Yes":"No");
                     isEveningServiceTxt.setText(response.body().getIsEveningService() ? "Yes":"No");
                     descriptionTxt.setText(response.body().getDescriptionService());
+
+                    Call<Coordinator> call1 = apiInterface.getCoordinatorById(response.body().getCoordinatorId());
+                    call1.enqueue(new Callback<Coordinator>() {
+                        @SuppressLint("SetTextI18n")
+                        @Override
+                        public void onResponse(Call<Coordinator> call, Response<Coordinator> response) {
+                            if (!response.isSuccessful()){
+                                Toast.makeText(getContext(), "Response from server Failed. try again later...", Toast.LENGTH_SHORT).show();
+                            } else {
+                                assert response.body() != null;
+                                coordinatorNameTxt.setText(response.body().getFirstName() + " " + response.body().getLastName());
+                                coordinatorContactTxt.setText(response.body().getPhoneNumber());
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<Coordinator> call, Throwable t) {
+                            Toast.makeText(getContext(), "Connection Failed. try again later... ", Toast.LENGTH_SHORT).show();
+                            System.out.println(t.getMessage());
+                        }
+                    });
+
                 }
             }
 
@@ -103,6 +124,27 @@ public class ServiceDetailsFragment extends Fragment {
                 System.out.println(t.getMessage());
             }
         });
+
+//        call.enqueue(new Callback<Coordinator>() {
+//            @SuppressLint("SetTextI18n")
+//            @Override
+//            public void onResponse(Call<Coordinator> call, Response<Coordinator> response) {
+//                if (!response.isSuccessful()){
+//                    Toast.makeText(getContext(), "Response from server Failed. try again later...", Toast.LENGTH_SHORT).show();
+//                } else {
+//                    assert response.body() != null;
+//                    coordinatorNameTxt.setText(response.body().getFirstName() + " " + response.body().getLastName());
+//                    coordinatorContactTxt.setText(response.body().getPhoneNumber());
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Coordinator> call, Throwable t) {
+//                Toast.makeText(getContext(), "Connection Failed. try again later... ", Toast.LENGTH_SHORT).show();
+//                System.out.println(t.getMessage());
+//            }
+//        });
+
 
 
 //        serviceIdTitle = view.findViewById(R.id.service_id_title);

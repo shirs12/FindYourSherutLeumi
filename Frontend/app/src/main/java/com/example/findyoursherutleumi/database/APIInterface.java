@@ -30,6 +30,9 @@ public interface APIInterface {
     @GET("services")
     Call<List<ServicePartial>> getAllServicesPartially();
 
+    @GET("coordinators/{id}")
+    Call<Coordinator> getCoordinatorById(@Path("id") int id);
+
     @POST("login")
     @FormUrlEncoded
     Call<User> authenticateUser(@Field("email") String email,
