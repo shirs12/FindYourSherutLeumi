@@ -125,10 +125,7 @@ CALL `get_all_services_partialy`(); -- test
 DELIMITER $$
 CREATE PROCEDURE `get_service_by_id`(IN id INT)
 BEGIN
-	SELECT service_id,service_name,organization_name,category,country,city,address,
-		has_apartment,is_second_year_only,is_morning_service,
-			is_evening_service,description_service,coordinator_name
-	FROM service WHERE service_id = id;
+	SELECT * FROM service WHERE service_id = id;
 END$$
 DELIMITER ;
 CALL `get_service_by_id`(1); -- test
@@ -381,5 +378,6 @@ BEGIN
 	WHERE email = p_email;
 END$$
 DELIMITER ;
+
 
 
