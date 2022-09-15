@@ -27,8 +27,6 @@ import retrofit2.Response;
 
 public class LoginFragment extends Fragment {
 
-    private int userTypeId;
-
     Button signInBtn;
     EditText inputEmail;
     EditText inputPassword;
@@ -67,6 +65,12 @@ public class LoginFragment extends Fragment {
                                 inputPassword.getText().clear();
 
                                 Fragment newFragment = new HomePageFragment();
+
+                                Bundle bundle = new Bundle();
+                                assert response.body() != null;
+                                bundle.putInt("id", response.body().getUserTypeId());
+                                newFragment.setArguments(bundle);
+
                                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                                 transaction.replace(R.id.fragmentContainerView, newFragment);
                                 transaction.addToBackStack(null);

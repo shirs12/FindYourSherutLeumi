@@ -11,6 +11,10 @@ public class User {
     @SerializedName("u_password")
     @Expose
     private String uPassword;
+    @SerializedName("level_user_id")
+    @Expose
+    private Integer userTypeId;
+
 
     public String getEmail() {
         return email;
@@ -27,6 +31,11 @@ public class User {
     public void setUPassword(String uPassword) {
         this.uPassword = uPassword;
     }
+
+    public Integer getUserTypeId() {
+        return userTypeId;
+    }
+
 
     @Override
     public String toString() {

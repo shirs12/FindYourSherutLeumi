@@ -72,7 +72,6 @@ public class ServiceDetailsFragment extends Fragment {
 
         assert getArguments() != null;
         serviceId = getArguments().getInt("id");
-        System.out.println(serviceId);
 
         Call<Service> call = apiInterface.getServiceById(serviceId);
         call.enqueue(new Callback<Service>() {

@@ -25,6 +25,8 @@ import java.util.List;
 
 public class HomePageFragment extends Fragment {
 
+    private int userTypeId;
+
     private HomePageViewModel mViewModel;
     RecyclerView recyclerView;
     ServicesAdapter servicesAdapter;
@@ -38,6 +40,10 @@ public class HomePageFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_page, container, false);
         mViewModel = new ViewModelProvider(this).get(HomePageViewModel.class);
+
+        assert getArguments() != null;
+        userTypeId = getArguments().getInt("id");
+        System.out.println(userTypeId);
 
         mViewModel.init();
         recyclerView = view.findViewById(R.id.services_lst);

@@ -85,6 +85,6 @@ public class Coordinator {
     public Integer getLevelUserId() {
         return levelUserId;
     }
-    
+
 }
 
