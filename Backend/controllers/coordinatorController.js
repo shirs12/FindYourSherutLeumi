@@ -16,11 +16,12 @@ exports.getAllCoordinators = async (req, res, next) => {
 exports.getCoordinatorById = async (req, res, next) => {
   const id = req.params.id;
   try {
-    const [coordinator, _] = await pool.execute(
+    const [result, _] = await pool.execute(
       "CALL get_coordinator_by_id(?)",
       [id]
     );
-    res.status(200).json(coordinator[0]);
+    const coordinator = result[0][0];
+    res.status(200).json(coordinator);
   } catch (err) {
     console.log(err);
     next(err);

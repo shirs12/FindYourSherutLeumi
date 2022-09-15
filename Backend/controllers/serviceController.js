@@ -26,8 +26,9 @@ exports.getAllServicesPartially = async (req, res, next) => {
 exports.getServiceById = async (req, res, next) => {
   const id = req.params.id;
   try {
-    const [service, _] = await pool.execute("CALL get_service_by_id(?)", [id]);
-    res.status(200).json(service[0]);
+    const [result, _] = await pool.execute("CALL get_service_by_id(?)", [id]);
+    const service = result[0][0];
+    res.status(200).json(service);
   } catch (err) {
     console.log(err);
     next(err);

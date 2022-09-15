@@ -16,10 +16,11 @@ exports.getAllApplicants = async (req, res, next) => {
 exports.getApplicantById = async (req, res, next) => {
   const id = req.params.id;
   try {
-    const [applicant, _] = await pool.execute("CALL get_applicant_by_id(?)", [
+    const [result, _] = await pool.execute("CALL get_applicant_by_id(?)", [
       id,
     ]);
-    res.status(200).json(applicant[0]);
+    const applicant = result[0][0];
+    res.status(200).json(applicant);
     console.log(applicant[0]);
   } catch (err) {
     console.log(err);

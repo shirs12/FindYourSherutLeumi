@@ -15,8 +15,9 @@ exports.getAllLevels = async (req, res, next) => {
 exports.getLevelById = async (req, res, next) => {
   const id = req.params.id;
   try {
-    const [level, _] = await pool.execute("CALL get_level_by_id(?)", [id]);
-    res.status(200).json(level[0]);
+    const [result, _] = await pool.execute("CALL get_level_by_id(?)", [id]);
+    const level = result[0][0];
+    res.status(200).json(level);
   } catch (err) {
     console.log(err);
     next(err);
