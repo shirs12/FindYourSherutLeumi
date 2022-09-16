@@ -49,11 +49,15 @@ public class HomePageFragment extends Fragment {
         mViewModel = new ViewModelProvider(this).get(HomePageViewModel.class);
         setHasOptionsMenu(true);
         addServiceBtn = view.findViewById(R.id.add_service_btn);
+
         // TODO: button visible/gone if coordinator/applicant
 
         assert getArguments() != null;
         userTypeId = getArguments().getInt("id");
         System.out.println(userTypeId);
+        if (userTypeId == 1){
+            addServiceBtn.setVisibility(View.GONE);
+        }
 
         mViewModel.init();
         recyclerView = view.findViewById(R.id.services_lst);

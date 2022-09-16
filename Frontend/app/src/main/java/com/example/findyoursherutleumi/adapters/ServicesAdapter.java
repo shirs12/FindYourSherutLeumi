@@ -50,7 +50,6 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
         holder.detailsBtn.setText("SHOW DETAILS");
 
         int id = servicesLst.get(position).getServiceId();
-        System.out.println("adapterrr:   " + id);
         holder.detailsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
