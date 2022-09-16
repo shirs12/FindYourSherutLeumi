@@ -25,6 +25,7 @@ import android.widget.SearchView;
 import com.example.findyoursherutleumi.R;
 import com.example.findyoursherutleumi.adapters.ServicesAdapter;
 import com.example.findyoursherutleumi.models.ServicePartial;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -35,7 +36,7 @@ public class HomePageFragment extends Fragment {
     private HomePageViewModel mViewModel;
     RecyclerView recyclerView;
     ServicesAdapter servicesAdapter;
-    Button addServiceBtn;
+    FloatingActionButton addServiceBtn;
 
     public static HomePageFragment newInstance() {
         return new HomePageFragment();
