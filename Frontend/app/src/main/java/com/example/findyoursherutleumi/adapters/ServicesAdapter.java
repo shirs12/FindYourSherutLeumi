@@ -107,10 +107,10 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
         protected FilterResults performFiltering(CharSequence charSequence) {
             List<ServicePartial> filteredList = new ArrayList<>();
             if (charSequence == null || charSequence.length() == 0){
-                filteredList.addAll(servicesLstSearch);
+                filteredList.addAll(servicesLst);
             } else {
                 String filterPattern = charSequence.toString().toLowerCase().trim();
-                for (ServicePartial item : servicesLstSearch){
+                for (ServicePartial item : servicesLst){
                     if (item.getServiceName().toLowerCase().contains(filterPattern)){
                         filteredList.add(item);
                     }

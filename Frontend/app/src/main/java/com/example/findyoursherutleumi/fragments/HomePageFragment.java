@@ -81,6 +81,7 @@ public class HomePageFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu,inflater);
         inflater.inflate(R.menu.nav_menu, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
@@ -99,6 +100,6 @@ public class HomePageFragment extends Fragment {
                 return false;
             }
         });
-        super.onCreateOptionsMenu(menu,inflater);
+
     }
 }
