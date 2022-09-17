@@ -41,4 +41,6 @@
         <item>מתנדב/ת</item>
         <item>רכז/ת</item>
     </string-array>
+    <string name="languages_bar">שפות</string>
+    <string name="show_details">הצג פרטים</string>
 </resources>

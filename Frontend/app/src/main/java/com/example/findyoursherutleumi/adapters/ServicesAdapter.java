@@ -24,16 +24,16 @@ import com.example.findyoursherutleumi.models.ServicePartial;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHolder> implements Filterable {
+public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHolder>{
 
     private final LayoutInflater inflater;
     private List<ServicePartial> servicesLst;
-    private List<ServicePartial> servicesLstSearch;
+//    private List<ServicePartial> servicesLstSearch;
 
     public ServicesAdapter(LayoutInflater inflater, List<ServicePartial> servicesLst){
         this.inflater = inflater;
         this.servicesLst = servicesLst;
-        servicesLstSearch = new ArrayList<>(servicesLst);
+//        servicesLstSearch = new ArrayList<>(servicesLst);
     }
 
     @NonNull
@@ -97,37 +97,37 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
         }
     }
 
-    @Override
-    public Filter getFilter() {
-        return servicesFiltered;
-    }
-
-    private Filter servicesFiltered = new Filter() {
-        @Override
-        protected FilterResults performFiltering(CharSequence charSequence) {
-            List<ServicePartial> filteredList = new ArrayList<>();
-            if (charSequence == null || charSequence.length() == 0){
-                filteredList.addAll(servicesLst);
-            } else {
-                String filterPattern = charSequence.toString().toLowerCase().trim();
-                for (ServicePartial item : servicesLst){
-                    if (item.getServiceName().toLowerCase().contains(filterPattern)){
-                        filteredList.add(item);
-                    }
-                }
-            }
-            FilterResults results = new FilterResults();
-            results.values = filteredList;
-
-            return results;
-        }
-
-        @SuppressLint("NotifyDataSetChanged")
-        @Override
-        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-            servicesLstSearch.clear();
-            servicesLstSearch.addAll((List) filterResults.values);
-            notifyDataSetChanged();
-        }
-    };
+//    @Override
+//    public Filter getFilter() {
+//        return servicesFiltered;
+//    }
+//
+//    private Filter servicesFiltered = new Filter() {
+//        @Override
+//        protected FilterResults performFiltering(CharSequence charSequence) {
+//            List<ServicePartial> filteredList = new ArrayList<>();
+//            if (charSequence == null || charSequence.length() == 0){
+//                filteredList.addAll(servicesLst);
+//            } else {
+//                String filterPattern = charSequence.toString().toLowerCase().trim();
+//                for (ServicePartial item : servicesLst){
+//                    if (item.getServiceName().toLowerCase().contains(filterPattern)){
+//                        filteredList.add(item);
+//                    }
+//                }
+//            }
+//            FilterResults results = new FilterResults();
+//            results.values = filteredList;
+//
+//            return results;
+//        }
+//
+//        @SuppressLint("NotifyDataSetChanged")
+//        @Override
+//        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+//            servicesLstSearch.clear();
+//            servicesLstSearch.addAll((List) filterResults.values);
+//            notifyDataSetChanged();
+//        }
+//    };
 }
