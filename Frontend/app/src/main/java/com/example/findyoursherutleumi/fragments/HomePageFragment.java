@@ -15,6 +15,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.SearchView;
 import android.widget.Spinner;
 
@@ -41,6 +44,7 @@ public class HomePageFragment extends Fragment {
     RecyclerView recyclerView;
     ServicesAdapter servicesAdapter;
     FloatingActionButton addServiceBtn;
+    private EditText searchBar;
 
     public static HomePageFragment newInstance() {
         return new HomePageFragment();
@@ -53,6 +57,7 @@ public class HomePageFragment extends Fragment {
         mViewModel = new ViewModelProvider(this).get(HomePageViewModel.class);
         setHasOptionsMenu(true);
         addServiceBtn = view.findViewById(R.id.add_service_btn);
+        searchBar = view.findViewById(R.id.search_bar);
 
         assert getArguments() != null;
         userTypeId = getArguments().getInt("id");
@@ -82,6 +87,24 @@ public class HomePageFragment extends Fragment {
             }
         });
         initRecyclerView();
+
+        searchBar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                servicesAdapter.filter(charSequence);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
         return view;
     }
 

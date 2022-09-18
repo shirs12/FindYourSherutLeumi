@@ -2,6 +2,7 @@ package com.example.findyoursherutleumi.adapters;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,18 +18,20 @@ import com.example.findyoursherutleumi.R;
 import com.example.findyoursherutleumi.fragments.ServiceDetailsFragment;
 import com.example.findyoursherutleumi.models.ServicePartial;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHolder>{
 
     private final LayoutInflater inflater;
     private List<ServicePartial> servicesLst;
-//    private List<ServicePartial> servicesLstSearch;
+    private List<ServicePartial> servicesLstCopy;
 
     public ServicesAdapter(LayoutInflater inflater, List<ServicePartial> servicesLst){
         this.inflater = inflater;
         this.servicesLst = servicesLst;
-//        servicesLstSearch = new ArrayList<>(servicesLst);
+        servicesLstCopy = new ArrayList<>();
+        servicesLstCopy.addAll(servicesLst);
     }
 
     @NonNull
@@ -103,6 +106,25 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
             cityTxt = itemView.findViewById(R.id.city_details_txt);
             descriptionTxt = itemView.findViewById(R.id.description_details_txt);
         }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void filter(CharSequence charSequence){
+        ArrayList<ServicePartial> templst = new ArrayList<>();
+        if (!TextUtils.isEmpty(charSequence)){
+            for (ServicePartial data : servicesLst){
+                if (data.getServiceName().toLowerCase().contains(charSequence)){
+                    templst.add(data);
+                }
+            }
+        } else{
+            templst.addAll(servicesLstCopy);
+        }
+
+        servicesLst.clear();
+        servicesLst.addAll(templst);
+        notifyDataSetChanged();
+        templst.clear();
     }
 
 

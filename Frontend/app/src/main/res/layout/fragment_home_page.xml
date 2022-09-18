@@ -50,11 +50,18 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/textView"
+        android:id="@+id/search_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/rounded_corners_light_blue"
+        android:hint="@string/search"
+        android:textColorHint="@color/white"
+        android:paddingStart="10dp"
+        android:drawableEnd="@drawable/ic_search"
+        android:paddingEnd="10dp"
         android:minHeight="48dp"
-        android:text="TextView" />
+        android:textColor="@color/white" />
 
     <RelativeLayout
         android:layout_width="match_parent"
