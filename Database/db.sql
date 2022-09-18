@@ -78,11 +78,11 @@ VALUES('יערה','רון כהן','050-7521671','YaelCohenAguda@gmail.com','$2a$
 
 -- service
 INSERT INTO service(service_name,organization_name,category,country,city,address,has_apartment,
-    is_second_year_only,is_morning_service,is_evening_service,description_service,coordinator_name)
+    is_second_year_only,is_morning_service,is_evening_service,description_service,coordinator_name,coordinator_id)
     VALUES('מערך הסייבר הלאומי','האגודה להתנדבות','משרדי ממשלה','ישראל','באר שבע','באר שבע',false,false,
-			true,false,'תפקיד מסווג ומעניין במחלקה המגנה על כל מערך הסייבר.הגנה מפני פריצות והתקפות רשת במשרדי הממשלה ובמדינת ישראל.','רון כהן יערה'),
+			true,false,'תפקיד מסווג ומעניין במחלקה המגנה על כל מערך הסייבר.הגנה מפני פריצות והתקפות רשת במשרדי הממשלה ובמדינת ישראל.','רון כהן יערה',1),
 		  ('מרכז רפואי רבין-בלינסון','שילה','בריאות','ישראל','פתח תקווה','זבוטינסקי 39',true,false,
-			true,false,'ישנם מספר תפקידים בבית חולים בילינסון, ביניהם: מזכירה רפואית, סיעוד (סייעת אחות), תומכת רפואה. תפקיד משמעותי דינמי ומאתגר בתחום הרפואה. *נדרש 5 יח"ל בביולוגיה, פיזיקה או כימיה.','שרית ויזנר');
+			true,false,'ישנם מספר תפקידים בבית חולים בילינסון, ביניהם: מזכירה רפואית, סיעוד (סייעת אחות), תומכת רפואה. תפקיד משמעותי דינמי ומאתגר בתחום הרפואה. *נדרש 5 יח"ל בביולוגיה, פיזיקה או כימיה.','שרית ויזנר',2);
 SET SQL_SAFE_UPDATES = 0;
 DELETE FROM Service WHERE service_name = 'name2';
 SET SQL_SAFE_UPDATES = 1;
@@ -135,12 +135,12 @@ DELIMITER $$
 CREATE PROCEDURE `add_new_service`(IN p_service_name NVARCHAR(40), IN p_organization_name NVARCHAR(40),
  IN p_category NVARCHAR(50), IN p_country NVARCHAR(30), IN p_city NVARCHAR(30), IN p_address NVARCHAR(30),
  IN p_has_apartment BOOLEAN, IN p_is_second_year_only BOOLEAN, IN p_is_morning_service BOOLEAN,
- IN p_is_evening_service BOOLEAN, IN p_description_service NVARCHAR(200), IN p_coordinator_name NVARCHAR(25))
+ IN p_is_evening_service BOOLEAN, IN p_description_service NVARCHAR(200), IN p_coordinator_name NVARCHAR(25),IN p_coordinator_id INT)
 BEGIN
     INSERT INTO service(service_name,organization_name,category,country,city,address,has_apartment,
-    is_second_year_only,is_morning_service,is_evening_service,description_service,coordinator_name)
+    is_second_year_only,is_morning_service,is_evening_service,description_service,coordinator_name,coordinator_id)
     VALUES(p_service_name, p_organization_name, p_category, p_country,p_city,p_address,p_has_apartment,
-    p_is_second_year_only,p_is_morning_service,p_is_evening_service,p_description_service,p_coordinator_name);
+    p_is_second_year_only,p_is_morning_service,p_is_evening_service,p_description_service,p_coordinator_name,p_coordinator_id);
 END$$
 DELIMITER ;
 
