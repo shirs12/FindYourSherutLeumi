@@ -68,7 +68,8 @@ public class LoginFragment extends Fragment {
 
                                 Bundle bundle = new Bundle();
                                 assert response.body() != null;
-                                bundle.putInt("id", response.body().getUserTypeId());
+                                bundle.putInt("typeId", response.body().getUserTypeId());
+                                bundle.putString("email", response.body().getEmail());
                                 newFragment.setArguments(bundle);
 
                                 FragmentTransaction transaction = getFragmentManager().beginTransaction();

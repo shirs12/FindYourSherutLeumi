@@ -39,6 +39,7 @@ import java.util.List;
 public class HomePageFragment extends Fragment {
 
     private int userTypeId;
+    private String userEmail;
 
     private HomePageViewModel mViewModel;
     RecyclerView recyclerView;
@@ -60,7 +61,8 @@ public class HomePageFragment extends Fragment {
         searchBar = view.findViewById(R.id.search_bar);
 
         assert getArguments() != null;
-        userTypeId = getArguments().getInt("id");
+        userEmail = getArguments().getString("email");
+        userTypeId = getArguments().getInt("typeId");
         System.out.println(userTypeId);
         if (userTypeId == 1){
             addServiceBtn.setVisibility(View.GONE);
@@ -70,6 +72,11 @@ public class HomePageFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Fragment newFragment = new AddNewServiceFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("email", userEmail);
+                newFragment.setArguments(bundle);
+
+                assert getFragmentManager() != null;
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.fragmentContainerView, newFragment);
                 transaction.addToBackStack(null);

@@ -16,6 +16,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface APIInterface {
     @GET("applicants")
@@ -32,6 +33,10 @@ public interface APIInterface {
 
     @GET("coordinators/{id}")
     Call<Coordinator> getCoordinatorById(@Path("id") int id);
+
+    @GET("coordinators{email}")
+    Call<Coordinator> getCoordinatorByEmail(@Path("email") String email);
+
 
     @POST("login")
     @FormUrlEncoded
@@ -56,6 +61,21 @@ public interface APIInterface {
                                            @Field("u_password") String password,
                                            @Field("organization_name") String organizationName);
 
+    @POST("services/add")
+    @FormUrlEncoded
+    Call<Service> createNewService(@Field("service_name") String serviceName,
+                                           @Field("organization_name") String organizationName,
+                                           @Field("category") String category,
+                                           @Field("country") String country,
+                                           @Field("city") String city,
+                                           @Field("address") String address,
+                                           @Field("has_apartment") Integer hasApartment,
+                                           @Field("is_second_year_only") Integer secondYear,
+                                           @Field("is_morning_service") Integer isMorning,
+                                           @Field("is_evening_service") Integer isEvening,
+                                           @Field("description_service") String description,
+                                           @Field("coordinator_name") String coordinatorName,
+                                           @Field("coordinator_id") int coordinatorId);
 
 
 

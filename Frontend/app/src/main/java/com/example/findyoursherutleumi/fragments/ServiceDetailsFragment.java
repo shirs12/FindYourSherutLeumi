@@ -87,10 +87,10 @@ public class ServiceDetailsFragment extends Fragment {
                     countryTxt.setText(response.body().getCountry());
                     cityTxt.setText(response.body().getCity());
                     addressTxt.setText(response.body().getAddress());
-                    hasApartmentTxt.setText(response.body().getHasApartment() ? "Yes":"No");
-                    isSecondYearOnlyTxt.setText(response.body().getIsSecondYearOnly() ? "Yes":"No");
-                    isMorningServiceTxt.setText(response.body().getIsMorningService() ? "Yes":"No");
-                    isEveningServiceTxt.setText(response.body().getIsEveningService() ? "Yes":"No");
+                    hasApartmentTxt.setText(response.body().getHasApartment() ? R.string.yes : R.string.no);
+                    isSecondYearOnlyTxt.setText(response.body().getIsSecondYearOnly() ? R.string.yes : R.string.no);
+                    isMorningServiceTxt.setText(response.body().getIsMorningService() ? R.string.yes : R.string.no);
+                    isEveningServiceTxt.setText(response.body().getIsEveningService() ? R.string.yes : R.string.no);
                     descriptionTxt.setText(response.body().getDescriptionService());
 
                     Call<Coordinator> call1 = apiInterface.getCoordinatorById(response.body().getCoordinatorId());

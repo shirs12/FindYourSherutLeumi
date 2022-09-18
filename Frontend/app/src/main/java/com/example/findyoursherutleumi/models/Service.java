@@ -106,9 +106,8 @@ public class Service {
         return true;
     }
 
-    public void setHasApartment(boolean hasApartment) {
-        if (hasApartment) this.hasApartment = 1;
-        else this.hasApartment = 0;
+    public void setHasApartment(Integer hasApartment) {
+        this.hasApartment = hasApartment;
     }
 
     public boolean getIsSecondYearOnly() {
@@ -118,9 +117,8 @@ public class Service {
 
     }
 
-    public void setIsSecondYearOnly(boolean isSecondYearOnly) {
-        if (isSecondYearOnly) this.isSecondYearOnly = 1;
-        else this.isSecondYearOnly = 0;
+    public void setIsSecondYearOnly(Integer isSecondYearOnly) {
+        this.isSecondYearOnly = isSecondYearOnly;
 
     }
 
@@ -130,9 +128,8 @@ public class Service {
         return true;
     }
 
-    public void setIsMorningService(boolean isMorningService) {
-        if (isMorningService) this.isMorningService = 1;
-        else this.isMorningService = 0;
+    public void setIsMorningService(Integer isMorningService) {
+        this.isMorningService = isMorningService;
     }
 
     public boolean getIsEveningService() {
@@ -141,9 +138,8 @@ public class Service {
         return true;
     }
 
-    public void setIsEveningService(boolean isEveningService) {
-        if (isEveningService) this.isEveningService = 1;
-        else this.isEveningService = 0;
+    public void setIsEveningService(Integer isEveningService) {
+        this.isEveningService = isEveningService;
     }
 
     public String getDescriptionService() {
