@@ -26,7 +26,7 @@
     <string name="city_hint">עיר…</string>
     <string name="search_bar">חיפוש</string>
     <string name="no_result">אין תוצאות</string>
-    <string name="category">קטגוריה</string>
+    <string name="category">תחום</string>
     <string name="country">מדינה</string>
     <string name="address">כתובת</string>
     <string name="has_apartment">דירה</string>
@@ -38,6 +38,15 @@
     <string name="coordinator_contact">פרטי התקשרות רכז/ת</string>
     <string name="languages_bar">שפות</string>
     <string name="show_details">הצג פרטים</string>
+    <string name="add_new_service">הוסף/י תקן חדש</string>
+    <string name="service">תקן</string>
+    <string name="service_name_hint">שם תקן…</string>
+    <string name="category_hint">תחום…</string>
+    <string name="country_hint">מדינה…</string>
+    <string name="address_hint">כתובת…</string>
+    <string name="description_hint">תיאור…</string>
+    <string name="coordinator_hint">שם רכז/ת…</string>
+    <string name="coordinator_contact_hint">פרטי קשר רכז/ת…</string>
 
     <string-array name="user_types_array">
         <item>מתנדב/ת</item>

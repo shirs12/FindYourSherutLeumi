@@ -37,6 +37,15 @@
     <string name="coordinator_contact">Coordinator Contact</string>
     <string name="languages_bar">Languages</string>
     <string name="show_details">show details</string>
+    <string name="add_new_service">Add New Service</string>
+    <string name="service">Service</string>
+    <string name="service_name_hint">service name…</string>
+    <string name="category_hint">category…</string>
+    <string name="country_hint">country…</string>
+    <string name="address_hint">address…</string>
+    <string name="description_hint">description…</string>
+    <string name="coordinator_hint">coordinator name…</string>
+    <string name="coordinator_contact_hint">coordinator contact…</string>
 
     <string-array name="user_types_array">
         <item>Applicant</item>
