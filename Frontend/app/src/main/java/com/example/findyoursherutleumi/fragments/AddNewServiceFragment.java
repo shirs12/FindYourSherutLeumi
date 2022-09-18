@@ -27,6 +27,7 @@ public class AddNewServiceFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_add_new, container, false);
     }
+    // TODO: on click to add a new service to the app (db).
 
 
 }

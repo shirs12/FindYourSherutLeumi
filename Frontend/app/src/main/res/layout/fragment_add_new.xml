@@ -76,15 +76,19 @@
                                 android:padding="5dp"
                                 android:text="@string/service"
                                 android:textColor="@color/white"
+                                android:textSize="16sp"
                                 android:textStyle="bold" />
 
-                            <TextView
-                                android:id="@+id/service_txt_add"
+                            <EditText
+                                android:id="@+id/service_input_add"
                                 android:layout_width="260dp"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/rounded_corners"
+                                android:hint="@string/service_name_hint"
+                                android:inputType="text"
                                 android:padding="5dp"
-                                android:text="@string/service_name_hint" />
+                                android:textSize="14sp"
+                                tools:ignore="TouchTargetSizeCheck" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -94,21 +98,25 @@
                             android:orientation="horizontal">
 
                             <TextView
-                                android:id="@+id/organization_title_details"
-                                android:layout_width="95dp"
+                                android:id="@+id/organization_title_add"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="5dp"
                                 android:text="@string/organization"
                                 android:textColor="@color/white"
+                                android:textSize="16sp"
                                 android:textStyle="bold" />
 
-                            <TextView
-                                android:id="@+id/organization_txt_details"
-                                android:layout_width="260dp"
+                            <EditText
+                                android:id="@+id/organization_input_add"
+                                android:layout_width="252dp"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/rounded_corners"
+                                android:hint="@string/organization_hint"
+                                android:inputType="text"
                                 android:padding="5dp"
-                                android:text="@string/organization_hint" />
+                                android:textSize="14sp"
+                                tools:ignore="TouchTargetSizeCheck" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -122,17 +130,22 @@
                                 android:layout_width="95dp"
                                 android:layout_height="wrap_content"
                                 android:padding="5dp"
+                                android:textSize="16sp"
                                 android:text="@string/category"
                                 android:textColor="@color/white"
                                 android:textStyle="bold" />
 
-                            <TextView
-                                android:id="@+id/category_txt"
+
+                            <EditText
+                                android:id="@+id/category_input_add"
                                 android:layout_width="260dp"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/rounded_corners"
+                                android:hint="@string/category_hint"
+                                android:inputType="text"
                                 android:padding="5dp"
-                                android:text="@string/category_hint" />
+                                android:textSize="14sp"
+                                tools:ignore="TouchTargetSizeCheck" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -146,17 +159,21 @@
                                 android:layout_width="95dp"
                                 android:layout_height="wrap_content"
                                 android:padding="5dp"
+                                android:textSize="16sp"
                                 android:text="@string/country"
                                 android:textColor="@color/white"
                                 android:textStyle="bold" />
 
-                            <TextView
-                                android:id="@+id/country_txt"
+                            <EditText
+                                android:id="@+id/country_input_add"
                                 android:layout_width="260dp"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/rounded_corners"
+                                android:hint="@string/country_hint"
+                                android:inputType="text"
                                 android:padding="5dp"
-                                android:text="@string/country_hint" />
+                                android:textSize="14sp"
+                                tools:ignore="TouchTargetSizeCheck" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -170,17 +187,21 @@
                                 android:layout_width="95dp"
                                 android:layout_height="wrap_content"
                                 android:padding="5dp"
+                                android:textSize="16sp"
                                 android:text="@string/city"
                                 android:textColor="@color/white"
                                 android:textStyle="bold" />
 
-                            <TextView
-                                android:id="@+id/city_txt"
+                            <EditText
+                                android:id="@+id/city_input_add"
                                 android:layout_width="260dp"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/rounded_corners"
+                                android:hint="@string/city_hint"
+                                android:inputType="text"
                                 android:padding="5dp"
-                                android:text="@string/city_hint" />
+                                android:textSize="14sp"
+                                tools:ignore="TouchTargetSizeCheck" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -194,17 +215,21 @@
                                 android:layout_width="95dp"
                                 android:layout_height="wrap_content"
                                 android:padding="5dp"
+                                android:textSize="16sp"
                                 android:text="@string/address"
                                 android:textColor="@color/white"
                                 android:textStyle="bold" />
 
-                            <TextView
-                                android:id="@+id/address_txt"
+                            <EditText
+                                android:id="@+id/address_input_add"
                                 android:layout_width="260dp"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/rounded_corners"
+                                android:hint="@string/address_hint"
+                                android:inputType="text"
                                 android:padding="5dp"
-                                android:text="@string/address_hint" />
+                                android:textSize="14sp"
+                                tools:ignore="TouchTargetSizeCheck" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -219,6 +244,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:padding="5dp"
+                                android:textSize="16sp"
                                 android:text="@string/has_apartment"
                                 android:textColor="@color/white"
                                 android:textStyle="bold" />
@@ -244,6 +270,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="5dp"
+                                android:textSize="16sp"
                                 android:text="@string/is_second_year_only"
                                 android:textColor="@color/white"
                                 android:textStyle="bold" />
@@ -269,6 +296,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="5dp"
+                                android:textSize="16sp"
                                 android:text="@string/is_morning_service"
                                 android:textColor="@color/white"
                                 android:textStyle="bold" />
@@ -294,6 +322,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:padding="5dp"
+                                android:textSize="16sp"
                                 android:text="@string/is_evening_service"
                                 android:textColor="@color/white"
                                 android:textStyle="bold" />
@@ -319,17 +348,21 @@
                                 android:layout_width="95dp"
                                 android:layout_height="wrap_content"
                                 android:padding="5dp"
+                                android:textSize="16sp"
                                 android:text="@string/description"
                                 android:textColor="@color/white"
                                 android:textStyle="bold" />
 
-                            <TextView
-                                android:id="@+id/description_service_txt"
+                            <EditText
+                                android:id="@+id/description_input_add"
                                 android:layout_width="260dp"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/rounded_corners"
+                                android:hint="@string/description_hint"
+                                android:inputType="text"
                                 android:padding="5dp"
-                                android:text="@string/description_hint" />
+                                android:textSize="14sp"
+                                tools:ignore="TouchTargetSizeCheck" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -343,17 +376,21 @@
                                 android:layout_width="95dp"
                                 android:layout_height="wrap_content"
                                 android:padding="5dp"
+                                android:textSize="16sp"
                                 android:text="@string/coordinator"
                                 android:textColor="@color/white"
                                 android:textStyle="bold" />
 
-                            <TextView
-                                android:id="@+id/coordinator_name_txt"
+                            <EditText
+                                android:id="@+id/coordinator_input_add"
                                 android:layout_width="260dp"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/rounded_corners"
+                                android:hint="@string/coordinator_hint"
+                                android:inputType="text"
                                 android:padding="5dp"
-                                android:text="@string/coordinator_hint" />
+                                android:textSize="14sp"
+                                tools:ignore="TouchTargetSizeCheck" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -364,20 +401,24 @@
 
                             <TextView
                                 android:id="@+id/coordinator_contact_title"
-                                android:layout_width="95dp"
+                                android:layout_width="105dp"
                                 android:layout_height="wrap_content"
                                 android:padding="5dp"
                                 android:text="@string/coordinator_contact"
                                 android:textColor="@color/white"
+                                android:textSize="16sp"
                                 android:textStyle="bold" />
 
-                            <TextView
-                                android:id="@+id/coordinator_contact_txt"
+                            <EditText
+                                android:id="@+id/coordinator_contact_input_add"
                                 android:layout_width="260dp"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/rounded_corners"
+                                android:hint="@string/coordinator_contact_hint"
+                                android:inputType="text"
                                 android:padding="5dp"
-                                android:text="@string/coordinator_contact_hint" />
+                                android:textSize="14sp"
+                                tools:ignore="TouchTargetSizeCheck" />
                         </LinearLayout>
 
                     </LinearLayout>
