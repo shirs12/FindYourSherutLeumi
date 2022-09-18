@@ -78,21 +78,17 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.nav_menu, menu);
-
+        getMenuInflater().inflate(R.menu.nav_menu, menu);
         MenuItem languagesItem = menu.findItem(R.id.languages_btn);
-        Button button = (Button) languagesItem.getActionView();
-        button.setOnClickListener(new View.OnClickListener() {
+        languagesItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
-            public void onClick(View view) {
+            public boolean onMenuItemClick(MenuItem menuItem) {
                 showChangeLanguageDialog();
+                return true;
             }
         });
-
         return true;
     }
-
     private void showChangeLanguageDialog() {
         final String [] languagesLst = {"עברית", "English"};
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
