@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.findyoursherutleumi.adapters.ServicesAdapter;
 import com.example.findyoursherutleumi.database.APIClient;
 import com.example.findyoursherutleumi.database.APIInterface;
 import com.example.findyoursherutleumi.fragments.LoginFragment;

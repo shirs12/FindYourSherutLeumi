@@ -9,7 +9,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
-        android:layout_height="190dp"
+        android:layout_height="200dp"
         android:layout_margin="5dp"
         android:outlineAmbientShadowColor="#D3D3D3"
         app:cardCornerRadius="15dp"
@@ -70,25 +70,187 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/service_details_text"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginTop="63dp"
-                android:paddingStart="10dp"
-                android:paddingTop="5dp"
-                android:paddingEnd="10dp"
-                android:paddingBottom="5dp"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat."
-                android:textAlignment="textEnd"
-                app:autoSizeMaxTextSize="30sp"
-                app:autoSizeMinTextSize="10sp"
-                app:autoSizeStepGranularity="2sp"
-                app:autoSizeTextType="uniform"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="60dp"
+                android:orientation="vertical"
+                android:padding="3dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <!--                <TextView-->
+                <!--                    android:id="@+id/service_details_text"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="126dp"-->
+                <!--                    android:layout_marginTop="63dp"-->
+                <!--                    android:paddingStart="10dp"-->
+                <!--                    android:paddingTop="5dp"-->
+                <!--                    android:paddingEnd="10dp"-->
+                <!--                    android:paddingBottom="5dp"-->
+                <!--                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat."-->
+                <!--                    android:textAlignment="textEnd"-->
+                <!--                    app:autoSizeMaxTextSize="30sp"-->
+                <!--                    app:autoSizeMinTextSize="10sp"-->
+                <!--                    app:autoSizeStepGranularity="2sp"-->
+                <!--                    app:autoSizeTextType="uniform" />-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/organization_details_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:text="@string/organization"
+                        android:textStyle="bold"
+                        app:autoSizeMaxTextSize="30sp"
+                        app:autoSizeMinTextSize="10sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <TextView
+                        android:id="@+id/organization_details_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="TextView"
+                        app:autoSizeMaxTextSize="30sp"
+                        app:autoSizeMinTextSize="10sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/category_details_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:text="@string/category"
+                        android:textStyle="bold"
+                        app:autoSizeMaxTextSize="30sp"
+                        app:autoSizeMinTextSize="10sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <TextView
+                        android:id="@+id/category_details_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="TextView"
+                        app:autoSizeMaxTextSize="30sp"
+                        app:autoSizeMinTextSize="10sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/country_details_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:text="@string/country"
+                        android:textStyle="bold"
+                        app:autoSizeMaxTextSize="30sp"
+                        app:autoSizeMinTextSize="10sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <TextView
+                        android:id="@+id/country_details_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="TextView"
+                        app:autoSizeMaxTextSize="30sp"
+                        app:autoSizeMinTextSize="10sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/city_details_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:text="@string/city"
+                        android:textStyle="bold"
+                        app:autoSizeMaxTextSize="30sp"
+                        app:autoSizeMinTextSize="10sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <TextView
+                        android:id="@+id/city_details_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="TextView"
+                        app:autoSizeMaxTextSize="30sp"
+                        app:autoSizeMinTextSize="10sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/description_details_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:text="@string/description"
+                        android:textStyle="bold"
+                        app:autoSizeMaxTextSize="30sp"
+                        app:autoSizeMinTextSize="10sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+
+                    <TextView
+                        android:id="@+id/description_details_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="TextView"
+                        app:autoSizeMaxTextSize="30sp"
+                        app:autoSizeMinTextSize="10sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>

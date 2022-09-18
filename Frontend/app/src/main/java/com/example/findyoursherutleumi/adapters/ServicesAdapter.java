@@ -6,22 +6,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.findyoursherutleumi.R;
-import com.example.findyoursherutleumi.fragments.HomePageFragment;
 import com.example.findyoursherutleumi.fragments.ServiceDetailsFragment;
 import com.example.findyoursherutleumi.models.ServicePartial;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHolder>{
@@ -46,8 +41,13 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.title.setText(servicesLst.get(position).getServiceName());
-        holder.detailsTxt.setText(servicesLst.get(position).toString());
-        holder.detailsBtn.setText("SHOW DETAILS");
+        holder.detailsBtn.setText(R.string.show_details);
+
+        holder.organizationTxt.setText(servicesLst.get(position).getOrganizationName());
+        holder.categoryTxt.setText(servicesLst.get(position).getCategory());
+        holder.countryTxt.setText(servicesLst.get(position).getCountry());
+        holder.cityTxt.setText(servicesLst.get(position).getCity());
+        holder.descriptionTxt.setText(servicesLst.get(position).getDescriptionService());
 
         int id = servicesLst.get(position).getServiceId();
         holder.detailsBtn.setOnClickListener(new View.OnClickListener() {
@@ -86,16 +86,29 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
 
         TextView title;
         Button detailsBtn;
-        TextView detailsTxt;
+        TextView organizationTxt;
+        TextView categoryTxt;
+        TextView countryTxt;
+        TextView cityTxt;
+        TextView descriptionTxt;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.service_title_lst);
             detailsBtn = itemView.findViewById(R.id.show_details_btn);
-            detailsTxt = itemView.findViewById(R.id.service_details_text);
 
+            organizationTxt = itemView.findViewById(R.id.organization_details_txt);
+            categoryTxt = itemView.findViewById(R.id.category_details_txt);
+            countryTxt = itemView.findViewById(R.id.country_details_txt);
+            cityTxt = itemView.findViewById(R.id.city_details_txt);
+            descriptionTxt = itemView.findViewById(R.id.description_details_txt);
         }
     }
+
+
+
+
+
 
 //    @Override
 //    public Filter getFilter() {
