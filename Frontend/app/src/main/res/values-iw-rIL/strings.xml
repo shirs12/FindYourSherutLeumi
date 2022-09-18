@@ -36,6 +36,8 @@
     <string name="is_evening_service">תקן ערב</string>
     <string name="coordinator">רכז/ת</string>
     <string name="coordinator_contact">פרטי התקשרות רכז/ת</string>
+    <string name="languages_bar">שפות</string>
+    <string name="show_details">הצג פרטים</string>
 
     <string-array name="user_types_array">
         <item>מתנדב/ת</item>
