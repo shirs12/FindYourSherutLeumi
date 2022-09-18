@@ -66,20 +66,18 @@
 
                         <TextView
                             android:id="@+id/service_title_add"
-                            android:layout_width="wrap_content"
+                            android:layout_width="95dp"
                             android:layout_height="wrap_content"
                             android:padding="5dp"
-                            android:layout_weight="1"
                             android:text="@string/service"
                             android:textColor="@color/white"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/service_txt_add"
-                            android:layout_width="wrap_content"
+                            android:layout_width="260dp"
                             android:layout_height="wrap_content"
                             android:background="@drawable/rounded_corners"
-                            android:layout_weight="6"
                             android:padding="5dp"
                             android:text="@string/service_name_hint" />
                     </LinearLayout>
@@ -92,7 +90,7 @@
 
                         <TextView
                             android:id="@+id/organization_title_details"
-                            android:layout_width="wrap_content"
+                            android:layout_width="95dp"
                             android:layout_height="wrap_content"
                             android:padding="5dp"
                             android:text="@string/organization"
@@ -101,9 +99,8 @@
 
                         <TextView
                             android:id="@+id/organization_txt_details"
-                            android:layout_width="wrap_content"
+                            android:layout_width="260dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="6"
                             android:background="@drawable/rounded_corners"
                             android:padding="5dp"
                             android:text="@string/organization_hint" />
@@ -117,19 +114,17 @@
 
                         <TextView
                             android:id="@+id/category_title"
-                            android:layout_width="wrap_content"
+                            android:layout_width="95dp"
                             android:layout_height="wrap_content"
                             android:padding="5dp"
-                            android:layout_weight="1"
                             android:text="@string/category"
                             android:textColor="@color/white"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/category_txt"
-                            android:layout_width="wrap_content"
+                            android:layout_width="260dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="8"
                             android:background="@drawable/rounded_corners"
                             android:padding="5dp"
                             android:text="@string/category_hint" />
@@ -143,20 +138,18 @@
 
                         <TextView
                             android:id="@+id/country_title"
-                            android:layout_width="wrap_content"
+                            android:layout_width="95dp"
                             android:layout_height="wrap_content"
                             android:padding="5dp"
-                            android:layout_weight="1"
                             android:text="@string/country"
                             android:textColor="@color/white"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/country_txt"
-                            android:layout_width="wrap_content"
+                            android:layout_width="260dp"
                             android:layout_height="wrap_content"
                             android:background="@drawable/rounded_corners"
-                            android:layout_weight="6"
                             android:padding="5dp"
                             android:text="@string/country_hint" />
                     </LinearLayout>
@@ -169,19 +162,17 @@
 
                         <TextView
                             android:id="@+id/city_title"
-                            android:layout_width="wrap_content"
+                            android:layout_width="95dp"
                             android:layout_height="wrap_content"
                             android:padding="5dp"
-                            android:layout_weight="1"
                             android:text="@string/city"
                             android:textColor="@color/white"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/city_txt"
-                            android:layout_width="wrap_content"
+                            android:layout_width="260dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="3.5"
                             android:background="@drawable/rounded_corners"
                             android:padding="5dp"
                             android:text="@string/city_hint" />
@@ -195,19 +186,17 @@
 
                         <TextView
                             android:id="@+id/address_title"
-                            android:layout_width="wrap_content"
+                            android:layout_width="95dp"
                             android:layout_height="wrap_content"
                             android:padding="5dp"
-                            android:layout_weight="1"
                             android:text="@string/address"
                             android:textColor="@color/white"
                             android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/address_txt"
-                            android:layout_width="wrap_content"
+                            android:layout_width="260dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="7"
                             android:background="@drawable/rounded_corners"
                             android:padding="5dp"
                             android:text="@string/address_hint" />
@@ -322,7 +311,7 @@
 
                         <TextView
                             android:id="@+id/description_service_title"
-                            android:layout_width="wrap_content"
+                            android:layout_width="95dp"
                             android:layout_height="wrap_content"
                             android:padding="5dp"
                             android:text="@string/description"
@@ -331,9 +320,8 @@
 
                         <TextView
                             android:id="@+id/description_service_txt"
-                            android:layout_width="wrap_content"
+                            android:layout_width="260dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:background="@drawable/rounded_corners"
                             android:padding="5dp"
                             android:text="@string/description_hint" />
@@ -347,7 +335,7 @@
 
                         <TextView
                             android:id="@+id/coordinator_name_title"
-                            android:layout_width="wrap_content"
+                            android:layout_width="95dp"
                             android:layout_height="wrap_content"
                             android:padding="5dp"
                             android:text="@string/coordinator"
@@ -356,9 +344,8 @@
 
                         <TextView
                             android:id="@+id/coordinator_name_txt"
-                            android:layout_width="wrap_content"
+                            android:layout_width="260dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:background="@drawable/rounded_corners"
                             android:padding="5dp"
                             android:text="@string/coordinator_hint" />
@@ -372,7 +359,7 @@
 
                         <TextView
                             android:id="@+id/coordinator_contact_title"
-                            android:layout_width="wrap_content"
+                            android:layout_width="95dp"
                             android:layout_height="wrap_content"
                             android:padding="5dp"
                             android:text="@string/coordinator_contact"
@@ -381,9 +368,8 @@
 
                         <TextView
                             android:id="@+id/coordinator_contact_txt"
-                            android:layout_width="wrap_content"
+                            android:layout_width="260dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:background="@drawable/rounded_corners"
                             android:padding="5dp"
                             android:text="@string/coordinator_contact_hint" />
