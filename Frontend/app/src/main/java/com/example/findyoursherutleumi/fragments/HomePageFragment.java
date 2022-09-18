@@ -1,5 +1,6 @@
 package com.example.findyoursherutleumi.fragments;
 
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -59,6 +60,17 @@ public class HomePageFragment extends Fragment {
         if (userTypeId == 1){
             addServiceBtn.setVisibility(View.GONE);
         }
+
+        addServiceBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment newFragment = new AddNewServiceFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragmentContainerView, newFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
 
         mViewModel.init();
         recyclerView = view.findViewById(R.id.services_lst);
