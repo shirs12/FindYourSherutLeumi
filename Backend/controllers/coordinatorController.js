@@ -28,6 +28,22 @@ exports.getCoordinatorById = async (req, res, next) => {
   }
 };
 
+exports.getCoordinatorByEmail = async (req, res, next) => {
+  const email = req.params.email;
+  try {
+    const [result, _] = await pool.execute(
+      "CALL get_coordinator_by_email(?)",
+      [email]
+    );
+    const coordinator = result[0][0];
+    console.log(coordinator);
+    res.status(200).json(coordinator);
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
+};
+
 // POST - post new coordinator to the db
 exports.createNewCoordinator = async (req, res, next) => {
   const {

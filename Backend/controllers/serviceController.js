@@ -50,10 +50,11 @@ exports.createNewService = async (req, res, next) => {
     is_evening_service,
     description_service,
     coordinator_name,
+    coordinator_id
   } = req.body;
   try {
     const service = await pool.execute(
-      "CALL add_new_service(?,?,?,?,?,?,?,?,?,?,?,?)",
+      "CALL add_new_service(?,?,?,?,?,?,?,?,?,?,?,?,?)",
       [
         service_name,
         organization_name,
@@ -67,6 +68,7 @@ exports.createNewService = async (req, res, next) => {
         is_evening_service,
         description_service,
         coordinator_name,
+        coordinator_id
       ]
     );
     res.status(201).json({ service });
