@@ -47,6 +47,7 @@
     <string name="description_hint">תיאור…</string>
     <string name="coordinator_hint">שם רכז/ת…</string>
     <string name="coordinator_contact_hint">פרטי קשר רכז/ת…</string>
+    <string name="add_btn">הוסף</string>
 
     <string-array name="user_types_array">
         <item>מתנדב/ת</item>

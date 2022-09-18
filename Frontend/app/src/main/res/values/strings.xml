@@ -46,6 +46,7 @@
     <string name="description_hint">description…</string>
     <string name="coordinator_hint">coordinator name…</string>
     <string name="coordinator_contact_hint">coordinator contact…</string>
+    <string name="add_btn">add</string>
 
     <string-array name="user_types_array">
         <item>Applicant</item>

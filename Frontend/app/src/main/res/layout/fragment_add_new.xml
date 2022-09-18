@@ -37,347 +37,363 @@
             android:textSize="28sp"
             android:textStyle="bold" />
 
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/light_blue"
             android:fillViewport="true"
-            android:padding="10dp"
             tools:ignore="SpeakableTextPresentCheck">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/service_details_card"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                app:cardBackgroundColor="@color/light_blue">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                <LinearLayout
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/service_details_card"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:padding="5dp"
+                    app:cardBackgroundColor="@color/light_blue"
+                    app:cardCornerRadius="5dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="5dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
-                        android:orientation="horizontal">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
 
-                        <TextView
-                            android:id="@+id/service_title_add"
-                            android:layout_width="95dp"
-                            android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:text="@string/service"
-                            android:textColor="@color/white"
-                            android:textStyle="bold" />
+                            android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/service_txt_add"
-                            android:layout_width="260dp"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/rounded_corners"
-                            android:padding="5dp"
-                            android:text="@string/service_name_hint" />
+                            <TextView
+                                android:id="@+id/service_title_add"
+                                android:layout_width="95dp"
+                                android:layout_height="wrap_content"
+                                android:padding="5dp"
+                                android:text="@string/service"
+                                android:textColor="@color/white"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/service_txt_add"
+                                android:layout_width="260dp"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/rounded_corners"
+                                android:padding="5dp"
+                                android:text="@string/service_name_hint" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/organization_title_details"
+                                android:layout_width="95dp"
+                                android:layout_height="wrap_content"
+                                android:padding="5dp"
+                                android:text="@string/organization"
+                                android:textColor="@color/white"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/organization_txt_details"
+                                android:layout_width="260dp"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/rounded_corners"
+                                android:padding="5dp"
+                                android:text="@string/organization_hint" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/category_title"
+                                android:layout_width="95dp"
+                                android:layout_height="wrap_content"
+                                android:padding="5dp"
+                                android:text="@string/category"
+                                android:textColor="@color/white"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/category_txt"
+                                android:layout_width="260dp"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/rounded_corners"
+                                android:padding="5dp"
+                                android:text="@string/category_hint" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/country_title"
+                                android:layout_width="95dp"
+                                android:layout_height="wrap_content"
+                                android:padding="5dp"
+                                android:text="@string/country"
+                                android:textColor="@color/white"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/country_txt"
+                                android:layout_width="260dp"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/rounded_corners"
+                                android:padding="5dp"
+                                android:text="@string/country_hint" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/city_title"
+                                android:layout_width="95dp"
+                                android:layout_height="wrap_content"
+                                android:padding="5dp"
+                                android:text="@string/city"
+                                android:textColor="@color/white"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/city_txt"
+                                android:layout_width="260dp"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/rounded_corners"
+                                android:padding="5dp"
+                                android:text="@string/city_hint" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/address_title"
+                                android:layout_width="95dp"
+                                android:layout_height="wrap_content"
+                                android:padding="5dp"
+                                android:text="@string/address"
+                                android:textColor="@color/white"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/address_txt"
+                                android:layout_width="260dp"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/rounded_corners"
+                                android:padding="5dp"
+                                android:text="@string/address_hint" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/has_apartment_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="5dp"
+                                android:text="@string/has_apartment"
+                                android:textColor="@color/white"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/has_apartment_txt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="60"
+                                android:background="@drawable/rounded_corners"
+                                android:padding="5dp"
+                                android:text="TextView" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/is_second_year_only_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="5dp"
+                                android:text="@string/is_second_year_only"
+                                android:textColor="@color/white"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/is_second_year_only_txt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@drawable/rounded_corners"
+                                android:padding="5dp"
+                                android:text="TextView" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/is_morning_service_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="5dp"
+                                android:text="@string/is_morning_service"
+                                android:textColor="@color/white"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/is_morning_service_txt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@drawable/rounded_corners"
+                                android:padding="5dp"
+                                android:text="TextView" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/is_evening_service_title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="5dp"
+                                android:text="@string/is_evening_service"
+                                android:textColor="@color/white"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/is_evening_service_txt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@drawable/rounded_corners"
+                                android:padding="5dp"
+                                android:text="TextView" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/description_service_title"
+                                android:layout_width="95dp"
+                                android:layout_height="wrap_content"
+                                android:padding="5dp"
+                                android:text="@string/description"
+                                android:textColor="@color/white"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/description_service_txt"
+                                android:layout_width="260dp"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/rounded_corners"
+                                android:padding="5dp"
+                                android:text="@string/description_hint" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/coordinator_name_title"
+                                android:layout_width="95dp"
+                                android:layout_height="wrap_content"
+                                android:padding="5dp"
+                                android:text="@string/coordinator"
+                                android:textColor="@color/white"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/coordinator_name_txt"
+                                android:layout_width="260dp"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/rounded_corners"
+                                android:padding="5dp"
+                                android:text="@string/coordinator_hint" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/coordinator_contact_title"
+                                android:layout_width="95dp"
+                                android:layout_height="wrap_content"
+                                android:padding="5dp"
+                                android:text="@string/coordinator_contact"
+                                android:textColor="@color/white"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/coordinator_contact_txt"
+                                android:layout_width="260dp"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/rounded_corners"
+                                android:padding="5dp"
+                                android:text="@string/coordinator_contact_hint" />
+                        </LinearLayout>
+
                     </LinearLayout>
+                </androidx.cardview.widget.CardView>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="5dp"
-                        android:orientation="horizontal">
+                <Button
+                    android:id="@+id/add_new_service_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="30dp"
+                    android:backgroundTint="@color/light_blue"
+                    android:text="@string/add_btn" />
 
-                        <TextView
-                            android:id="@+id/organization_title_details"
-                            android:layout_width="95dp"
-                            android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:text="@string/organization"
-                            android:textColor="@color/white"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/organization_txt_details"
-                            android:layout_width="260dp"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/rounded_corners"
-                            android:padding="5dp"
-                            android:text="@string/organization_hint" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="5dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/category_title"
-                            android:layout_width="95dp"
-                            android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:text="@string/category"
-                            android:textColor="@color/white"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/category_txt"
-                            android:layout_width="260dp"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/rounded_corners"
-                            android:padding="5dp"
-                            android:text="@string/category_hint" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="5dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/country_title"
-                            android:layout_width="95dp"
-                            android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:text="@string/country"
-                            android:textColor="@color/white"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/country_txt"
-                            android:layout_width="260dp"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/rounded_corners"
-                            android:padding="5dp"
-                            android:text="@string/country_hint" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="5dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/city_title"
-                            android:layout_width="95dp"
-                            android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:text="@string/city"
-                            android:textColor="@color/white"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/city_txt"
-                            android:layout_width="260dp"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/rounded_corners"
-                            android:padding="5dp"
-                            android:text="@string/city_hint" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="5dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/address_title"
-                            android:layout_width="95dp"
-                            android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:text="@string/address"
-                            android:textColor="@color/white"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/address_txt"
-                            android:layout_width="260dp"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/rounded_corners"
-                            android:padding="5dp"
-                            android:text="@string/address_hint" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="5dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/has_apartment_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:layout_weight="1"
-                            android:text="@string/has_apartment"
-                            android:textColor="@color/white"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/has_apartment_txt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="60"
-                            android:background="@drawable/rounded_corners"
-                            android:padding="5dp"
-                            android:text="TextView" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="5dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/is_second_year_only_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:text="@string/is_second_year_only"
-                            android:textColor="@color/white"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/is_second_year_only_txt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:background="@drawable/rounded_corners"
-                            android:padding="5dp"
-                            android:text="TextView" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="5dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/is_morning_service_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:text="@string/is_morning_service"
-                            android:textColor="@color/white"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/is_morning_service_txt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:background="@drawable/rounded_corners"
-                            android:padding="5dp"
-                            android:text="TextView" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="5dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/is_evening_service_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:text="@string/is_evening_service"
-                            android:textColor="@color/white"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/is_evening_service_txt"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:background="@drawable/rounded_corners"
-                            android:padding="5dp"
-                            android:text="TextView" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="5dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/description_service_title"
-                            android:layout_width="95dp"
-                            android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:text="@string/description"
-                            android:textColor="@color/white"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/description_service_txt"
-                            android:layout_width="260dp"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/rounded_corners"
-                            android:padding="5dp"
-                            android:text="@string/description_hint" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="5dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/coordinator_name_title"
-                            android:layout_width="95dp"
-                            android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:text="@string/coordinator"
-                            android:textColor="@color/white"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/coordinator_name_txt"
-                            android:layout_width="260dp"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/rounded_corners"
-                            android:padding="5dp"
-                            android:text="@string/coordinator_hint" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="5dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/coordinator_contact_title"
-                            android:layout_width="95dp"
-                            android:layout_height="wrap_content"
-                            android:padding="5dp"
-                            android:text="@string/coordinator_contact"
-                            android:textColor="@color/white"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/coordinator_contact_txt"
-                            android:layout_width="260dp"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/rounded_corners"
-                            android:padding="5dp"
-                            android:text="@string/coordinator_contact_hint" />
-                    </LinearLayout>
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </LinearLayout>
         </ScrollView>
+
 
     </LinearLayout>
 
