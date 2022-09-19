@@ -135,6 +135,8 @@ public class AddNewServiceFragment extends Fragment {
                                         descriptionInput.getText().toString(),
                                         response.body().getFirstName() + " " + response.body().getLastName(),
                                         response.body().getCoordinatorId());
+                                // TODO: update recyclerview
+                                
                                 call2.enqueue(new Callback<Service>() {
                                     @Override
                                     public void onResponse(Call<Service> call, Response<Service> response) {
@@ -149,6 +151,12 @@ public class AddNewServiceFragment extends Fragment {
                                             cityInput.getText().clear();
                                             addressInput.getText().clear();
                                             descriptionInput.getText().clear();
+
+                                            apartmentRadio.clearCheck();
+                                            secondYearRadio.clearCheck();
+                                            morningRadio.clearCheck();
+                                            eveningRadio.clearCheck();
+
                                             System.out.println(response.code());
                                             Toast.makeText(getContext(), "New service added successfully", Toast.LENGTH_SHORT).show();
                                         }
@@ -175,7 +183,6 @@ public class AddNewServiceFragment extends Fragment {
 
         return view;
     }
-
 
     public void onRadioButtonClicked1(View view) {
         int radioId = apartmentRadio.getCheckedRadioButtonId();

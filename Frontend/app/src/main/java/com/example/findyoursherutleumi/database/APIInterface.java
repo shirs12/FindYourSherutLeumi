@@ -34,7 +34,7 @@ public interface APIInterface {
     @GET("coordinators/{id}")
     Call<Coordinator> getCoordinatorById(@Path("id") int id);
 
-    @GET("coordinators{email}")
+    @GET("coordinators/email/{email}")
     Call<Coordinator> getCoordinatorByEmail(@Path("email") String email);
 
 
