@@ -122,9 +122,25 @@ public class HomePageFragment extends Fragment {
         recyclerView.setAdapter(servicesAdapter);
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    public void updateAdapter(){
+        servicesAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        updateAdapter();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateAdapter();
+    }
 
 
-//    @Override
+    //    @Override
 //    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 //        super.onCreateOptionsMenu(menu,inflater);
 //        inflater.inflate(R.menu.nav_menu, menu);

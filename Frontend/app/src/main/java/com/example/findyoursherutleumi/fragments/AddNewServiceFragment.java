@@ -1,5 +1,6 @@
 package com.example.findyoursherutleumi.fragments;
 
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
@@ -54,10 +55,10 @@ public class AddNewServiceFragment extends Fragment {
     RadioGroup eveningRadio;
     RadioButton eveningBtn;
 
-    private int hasApartment;
-    private int isSecondYear;
-    private int isMorning;
-    private int isEvening;
+    private int hasApartment = 0;
+    private int isSecondYear = 0;
+    private int isMorning = 0;
+    private int isEvening = 0;
 
     public static AddNewServiceFragment newInstance() {
         return new AddNewServiceFragment();
@@ -135,11 +136,10 @@ public class AddNewServiceFragment extends Fragment {
                                         descriptionInput.getText().toString(),
                                         response.body().getFirstName() + " " + response.body().getLastName(),
                                         response.body().getCoordinatorId());
-                                // TODO: update recyclerview
-                                
+
                                 call2.enqueue(new Callback<Service>() {
                                     @Override
-                                    public void onResponse(Call<Service> call, Response<Service> response) {
+                                    public void onResponse(@NonNull Call<Service> call, @NonNull Response<Service> response) {
                                         if(!response.isSuccessful()) {
                                             Toast.makeText(getContext(), "Connection Failed. try again later...", Toast.LENGTH_SHORT).show();
                                             System.out.println("code2:        " + response.code());
@@ -152,14 +152,17 @@ public class AddNewServiceFragment extends Fragment {
                                             addressInput.getText().clear();
                                             descriptionInput.getText().clear();
 
-                                            apartmentRadio.clearCheck();
-                                            secondYearRadio.clearCheck();
-                                            morningRadio.clearCheck();
-                                            eveningRadio.clearCheck();
+//                                            apartmentRadio.clearCheck();
+//                                            secondYearRadio.clearCheck();
+//                                            morningRadio.clearCheck();
+//                                            eveningRadio.clearCheck();
 
                                             System.out.println(response.code());
                                             Toast.makeText(getContext(), "New service added successfully", Toast.LENGTH_SHORT).show();
+
+                                            //TODO: optional - trans to homepage fragment
                                         }
+
                                     }
 
                                     @Override
@@ -187,36 +190,30 @@ public class AddNewServiceFragment extends Fragment {
     public void onRadioButtonClicked1(View view) {
         int radioId = apartmentRadio.getCheckedRadioButtonId();
         apartmentBtn = view.findViewById(radioId);
-        if (apartmentBtn.getId() == R.id.has_apartment_no_radio)
-            hasApartment = 0;
-        else if (apartmentBtn.getId() == R.id.has_apartment_yes_radio)
+        if (apartmentBtn.getId() == R.id.has_apartment_yes_radio)
             hasApartment = 1;
     }
 
     public void onRadioButtonClicked2(View view) {
         int radioId = secondYearRadio.getCheckedRadioButtonId();
         secondYearBtn = view.findViewById(radioId);
-        if (secondYearBtn.getId() == R.id.second_year_no_radio)
-            isSecondYear = 0;
-        else if (secondYearBtn.getId() == R.id.second_year_yes_radio)
+        if (secondYearBtn.getId() == R.id.second_year_yes_radio)
             isSecondYear = 1;
     }
 
     public void onRadioButtonClicked3(View view) {
         int radioId = morningRadio.getCheckedRadioButtonId();
         morningBtn = view.findViewById(radioId);
-        if (morningBtn.getId() == R.id.morning_service_no_radio)
-            isMorning = 0;
-        else if (morningBtn.getId() == R.id.morning_service_yes_radio)
+        if (morningBtn.getId() == R.id.morning_service_yes_radio)
             isMorning = 1;
     }
 
     public void onRadioButtonClicked4(View view) {
         int radioId = eveningRadio.getCheckedRadioButtonId();
         eveningBtn = view.findViewById(radioId);
-        if (eveningBtn.getId() == R.id.evening_service_no_radio)
-            isEvening = 0;
-        else if (eveningBtn.getId() == R.id.evening_service_yes_radio)
+        if (eveningBtn.getId() == R.id.evening_service_yes_radio)
             isEvening = 1;
     }
+
 }
+
