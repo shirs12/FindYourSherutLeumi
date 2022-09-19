@@ -4,7 +4,7 @@ const router = express.Router();
 
 // GET
 router.route("/").get(coordinatorController.getAllCoordinators);
-router.route("/:email").get(coordinatorController.getCoordinatorByEmail);
+router.route("/email/:email").get(coordinatorController.getCoordinatorByEmail);
 router
   .route("/:id")
   .get(coordinatorController.getCoordinatorById) // GET by id
