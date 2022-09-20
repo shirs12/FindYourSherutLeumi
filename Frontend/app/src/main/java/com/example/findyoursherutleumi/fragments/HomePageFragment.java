@@ -35,6 +35,7 @@ import com.example.findyoursherutleumi.models.ServicePartial;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
+import java.util.Objects;
 
 public class HomePageFragment extends Fragment {
 
@@ -51,6 +52,7 @@ public class HomePageFragment extends Fragment {
         return new HomePageFragment();
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -58,7 +60,6 @@ public class HomePageFragment extends Fragment {
         mViewModel = new ViewModelProvider(this).get(HomePageViewModel.class);
         setHasOptionsMenu(true);
         addServiceBtn = view.findViewById(R.id.add_service_btn);
-        searchBar = view.findViewById(R.id.search_bar);
 
         assert getArguments() != null;
         userEmail = getArguments().getString("email");
@@ -67,6 +68,19 @@ public class HomePageFragment extends Fragment {
         if (userTypeId == 1){
             addServiceBtn.setVisibility(View.GONE);
         }
+
+        mViewModel.init();
+
+        recyclerView = view.findViewById(R.id.services_lst);
+        mViewModel.getServices().observe(getViewLifecycleOwner(), new Observer<List<ServicePartial>>() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onChanged(List<ServicePartial> servicePartials) {
+                servicesAdapter.notifyDataSetChanged();
+            }
+        });
+
+        initRecyclerView();
 
         addServiceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,26 +98,17 @@ public class HomePageFragment extends Fragment {
             }
         });
 
-        mViewModel.init();
-        recyclerView = view.findViewById(R.id.services_lst);
-        mViewModel.getServices().observe(getViewLifecycleOwner(), new Observer<List<ServicePartial>>() {
-            @SuppressLint("NotifyDataSetChanged")
-            @Override
-            public void onChanged(List<ServicePartial> servicePartials) {
-                servicesAdapter.notifyDataSetChanged();
-            }
-        });
-        initRecyclerView();
-
+        searchBar = view.findViewById(R.id.search_bar);
         searchBar.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                servicesAdapter.filter(charSequence);
+                servicesAdapter.notifyDataSetChanged();
             }
 
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                
+                servicesAdapter.filter(charSequence);
             }
 
             @Override
@@ -112,6 +117,7 @@ public class HomePageFragment extends Fragment {
             }
         });
 
+        servicesAdapter.notifyDataSetChanged();
         return view;
     }
 
@@ -138,7 +144,7 @@ public class HomePageFragment extends Fragment {
         super.onResume();
         updateAdapter();
     }
-
+    
 
     //    @Override
 //    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

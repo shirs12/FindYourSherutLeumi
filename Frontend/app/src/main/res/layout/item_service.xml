@@ -9,7 +9,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
-        android:layout_height="200dp"
+        android:layout_height="220dp"
         android:layout_margin="5dp"
         android:outlineAmbientShadowColor="#D3D3D3"
         app:cardCornerRadius="15dp"
@@ -51,7 +51,8 @@
                     app:autoSizeMaxTextSize="30sp"
                     app:autoSizeMinTextSize="10sp"
                     app:autoSizeStepGranularity="2sp"
-                    app:autoSizeTextType="uniform" />
+                    app:autoSizeTextType="uniform"
+                    tools:ignore="TextContrastCheck" />
 
                 <Button
                     android:id="@+id/show_details_btn"
@@ -61,7 +62,8 @@
                     android:backgroundTint="#2196F3"
                     android:gravity="center"
                     android:text="@string/show_details"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    tools:ignore="TextContrastCheck" />
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -120,7 +122,6 @@
                         android:id="@+id/organization_details_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:text="TextView"
                         app:autoSizeMaxTextSize="30sp"
                         app:autoSizeMinTextSize="10sp"
@@ -150,7 +151,6 @@
                         android:id="@+id/category_details_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:text="TextView"
                         app:autoSizeMaxTextSize="30sp"
                         app:autoSizeMinTextSize="10sp"
@@ -180,18 +180,17 @@
                         android:id="@+id/country_details_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:text="TextView"
                         app:autoSizeMaxTextSize="30sp"
                         app:autoSizeMinTextSize="10sp"
                         app:autoSizeStepGranularity="2sp"
                         app:autoSizeTextType="uniform" />
-                </LinearLayout>
+                    <!--                </LinearLayout>-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    <!--                <LinearLayout-->
+                    <!--                    android:layout_width="match_parent"-->
+                    <!--                    android:layout_height="wrap_content"-->
+                    <!--                    android:orientation="horizontal">-->
 
                     <TextView
                         android:id="@+id/city_details_title"
@@ -210,7 +209,6 @@
                         android:id="@+id/city_details_txt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:text="TextView"
                         app:autoSizeMaxTextSize="30sp"
                         app:autoSizeMinTextSize="10sp"
@@ -238,9 +236,11 @@
 
                     <TextView
                         android:id="@+id/description_details_txt"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
                         android:text="TextView"
                         app:autoSizeMaxTextSize="30sp"
                         app:autoSizeMinTextSize="10sp"
@@ -253,4 +253,4 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

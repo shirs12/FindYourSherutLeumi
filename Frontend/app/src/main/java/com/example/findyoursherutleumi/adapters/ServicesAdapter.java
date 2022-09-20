@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,13 +26,12 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
 
     private final LayoutInflater inflater;
     private List<ServicePartial> servicesLst;
-    private List<ServicePartial> servicesLstCopy;
+    private List<ServicePartial> fullLst = new ArrayList<>();
 
     public ServicesAdapter(LayoutInflater inflater, List<ServicePartial> servicesLst){
         this.inflater = inflater;
         this.servicesLst = servicesLst;
-        servicesLstCopy = new ArrayList<>();
-        servicesLstCopy.addAll(servicesLst);
+        this.fullLst.addAll(servicesLst);
     }
 
     @NonNull
@@ -81,8 +81,9 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
 
     @SuppressLint("NotifyDataSetChanged")
     public void updateServicesList(final List<ServicePartial> mServicesLst) {
-        this.servicesLst.clear();
+//        this.servicesLst.clear();
         this.servicesLst = mServicesLst;
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -106,26 +107,72 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
             cityTxt = itemView.findViewById(R.id.city_details_txt);
             descriptionTxt = itemView.findViewById(R.id.description_details_txt);
         }
+
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    public void filter(CharSequence charSequence){
-        ArrayList<ServicePartial> templst = new ArrayList<>();
-        if (!TextUtils.isEmpty(charSequence)){
-            for (ServicePartial data : servicesLst){
-                if (data.getServiceName().toLowerCase().contains(charSequence)){
-                    templst.add(data);
-                }
+    public void filter(CharSequence charSequence) {
+        List<ServicePartial> filteredLst = new ArrayList<>();
+        if (TextUtils.isEmpty(charSequence))
+            filteredLst.addAll(servicesLst);
+        else{
+            for (ServicePartial data : servicesLst) {
+                if (data.getServiceName().toLowerCase().contains(charSequence)
+                    || data.getCategory().toLowerCase().contains(charSequence)
+                    || data.getCity().toLowerCase().contains(charSequence))
+                    filteredLst.add(data);
             }
-        } else{
-            templst.addAll(servicesLstCopy);
+            if (filteredLst.isEmpty()) {
+                Toast.makeText(inflater.getContext(), R.string.no_result, Toast.LENGTH_SHORT).show();
+                updateServicesList(servicesLst);
+                System.out.println("size servicesLst0:   " + servicesLst.size());
+                notifyDataSetChanged();
+            }
+            else updateServicesList(filteredLst);
         }
-
-        servicesLst.clear();
-        servicesLst.addAll(templst);
+        //updateServicesList(fullLst);
         notifyDataSetChanged();
-        templst.clear();
     }
+
+
+
+//    @SuppressLint("NotifyDataSetChanged")
+//    public void filter(CharSequence charSequence) {
+//        List<ServicePartial> filteredLst = new ArrayList<>();
+//        if (!TextUtils.isEmpty(charSequence)) {
+//            for (ServicePartial data : servicesLst) {
+//                if (data.getServiceName().toLowerCase().contains(charSequence)
+//                    || data.getCategory().toLowerCase().contains(charSequence)
+//                    || data.getCity().toLowerCase().contains(charSequence)) {
+//                    filteredLst.add(data);
+//                }
+//            }
+//
+//            if (filteredLst.isEmpty()) {
+//                Toast.makeText(inflater.getContext(), R.string.no_result, Toast.LENGTH_SHORT).show();
+//                updateServicesList(servicesLst);
+//                System.out.println("size servicesLst0:   " + servicesLst.size());
+//                notifyDataSetChanged();
+//            }
+//            updateServicesList(filteredLst);
+//            notifyDataSetChanged();
+//
+//        } else{
+//            updateServicesList(fullLst);
+//            System.out.println("size filteredLst:   " + filteredLst.size());
+//            System.out.println("size servicesLst1:   " + servicesLst.size());
+//            System.out.println("size fullLst:   " + fullLst.size());
+//            System.out.println("size servicesLst2:   " + servicesLst.size());
+//            notifyDataSetChanged();
+//        }
+////        updateServicesList(fullLst);
+////        servicesLst.clear();
+////        servicesLst.addAll(tempLst);
+////            notifyDataSetChanged();
+////        tempLst.clear();
+//    }
+
+
 
 
 

@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
         actionBar.setTitle(getResources().getString(R.string.app_name));
 
 
