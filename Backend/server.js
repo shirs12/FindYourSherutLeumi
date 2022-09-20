@@ -3,7 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 app.use(express.urlencoded({ extended: true }));
-const PORT = process.env.PORT || 3000;
+// const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
@@ -23,6 +23,11 @@ app.use((err, req, res, next) => {
     massage: "Somthing went wrong...",
   });
 });
+
+app.all("/*", (req, res) => {
+  res.status(404)
+  .json({massage : `${req.method} on ${req.originalUrl} not found`});
+})
 
 
 // app.listen(PORT, () => console.log(`Listening on port ${PORT}...`));
