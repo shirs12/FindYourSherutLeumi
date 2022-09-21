@@ -64,7 +64,6 @@ public class HomePageFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_page, container, false);
-//        mViewModel = new ViewModelProvider(this).get(HomePageViewModel.class);
         setHasOptionsMenu(true);
         addServiceBtn = view.findViewById(R.id.add_service_btn);
 
@@ -76,13 +75,12 @@ public class HomePageFragment extends Fragment {
             addServiceBtn.setVisibility(View.GONE);
         }
 
-//        mViewModel.init();
-
         recyclerView = view.findViewById(R.id.services_lst);
         mViewModel.getServices().observe(getViewLifecycleOwner(), new Observer<List<ServicePartial>>() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onChanged(List<ServicePartial> servicePartials) {
+                servicesAdapter.updateServicesList(servicePartials);
                 servicesAdapter.notifyDataSetChanged();
             }
         });

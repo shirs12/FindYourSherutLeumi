@@ -10,6 +10,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -48,6 +50,8 @@ public class CoordinatorSignUpFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_coordinator_sign_up, container, false);
         apiInterface = APIClient.getInstance().create(APIInterface.class);
+
+        setHasOptionsMenu(true);
 
         firstNameInput = view.findViewById(R.id.first_name_input);
         lastNameInput = view.findViewById(R.id.last_name_input);
@@ -116,6 +120,12 @@ public class CoordinatorSignUpFragment extends Fragment {
         return true;
     }
 
+    @Override
+    public void onPrepareOptionsMenu(@NonNull Menu menu) {
+        MenuItem item = menu.findItem(R.id.more_item);
+        if(item!=null)
+            item.setVisible(false);
+    }
 
 
 }

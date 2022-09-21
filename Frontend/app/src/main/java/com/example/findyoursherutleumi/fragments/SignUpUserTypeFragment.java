@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -33,6 +35,8 @@ public class SignUpUserTypeFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sign_up_user_type, container, false);
 
+        setHasOptionsMenu(true);
+
         Spinner spinner = (Spinner) view.findViewById(R.id.user_type_spinner);
         spinner.setOnItemSelectedListener(new SpinnerAdapter());
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
@@ -57,9 +61,14 @@ public class SignUpUserTypeFragment extends Fragment {
             }
         });
 
-
-
         return view;
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(@NonNull Menu menu) {
+        MenuItem item = menu.findItem(R.id.more_item);
+        if(item!=null)
+            item.setVisible(false);
     }
 
 

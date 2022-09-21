@@ -81,7 +81,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
 
     @SuppressLint("NotifyDataSetChanged")
     public void updateServicesList(final List<ServicePartial> mServicesLst) {
-//        this.servicesLst.clear();
+        this.servicesLst.clear();
         this.servicesLst = mServicesLst;
         notifyDataSetChanged();
     }
@@ -130,7 +130,6 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
             }
             else updateServicesList(filteredLst);
         }
-        //updateServicesList(fullLst);
         notifyDataSetChanged();
     }
 

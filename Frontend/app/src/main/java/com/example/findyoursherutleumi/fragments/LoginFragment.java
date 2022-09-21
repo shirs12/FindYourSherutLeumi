@@ -9,6 +9,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -43,6 +45,8 @@ public class LoginFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         apiInterface = APIClient.getInstance().create(APIInterface.class);
+
+        setHasOptionsMenu(true);
 
         inputEmail = view.findViewById(R.id.email_address_input);
         inputPassword = view.findViewById(R.id.password_input);
@@ -105,4 +109,13 @@ public class LoginFragment extends Fragment {
         });
         return view;
     }
+
+    @Override
+    public void onPrepareOptionsMenu(@NonNull Menu menu) {
+        MenuItem item = menu.findItem(R.id.more_item);
+        if(item!=null)
+            item.setVisible(false);
+    }
+
+
 }
