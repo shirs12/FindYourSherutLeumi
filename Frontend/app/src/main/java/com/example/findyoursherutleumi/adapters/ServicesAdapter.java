@@ -81,7 +81,6 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
 
     @SuppressLint("NotifyDataSetChanged")
     public void updateServicesList(final List<ServicePartial> mServicesLst) {
-        this.servicesLst.clear();
         this.servicesLst = mServicesLst;
         notifyDataSetChanged();
     }
