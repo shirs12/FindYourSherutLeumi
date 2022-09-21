@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">FindYourSherutLeumi</string>
+    <string name="sign_in">התחברות</string>
+    <string name="email">אימייל</string>
+    <string name="email_hint">אימייל…</string>
+    <string name="password">סיסמה</string>
+    <string name="password_hint">סיסמה…</string>
+    <string name="login_btn">התחבר</string>
+    <string name="sign_up">רישום</string>
+    <string name="user_type">בחר/י סוג הרשמה</string>
+    <string name="logo">לוגו</string>
+    <string name="next_btn">הבא</string>
+    <string name="coordinator_sign_up">רישום רכזות/ים</string>
+    <string name="submit_btn">אישור</string>
+    <string name="first_name">שם פרטי</string>
+    <string name="first_name_hint">שם פרטי…</string>
+    <string name="last_name">שם משפחה</string>
+    <string name="last_name_hint">שם משפחה…</string>
+    <string name="organization">עמותה</string>
+    <string name="organization_hint">עמותה…</string>
+    <string name="phone_number">מספר טלפון</string>
+    <string name="phone_number_hint">מספר טלפון…</string>
+    <string name="applicant_sign_up">רישום מתנדבות/ים</string>
+    <string name="city">עיר</string>
+    <string name="city_hint">עיר…</string>
+    <string name="search_bar">חיפוש</string>
+    <string name="no_result">אין תוצאות</string>
+    <string name="category">תחום</string>
+    <string name="country">מדינה</string>
+    <string name="address">כתובת</string>
+    <string name="has_apartment">דירה</string>
+    <string name="is_second_year_only">שנה שניה</string>
+    <string name="is_morning_service">תקן בוקר</string>
+    <string name="description">תיאור</string>
+    <string name="is_evening_service">תקן ערב</string>
+    <string name="coordinator">רכז/ת</string>
+    <string name="coordinator_contact">פרטי התקשרות רכז/ת</string>
+    <string name="languages_bar">שפות</string>
+    <string name="show_details">הצג פרטים</string>
+    <string name="add_new_service">הוסף/י תקן חדש</string>
+    <string name="service">תקן</string>
+    <string name="service_name_hint">שם תקן…</string>
+    <string name="category_hint">תחום…</string>
+    <string name="country_hint">מדינה…</string>
+    <string name="address_hint">כתובת…</string>
+    <string name="description_hint">תיאור…</string>
+    <string name="coordinator_hint">שם רכז/ת…</string>
+    <string name="coordinator_contact_hint">פרטי קשר רכז/ת…</string>
+    <string name="add_btn">הוסף</string>
+    <string name="search">חיפוש…</string>
+    <string name="yes">כן</string>
+    <string name="no">לא</string>
+    <string name="more_menu">עוד</string>
+    <string name="settings">הגדרות</string>
+    <string name="logout">התנתק/י</string>
+
+    <string-array name="user_types_array">
+        <item>מתנדב/ת</item>
+        <item>רכז/ת</item>
+    </string-array>
+</resources>
