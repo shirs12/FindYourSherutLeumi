@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -20,6 +22,7 @@ import android.widget.Button;
 import com.example.findyoursherutleumi.adapters.ServicesAdapter;
 import com.example.findyoursherutleumi.database.APIClient;
 import com.example.findyoursherutleumi.database.APIInterface;
+import com.example.findyoursherutleumi.fragments.AddNewServiceFragment;
 import com.example.findyoursherutleumi.fragments.LoginFragment;
 import com.example.findyoursherutleumi.models.Applicant;
 
@@ -44,9 +47,6 @@ public class MainActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.setTitle(getResources().getString(R.string.app_name));
-
-
-
 
 
 
@@ -75,13 +75,14 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.nav_menu, menu);
         MenuItem languagesItem = menu.findItem(R.id.languages_btn);
+        MenuItem logoutItem = menu.findItem(R.id.logout_item);
+
         languagesItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
@@ -89,6 +90,26 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        logoutItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Fragment newFragment = new LoginFragment();
+                assert getFragmentManager() != null;
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.fragmentContainerView, newFragment).disallowAddToBackStack();
+                transaction.commit();
+
+                // clears fragment's back stack to prevent user from going back after logging out.
+                int count = fragmentManager.getBackStackEntryCount();
+                for(int i = 0; i < count; ++i) {
+                    fragmentManager.popBackStackImmediate();
+                }
+                return false;
+            }
+        });
+
         return true;
     }
     private void showChangeLanguageDialog() {

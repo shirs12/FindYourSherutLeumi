@@ -117,7 +117,7 @@ public class AddNewServiceFragment extends Fragment {
                     Call<Coordinator> call = apiInterface.getCoordinatorByEmail(userEmail);
                     call.enqueue(new Callback<Coordinator>() {
                         @Override
-                        public void onResponse(Call<Coordinator> call, Response<Coordinator> response) {
+                        public void onResponse(@NonNull Call<Coordinator> call, @NonNull Response<Coordinator> response) {
                             if(!response.isSuccessful()) {
                                 Toast.makeText(getContext(), "Connection Failed. try again later...", Toast.LENGTH_SHORT).show();
                                 System.out.println("code1:        " + response.code());
@@ -150,15 +150,10 @@ public class AddNewServiceFragment extends Fragment {
                                             addressInput.getText().clear();
                                             descriptionInput.getText().clear();
 
-//                                            apartmentRadio.clearCheck();
-//                                            secondYearRadio.clearCheck();
-//                                            morningRadio.clearCheck();
-//                                            eveningRadio.clearCheck();
-
                                             System.out.println(response.code());
                                             Toast.makeText(getContext(), "New service added successfully", Toast.LENGTH_SHORT).show();
 
-                                            //TODO: optional - trans to homepage fragment
+                                            // TODO: optional - trans to homepage fragment
                                         }
 
                                     }
