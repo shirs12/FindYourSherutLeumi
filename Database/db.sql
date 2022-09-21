@@ -83,6 +83,7 @@ INSERT INTO service(service_name,organization_name,category,country,city,address
 			true,false,'תפקיד מסווג ומעניין במחלקה המגנה על כל מערך הסייבר.הגנה מפני פריצות והתקפות רשת במשרדי הממשלה ובמדינת ישראל.','רון כהן יערה',1),
 		  ('מרכז רפואי רבין-בלינסון','שילה','בריאות','ישראל','פתח תקווה','זבוטינסקי 39',true,false,
 			true,false,'ישנם מספר תפקידים בבית חולים בילינסון, ביניהם: מזכירה רפואית, סיעוד (סייעת אחות), תומכת רפואה. תפקיד משמעותי דינמי ומאתגר בתחום הרפואה. *נדרש 5 יח"ל בביולוגיה, פיזיקה או כימיה.','שרית ויזנר',2);
+
 SET SQL_SAFE_UPDATES = 0;
 DELETE FROM Service WHERE service_name = 'name2';
 SET SQL_SAFE_UPDATES = 1;
@@ -374,6 +375,4 @@ BEGIN
 	WHERE email = p_email;
 END$$
 DELIMITER ;
-
-
 
