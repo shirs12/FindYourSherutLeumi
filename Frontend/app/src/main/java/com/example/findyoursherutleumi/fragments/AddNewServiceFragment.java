@@ -31,8 +31,6 @@ import retrofit2.Response;
 
 public class AddNewServiceFragment extends Fragment {
 
-    private AddNewViewModel mViewModel;
-
     APIInterface apiInterface;
 
     private String userEmail;

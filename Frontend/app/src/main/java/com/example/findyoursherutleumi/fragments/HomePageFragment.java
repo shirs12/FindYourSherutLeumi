@@ -52,12 +52,19 @@ public class HomePageFragment extends Fragment {
         return new HomePageFragment();
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mViewModel = new ViewModelProvider(this).get(HomePageViewModel.class);
+        mViewModel.init();
+    }
+
     @SuppressLint("NotifyDataSetChanged")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_page, container, false);
-        mViewModel = new ViewModelProvider(this).get(HomePageViewModel.class);
+//        mViewModel = new ViewModelProvider(this).get(HomePageViewModel.class);
         setHasOptionsMenu(true);
         addServiceBtn = view.findViewById(R.id.add_service_btn);
 
@@ -69,7 +76,7 @@ public class HomePageFragment extends Fragment {
             addServiceBtn.setVisibility(View.GONE);
         }
 
-        mViewModel.init();
+//        mViewModel.init();
 
         recyclerView = view.findViewById(R.id.services_lst);
         mViewModel.getServices().observe(getViewLifecycleOwner(), new Observer<List<ServicePartial>>() {
@@ -145,6 +152,17 @@ public class HomePageFragment extends Fragment {
         updateAdapter();
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        updateAdapter();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        updateAdapter();
+    }
 
     //    @Override
 //    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
