@@ -50,6 +50,7 @@ public class LoginFragment extends Fragment {
         signInBtn = view.findViewById(R.id.sign_in_btn);
         signUpClickable = view.findViewById(R.id.sign_up_clickable);
 
+
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

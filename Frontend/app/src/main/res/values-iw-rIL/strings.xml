@@ -51,6 +51,9 @@
     <string name="search">חיפוש…</string>
     <string name="yes">כן</string>
     <string name="no">לא</string>
+    <string name="more_menu">עוד</string>
+    <string name="settings">הגדרות</string>
+    <string name="logout">התנתק/י</string>
 
     <string-array name="user_types_array">
         <item>מתנדב/ת</item>

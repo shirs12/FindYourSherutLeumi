@@ -65,7 +65,7 @@ public class HomePageFragment extends Fragment {
         userEmail = getArguments().getString("email");
         userTypeId = getArguments().getInt("typeId");
         System.out.println(userTypeId);
-        if (userTypeId == 1){
+        if (userTypeId == 1) {
             addServiceBtn.setVisibility(View.GONE);
         }
 
@@ -129,7 +129,7 @@ public class HomePageFragment extends Fragment {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    public void updateAdapter(){
+    public void updateAdapter() {
         servicesAdapter.notifyDataSetChanged();
     }
 
@@ -144,7 +144,7 @@ public class HomePageFragment extends Fragment {
         super.onResume();
         updateAdapter();
     }
-    
+
 
     //    @Override
 //    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
