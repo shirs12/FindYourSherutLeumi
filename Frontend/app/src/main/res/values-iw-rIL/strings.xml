@@ -54,6 +54,9 @@
     <string name="more_menu">עוד</string>
     <string name="settings">הגדרות</string>
     <string name="logout">התנתק/י</string>
+    <string name="edit_details">עדכן/י פרטים</string>
+    <string name="update_btn">עדכן</string>
+    <string name="edit_services_list">ערוך/י רשימת תקנים</string>
 
     <string-array name="user_types_array">
         <item>מתנדב/ת</item>

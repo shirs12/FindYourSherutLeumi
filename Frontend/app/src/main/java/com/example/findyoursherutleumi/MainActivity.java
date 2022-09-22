@@ -127,6 +127,8 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
                 // TODO: send user id to setting fragment to show user's details
                 Bundle bundle = new Bundle();
                 bundle.putString("email", user.getEmail());
+                bundle.putInt("typeId", user.getUserTypeId());
+                bundle.putString("password", user.getUPassword());
                 newFragment.setArguments(bundle);
 
                 FragmentTransaction transaction = fragmentManager.beginTransaction();

@@ -53,6 +53,9 @@
     <string name="more_menu">More</string>
     <string name="settings">Settings</string>
     <string name="logout">Logout</string>
+    <string name="edit_details">Edit Details</string>
+    <string name="update_btn">update</string>
+    <string name="edit_services_list">Edit Services List</string>
 
     <string-array name="user_types_array">
         <item>Applicant</item>

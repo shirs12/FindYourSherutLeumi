@@ -2,6 +2,7 @@ package com.example.findyoursherutleumi.fragments;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,12 +20,11 @@ public class SettingsFragment extends Fragment {
 
     private SettingsViewModel mViewModel;
 
-    TextView title;
-
     public static SettingsFragment newInstance() {
         return new SettingsFragment();
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -32,8 +32,6 @@ public class SettingsFragment extends Fragment {
 
         assert getArguments() != null;
 
-        title = view.findViewById(R.id.settings_title);
-        title.setText(getArguments().getString("email"));
 
         return view;
     }
