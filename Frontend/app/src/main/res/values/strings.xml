@@ -57,6 +57,7 @@
     <string name="update_btn">update</string>
     <string name="edit_services_list">Edit Services List</string>
     <string name="logout_dialog">Are you sure you want to logout ?</string>
+    <string name="delete">Delete</string>
 
     <string-array name="user_types_array">
         <item>Applicant</item>

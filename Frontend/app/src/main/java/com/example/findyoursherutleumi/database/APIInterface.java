@@ -10,6 +10,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -81,13 +82,19 @@ public interface APIInterface {
 
     @PUT("coordinators/{id}")
     @FormUrlEncoded
-    Call<Coordinator> updateCoordinatorById(@Field("coordinator_id") int id,
+    Call<Coordinator> updateCoordinatorById(@Path("id") int coordinator_id,
                                             @Field("first_name") String first_name,
                                             @Field("last_name") String last_name,
                                             @Field("phone_number") String phone_number,
                                             @Field("email") String email,
                                             @Field("u_password") String u_password,
                                             @Field("organization_name") String organization_name);
+
+
+    @DELETE("services/{id}")
+    @FormUrlEncoded
+    Call<Service> deleteServiceById(@Path("id") int id);
+
 
 
 }

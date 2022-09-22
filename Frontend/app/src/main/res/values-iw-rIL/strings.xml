@@ -58,6 +58,7 @@
     <string name="update_btn">עדכן</string>
     <string name="edit_services_list">ערוך/י רשימת תקנים</string>
     <string name="logout_dialog">את/ה בטוח/ה שתרצי/ה להתנתק?</string>
+    <string name="delete">מחיקה</string>
 
     <string-array name="user_types_array">
         <item>מתנדב/ת</item>

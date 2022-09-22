@@ -94,7 +94,6 @@ public class SettingsFragment extends Fragment {
                         lastNameInput.getText().toString(),
                         phoneInput.getText().toString(),
                         emailInput.getText().toString(),
-                        //TODO: update in server - bcrypt password in 'update' methods.
                         passwordInput.getText().toString(),
                         organizationInput.getText().toString());
                 call1.enqueue(new Callback<Coordinator>() {
