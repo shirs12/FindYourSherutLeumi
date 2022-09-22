@@ -4,6 +4,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,6 +21,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.findyoursherutleumi.MainActivity;
 import com.example.findyoursherutleumi.R;
 import com.example.findyoursherutleumi.database.APIClient;
 import com.example.findyoursherutleumi.database.APIInterface;
@@ -57,6 +60,7 @@ public class AddNewServiceFragment extends Fragment {
     private int isSecondYear = 0;
     private int isMorning = 0;
     private int isEvening = 0;
+
 
     public static AddNewServiceFragment newInstance() {
         return new AddNewServiceFragment();

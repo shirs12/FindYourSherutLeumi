@@ -2,6 +2,8 @@ package com.example.findyoursherutleumi.fragments;
 
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,9 +20,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.findyoursherutleumi.FragmentToActivity;
+import com.example.findyoursherutleumi.MainActivity;
 import com.example.findyoursherutleumi.R;
 import com.example.findyoursherutleumi.database.APIClient;
 import com.example.findyoursherutleumi.database.APIInterface;
+import com.example.findyoursherutleumi.models.Coordinator;
 import com.example.findyoursherutleumi.models.User;
 
 import retrofit2.Call;
@@ -35,6 +40,19 @@ public class LoginFragment extends Fragment {
     TextView signUpClickable;
 
     APIInterface apiInterface;
+
+    private FragmentToActivity mCallback;
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        try {
+            mCallback = (FragmentToActivity) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement FragmentToActivity");
+        }
+    }
 
     public static LoginFragment newInstance() {
         return new LoginFragment();
@@ -66,6 +84,8 @@ public class LoginFragment extends Fragment {
                             if(!response.isSuccessful()) {
                                 Toast.makeText(getContext(), "Connection Failed. try again later...", Toast.LENGTH_SHORT).show();
                             }else {
+                                mCallback.communicate(response.body());
+
                                 inputEmail.getText().clear();
                                 inputPassword.getText().clear();
 
@@ -73,6 +93,7 @@ public class LoginFragment extends Fragment {
 
                                 Bundle bundle = new Bundle();
                                 assert response.body() != null;
+
                                 bundle.putInt("typeId", response.body().getUserTypeId());
                                 bundle.putString("email", response.body().getEmail());
                                 newFragment.setArguments(bundle);

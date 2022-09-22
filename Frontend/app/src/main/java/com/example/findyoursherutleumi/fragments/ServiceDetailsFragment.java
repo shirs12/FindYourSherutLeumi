@@ -76,7 +76,7 @@ public class ServiceDetailsFragment extends Fragment {
         Call<Service> call = apiInterface.getServiceById(serviceId);
         call.enqueue(new Callback<Service>() {
             @Override
-            public void onResponse(Call<Service> call, Response<Service> response) {
+            public void onResponse(@NonNull Call<Service> call, @NonNull Response<Service> response) {
                 if (!response.isSuccessful())
                     Toast.makeText(getContext(), "Response from server Failed. try again later...", Toast.LENGTH_SHORT).show();
                 else {

@@ -162,6 +162,7 @@ public class HomePageFragment extends Fragment {
         updateAdapter();
     }
 
+
     //    @Override
 //    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 //        super.onCreateOptionsMenu(menu,inflater);

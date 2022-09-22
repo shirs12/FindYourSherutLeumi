@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -18,25 +19,31 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.findyoursherutleumi.adapters.ServicesAdapter;
 import com.example.findyoursherutleumi.database.APIClient;
 import com.example.findyoursherutleumi.database.APIInterface;
 import com.example.findyoursherutleumi.fragments.AddNewServiceFragment;
 import com.example.findyoursherutleumi.fragments.LoginFragment;
+import com.example.findyoursherutleumi.fragments.SettingsFragment;
 import com.example.findyoursherutleumi.models.Applicant;
+import com.example.findyoursherutleumi.models.User;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements FragmentToActivity {
     private static final String TAG = "MainActivity";
 //    APIInterface apiInterface;
 //    private Button button1;
+
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.nav_menu, menu);
         MenuItem languagesItem = menu.findItem(R.id.languages_btn);
         MenuItem logoutItem = menu.findItem(R.id.logout_item);
+        MenuItem settingsItem = menu.findItem(R.id.settings_item);
 
         languagesItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
@@ -106,12 +114,36 @@ public class MainActivity extends AppCompatActivity {
                 for(int i = 0; i < count; ++i) {
                     fragmentManager.popBackStackImmediate();
                 }
-                return false;
+                return true;
+            }
+        });
+
+        settingsItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Fragment newFragment = new SettingsFragment();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+
+                // TODO: send user id to setting fragment to show user's details
+                Bundle bundle = new Bundle();
+                bundle.putString("email", user.getEmail());
+                newFragment.setArguments(bundle);
+
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.fragmentContainerView, newFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+                return true;
             }
         });
 
         return true;
     }
+
+
+
+
     private void showChangeLanguageDialog() {
         final String [] languagesLst = {"עברית", "English"};
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
@@ -151,5 +183,9 @@ public class MainActivity extends AppCompatActivity {
         setLocale(language);
     }
 
-
+    @Override
+    public void communicate(User user) {
+        System.out.println(user.getEmail());
+        this.user = user;
+    }
 }
