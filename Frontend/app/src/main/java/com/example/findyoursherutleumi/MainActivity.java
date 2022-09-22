@@ -102,18 +102,39 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
         logoutItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                Fragment newFragment = new LoginFragment();
-                assert getFragmentManager() != null;
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.fragmentContainerView, newFragment).disallowAddToBackStack();
-                transaction.commit();
 
-                // clears fragment's back stack to prevent user from going back after logging out.
-                int count = fragmentManager.getBackStackEntryCount();
-                for(int i = 0; i < count; ++i) {
-                    fragmentManager.popBackStackImmediate();
-                }
+                final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setMessage(R.string.logout_dialog);
+                builder.setCancelable(true);
+
+                builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Fragment newFragment = new LoginFragment();
+                        assert getFragmentManager() != null;
+                        FragmentManager fragmentManager = getSupportFragmentManager();
+                        FragmentTransaction transaction = fragmentManager.beginTransaction();
+                        transaction.replace(R.id.fragmentContainerView, newFragment).disallowAddToBackStack();
+                        transaction.commit();
+
+                        // clears fragment's back stack to prevent user from going back after logging out.
+                        int count = fragmentManager.getBackStackEntryCount();
+                        for(int index = 0; index < count; ++index) {
+                            fragmentManager.popBackStackImmediate();
+                        }
+                    }
+                });
+
+                builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+
                 return true;
             }
         });
@@ -121,10 +142,10 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
         settingsItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
+
                 Fragment newFragment = new SettingsFragment();
                 FragmentManager fragmentManager = getSupportFragmentManager();
 
-                // TODO: send user id to setting fragment to show user's details
                 Bundle bundle = new Bundle();
                 bundle.putString("email", user.getEmail());
                 bundle.putInt("typeId", user.getUserTypeId());
