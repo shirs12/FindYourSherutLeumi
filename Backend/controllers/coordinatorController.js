@@ -86,6 +86,7 @@ exports.updateCoordinatorById = async (req, res, next) => {
     organization_name,
   } = req.body;
   try {
+    const hash_password = await bcrypt.hash(u_password, 12);
     const coordinator = await pool.execute(
       "CALL update_coordinator(?,?,?,?,?,?,?)",
       [
@@ -94,7 +95,7 @@ exports.updateCoordinatorById = async (req, res, next) => {
         last_name,
         phone_number,
         email,
-        u_password,
+        hash_password,
         organization_name,
       ]
     );

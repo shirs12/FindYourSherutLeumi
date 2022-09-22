@@ -63,9 +63,10 @@ exports.updateApplicantById = async (req, res, next) => {
     u_password,
   } = req.body;
   try {
+    const hash_password = await bcrypt.hash(u_password, 12);
     const applicant = await pool.execute(
       "CALL update_applicant(?,?,?,?,?,?,?)",
-      [id, first_name, last_name, phone_number, city, email, u_password]
+      [id, first_name, last_name, phone_number, city, email, hash_password]
     );
     res.status(201).json(applicant[0]);
   } catch (err) {
