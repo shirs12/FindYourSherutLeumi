@@ -58,7 +58,7 @@
                         android:textSize="16sp" />
 
                     <EditText
-                        android:id="@+id/user_first_name_input"
+                        android:id="@+id/c_first_name_input"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -81,7 +81,7 @@
                         android:textSize="16sp" />
 
                     <EditText
-                        android:id="@+id/user_last_name_input"
+                        android:id="@+id/c_last_name_input"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -105,7 +105,7 @@
                         android:textSize="16sp" />
 
                     <EditText
-                        android:id="@+id/user_email_input"
+                        android:id="@+id/c_email_input"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -128,7 +128,7 @@
                         android:textSize="16sp" />
 
                     <EditText
-                        android:id="@+id/user_phone_input"
+                        android:id="@+id/c_phone_input"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -151,7 +151,7 @@
                         android:textSize="16sp" />
 
                     <EditText
-                        android:id="@+id/user_password_input"
+                        android:id="@+id/c_password_input"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -174,7 +174,7 @@
                         android:textSize="16sp" />
 
                     <EditText
-                        android:id="@+id/user_organization_input"
+                        android:id="@+id/c_organization_input"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -184,7 +184,7 @@
                 </LinearLayout>
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/update_edit_details_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -211,7 +211,10 @@
                     android:id="@+id/button2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
                     android:backgroundTint="@color/light_blue"
                     android:text="@string/update_btn" />
 

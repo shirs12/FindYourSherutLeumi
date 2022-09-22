@@ -15,6 +15,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -77,6 +78,16 @@ public interface APIInterface {
                                            @Field("coordinator_name") String coordinatorName,
                                            @Field("coordinator_id") int coordinatorId);
 
+
+    @PUT("coordinators/{id}")
+    @FormUrlEncoded
+    Call<Coordinator> updateCoordinatorById(@Field("coordinator_id") int id,
+                                            @Field("first_name") String first_name,
+                                            @Field("last_name") String last_name,
+                                            @Field("phone_number") String phone_number,
+                                            @Field("email") String email,
+                                            @Field("u_password") String u_password,
+                                            @Field("organization_name") String organization_name);
 
 
 }
