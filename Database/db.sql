@@ -131,6 +131,15 @@ END$$
 DELIMITER ;
 CALL `get_service_by_id`(1); -- test
 
+-- procedure that calls services by coordinator id from db
+DELIMITER $$
+CREATE PROCEDURE `get_service_by_coordinator_id`(IN id INT)
+BEGIN
+	SELECT * FROM service WHERE coordinator_id = id;
+END$$
+DELIMITER ;
+CALL `get_service_by_coordinator_id`(5); -- test
+
 -- procedure that adds new service into the db
 DELIMITER $$
 CREATE PROCEDURE `add_new_service`(IN p_service_name NVARCHAR(40), IN p_organization_name NVARCHAR(40),
@@ -375,4 +384,6 @@ BEGIN
 	WHERE email = p_email;
 END$$
 DELIMITER ;
+
+
 
