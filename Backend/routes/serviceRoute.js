@@ -5,6 +5,8 @@ const router = express.Router();
 // GET
 router.route("/").get(serviceController.getAllServices);
 
+router.route("/coordinator/:id").get(serviceController.getServicesByCoordinatorId);
+
 // POST
 router.post("/add", serviceController.createNewService);
 

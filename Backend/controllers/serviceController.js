@@ -35,6 +35,18 @@ exports.getServiceById = async (req, res, next) => {
   }
 };
 
+// gets specific service from db
+exports.getServicesByCoordinatorId = async (req, res, next) => {
+  const id = req.params.id;
+  try {
+    const [service, _] = await pool.execute("CALL get_service_by_coordinator_id(?)", [id]);
+    res.status(200).json(service[0]);
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
+};
+
 // POST - post new service to the db
 exports.createNewService = async (req, res, next) => {
   const {
