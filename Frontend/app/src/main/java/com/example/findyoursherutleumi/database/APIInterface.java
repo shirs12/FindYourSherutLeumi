@@ -33,6 +33,9 @@ public interface APIInterface {
     @GET("services")
     Call<List<ServicePartial>> getAllServicesPartially();
 
+    @GET("services/coordinator/{id}")
+    Call<List<Service>> getServicesByCoordinatorId(@Path("id") int id);
+
     @GET("coordinators/{id}")
     Call<Coordinator> getCoordinatorById(@Path("id") int id);
 

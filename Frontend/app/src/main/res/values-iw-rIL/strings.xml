@@ -59,6 +59,9 @@
     <string name="edit_services_list">ערוך/י רשימת תקנים</string>
     <string name="logout_dialog">את/ה בטוח/ה שתרצי/ה להתנתק?</string>
     <string name="delete">מחיקה</string>
+    <string name="delete_service_dialog">את/ה בטוח/ה שתרצי/ה למחוק תקן זה?</string>
+    <string name="item_deleted_toast">תקן נמחק בהצלחה</string>
+    <string name="connection_failed_toast">החיבור נכשל, נסה/י שוב מאוחר יותר…</string>
 
     <string-array name="user_types_array">
         <item>מתנדב/ת</item>
