@@ -111,7 +111,7 @@ exports.deleteCoordinatorById = async (req, res, next) => {
   const id = req.params.id;
   try {
     const deleted = await pool.execute("CALL delete_coordinator(?)", [id]);
-    res.status(200).json(deleted[0]);
+    res.sendStatus(200);
   } catch (err) {
     console.log(err);
     next(err);
