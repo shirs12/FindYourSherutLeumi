@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.findyoursherutleumi.MainActivity;
 import com.example.findyoursherutleumi.R;
+import com.example.findyoursherutleumi.database.APIClient;
 import com.example.findyoursherutleumi.database.APIInterface;
 import com.example.findyoursherutleumi.models.Service;
 import com.example.findyoursherutleumi.models.ServicePartial;
@@ -22,6 +23,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,11 +31,11 @@ import retrofit2.Response;
 public class EditServicesAdapter extends RecyclerView.Adapter<EditServicesAdapter.ViewHolder> {
 
     private final LayoutInflater inflater;
+    int id;
+    APIInterface apiInterface;
     private List<Service> servicesLst;
 
-    APIInterface apiInterface;
-
-    public EditServicesAdapter(LayoutInflater inflater, List<Service> servicesLst){
+    public EditServicesAdapter(LayoutInflater inflater, List<Service> servicesLst) {
         this.inflater = inflater;
         this.servicesLst = servicesLst;
     }
@@ -41,7 +43,8 @@ public class EditServicesAdapter extends RecyclerView.Adapter<EditServicesAdapte
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_service_coordinator,parent,false);
+        View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_service_coordinator, parent, false);
+        apiInterface = APIClient.getInstance().create(APIInterface.class);
         return new ViewHolder(rootView);
     }
 
@@ -50,7 +53,8 @@ public class EditServicesAdapter extends RecyclerView.Adapter<EditServicesAdapte
         holder.serviceNameTxt.setText(servicesLst.get(position).getServiceName());
         holder.cityTxt.setText(servicesLst.get(position).getCity());
 
-        int id = servicesLst.get(position).getServiceId();
+        id = servicesLst.get(position).getServiceId();
+        System.out.println("editttttttttttttttt2:       " + id);
         holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,29 +63,27 @@ public class EditServicesAdapter extends RecyclerView.Adapter<EditServicesAdapte
                     builder.setMessage(R.string.delete_service_dialog);
                     builder.setCancelable(true);
                     builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                        @SuppressLint("NotifyDataSetChanged")
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            deleteItem(id);
-                            System.out.println("iddddddddddd:          " + id);
-//                            Call<Service> call = apiInterface.deleteServiceById(id);
-//                            call.enqueue(new Callback<Service>() {
-//                                @SuppressLint("NotifyDataSetChanged")
-//                                @Override
-//                                public void onResponse(@NonNull Call<Service> call, @NonNull Response<Service> response) {
-//                                    if(!response.isSuccessful())
-//                                        Toast.makeText(inflater.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
-//                                    else{
-//                                        Toast.makeText(inflater.getContext(), R.string.item_deleted_toast, Toast.LENGTH_SHORT).show();
-//                                        notifyDataSetChanged();
-//                                    }
-//                                }
-//
-//                                @Override
-//                                public void onFailure(Call<Service> call, Throwable t) {
-//                                    Toast.makeText(inflater.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
-//                                }
-//                            });
+                            Call<ResponseBody> call = apiInterface.deleteServiceById(id);
+                            call.enqueue(new Callback<ResponseBody>() {
+                                @SuppressLint("NotifyDataSetChanged")
+                                @Override
+                                public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
+                                    if (!response.isSuccessful()) {
+                                        Toast.makeText(inflater.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        updateServicesList(servicesLst);
+                                        Toast.makeText(inflater.getContext(), R.string.item_deleted_toast, Toast.LENGTH_SHORT).show();
+                                        notifyItemRemoved(holder.getAdapterPosition());
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+                                    Toast.makeText(inflater.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
+                                }
+                            });
                         }
                     });
                     builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
@@ -97,28 +99,7 @@ public class EditServicesAdapter extends RecyclerView.Adapter<EditServicesAdapte
         });
     }
 
-    public void deleteItem(int id){
-        Call<Service> call = apiInterface.deleteServiceById(id);
-        call.enqueue(new Callback<Service>() {
-            @SuppressLint("NotifyDataSetChanged")
-            @Override
-            public void onResponse(@NonNull Call<Service> call, @NonNull Response<Service> response) {
-                if(!response.isSuccessful())
-                    Toast.makeText(inflater.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
-                else{
-                    servicesLst.remove(id);
-                    updateServicesList(servicesLst);
-                    Toast.makeText(inflater.getContext(), R.string.item_deleted_toast, Toast.LENGTH_SHORT).show();
-                    notifyDataSetChanged();
-                }
-            }
 
-            @Override
-            public void onFailure(Call<Service> call, Throwable t) {
-                Toast.makeText(inflater.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 
     @Override
     public int getItemCount() {
@@ -131,7 +112,7 @@ public class EditServicesAdapter extends RecyclerView.Adapter<EditServicesAdapte
         notifyDataSetChanged();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         FloatingActionButton deleteBtn;
         TextView serviceNameTxt;
