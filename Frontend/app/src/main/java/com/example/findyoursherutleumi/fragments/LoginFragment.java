@@ -72,7 +72,6 @@ public class LoginFragment extends Fragment {
         signInBtn = view.findViewById(R.id.sign_in_btn);
         signUpClickable = view.findViewById(R.id.sign_up_clickable);
 
-
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,7 +79,7 @@ public class LoginFragment extends Fragment {
                     Call<User> call = apiInterface.authenticateUser(inputEmail.getText().toString(), inputPassword.getText().toString());
                     call.enqueue(new Callback<User>() {
                         @Override
-                        public void onResponse(Call<User> call, Response<User> response) {
+                        public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
                             if(!response.isSuccessful()) {
                                 Toast.makeText(getContext(), "Connection Failed. try again later...", Toast.LENGTH_SHORT).show();
                             }else {
@@ -137,6 +136,5 @@ public class LoginFragment extends Fragment {
         if(item!=null)
             item.setVisible(false);
     }
-
 
 }

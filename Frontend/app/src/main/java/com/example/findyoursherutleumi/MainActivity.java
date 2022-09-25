@@ -39,10 +39,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements FragmentToActivity {
-    private static final String TAG = "MainActivity";
-//    APIInterface apiInterface;
-//    private Button button1;
 
+    private static final String TAG = "MainActivity";
     private User user;
 
     @Override
@@ -54,33 +52,6 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.setTitle(getResources().getString(R.string.app_name));
-
-
-
-//        button1 = findViewById(R.id.button1);
-//        apiInterface = APIClient.getInstance().create(APIInterface.class);
-//
-//        button1.setOnClickListener(view -> {
-//            Call<List<Applicant>> call = apiInterface.getAllApplicants();
-//            call.enqueue(new Callback<List<Applicant>>() {
-//                @Override
-//                public void onResponse(@NonNull Call<List<Applicant>> call, @NonNull Response<List<Applicant>> response) {
-//                    if(!response.isSuccessful()) Log.e(TAG, "onResponse: code : " + response.code());
-//                    if(response.isSuccessful()) {
-//                        Log.e(TAG, "onResponse: code : " + response.code());
-//                        assert response.body() != null;
-//                        Log.e(TAG, "onResponse: " + response.body().get(1));
-//                    }
-//                }
-//
-//                @Override
-//                public void onFailure(Call<List<Applicant>> call, Throwable t) {
-//                    Log.e(TAG, "onFailure: " + t.getMessage());
-//                }
-//            });
-//        });
-
-
 
     }
 
@@ -142,7 +113,6 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
         settingsItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-
                 Fragment newFragment = new SettingsFragment();
                 FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -163,8 +133,6 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
 
         return true;
     }
-
-
 
 
     private void showChangeLanguageDialog() {
@@ -208,7 +176,8 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
 
     @Override
     public void communicate(User user) {
-        System.out.println(user.getEmail());
         this.user = user;
     }
+
+
 }

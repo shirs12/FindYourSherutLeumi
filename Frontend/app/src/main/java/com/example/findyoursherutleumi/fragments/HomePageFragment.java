@@ -39,6 +39,8 @@ import java.util.Objects;
 
 public class HomePageFragment extends Fragment {
 
+    private static final String TAG = "HomePageFragment";
+
     private int userTypeId;
     private String userEmail;
 

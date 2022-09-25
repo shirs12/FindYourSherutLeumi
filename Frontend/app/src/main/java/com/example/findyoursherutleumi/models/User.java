@@ -36,6 +36,10 @@ public class User {
         return userTypeId;
     }
 
+    public void setUserTypeId(Integer userTypeId) {
+        this.userTypeId = userTypeId;
+    }
+
 
     @Override
     public String toString() {
