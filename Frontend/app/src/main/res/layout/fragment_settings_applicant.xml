@@ -190,6 +190,18 @@
                     android:backgroundTint="@color/light_blue"
                     android:text="@string/update_btn" />
 
+                <Button
+                    android:id="@+id/a_delete_user_edit_details_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="30dp"
+                    android:backgroundTint="@color/red"
+                    android:text="@string/delete_user_btn" />
+
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

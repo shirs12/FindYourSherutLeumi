@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
         logoutItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-
                 final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setMessage(R.string.logout_dialog);
                 builder.setCancelable(true);

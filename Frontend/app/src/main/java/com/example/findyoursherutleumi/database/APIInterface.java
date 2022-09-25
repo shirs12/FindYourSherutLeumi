@@ -111,5 +111,11 @@ public interface APIInterface {
     @DELETE("services/{id}")
     Call<ResponseBody> deleteServiceById(@Path("id") int service_id);
 
+    @DELETE("applicants/{id}")
+    Call<ResponseBody> deleteApplicantById(@Path("id") int applicant_id);
+
+    @DELETE("coordinators/{id}")
+    Call<ResponseBody> deleteCoordinatorById(@Path("id") int coordinator_id);
+
 
 }

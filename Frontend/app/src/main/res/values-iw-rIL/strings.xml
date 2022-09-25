@@ -62,6 +62,10 @@
     <string name="delete_service_dialog">את/ה בטוח/ה שתרצי/ה למחוק תקן זה?</string>
     <string name="item_deleted_toast">תקן נמחק בהצלחה</string>
     <string name="connection_failed_toast">החיבור נכשל, נסה/י שוב מאוחר יותר…</string>
+    <string name="details_updated_toast">הפרטים עודכנו בהצלחה!</string>
+    <string name="delete_user_btn">מחק/י משתמש</string>
+    <string name="delete_user_dialog">את/ה בטוח/ה שתרצי/ה למחוק את החשבון?</string>
+    <string name="user_deleted_toast">חשבון נמחק בהצלחה</string>
 
     <string-array name="user_types_array">
         <item>מתנדב/ת</item>

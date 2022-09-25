@@ -50,6 +50,7 @@ public class SettingsFragment extends Fragment {
     EditText organizationInput;
 
     Button updateDetailsBtn;
+    Button deleteCoordinatorBtn;
 
     APIInterface apiInterface;
 
