@@ -26,6 +26,7 @@ import com.example.findyoursherutleumi.database.APIClient;
 import com.example.findyoursherutleumi.database.APIInterface;
 import com.example.findyoursherutleumi.fragments.AddNewServiceFragment;
 import com.example.findyoursherutleumi.fragments.LoginFragment;
+import com.example.findyoursherutleumi.fragments.SettingsApplicantFragment;
 import com.example.findyoursherutleumi.fragments.SettingsFragment;
 import com.example.findyoursherutleumi.models.Applicant;
 import com.example.findyoursherutleumi.models.User;
@@ -113,7 +114,13 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
         settingsItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                Fragment newFragment = new SettingsFragment();
+                Fragment newFragment;
+                if (user.getUserTypeId() == 2){
+                    newFragment = new SettingsFragment();
+                }
+                else {
+                    newFragment = new SettingsApplicantFragment();
+                }
                 FragmentManager fragmentManager = getSupportFragmentManager();
 
                 Bundle bundle = new Bundle();

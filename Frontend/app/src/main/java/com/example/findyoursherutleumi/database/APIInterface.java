@@ -43,6 +43,9 @@ public interface APIInterface {
     @GET("coordinators/email/{email}")
     Call<Coordinator> getCoordinatorByEmail(@Path("email") String email);
 
+    @GET("applicants/email/{email}")
+    Call<Applicant> getApplicantByEmail(@Path("email") String email);
+
 
     @POST("login")
     @FormUrlEncoded
@@ -93,6 +96,16 @@ public interface APIInterface {
                                             @Field("email") String email,
                                             @Field("u_password") String u_password,
                                             @Field("organization_name") String organization_name);
+
+    @PUT("applicants/{id}")
+    @FormUrlEncoded
+    Call<Applicant> updateApplicantById(@Path("id") int applicant_id,
+                                            @Field("first_name") String first_name,
+                                            @Field("last_name") String last_name,
+                                            @Field("phone_number") String phone_number,
+                                            @Field("city") String city,
+                                            @Field("email") String email,
+                                            @Field("u_password") String u_password);
 
 
     @DELETE("services/{id}")

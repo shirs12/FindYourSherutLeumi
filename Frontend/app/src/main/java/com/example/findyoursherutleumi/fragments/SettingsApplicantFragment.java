@@ -1,0 +1,131 @@
+package com.example.findyoursherutleumi.fragments;
+
+import androidx.lifecycle.ViewModelProvider;
+
+import android.annotation.SuppressLint;
+import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.example.findyoursherutleumi.R;
+import com.example.findyoursherutleumi.database.APIClient;
+import com.example.findyoursherutleumi.database.APIInterface;
+import com.example.findyoursherutleumi.models.Applicant;
+import com.example.findyoursherutleumi.models.Coordinator;
+import com.example.findyoursherutleumi.models.Service;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class SettingsApplicantFragment extends Fragment {
+
+    private int applicantId;
+
+    EditText firstNameInput;
+    EditText lastNameInput;
+    EditText phoneInput;
+    EditText emailInput;
+    EditText cityInput;
+    EditText passwordInput;
+
+    Button updateDetailsBtn;
+
+    APIInterface apiInterface;
+
+    public static SettingsApplicantFragment newInstance() {
+        return new SettingsApplicantFragment();
+    }
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_settings_applicant, container, false);
+        apiInterface = APIClient.getInstance().create(APIInterface.class);
+
+        firstNameInput = view.findViewById(R.id.a_first_name_input);
+        lastNameInput = view.findViewById(R.id.a_last_name_input);
+        phoneInput = view.findViewById(R.id.a_phone_input);
+        emailInput = view.findViewById(R.id.a_email_input);
+        cityInput = view.findViewById(R.id.a_city_input);
+        passwordInput = view.findViewById(R.id.a_password_input);
+
+        fetchData();
+
+        updateDetailsBtn = view.findViewById(R.id.update_applicant_edit_details_btn);
+        updateDetailsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Call<Applicant> call = apiInterface.updateApplicantById(applicantId,
+                        firstNameInput.getText().toString(),
+                        lastNameInput.getText().toString(),
+                        phoneInput.getText().toString(),
+                        cityInput.getText().toString(),
+                        emailInput.getText().toString(),
+                        passwordInput.getText().toString());
+                call.enqueue(new Callback<Applicant>() {
+                    @Override
+                    public void onResponse(Call<Applicant> call, Response<Applicant> response) {
+                        if(!response.isSuccessful()) {
+                            Toast.makeText(inflater.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
+                            System.out.println("code1:        " + response.code());
+                        }else {
+                            assert response.body() != null;
+                            Toast.makeText(getContext(), "Your details updated successfully", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Applicant> call, Throwable t) {
+                        Toast.makeText(inflater.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
+
+        return view;
+    }
+
+    public void fetchData(){
+        assert getArguments() != null;
+        Call<Applicant> call1 = apiInterface.getApplicantByEmail(getArguments().getString("email"));
+        call1.enqueue(new Callback<Applicant>() {
+            @Override
+            public void onResponse(Call<Applicant> call, Response<Applicant> response) {
+                if(!response.isSuccessful()) {
+                    Toast.makeText(getContext(), "Connection Failed. try again later...", Toast.LENGTH_SHORT).show();
+                    System.out.println("code1:        " + response.code());
+                } else{
+                    assert response.body() != null;
+                    applicantId = response.body().getApplicantId();
+                    firstNameInput.setText(response.body().getFirstName());
+                    lastNameInput.setText(response.body().getLastName());
+                    phoneInput.setText(response.body().getPhoneNumber());
+                    cityInput.setText(response.body().getCity());
+                    emailInput.setText(response.body().getEmail());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Applicant> call, Throwable t) {
+                Toast.makeText(getContext(), "Connection Failed. try again later...", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
+
+
+}

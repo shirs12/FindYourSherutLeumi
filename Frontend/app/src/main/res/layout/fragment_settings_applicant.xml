@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/corrdinator_settings_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.SettingsFragment">
+    tools:context=".fragments.SettingsApplicantFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,7 +34,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/user_edit_details_settings_title"
+                    android:id="@+id/applicant_edit_details_settings_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
@@ -51,7 +49,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/user_first_name_title"
+                        android:id="@+id/a_first_name_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
@@ -59,7 +57,7 @@
                         android:textSize="16sp" />
 
                     <EditText
-                        android:id="@+id/c_first_name_input"
+                        android:id="@+id/a_first_name_input"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -74,7 +72,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/user_last_name_title"
+                        android:id="@+id/a_last_name_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
@@ -82,7 +80,7 @@
                         android:textSize="16sp" />
 
                     <EditText
-                        android:id="@+id/c_last_name_input"
+                        android:id="@+id/a_last_name_input"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -91,6 +89,28 @@
                         android:minHeight="48dp" />
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/a_phone_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:text="@string/phone_number"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/a_phone_input"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/phone_number_hint"
+                        android:inputType="text"
+                        android:minHeight="48dp" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -98,7 +118,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/user_email_title"
+                        android:id="@+id/a_email_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
@@ -106,7 +126,7 @@
                         android:textSize="16sp" />
 
                     <EditText
-                        android:id="@+id/c_email_input"
+                        android:id="@+id/a_email_input"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -121,29 +141,23 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/user_phone_title"
+                        android:id="@+id/a_city_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
-                        android:text="@string/phone_number"
+                        android:text="@string/city"
                         android:textSize="16sp" />
 
                     <EditText
-                        android:id="@+id/c_phone_input"
+                        android:id="@+id/a_city_input"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
-                        android:hint="@string/phone_number_hint"
+                        android:hint="@string/city_hint"
                         android:inputType="text"
                         android:minHeight="48dp" />
-
-                    <ProgressBar
-                        android:id="@+id/progressBar"
-                        style="?android:attr/progressBarStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
                 </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -151,7 +165,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/user_password_title"
+                        android:id="@+id/a_password_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
@@ -159,7 +173,7 @@
                         android:textSize="16sp" />
 
                     <EditText
-                        android:id="@+id/c_password_input"
+                        android:id="@+id/a_password_input"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -168,53 +182,13 @@
                         android:minHeight="48dp" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/user_organization_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:text="@string/organization"
-                        android:textSize="16sp" />
-
-                    <EditText
-                        android:id="@+id/c_organization_input"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ems="10"
-                        android:hint="@string/organization_hint"
-                        android:inputType="text"
-                        android:minHeight="48dp" />
-                </LinearLayout>
-
                 <Button
-                    android:id="@+id/update_edit_details_btn"
+                    android:id="@+id/update_applicant_edit_details_btn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:backgroundTint="@color/light_blue"
                     android:text="@string/update_btn" />
-
-                <TextView
-                    android:id="@+id/user_edit_services_list_settings_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="@string/edit_services_list"
-                    android:textColor="@color/light_blue"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/coordinator_services_list_edit"
-                    android:layout_width="match_parent"
-                    android:layout_height="250dp">
-
-                </androidx.recyclerview.widget.RecyclerView>
 
             </LinearLayout>
         </ScrollView>

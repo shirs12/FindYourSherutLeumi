@@ -36,7 +36,6 @@ import retrofit2.Response;
 
 public class SettingsFragment extends Fragment {
 
-    private SettingsViewModel mViewModel;
     EditServicesAdapter editServicesAdapter;
     List<Service> cServicesLst = new ArrayList<>();
     RecyclerView recyclerView;
@@ -80,50 +79,6 @@ public class SettingsFragment extends Fragment {
         organizationInput = view.findViewById(R.id.c_organization_input);
 
         fetchData();
-
-//        assert getArguments() != null;
-//        Call<Coordinator> call = apiInterface.getCoordinatorByEmail(getArguments().getString("email"));
-//        call.enqueue(new Callback<Coordinator>() {
-//            @Override
-//            public void onResponse(@NonNull Call<Coordinator> call, @NonNull Response<Coordinator> response) {
-//                if(!response.isSuccessful()) {
-//                    Toast.makeText(getContext(), "Connection Failed. try again later...", Toast.LENGTH_SHORT).show();
-//                    System.out.println("code1:        " + response.code());
-//                }else {
-//                    assert response.body() != null;
-//                    coordinatorId = response.body().getCoordinatorId();
-//                    firstNameInput.setText(response.body().getFirstName());
-//                    lastNameInput.setText(response.body().getLastName());
-//                    emailInput.setText(response.body().getEmail());
-//                    phoneInput.setText(response.body().getPhoneNumber());
-//                    organizationInput.setText(response.body().getOrganizationName());
-//
-//                    Call<List<Service>> call1 = apiInterface.getServicesByCoordinatorId(coordinatorId);
-//                    call1.enqueue(new Callback<List<Service>>() {
-//                        @SuppressLint("NotifyDataSetChanged")
-//                        @Override
-//                        public void onResponse(@NonNull Call<List<Service>> call, @NonNull Response<List<Service>> response) {
-//                            if(!response.isSuccessful())
-//                                Toast.makeText(inflater.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
-//                            else{
-//                                assert response.body() != null;
-//                                cServicesLst.addAll(response.body());
-//                                System.out.println("settingssssssssssssssss:     " + cServicesLst.get(0));
-//                                editServicesAdapter.notifyDataSetChanged();
-//                            }
-//                        }
-//                        @Override
-//                        public void onFailure(@NonNull Call<List<Service>> call, @NonNull Throwable t) {
-//                            Toast.makeText(inflater.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//                }
-//            }
-//            @Override
-//            public void onFailure(Call<Coordinator> call, Throwable t) {
-//                Toast.makeText(inflater.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
-//            }
-//        });
 
         updateDetailsBtn = view.findViewById(R.id.update_edit_details_btn);
         updateDetailsBtn.setOnClickListener(new View.OnClickListener() {
