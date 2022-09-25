@@ -28,6 +28,21 @@ exports.getApplicantById = async (req, res, next) => {
   }
 };
 
+// gets specific applicant from db by email
+exports.getApplicantByEmail = async (req, res, next) => {
+  const email = req.params.email;
+  try {
+    const [result, _] = await pool.execute("CALL get_applicant_by_email(?)", [
+      email,
+    ]);
+    const applicant = result[0][0];
+    res.status(200).json(applicant);
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
+};
+
 // POST - post new applicant to the db
 exports.createNewApplicant = async (req, res, next) => {
   const {

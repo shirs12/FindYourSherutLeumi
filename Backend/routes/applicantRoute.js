@@ -4,6 +4,8 @@ const router = express.Router();
 
 // GET
 router.route("/").get(applicantController.getAllApplicants);
+router.route("/email/:email").get(applicantController.getApplicantByEmail); // GET by email
+
 router
   .route("/:id")
   .get(applicantController.getApplicantById) // GET by id
