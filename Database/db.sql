@@ -186,6 +186,14 @@ BEGIN
 END$$
 DELIMITER ;
 
+-- procedure that deletes services by coordinator id from db
+DELIMITER $$
+CREATE PROCEDURE `delete_services_by_coordinator_id`(IN id INT)
+BEGIN
+	DELETE FROM service WHERE coordinator_id = id;
+END$$
+DELIMITER ;
+
 -- USER_LEVEL
 -- procedure that calls all the levels from db
 DELIMITER $$
