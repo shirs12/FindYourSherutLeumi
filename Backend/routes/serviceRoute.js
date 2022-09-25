@@ -10,6 +10,9 @@ router.route("/coordinator/:id").get(serviceController.getServicesByCoordinatorI
 // POST
 router.post("/add", serviceController.createNewService);
 
+// DELETE
+router.route("/coordinator/delete/:id").delete(serviceController.deleteServicesByCoordinatorId);
+
 router
   .route("/:id")
   .get(serviceController.getServiceById) // GET by id

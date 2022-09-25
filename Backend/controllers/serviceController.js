@@ -144,3 +144,15 @@ exports.deleteServiceById = async (req, res, next) => {
     next(err);
   }
 };
+
+// delete all services from db by coordinator id
+exports.deleteServicesByCoordinatorId = async (req, res, next) => {
+  const id = req.params.id;
+  try {
+    const deleted = await pool.execute("CALL delete_services_by_coordinator_id(?)", [id]);
+    res.sendStatus(200);
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
+};
