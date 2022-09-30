@@ -6,19 +6,16 @@ import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.findyoursherutleumi.MainActivity;
 import com.example.findyoursherutleumi.R;
 import com.example.findyoursherutleumi.database.APIClient;
 import com.example.findyoursherutleumi.database.APIInterface;
 import com.example.findyoursherutleumi.models.Service;
-import com.example.findyoursherutleumi.models.ServicePartial;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -54,7 +51,6 @@ public class EditServicesAdapter extends RecyclerView.Adapter<EditServicesAdapte
         holder.cityTxt.setText(servicesLst.get(position).getCity());
 
         id = servicesLst.get(position).getServiceId();
-        System.out.println("editttttttttttttttt2:       " + id);
         holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,6 +72,7 @@ public class EditServicesAdapter extends RecyclerView.Adapter<EditServicesAdapte
                                         servicesLst.remove(holder.getAdapterPosition());
                                         notifyItemRemoved(holder.getAdapterPosition());
                                         notifyItemRangeChanged(holder.getAdapterPosition(),servicesLst.size());
+                                        notifyDataSetChanged();
                                         Toast.makeText(inflater.getContext(), R.string.item_deleted_toast, Toast.LENGTH_SHORT).show();
                                     }
                                 }

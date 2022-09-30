@@ -1,43 +1,26 @@
 package com.example.findyoursherutleumi;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
-import com.example.findyoursherutleumi.adapters.ServicesAdapter;
-import com.example.findyoursherutleumi.database.APIClient;
-import com.example.findyoursherutleumi.database.APIInterface;
-import com.example.findyoursherutleumi.fragments.AddNewServiceFragment;
 import com.example.findyoursherutleumi.fragments.LoginFragment;
 import com.example.findyoursherutleumi.fragments.SettingsApplicantFragment;
 import com.example.findyoursherutleumi.fragments.SettingsFragment;
-import com.example.findyoursherutleumi.models.Applicant;
 import com.example.findyoursherutleumi.models.User;
 
-import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements FragmentToActivity {
 

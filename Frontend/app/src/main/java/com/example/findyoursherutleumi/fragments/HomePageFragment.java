@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
@@ -165,27 +166,4 @@ public class HomePageFragment extends Fragment {
     }
 
 
-    //    @Override
-//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-//        super.onCreateOptionsMenu(menu,inflater);
-//        inflater.inflate(R.menu.nav_menu, menu);
-//        MenuItem searchItem = menu.findItem(R.id.action_search);
-//        SearchView searchView = (SearchView) searchItem.getActionView();
-//
-//        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
-//
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String s) {
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String s) {
-//                servicesAdapter.getFilter().filter(s);
-//                return false;
-//            }
-//        });
-//
-//    }
 }

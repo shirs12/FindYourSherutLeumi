@@ -1,6 +1,7 @@
 package com.example.findyoursherutleumi.fragments;
 
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
@@ -144,7 +145,6 @@ public class AddNewServiceFragment extends Fragment {
                                     public void onResponse(@NonNull Call<Service> call, @NonNull Response<Service> response) {
                                         if(!response.isSuccessful()) {
                                             Toast.makeText(getContext(), "Connection Failed. try again later...", Toast.LENGTH_SHORT).show();
-                                            System.out.println("code2:        " + response.code());
                                         } else {
                                             serviceNameInput.getText().clear();
                                             organizationInput.getText().clear();
@@ -155,17 +155,19 @@ public class AddNewServiceFragment extends Fragment {
                                             descriptionInput.getText().clear();
 
                                             System.out.println(response.code());
-                                            Toast.makeText(getContext(), "New service added successfully", Toast.LENGTH_SHORT).show();
 
                                             // TODO: optional - trans to homepage fragment
+                                            assert getFragmentManager() != null;
+                                            FragmentManager fragmentManager = getFragmentManager();
+                                            fragmentManager.popBackStack();
+                                            Toast.makeText(getContext(), "New service added successfully", Toast.LENGTH_SHORT).show();
                                         }
 
                                     }
 
                                     @Override
-                                    public void onFailure(Call<Service> call, Throwable t) {
+                                    public void onFailure(@NonNull Call<Service> call, @NonNull Throwable t) {
                                         Toast.makeText(getContext(), "Connection Failed. try again later...", Toast.LENGTH_SHORT).show();
-                                        System.out.println("failllllllll1");
                                     }
                                 });
                             }
@@ -174,7 +176,6 @@ public class AddNewServiceFragment extends Fragment {
                         @Override
                         public void onFailure(Call<Coordinator> call, Throwable t) {
                             Toast.makeText(getContext(), "Connection Failed. try again later...", Toast.LENGTH_SHORT).show();
-                            System.out.println("failllllllll2");
                         }
                     });
                 }

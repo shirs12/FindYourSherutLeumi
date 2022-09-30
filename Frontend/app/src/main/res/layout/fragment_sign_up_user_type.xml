@@ -63,6 +63,5 @@
             android:text="@string/next_btn" />
 
 
-
     </LinearLayout>
 </FrameLayout>

@@ -21,17 +21,18 @@ import com.example.findyoursherutleumi.models.ServicePartial;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHolder>{
 
     private final LayoutInflater inflater;
     private List<ServicePartial> servicesLst;
-    private List<ServicePartial> fullLst = new ArrayList<>();
+    private List<ServicePartial> filteredList;
 
     public ServicesAdapter(LayoutInflater inflater, List<ServicePartial> servicesLst){
         this.inflater = inflater;
         this.servicesLst = servicesLst;
-        this.fullLst.addAll(servicesLst);
+        this.filteredList = new ArrayList<>(servicesLst);
     }
 
     @NonNull
@@ -43,16 +44,17 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.title.setText(servicesLst.get(position).getServiceName());
+//        holder.title.setText(servicesLst.get(position).getServiceName());
+        holder.title.setText(filteredList.get(position).getServiceName());
         holder.detailsBtn.setText(R.string.show_details);
 
-        holder.organizationTxt.setText(servicesLst.get(position).getOrganizationName());
-        holder.categoryTxt.setText(servicesLst.get(position).getCategory());
-        holder.countryTxt.setText(servicesLst.get(position).getCountry());
-        holder.cityTxt.setText(servicesLst.get(position).getCity());
-        holder.descriptionTxt.setText(servicesLst.get(position).getDescriptionService());
+        holder.organizationTxt.setText(filteredList.get(position).getOrganizationName());
+        holder.categoryTxt.setText(filteredList.get(position).getCategory());
+        holder.countryTxt.setText(filteredList.get(position).getCountry());
+        holder.cityTxt.setText(filteredList.get(position).getCity());
+        holder.descriptionTxt.setText(filteredList.get(position).getDescriptionService());
 
-        int id = servicesLst.get(position).getServiceId();
+        int id = filteredList.get(position).getServiceId();
         holder.detailsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,12 +78,12 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return servicesLst.size();
+        return filteredList.size();
     }
 
     @SuppressLint("NotifyDataSetChanged")
     public void updateServicesList(final List<ServicePartial> mServicesLst) {
-        this.servicesLst = mServicesLst;
+        this.filteredList = mServicesLst;
         notifyDataSetChanged();
     }
 
@@ -111,103 +113,19 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
 
     @SuppressLint("NotifyDataSetChanged")
     public void filter(CharSequence charSequence) {
-        List<ServicePartial> filteredLst = new ArrayList<>();
+        List<ServicePartial> temp = new ArrayList<>();
         if (TextUtils.isEmpty(charSequence))
-            filteredLst.addAll(servicesLst);
-        else{
-            for (ServicePartial data : servicesLst) {
-                if (data.getServiceName().toLowerCase().contains(charSequence)
-                    || data.getCategory().toLowerCase().contains(charSequence)
-                    || data.getCity().toLowerCase().contains(charSequence))
-                    filteredLst.add(data);
-            }
-            if (filteredLst.isEmpty()) {
-                Toast.makeText(inflater.getContext(), R.string.no_result, Toast.LENGTH_SHORT).show();
-                updateServicesList(servicesLst);
-                System.out.println("size servicesLst0:   " + servicesLst.size());
-                notifyDataSetChanged();
-            }
-            else updateServicesList(filteredLst);
-        }
+            this.filteredList = new ArrayList<>(servicesLst);
+        this.filteredList = (ArrayList<ServicePartial>) this.filteredList.stream()
+                .filter(data ->
+                        data.getServiceName().toLowerCase().contains(charSequence) ||
+                                data.getCategory().toLowerCase().contains(charSequence) ||
+                                data.getCity().toLowerCase().contains(charSequence))
+                .collect(Collectors.toList());
+//        Toast.makeText(inflater.getContext(), R.string.no_result, Toast.LENGTH_SHORT).show();
+        updateServicesList(filteredList);
         notifyDataSetChanged();
     }
-
-
-
-//    @SuppressLint("NotifyDataSetChanged")
-//    public void filter(CharSequence charSequence) {
-//        List<ServicePartial> filteredLst = new ArrayList<>();
-//        if (!TextUtils.isEmpty(charSequence)) {
-//            for (ServicePartial data : servicesLst) {
-//                if (data.getServiceName().toLowerCase().contains(charSequence)
-//                    || data.getCategory().toLowerCase().contains(charSequence)
-//                    || data.getCity().toLowerCase().contains(charSequence)) {
-//                    filteredLst.add(data);
-//                }
-//            }
-//
-//            if (filteredLst.isEmpty()) {
-//                Toast.makeText(inflater.getContext(), R.string.no_result, Toast.LENGTH_SHORT).show();
-//                updateServicesList(servicesLst);
-//                System.out.println("size servicesLst0:   " + servicesLst.size());
-//                notifyDataSetChanged();
-//            }
-//            updateServicesList(filteredLst);
-//            notifyDataSetChanged();
-//
-//        } else{
-//            updateServicesList(fullLst);
-//            System.out.println("size filteredLst:   " + filteredLst.size());
-//            System.out.println("size servicesLst1:   " + servicesLst.size());
-//            System.out.println("size fullLst:   " + fullLst.size());
-//            System.out.println("size servicesLst2:   " + servicesLst.size());
-//            notifyDataSetChanged();
-//        }
-////        updateServicesList(fullLst);
-////        servicesLst.clear();
-////        servicesLst.addAll(tempLst);
-////            notifyDataSetChanged();
-////        tempLst.clear();
-//    }
-
-
-
-
-
-
-
-
-//    @Override
-//    public Filter getFilter() {
-//        return servicesFiltered;
-//    }
-//
-//    private Filter servicesFiltered = new Filter() {
-//        @Override
-//        protected FilterResults performFiltering(CharSequence charSequence) {
-//            List<ServicePartial> filteredList = new ArrayList<>();
-//            if (charSequence == null || charSequence.length() == 0){
-//                filteredList.addAll(servicesLst);
-//            } else {
-//                String filterPattern = charSequence.toString().toLowerCase().trim();
-//                for (ServicePartial item : servicesLst){
-//                    if (item.getServiceName().toLowerCase().contains(filterPattern)){
-//                        filteredList.add(item);
-//                    }
-//                }
-//            }
-//            FilterResults results = new FilterResults();
-//            results.values = filteredList;
-//
-//            return results;
-//        }
-//
-//        @SuppressLint("NotifyDataSetChanged")
-//        @Override
-//        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-//            servicesLstSearch.clear();
-//            servicesLstSearch.addAll((List) filterResults.values);
-//            notifyDataSetChanged();
-//        }
-//    };
 }
+
+

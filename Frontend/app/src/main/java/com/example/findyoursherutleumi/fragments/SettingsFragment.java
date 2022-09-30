@@ -2,7 +2,6 @@ package com.example.findyoursherutleumi.fragments;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -20,12 +19,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.findyoursherutleumi.R;
 import com.example.findyoursherutleumi.adapters.EditServicesAdapter;
-import com.example.findyoursherutleumi.adapters.ServicesAdapter;
 import com.example.findyoursherutleumi.database.APIClient;
 import com.example.findyoursherutleumi.database.APIInterface;
 import com.example.findyoursherutleumi.models.Coordinator;
@@ -144,6 +141,7 @@ public class SettingsFragment extends Fragment {
                             fragmentManager.popBackStackImmediate();
                         }
 
+                        // TODO: delete successfully but by login with another account it gets an error
                         Call<ResponseBody> call1 = apiInterface.deleteServicesByCoordinatorId(coordinatorId);
                         call1.enqueue(new Callback<ResponseBody>() {
                             @Override
@@ -168,7 +166,6 @@ public class SettingsFragment extends Fragment {
                                             Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                                         }
                                     });
-                                    //Toast.makeText(newFragment.getContext(), R.string.user_deleted_toast, Toast.LENGTH_SHORT).show();
                                 }
                             }
 

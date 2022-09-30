@@ -2,11 +2,8 @@ package com.example.findyoursherutleumi.adapters;
 
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.findyoursherutleumi.R;
 import com.example.findyoursherutleumi.fragments.SignUpUserTypeFragment;
 
 public class SpinnerAdapter implements AdapterView.OnItemSelectedListener {

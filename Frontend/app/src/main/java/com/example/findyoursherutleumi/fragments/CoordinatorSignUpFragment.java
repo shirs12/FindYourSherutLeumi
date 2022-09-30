@@ -1,7 +1,6 @@
 package com.example.findyoursherutleumi.fragments;
 
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 
@@ -21,7 +20,6 @@ import android.widget.Toast;
 import com.example.findyoursherutleumi.R;
 import com.example.findyoursherutleumi.database.APIClient;
 import com.example.findyoursherutleumi.database.APIInterface;
-import com.example.findyoursherutleumi.models.Applicant;
 import com.example.findyoursherutleumi.models.Coordinator;
 
 import retrofit2.Call;

@@ -2,7 +2,6 @@ package com.example.findyoursherutleumi.fragments;
 
 import androidx.fragment.app.FragmentTransaction;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -21,11 +20,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.findyoursherutleumi.FragmentToActivity;
-import com.example.findyoursherutleumi.MainActivity;
 import com.example.findyoursherutleumi.R;
 import com.example.findyoursherutleumi.database.APIClient;
 import com.example.findyoursherutleumi.database.APIInterface;
-import com.example.findyoursherutleumi.models.Coordinator;
 import com.example.findyoursherutleumi.models.User;
 
 import retrofit2.Call;
@@ -127,6 +124,7 @@ public class LoginFragment extends Fragment {
                 }
             }
         });
+
         return view;
     }
 

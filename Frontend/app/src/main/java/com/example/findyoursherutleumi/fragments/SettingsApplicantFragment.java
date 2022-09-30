@@ -2,9 +2,7 @@ package com.example.findyoursherutleumi.fragments;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -20,15 +18,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.findyoursherutleumi.MainActivity;
 import com.example.findyoursherutleumi.R;
 import com.example.findyoursherutleumi.database.APIClient;
 import com.example.findyoursherutleumi.database.APIInterface;
 import com.example.findyoursherutleumi.models.Applicant;
-import com.example.findyoursherutleumi.models.Coordinator;
-import com.example.findyoursherutleumi.models.Service;
 
-import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
