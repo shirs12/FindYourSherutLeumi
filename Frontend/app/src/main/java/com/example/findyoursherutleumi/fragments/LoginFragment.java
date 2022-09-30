@@ -73,39 +73,43 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (view.getId() == R.id.sign_in_btn){
-                    Call<User> call = apiInterface.authenticateUser(inputEmail.getText().toString(), inputPassword.getText().toString());
-                    call.enqueue(new Callback<User>() {
-                        @Override
-                        public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
-                            if(!response.isSuccessful()) {
-                                Toast.makeText(getContext(), "Connection Failed. try again later...", Toast.LENGTH_SHORT).show();
-                            }else {
-                                mCallback.communicate(response.body());
+                    boolean isComplete = isEmpty(inputEmail.getText().toString(), inputPassword.getText().toString());
+                    if (isComplete) {
+                        Call<User> call = apiInterface.authenticateUser(inputEmail.getText().toString(), inputPassword.getText().toString());
+                        call.enqueue(new Callback<User>() {
+                            @Override
+                            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
+                                if (!response.isSuccessful()) {
+                                    Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
+                                } else {
+                                    mCallback.communicate(response.body());
 
-                                inputEmail.getText().clear();
-                                inputPassword.getText().clear();
+                                    inputEmail.getText().clear();
+                                    inputPassword.getText().clear();
 
-                                Fragment newFragment = new HomePageFragment();
+                                    Fragment newFragment = new HomePageFragment();
 
-                                Bundle bundle = new Bundle();
-                                assert response.body() != null;
+                                    Bundle bundle = new Bundle();
+                                    assert response.body() != null;
 
-                                bundle.putInt("typeId", response.body().getUserTypeId());
-                                bundle.putString("email", response.body().getEmail());
-                                newFragment.setArguments(bundle);
+                                    bundle.putInt("typeId", response.body().getUserTypeId());
+                                    bundle.putString("email", response.body().getEmail());
+                                    newFragment.setArguments(bundle);
 
-                                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                                transaction.replace(R.id.fragmentContainerView, newFragment);
-                                transaction.addToBackStack(null);
-                                transaction.commit();
+                                    assert getFragmentManager() != null;
+                                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                                    transaction.replace(R.id.fragmentContainerView, newFragment);
+                                    transaction.addToBackStack(null);
+                                    transaction.commit();
+                                }
                             }
-                        }
 
-                        @Override
-                        public void onFailure(Call<User> call, Throwable t) {
-                            Toast.makeText(getContext(), "Connection Failed. try again later...", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                            @Override
+                            public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
+                                Toast.makeText(getContext(), "Connection Failed. try again later...", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
                 }
             }
         });
@@ -115,6 +119,7 @@ public class LoginFragment extends Fragment {
             public void onClick(View view) {
                 if (view.getId() == R.id.sign_up_clickable){
                     Fragment newFragment = new SignUpUserTypeFragment();
+                    assert getFragmentManager() != null;
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
                     transaction.replace(R.id.fragmentContainerView, newFragment);
@@ -126,6 +131,14 @@ public class LoginFragment extends Fragment {
         });
 
         return view;
+    }
+
+    private boolean isEmpty(String input1, String input2) {
+        if (input1.isEmpty() || input2.isEmpty()) {
+            Toast.makeText(getContext(), R.string.fields_not_filled, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 
     @Override

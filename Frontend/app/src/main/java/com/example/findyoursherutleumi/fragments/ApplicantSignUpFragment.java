@@ -77,9 +77,9 @@ public class ApplicantSignUpFragment extends Fragment {
                                 passwordInput.getText().toString());
                         call.enqueue(new Callback<Applicant>() {
                             @Override
-                            public void onResponse(Call<Applicant> call, Response<Applicant> response) {
+                            public void onResponse(@NonNull Call<Applicant> call, @NonNull Response<Applicant> response) {
                                 if(!response.isSuccessful()) {
-                                    Toast.makeText(getContext(), "Connection Failed. try again later...", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                                 } else{
                                     firstNameInput.getText().clear();
                                     lastNameInput.getText().clear();
@@ -89,6 +89,7 @@ public class ApplicantSignUpFragment extends Fragment {
                                     passwordInput.getText().clear();
 
                                     Fragment newFragment = new LoginFragment();
+                                    assert getFragmentManager() != null;
                                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                                     transaction.replace(R.id.fragmentContainerView, newFragment);
                                     transaction.addToBackStack(null);
@@ -97,8 +98,8 @@ public class ApplicantSignUpFragment extends Fragment {
                             }
 
                             @Override
-                            public void onFailure(Call<Applicant> call, Throwable t) {
-                                Toast.makeText(getContext(), "Connection Failed. try again later...", Toast.LENGTH_SHORT).show();
+                            public void onFailure(@NonNull Call<Applicant> call, @NonNull Throwable t) {
+                                Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -111,10 +112,14 @@ public class ApplicantSignUpFragment extends Fragment {
     }
 
     private boolean isEmpty(String input1, String input2, String input3,
-                         String input4, String input5, String input6) {
+                         String input4, String input5, String pass) {
         if (input1.isEmpty() || input2.isEmpty() || input3.isEmpty()
-                || input4.isEmpty() || input5.isEmpty() || input6.isEmpty()) {
-            Toast.makeText(getContext(), "please fill all required fields...", Toast.LENGTH_SHORT).show();
+                || input4.isEmpty() || input5.isEmpty() || pass.isEmpty()) {
+            Toast.makeText(getContext(), R.string.fields_not_filled, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else if (pass.length() < 6){
+            Toast.makeText(getContext(), R.string.pass_length_short, Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;
@@ -123,7 +128,7 @@ public class ApplicantSignUpFragment extends Fragment {
     @Override
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
         MenuItem item = menu.findItem(R.id.more_item);
-        if(item!=null)
+        if(item != null)
             item.setVisible(false);
     }
 

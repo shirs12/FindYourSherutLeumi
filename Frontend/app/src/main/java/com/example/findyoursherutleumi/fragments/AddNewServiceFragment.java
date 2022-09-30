@@ -118,7 +118,15 @@ public class AddNewServiceFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (view.getId() == R.id.add_new_service_btn){
-                    System.out.println("userEmail:    " + userEmail);
+                    boolean isComplete = isEmpty(serviceNameInput.getText().toString(),
+                            organizationInput.getText().toString(),
+                            categoryInput.getText().toString(),
+                            countryInput.getText().toString(),
+                            cityInput.getText().toString(),
+                            addressInput.getText().toString(),
+                            descriptionInput.getText().toString()
+                           );
+                    if (isComplete) {
                     Call<Coordinator> call = apiInterface.getCoordinatorByEmail(userEmail);
                     call.enqueue(new Callback<Coordinator>() {
                         @Override
@@ -143,8 +151,8 @@ public class AddNewServiceFragment extends Fragment {
                                 call2.enqueue(new Callback<Service>() {
                                     @Override
                                     public void onResponse(@NonNull Call<Service> call, @NonNull Response<Service> response) {
-                                        if(!response.isSuccessful()) {
-                                            Toast.makeText(getContext(), "Connection Failed. try again later...", Toast.LENGTH_SHORT).show();
+                                        if (!response.isSuccessful()) {
+                                            Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                                         } else {
                                             serviceNameInput.getText().clear();
                                             organizationInput.getText().clear();
@@ -171,13 +179,15 @@ public class AddNewServiceFragment extends Fragment {
                                     }
                                 });
                             }
-                        }
+                            }
+
 
                         @Override
                         public void onFailure(Call<Coordinator> call, Throwable t) {
                             Toast.makeText(getContext(), "Connection Failed. try again later...", Toast.LENGTH_SHORT).show();
                         }
                     });
+                }
                 }
             }
         });
@@ -212,6 +222,18 @@ public class AddNewServiceFragment extends Fragment {
         if (eveningBtn.getId() == R.id.evening_service_yes_radio)
             isEvening = 1;
     }
+
+    private boolean isEmpty(String input1, String input2, String input3,
+                            String input4, String input5, String input6,
+                            String input7) {
+        if (input1.isEmpty() || input2.isEmpty() || input3.isEmpty()
+                || input4.isEmpty() || input5.isEmpty() || input6.isEmpty() || input7.isEmpty()) {
+            Toast.makeText(getContext(), R.string.fields_not_filled, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
 
 }
 
