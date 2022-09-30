@@ -112,14 +112,18 @@ public class ApplicantSignUpFragment extends Fragment {
     }
 
     private boolean isEmpty(String input1, String input2, String input3,
-                         String input4, String input5, String pass) {
+                         String input4, String email, String pass) {
         if (input1.isEmpty() || input2.isEmpty() || input3.isEmpty()
-                || input4.isEmpty() || input5.isEmpty() || pass.isEmpty()) {
+                || input4.isEmpty() || email.isEmpty() || pass.isEmpty()) {
             Toast.makeText(getContext(), R.string.fields_not_filled, Toast.LENGTH_SHORT).show();
             return false;
         }
         else if (pass.length() < 6){
             Toast.makeText(getContext(), R.string.pass_length_short, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            Toast.makeText(getContext(), R.string.email_address_not_valid, Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;

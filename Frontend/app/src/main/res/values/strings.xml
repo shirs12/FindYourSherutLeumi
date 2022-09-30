@@ -67,6 +67,7 @@
     <string name="user_deleted_toast">User deleted successfully</string>
     <string name="fields_not_filled">Please fill all required fields</string>
     <string name="pass_length_short">password needs to be at least 6 characters</string>
+    <string name="email_address_not_valid">email address is not valid</string>
 
     <string-array name="user_types_array">
         <item>Applicant</item>

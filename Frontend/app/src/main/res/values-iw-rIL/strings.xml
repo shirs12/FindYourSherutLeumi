@@ -68,6 +68,7 @@
     <string name="user_deleted_toast">חשבון נמחק בהצלחה</string>
     <string name="fields_not_filled">יש למלא את כל השדות</string>
     <string name="pass_length_short">סיסמה צריכה להיות באורך 6 תווים לפחות</string>
+    <string name="email_address_not_valid">כתובת המייל לא תקינה</string>
 
     <string-array name="user_types_array">
         <item>מתנדב/ת</item>
