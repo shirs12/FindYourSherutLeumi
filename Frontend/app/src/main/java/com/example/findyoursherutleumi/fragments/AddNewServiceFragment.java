@@ -132,8 +132,7 @@ public class AddNewServiceFragment extends Fragment {
                         @Override
                         public void onResponse(@NonNull Call<Coordinator> call, @NonNull Response<Coordinator> response) {
                             if(!response.isSuccessful()) {
-                                Toast.makeText(getContext(), "Connection Failed. try again later...", Toast.LENGTH_SHORT).show();
-                                System.out.println("code1:        " + response.code());
+                                Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                             }else {
                                 assert response.body() != null;
                                 Call<Service> call2 = apiInterface.createNewService(
@@ -162,20 +161,18 @@ public class AddNewServiceFragment extends Fragment {
                                             addressInput.getText().clear();
                                             descriptionInput.getText().clear();
 
-                                            System.out.println(response.code());
-
-                                            // TODO: optional - trans to homepage fragment
+                                            // TODO: refresh recyclerview
                                             assert getFragmentManager() != null;
                                             FragmentManager fragmentManager = getFragmentManager();
                                             fragmentManager.popBackStack();
-                                            Toast.makeText(getContext(), "New service added successfully", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getContext(), R.string.new_service_added, Toast.LENGTH_SHORT).show();
                                         }
 
                                     }
 
                                     @Override
                                     public void onFailure(@NonNull Call<Service> call, @NonNull Throwable t) {
-                                        Toast.makeText(getContext(), "Connection Failed. try again later...", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                                     }
                                 });
                             }
@@ -183,8 +180,8 @@ public class AddNewServiceFragment extends Fragment {
 
 
                         @Override
-                        public void onFailure(Call<Coordinator> call, Throwable t) {
-                            Toast.makeText(getContext(), "Connection Failed. try again later...", Toast.LENGTH_SHORT).show();
+                        public void onFailure(@NonNull Call<Coordinator> call, @NonNull Throwable t) {
+                            Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

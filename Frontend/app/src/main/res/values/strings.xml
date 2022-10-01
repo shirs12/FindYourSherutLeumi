@@ -68,6 +68,7 @@
     <string name="fields_not_filled">Please fill all required fields</string>
     <string name="pass_length_short">password needs to be at least 6 characters</string>
     <string name="email_address_not_valid">email address is not valid</string>
+    <string name="new_service_added">New service added successfully</string>
 
     <string-array name="user_types_array">
         <item>Applicant</item>
