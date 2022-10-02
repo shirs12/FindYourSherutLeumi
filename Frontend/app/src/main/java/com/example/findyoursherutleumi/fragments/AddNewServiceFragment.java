@@ -157,10 +157,18 @@ public class AddNewServiceFragment extends Fragment {
                                                 addressInput.getText().clear();
                                                 descriptionInput.getText().clear();
 
-                                                // TODO: update recyclerview
+                                                // TODO: to update recyclerview
                                                 assert getFragmentManager() != null;
                                                 FragmentManager fragmentManager = getFragmentManager();
                                                 fragmentManager.popBackStack();
+
+//                                                assert getFragmentManager() != null;
+//                                                Fragment newFragment = new HomePageFragment();
+//                                                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//                                                transaction.replace(R.id.fragmentContainerView, newFragment)
+//                                                        .addToBackStack(null)
+//                                                        .commit();
+
                                                 Toast.makeText(getContext(), R.string.new_service_added, Toast.LENGTH_SHORT).show();
                                             }
 

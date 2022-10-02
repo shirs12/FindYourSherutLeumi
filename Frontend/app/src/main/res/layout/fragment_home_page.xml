@@ -38,18 +38,6 @@
             app:tint="#EEE"
             tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck" />
 
-        <!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-        <!--            android:id="@+id/add_service_btn"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="match_parent"-->
-        <!--            android:layout_gravity="top|end"-->
-        <!--            android:layout_weight="1"-->
-        <!--            android:clickable="true"-->
-        <!--            android:foregroundGravity="center_horizontal"-->
-        <!--            android:src="@android:drawable/ic_input_add"-->
-        <!--            app:backgroundTint="@color/light_blue"-->
-        <!--            app:tint="#EEE"-->
-        <!--            tools:ignore="SpeakableTextPresentCheck" />-->
     </LinearLayout>
 
     <EditText

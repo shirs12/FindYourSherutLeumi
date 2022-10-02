@@ -20,9 +20,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.example.findyoursherutleumi.MainActivity;
 import com.example.findyoursherutleumi.R;
 import com.example.findyoursherutleumi.adapters.ServicesAdapter;
 import com.example.findyoursherutleumi.models.ServicePartial;
+import com.example.findyoursherutleumi.models.User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -57,10 +59,13 @@ public class HomePageFragment extends Fragment {
         setHasOptionsMenu(true);
         addServiceBtn = view.findViewById(R.id.add_service_btn);
 
-        assert getArguments() != null;
-        userEmail = getArguments().getString("email");
-        userTypeId = getArguments().getInt("typeId");
-        System.out.println(userTypeId);
+        if (getArguments() != null) {
+            userEmail = getArguments().getString("email");
+            userTypeId = getArguments().getInt("typeId");
+        }else{
+            userEmail = MainActivity.getUser().getEmail();
+            userTypeId = MainActivity.getUser().getUserTypeId();
+        }
         if (userTypeId == 1) {
             addServiceBtn.setVisibility(View.GONE);
         }
@@ -87,7 +92,7 @@ public class HomePageFragment extends Fragment {
 
                 assert getFragmentManager() != null;
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.fragmentContainerView, newFragment);
+                transaction.replace(R.id.fragmentContainerView, newFragment, "home_page_tag");
                 transaction.addToBackStack(null);
                 transaction.commit();
             }
@@ -97,7 +102,7 @@ public class HomePageFragment extends Fragment {
         searchBar.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                // servicesAdapter.notifyDataSetChanged();
+
             }
 
             @SuppressLint("NotifyDataSetChanged")
@@ -134,28 +139,28 @@ public class HomePageFragment extends Fragment {
         updateAdapter();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        updateAdapter();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        updateAdapter();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        updateAdapter();
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        updateAdapter();
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        updateAdapter();
+//    }
+//
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+//        updateAdapter();
+//    }
+//
+//    @Override
+//    public void onStop() {
+//        super.onStop();
+//        updateAdapter();
+//    }
+//
+//    @Override
+//    public void onDetach() {
+//        super.onDetach();
+//        updateAdapter();
+//    }
 
 }

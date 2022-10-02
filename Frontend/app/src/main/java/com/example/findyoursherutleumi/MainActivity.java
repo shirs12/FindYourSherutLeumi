@@ -25,8 +25,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements FragmentToActivity {
 
-    private static final String TAG = "MainActivity";
-    private User user;
+    private static User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -180,5 +179,8 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
         this.user = user;
     }
 
+    public static User getUser(){
+        return user;
+    }
 
 }

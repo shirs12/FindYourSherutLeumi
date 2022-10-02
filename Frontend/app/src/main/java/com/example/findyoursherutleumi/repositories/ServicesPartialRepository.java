@@ -1,10 +1,12 @@
 package com.example.findyoursherutleumi.repositories;
 
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.findyoursherutleumi.R;
 import com.example.findyoursherutleumi.database.APIClient;
 import com.example.findyoursherutleumi.database.APIInterface;
 import com.example.findyoursherutleumi.models.ServicePartial;
@@ -45,14 +47,14 @@ public class ServicesPartialRepository {
             @Override
             public void onResponse(@NonNull Call<List<ServicePartial>> call, @NonNull Response<List<ServicePartial>> response) {
                 if (!response.isSuccessful())
-                    System.out.println("something went wrong...");
+                    Toast.makeText(detailsBtn.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                 assert response.body() != null;
                 dataSet.clear();
                 dataSet.addAll(response.body());
             }
             @Override
             public void onFailure(@NonNull Call<List<ServicePartial>> call, @NonNull Throwable t) {
-                System.out.println("failed");
+                Toast.makeText(detailsBtn.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
             }
         });
     }
