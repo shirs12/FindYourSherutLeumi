@@ -36,9 +36,6 @@ import retrofit2.Response;
 public class AddNewServiceFragment extends Fragment {
 
     APIInterface apiInterface;
-
-    private String userEmail;
-
     Button addServiceBtn;
     EditText serviceNameInput;
     EditText organizationInput;
@@ -47,7 +44,6 @@ public class AddNewServiceFragment extends Fragment {
     EditText cityInput;
     EditText addressInput;
     EditText descriptionInput;
-
     RadioGroup apartmentRadio;
     RadioButton apartmentBtn;
     RadioGroup secondYearRadio;
@@ -56,7 +52,7 @@ public class AddNewServiceFragment extends Fragment {
     RadioButton morningBtn;
     RadioGroup eveningRadio;
     RadioButton eveningBtn;
-
+    private String userEmail;
     private int hasApartment = 0;
     private int isSecondYear = 0;
     private int isMorning = 0;
@@ -117,7 +113,7 @@ public class AddNewServiceFragment extends Fragment {
         addServiceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (view.getId() == R.id.add_new_service_btn){
+                if (view.getId() == R.id.add_new_service_btn) {
                     boolean isComplete = isEmpty(serviceNameInput.getText().toString(),
                             organizationInput.getText().toString(),
                             categoryInput.getText().toString(),
@@ -125,66 +121,66 @@ public class AddNewServiceFragment extends Fragment {
                             cityInput.getText().toString(),
                             addressInput.getText().toString(),
                             descriptionInput.getText().toString()
-                           );
+                    );
                     if (isComplete) {
-                    Call<Coordinator> call = apiInterface.getCoordinatorByEmail(userEmail);
-                    call.enqueue(new Callback<Coordinator>() {
-                        @Override
-                        public void onResponse(@NonNull Call<Coordinator> call, @NonNull Response<Coordinator> response) {
-                            if(!response.isSuccessful()) {
-                                Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
-                            }else {
-                                assert response.body() != null;
-                                Call<Service> call2 = apiInterface.createNewService(
-                                        serviceNameInput.getText().toString(),
-                                        organizationInput.getText().toString(),
-                                        categoryInput.getText().toString(),
-                                        countryInput.getText().toString(),
-                                        cityInput.getText().toString(),
-                                        addressInput.getText().toString(),
-                                        hasApartment, isSecondYear, isMorning, isEvening,
-                                        descriptionInput.getText().toString(),
-                                        response.body().getFirstName() + " " + response.body().getLastName(),
-                                        response.body().getCoordinatorId());
+                        Call<Coordinator> call = apiInterface.getCoordinatorByEmail(userEmail);
+                        call.enqueue(new Callback<Coordinator>() {
+                            @Override
+                            public void onResponse(@NonNull Call<Coordinator> call, @NonNull Response<Coordinator> response) {
+                                if (!response.isSuccessful()) {
+                                    Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
+                                } else {
+                                    assert response.body() != null;
+                                    Call<Service> call2 = apiInterface.createNewService(
+                                            serviceNameInput.getText().toString(),
+                                            organizationInput.getText().toString(),
+                                            categoryInput.getText().toString(),
+                                            countryInput.getText().toString(),
+                                            cityInput.getText().toString(),
+                                            addressInput.getText().toString(),
+                                            hasApartment, isSecondYear, isMorning, isEvening,
+                                            descriptionInput.getText().toString(),
+                                            response.body().getFirstName() + " " + response.body().getLastName(),
+                                            response.body().getCoordinatorId());
 
-                                call2.enqueue(new Callback<Service>() {
-                                    @Override
-                                    public void onResponse(@NonNull Call<Service> call, @NonNull Response<Service> response) {
-                                        if (!response.isSuccessful()) {
-                                            Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
-                                        } else {
-                                            serviceNameInput.getText().clear();
-                                            organizationInput.getText().clear();
-                                            categoryInput.getText().clear();
-                                            countryInput.getText().clear();
-                                            cityInput.getText().clear();
-                                            addressInput.getText().clear();
-                                            descriptionInput.getText().clear();
+                                    call2.enqueue(new Callback<Service>() {
+                                        @Override
+                                        public void onResponse(@NonNull Call<Service> call, @NonNull Response<Service> response) {
+                                            if (!response.isSuccessful()) {
+                                                Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                serviceNameInput.getText().clear();
+                                                organizationInput.getText().clear();
+                                                categoryInput.getText().clear();
+                                                countryInput.getText().clear();
+                                                cityInput.getText().clear();
+                                                addressInput.getText().clear();
+                                                descriptionInput.getText().clear();
 
-                                            // TODO: refresh recyclerview
-                                            assert getFragmentManager() != null;
-                                            FragmentManager fragmentManager = getFragmentManager();
-                                            fragmentManager.popBackStack();
-                                            Toast.makeText(getContext(), R.string.new_service_added, Toast.LENGTH_SHORT).show();
+                                                // TODO: update recyclerview
+                                                assert getFragmentManager() != null;
+                                                FragmentManager fragmentManager = getFragmentManager();
+                                                fragmentManager.popBackStack();
+                                                Toast.makeText(getContext(), R.string.new_service_added, Toast.LENGTH_SHORT).show();
+                                            }
+
                                         }
 
-                                    }
-
-                                    @Override
-                                    public void onFailure(@NonNull Call<Service> call, @NonNull Throwable t) {
-                                        Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
+                                        @Override
+                                        public void onFailure(@NonNull Call<Service> call, @NonNull Throwable t) {
+                                            Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
                             }
 
 
-                        @Override
-                        public void onFailure(@NonNull Call<Coordinator> call, @NonNull Throwable t) {
-                            Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
+                            @Override
+                            public void onFailure(@NonNull Call<Coordinator> call, @NonNull Throwable t) {
+                                Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
                 }
             }
         });

@@ -122,7 +122,6 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
                                 data.getCategory().toLowerCase().contains(charSequence) ||
                                 data.getCity().toLowerCase().contains(charSequence))
                 .collect(Collectors.toList());
-//        Toast.makeText(inflater.getContext(), R.string.no_result, Toast.LENGTH_SHORT).show();
         updateServicesList(filteredList);
         notifyDataSetChanged();
     }

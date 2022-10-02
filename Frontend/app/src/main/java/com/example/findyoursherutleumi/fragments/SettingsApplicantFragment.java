@@ -160,9 +160,9 @@ public class SettingsApplicantFragment extends Fragment {
         Call<Applicant> call1 = apiInterface.getApplicantByEmail(getArguments().getString("email"));
         call1.enqueue(new Callback<Applicant>() {
             @Override
-            public void onResponse(Call<Applicant> call, Response<Applicant> response) {
+            public void onResponse(@NonNull Call<Applicant> call, @NonNull Response<Applicant> response) {
                 if(!response.isSuccessful()) {
-                    Toast.makeText(getContext(), "Connection Failed. try again later...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                     System.out.println("code1:        " + response.code());
                 } else{
                     assert response.body() != null;
@@ -176,8 +176,8 @@ public class SettingsApplicantFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<Applicant> call, Throwable t) {
-                Toast.makeText(getContext(), "Connection Failed. try again later...", Toast.LENGTH_SHORT).show();
+            public void onFailure(@NonNull Call<Applicant> call, @NonNull Throwable t) {
+                Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -106,7 +106,7 @@ public class LoginFragment extends Fragment {
 
                             @Override
                             public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
-                                Toast.makeText(getContext(), "Connection Failed. try again later...", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -144,7 +144,7 @@ public class LoginFragment extends Fragment {
     @Override
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
         MenuItem item = menu.findItem(R.id.more_item);
-        if(item!=null)
+        if(item != null)
             item.setVisible(false);
     }
 

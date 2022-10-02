@@ -1,5 +1,6 @@
 package com.example.findyoursherutleumi;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -36,7 +37,19 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.setTitle(getResources().getString(R.string.app_name));
+        if (user == null && savedInstanceState != null) {
+            user = new User();
+            user.setEmail(savedInstanceState.getString("email"));
+            user.setUserTypeId(savedInstanceState.getInt("typeId"));
+            user.setUPassword("");
+        }
+    }
 
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("email", user.getEmail());
+        outState.putInt("typeId", user.getUserTypeId());
     }
 
     @Override
@@ -108,7 +121,6 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
                 Bundle bundle = new Bundle();
                 bundle.putString("email", user.getEmail());
                 bundle.putInt("typeId", user.getUserTypeId());
-                bundle.putString("password", user.getUPassword());
                 newFragment.setArguments(bundle);
 
                 FragmentTransaction transaction = fragmentManager.beginTransaction();

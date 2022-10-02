@@ -170,7 +170,7 @@ public class SettingsFragment extends Fragment {
                             }
 
                             @Override
-                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                                 Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -202,8 +202,7 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onResponse(@NonNull Call<Coordinator> call, @NonNull Response<Coordinator> response) {
                 if(!response.isSuccessful()) {
-                    Toast.makeText(getContext(), "Connection Failed. try again later...", Toast.LENGTH_SHORT).show();
-                    System.out.println("code1:        " + response.code());
+                    Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                 }else {
                     assert response.body() != null;
                     coordinatorId = response.body().getCoordinatorId();
@@ -224,7 +223,6 @@ public class SettingsFragment extends Fragment {
                                 assert response.body() != null;
                                 cServicesLst.addAll(response.body());
                                 editServicesAdapter.notifyDataSetChanged();
-                                System.out.println("settingssssssssssssssss:     " + cServicesLst.size());
                             }
                         }
                         @Override
@@ -235,7 +233,7 @@ public class SettingsFragment extends Fragment {
                 }
             }
             @Override
-            public void onFailure(Call<Coordinator> call, Throwable t) {
+            public void onFailure(@NonNull Call<Coordinator> call, @NonNull Throwable t) {
                 Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
             }
         });

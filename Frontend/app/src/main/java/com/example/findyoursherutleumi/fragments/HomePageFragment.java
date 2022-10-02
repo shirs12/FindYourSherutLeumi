@@ -5,9 +5,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,16 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.SearchView;
-import android.widget.Spinner;
 
 import com.example.findyoursherutleumi.R;
 import com.example.findyoursherutleumi.adapters.ServicesAdapter;
@@ -36,11 +26,8 @@ import com.example.findyoursherutleumi.models.ServicePartial;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
-import java.util.Objects;
 
 public class HomePageFragment extends Fragment {
-
-    private static final String TAG = "HomePageFragment";
 
     private int userTypeId;
     private String userEmail;
@@ -110,7 +97,7 @@ public class HomePageFragment extends Fragment {
         searchBar.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                servicesAdapter.notifyDataSetChanged();
+                // servicesAdapter.notifyDataSetChanged();
             }
 
             @SuppressLint("NotifyDataSetChanged")
@@ -160,10 +147,15 @@ public class HomePageFragment extends Fragment {
     }
 
     @Override
+    public void onStop() {
+        super.onStop();
+        updateAdapter();
+    }
+
+    @Override
     public void onDetach() {
         super.onDetach();
         updateAdapter();
     }
-
 
 }
