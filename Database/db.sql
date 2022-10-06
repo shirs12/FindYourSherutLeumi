@@ -1,4 +1,4 @@
-CREATE DATABASE FindYourSherutLeumi;
+CREATE DATABASE IF NOT EXISTS FindYourSherutLeumi;
 
 -- DROP DATABASE FindYourSherutLeumi;
 
@@ -248,9 +248,7 @@ CALL `delete_level`(3); -- test
 DELIMITER $$
 CREATE PROCEDURE `get_all_applicants`()
 BEGIN
-    SELECT first_name,last_name,phone_number,
-		city,email,u_password
-    FROM applicant;
+    SELECT * FROM applicant;
     END$$
 DELIMITER ;
 CALL `get_all_applicants`(); -- test
