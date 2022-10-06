@@ -64,7 +64,6 @@ public class EditServicesAdapter extends RecyclerView.Adapter<EditServicesAdapte
                             if (!response.isSuccessful()) {
                                 Toast.makeText(inflater.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                             } else {
-                                // TODO: update recyclerview in HomePageFragment
                                 System.out.println("codeeeeeeeeeeeeeee:           " + response.code());
                                 servicesLst.remove(holder.getAdapterPosition());
                                 notifyItemRemoved(holder.getAdapterPosition());

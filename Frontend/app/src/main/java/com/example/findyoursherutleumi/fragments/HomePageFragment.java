@@ -141,6 +141,7 @@ public class HomePageFragment extends Fragment {
     public void onResume() {
         super.onResume();
         mViewModel.loadServices();
+        updateAdapter();
     }
 
     @Override

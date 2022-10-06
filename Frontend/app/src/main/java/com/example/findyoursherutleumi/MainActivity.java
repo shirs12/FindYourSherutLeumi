@@ -162,11 +162,13 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
     public void onBackPressed() {
         super.onBackPressed();
         assert getFragmentManager() != null;
-        Fragment newFragment = new HomePageFragment();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragmentContainerView, newFragment)
-                .addToBackStack(null)
-                .commit();
+        if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
+            Fragment newFragment = new HomePageFragment();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragmentContainerView, newFragment)
+                    .addToBackStack(null)
+                    .commit();
+        }
     }
 
 
