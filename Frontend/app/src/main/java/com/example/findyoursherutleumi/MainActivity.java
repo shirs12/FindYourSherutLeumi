@@ -48,8 +48,10 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString("email", user.getEmail());
-        outState.putInt("typeId", user.getUserTypeId());
+        if(user != null) {
+            outState.putString("email", user.getEmail());
+            outState.putInt("typeId", user.getUserTypeId());
+        }
     }
 
     @Override
