@@ -248,25 +248,17 @@
                                 android:textSize="16sp"
                                 android:textStyle="bold" />
 
-                            <com.google.android.material.textfield.TextInputLayout
-                                android:layout_width="match_parent"
+                            <EditText
+                                android:id="@+id/description_input_add"
+                                android:layout_width="260dp"
                                 android:layout_height="wrap_content"
-                                app:counterEnabled="true"
-                                app:counterMaxLength="200"
-                                app:boxStrokeColor="@color/light_gray"
-                                app:counterTextAppearance="@style/counterText"
-                                app:counterOverflowTextAppearance="@style/counterOverride">
-
-                                <EditText
-                                    android:id="@+id/description_input_add"
-                                    android:layout_width="260dp"
-                                    android:layout_height="wrap_content"
-                                    android:background="@drawable/rounded_corners"
-                                    android:inputType="text"
-                                    android:padding="5dp"
-                                    android:textSize="14sp"
-                                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
-                            </com.google.android.material.textfield.TextInputLayout>
+                                android:background="@drawable/rounded_corners"
+                                android:hint="@string/description_hint"
+                                android:inputType="text"
+                                android:padding="5dp"
+                                android:textSize="14sp"
+                                android:maxLength="200"
+                                tools:ignore="TouchTargetSizeCheck" />
                         </LinearLayout>
 
                         <LinearLayout
