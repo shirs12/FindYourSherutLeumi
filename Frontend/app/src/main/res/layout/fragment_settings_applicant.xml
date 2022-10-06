@@ -108,7 +108,7 @@
                         android:layout_height="wrap_content"
                         android:ems="10"
                         android:hint="@string/phone_number_hint"
-                        android:inputType="text"
+                        android:inputType="phone"
                         android:minHeight="48dp" />
                 </LinearLayout>
 

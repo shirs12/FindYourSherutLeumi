@@ -21,6 +21,7 @@ import com.example.findyoursherutleumi.fragments.SettingsFragment;
 import com.example.findyoursherutleumi.models.User;
 
 import java.util.Locale;
+import java.util.Objects;
 
 
 public class MainActivity extends AppCompatActivity implements FragmentToActivity {
@@ -161,8 +162,10 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        System.out.println("backkkkkkkkkkkkkk:             " + getSupportFragmentManager().getBackStackEntryCount());
         assert getFragmentManager() != null;
-        if (getSupportFragmentManager().getBackStackEntryCount() > 1) {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 1 && user != null) {
+//                || getSupportFragmentManager().findFragmentById(R.id.login_fragment) == ) {
             Fragment newFragment = new HomePageFragment();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.fragmentContainerView, newFragment)

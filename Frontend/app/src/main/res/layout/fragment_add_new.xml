@@ -257,6 +257,7 @@
                                 android:inputType="text"
                                 android:padding="5dp"
                                 android:textSize="14sp"
+                                android:maxLength="200"
                                 tools:ignore="TouchTargetSizeCheck" />
                         </LinearLayout>
 

@@ -118,7 +118,7 @@
                     android:backgroundTint="@color/light_gray"
                     android:ems="10"
                     android:hint="@string/phone_number_hint"
-                    android:inputType="text"
+                    android:inputType="phone"
                     android:minHeight="48dp"
                     android:textSize="16sp"
                     tools:ignore="TextFields" />
