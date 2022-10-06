@@ -69,64 +69,58 @@ public class LoginFragment extends Fragment {
         signInBtn = view.findViewById(R.id.sign_in_btn);
         signUpClickable = view.findViewById(R.id.sign_up_clickable);
 
-        signInBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (view.getId() == R.id.sign_in_btn){
-                    boolean isComplete = isEmpty(inputEmail.getText().toString(), inputPassword.getText().toString());
-                    if (isComplete) {
-                        Call<User> call = apiInterface.authenticateUser(inputEmail.getText().toString(), inputPassword.getText().toString());
-                        call.enqueue(new Callback<User>() {
-                            @Override
-                            public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
-                                if (!response.isSuccessful()) {
-                                    Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
-                                } else {
-                                    mCallback.communicate(response.body());
-
-                                    inputEmail.getText().clear();
-                                    inputPassword.getText().clear();
-
-                                    Fragment newFragment = new HomePageFragment();
-
-                                    Bundle bundle = new Bundle();
-                                    assert response.body() != null;
-
-                                    bundle.putInt("typeId", response.body().getUserTypeId());
-                                    bundle.putString("email", response.body().getEmail());
-                                    newFragment.setArguments(bundle);
-
-                                    assert getFragmentManager() != null;
-                                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                                    transaction.replace(R.id.fragmentContainerView, newFragment);
-                                    transaction.addToBackStack(null);
-                                    transaction.commit();
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
+        signInBtn.setOnClickListener(view1 -> {
+            if (view1.getId() == R.id.sign_in_btn){
+                boolean isComplete = isEmpty(inputEmail.getText().toString(), inputPassword.getText().toString());
+                if (isComplete) {
+                    Call<User> call = apiInterface.authenticateUser(inputEmail.getText().toString(), inputPassword.getText().toString());
+                    call.enqueue(new Callback<User>() {
+                        @Override
+                        public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
+                            if (!response.isSuccessful()) {
                                 Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
+                            } else {
+                                mCallback.communicate(response.body());
+
+                                inputEmail.getText().clear();
+                                inputPassword.getText().clear();
+
+                                Fragment newFragment = new HomePageFragment();
+
+                                Bundle bundle = new Bundle();
+                                assert response.body() != null;
+
+                                bundle.putInt("typeId", response.body().getUserTypeId());
+                                bundle.putString("email", response.body().getEmail());
+                                newFragment.setArguments(bundle);
+
+                                assert getFragmentManager() != null;
+                                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                                transaction.replace(R.id.fragmentContainerView, newFragment, "home_page_tag");
+                                transaction.addToBackStack(null);
+                                transaction.commit();
                             }
-                        });
-                    }
+                        }
+
+                        @Override
+                        public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
+                            Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             }
         });
 
-        signUpClickable.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (view.getId() == R.id.sign_up_clickable){
-                    Fragment newFragment = new SignUpUserTypeFragment();
-                    assert getFragmentManager() != null;
-                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        signUpClickable.setOnClickListener(view12 -> {
+            if (view12.getId() == R.id.sign_up_clickable){
+                Fragment newFragment = new SignUpUserTypeFragment();
+                assert getFragmentManager() != null;
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
-                    transaction.replace(R.id.fragmentContainerView, newFragment);
-                    transaction.addToBackStack(null);
+                transaction.replace(R.id.fragmentContainerView, newFragment);
+                transaction.addToBackStack(null);
 
-                    transaction.commit();
-                }
+                transaction.commit();
             }
         });
 

@@ -1,12 +1,8 @@
 package com.example.findyoursherutleumi.fragments;
 
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,7 +18,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.example.findyoursherutleumi.MainActivity;
 import com.example.findyoursherutleumi.R;
 import com.example.findyoursherutleumi.database.APIClient;
 import com.example.findyoursherutleumi.database.APIInterface;
@@ -78,12 +73,7 @@ public class AddNewServiceFragment extends Fragment {
         descriptionInput = view.findViewById(R.id.description_input_add);
 
         apartmentRadio = view.findViewById(R.id.apartment_radio);
-        apartmentRadio.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                onRadioButtonClicked1(view);
-            }
-        });
+        apartmentRadio.setOnCheckedChangeListener((radioGroup, i) -> onRadioButtonClicked1(view));
         secondYearRadio = view.findViewById(R.id.second_year_radio);
         secondYearRadio.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -110,85 +100,78 @@ public class AddNewServiceFragment extends Fragment {
         userEmail = getArguments().getString("email");
 
         addServiceBtn = view.findViewById(R.id.add_new_service_btn);
-        addServiceBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (view.getId() == R.id.add_new_service_btn) {
-                    boolean isComplete = isEmpty(serviceNameInput.getText().toString(),
-                            organizationInput.getText().toString(),
-                            categoryInput.getText().toString(),
-                            countryInput.getText().toString(),
-                            cityInput.getText().toString(),
-                            addressInput.getText().toString(),
-                            descriptionInput.getText().toString()
-                    );
-                    if (isComplete) {
-                        Call<Coordinator> call = apiInterface.getCoordinatorByEmail(userEmail);
-                        call.enqueue(new Callback<Coordinator>() {
-                            @Override
-                            public void onResponse(@NonNull Call<Coordinator> call, @NonNull Response<Coordinator> response) {
-                                if (!response.isSuccessful()) {
-                                    Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
-                                } else {
-                                    assert response.body() != null;
-                                    Call<Service> call2 = apiInterface.createNewService(
-                                            serviceNameInput.getText().toString(),
-                                            organizationInput.getText().toString(),
-                                            categoryInput.getText().toString(),
-                                            countryInput.getText().toString(),
-                                            cityInput.getText().toString(),
-                                            addressInput.getText().toString(),
-                                            hasApartment, isSecondYear, isMorning, isEvening,
-                                            descriptionInput.getText().toString(),
-                                            response.body().getFirstName() + " " + response.body().getLastName(),
-                                            response.body().getCoordinatorId());
-
-                                    call2.enqueue(new Callback<Service>() {
-                                        @Override
-                                        public void onResponse(@NonNull Call<Service> call, @NonNull Response<Service> response) {
-                                            if (!response.isSuccessful()) {
-                                                Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
-                                            } else {
-                                                serviceNameInput.getText().clear();
-                                                organizationInput.getText().clear();
-                                                categoryInput.getText().clear();
-                                                countryInput.getText().clear();
-                                                cityInput.getText().clear();
-                                                addressInput.getText().clear();
-                                                descriptionInput.getText().clear();
-
-                                                // TODO: to update recyclerview
-                                                assert getFragmentManager() != null;
-                                                FragmentManager fragmentManager = getFragmentManager();
-                                                fragmentManager.popBackStack();
-
-//                                                assert getFragmentManager() != null;
-//                                                Fragment newFragment = new HomePageFragment();
-//                                                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-//                                                transaction.replace(R.id.fragmentContainerView, newFragment)
-//                                                        .addToBackStack(null)
-//                                                        .commit();
-
-                                                Toast.makeText(getContext(), R.string.new_service_added, Toast.LENGTH_SHORT).show();
-                                            }
-
-                                        }
-
-                                        @Override
-                                        public void onFailure(@NonNull Call<Service> call, @NonNull Throwable t) {
-                                            Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-                                }
-                            }
-
-
-                            @Override
-                            public void onFailure(@NonNull Call<Coordinator> call, @NonNull Throwable t) {
+        addServiceBtn.setOnClickListener(view1 -> {
+            if (view1.getId() == R.id.add_new_service_btn) {
+                boolean isComplete = isEmpty(serviceNameInput.getText().toString(),
+                        organizationInput.getText().toString(),
+                        categoryInput.getText().toString(),
+                        countryInput.getText().toString(),
+                        cityInput.getText().toString(),
+                        addressInput.getText().toString(),
+                        descriptionInput.getText().toString()
+                );
+                if (isComplete) {
+                    Call<Coordinator> call = apiInterface.getCoordinatorByEmail(userEmail);
+                    call.enqueue(new Callback<Coordinator>() {
+                        @Override
+                        public void onResponse(@NonNull Call<Coordinator> call, @NonNull Response<Coordinator> response) {
+                            if (!response.isSuccessful()) {
                                 Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
+                            } else {
+                                assert response.body() != null;
+                                Call<Service> call2 = apiInterface.createNewService(
+                                        serviceNameInput.getText().toString(),
+                                        organizationInput.getText().toString(),
+                                        categoryInput.getText().toString(),
+                                        countryInput.getText().toString(),
+                                        cityInput.getText().toString(),
+                                        addressInput.getText().toString(),
+                                        hasApartment, isSecondYear, isMorning, isEvening,
+                                        descriptionInput.getText().toString(),
+                                        response.body().getFirstName() + " " + response.body().getLastName(),
+                                        response.body().getCoordinatorId());
+
+                                call2.enqueue(new Callback<Service>() {
+                                    @SuppressLint("NotifyDataSetChanged")
+                                    @Override
+                                    public void onResponse(@NonNull Call<Service> call, @NonNull Response<Service> response) {
+                                        if (!response.isSuccessful()) {
+                                            Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            serviceNameInput.getText().clear();
+                                            organizationInput.getText().clear();
+                                            categoryInput.getText().clear();
+                                            countryInput.getText().clear();
+                                            cityInput.getText().clear();
+                                            addressInput.getText().clear();
+                                            descriptionInput.getText().clear();
+
+                                            assert getFragmentManager() != null;
+                                            Fragment newFragment = new HomePageFragment();
+                                            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                                            transaction.replace(R.id.fragmentContainerView, newFragment)
+                                                    .addToBackStack(null)
+                                                    .commit();
+
+                                            Toast.makeText(getContext(), R.string.new_service_added, Toast.LENGTH_SHORT).show();
+                                        }
+
+                                    }
+
+                                    @Override
+                                    public void onFailure(@NonNull Call<Service> call, @NonNull Throwable t) {
+                                        Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                             }
-                        });
-                    }
+                        }
+
+
+                        @Override
+                        public void onFailure(@NonNull Call<Coordinator> call, @NonNull Throwable t) {
+                            Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             }
         });

@@ -8,13 +8,13 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.findyoursherutleumi.fragments.HomePageFragment;
 import com.example.findyoursherutleumi.fragments.LoginFragment;
 import com.example.findyoursherutleumi.fragments.SettingsApplicantFragment;
 import com.example.findyoursherutleumi.fragments.SettingsFragment;
@@ -58,79 +58,57 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
         MenuItem logoutItem = menu.findItem(R.id.logout_item);
         MenuItem settingsItem = menu.findItem(R.id.settings_item);
 
-        languagesItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                showChangeLanguageDialog();
-                return true;
-            }
+        languagesItem.setOnMenuItemClickListener(menuItem -> {
+            showChangeLanguageDialog();
+            return true;
         });
 
-        logoutItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setMessage(R.string.logout_dialog);
-                builder.setCancelable(true);
+        logoutItem.setOnMenuItemClickListener(menuItem -> {
+            final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setMessage(R.string.logout_dialog);
+            builder.setCancelable(true);
 
-                builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        Fragment newFragment = new LoginFragment();
-                        assert getFragmentManager() != null;
-                        FragmentManager fragmentManager = getSupportFragmentManager();
-                        FragmentTransaction transaction = fragmentManager.beginTransaction();
-                        transaction.replace(R.id.fragmentContainerView, newFragment).disallowAddToBackStack();
-                        transaction.commit();
-
-                        // clears fragment's back stack to prevent user from going back after logging out.
-                        int count = fragmentManager.getBackStackEntryCount();
-                        for(int index = 0; index < count; ++index) {
-                            fragmentManager.popBackStackImmediate();
-                        }
-                    }
-                });
-
-                builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.cancel();
-                    }
-                });
-
-                AlertDialog alertDialog = builder.create();
-                alertDialog.show();
-
-                return true;
-            }
-        });
-
-        settingsItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                Fragment newFragment;
-                if (user.getUserTypeId() == 2){
-                    newFragment = new SettingsFragment();
-                }
-                else {
-                    newFragment = new SettingsApplicantFragment();
-                }
+            builder.setPositiveButton(R.string.yes, (dialogInterface, i) -> {
+                Fragment newFragment = new LoginFragment();
+                assert getFragmentManager() != null;
                 FragmentManager fragmentManager = getSupportFragmentManager();
-
-                Bundle bundle = new Bundle();
-                bundle.putString("email", user.getEmail());
-                bundle.putInt("typeId", user.getUserTypeId());
-                newFragment.setArguments(bundle);
-
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.fragmentContainerView, newFragment);
-                transaction.addToBackStack(null);
+                transaction.replace(R.id.fragmentContainerView, newFragment).disallowAddToBackStack();
                 transaction.commit();
 
-                return true;
-            }
+                // clears fragment's back stack to prevent user from going back after logging out.
+                int count = fragmentManager.getBackStackEntryCount();
+                for(int index = 0; index < count; ++index) {
+                    fragmentManager.popBackStackImmediate();
+                }
+            });
+            builder.setNegativeButton(R.string.no, (dialogInterface, i) -> dialogInterface.cancel());
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+            return true;
         });
 
+        settingsItem.setOnMenuItemClickListener(menuItem -> {
+            Fragment newFragment;
+            if (user.getUserTypeId() == 2){
+                newFragment = new SettingsFragment();
+            }
+            else {
+                newFragment = new SettingsApplicantFragment();
+            }
+            FragmentManager fragmentManager = getSupportFragmentManager();
+
+            Bundle bundle = new Bundle();
+            bundle.putString("email", user.getEmail());
+            bundle.putInt("typeId", user.getUserTypeId());
+            newFragment.setArguments(bundle);
+
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.fragmentContainerView, newFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+            return true;
+        });
         return true;
     }
 
@@ -139,19 +117,16 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
         final String [] languagesLst = {"עברית", "English"};
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setTitle("Choose Language...");
-        builder.setSingleChoiceItems(languagesLst, -1, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                if (i == 0) {
-                    setLocale("iw");
-                    recreate();
-                }
-                else if (i == 1) {
-                    setLocale("en");
-                    recreate();
-                }
-                dialogInterface.dismiss();
+        builder.setSingleChoiceItems(languagesLst, -1, (dialogInterface, i) -> {
+            if (i == 0) {
+                setLocale("iw");
+                recreate();
             }
+            else if (i == 1) {
+                setLocale("en");
+                recreate();
+            }
+            dialogInterface.dismiss();
         });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
@@ -182,5 +157,17 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
     public static User getUser(){
         return user;
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        assert getFragmentManager() != null;
+        Fragment newFragment = new HomePageFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragmentContainerView, newFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
 
 }

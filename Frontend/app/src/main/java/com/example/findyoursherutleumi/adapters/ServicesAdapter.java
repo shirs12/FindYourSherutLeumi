@@ -43,7 +43,6 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-//        holder.title.setText(servicesLst.get(position).getServiceName());
         holder.title.setText(filteredList.get(position).getServiceName());
         holder.detailsBtn.setText(R.string.show_details);
 
@@ -82,7 +81,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
 
     @SuppressLint("NotifyDataSetChanged")
     public void updateServicesList(final List<ServicePartial> mServicesLst) {
-        this.filteredList = mServicesLst;
+        filteredList = mServicesLst;
         notifyDataSetChanged();
     }
 

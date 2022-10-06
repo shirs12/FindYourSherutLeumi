@@ -2,7 +2,6 @@ package com.example.findyoursherutleumi.adapters;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,53 +49,42 @@ public class EditServicesAdapter extends RecyclerView.Adapter<EditServicesAdapte
         holder.serviceNameTxt.setText(servicesLst.get(position).getServiceName());
         holder.cityTxt.setText(servicesLst.get(position).getCity());
 
-        id = servicesLst.get(position).getServiceId();
-        holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (view.getId() == holder.deleteBtn.findViewById(R.id.delete_service_edit_btn).getId()) {
-                    final AlertDialog.Builder builder = new AlertDialog.Builder(inflater.getContext());
-                    builder.setMessage(R.string.delete_service_dialog);
-                    builder.setCancelable(true);
-                    builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+        holder.deleteBtn.setOnClickListener(view -> {
+            if (view.getId() == holder.deleteBtn.findViewById(R.id.delete_service_edit_btn).getId()) {
+                id = servicesLst.get(holder.getAdapterPosition()).getServiceId();
+                final AlertDialog.Builder builder = new AlertDialog.Builder(inflater.getContext());
+                builder.setMessage(R.string.delete_service_dialog);
+                builder.setCancelable(true);
+                builder.setPositiveButton(R.string.yes, (dialogInterface, i) -> {
+                    Call<ResponseBody> call = apiInterface.deleteServiceById(id);
+                    call.enqueue(new Callback<ResponseBody>() {
+                        @SuppressLint("NotifyDataSetChanged")
                         @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            Call<ResponseBody> call = apiInterface.deleteServiceById(id);
-                            call.enqueue(new Callback<ResponseBody>() {
-                                @SuppressLint("NotifyDataSetChanged")
-                                @Override
-                                public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
-                                    if (!response.isSuccessful()) {
-                                        Toast.makeText(inflater.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        servicesLst.remove(holder.getAdapterPosition());
-                                        notifyItemRemoved(holder.getAdapterPosition());
-                                        notifyItemRangeChanged(holder.getAdapterPosition(),servicesLst.size());
-                                        notifyDataSetChanged();
-                                        Toast.makeText(inflater.getContext(), R.string.item_deleted_toast, Toast.LENGTH_SHORT).show();
-                                    }
-                                }
+                        public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
+                            if (!response.isSuccessful()) {
+                                Toast.makeText(inflater.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
+                            } else {
+                                // TODO: update recyclerview in HomePageFragment
+                                System.out.println("codeeeeeeeeeeeeeee:           " + response.code());
+                                servicesLst.remove(holder.getAdapterPosition());
+                                notifyItemRemoved(holder.getAdapterPosition());
+                                notifyItemRangeChanged(holder.getAdapterPosition(),servicesLst.size());
+                                Toast.makeText(inflater.getContext(), R.string.item_deleted_toast, Toast.LENGTH_SHORT).show();
+                            }
+                        }
 
-                                @Override
-                                public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
-                                    Toast.makeText(inflater.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
-                    });
-                    builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                         @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            dialogInterface.cancel();
+                        public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+                            Toast.makeText(inflater.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                         }
                     });
-                    AlertDialog alertDialog = builder.create();
-                    alertDialog.show();
-                }
+                });
+                builder.setNegativeButton(R.string.no, (dialogInterface, i) -> dialogInterface.cancel());
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
             }
         });
     }
-
 
 
     @Override

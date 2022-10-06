@@ -24,4 +24,8 @@ public class HomePageViewModel extends ViewModel {
         return servicesPartialLst;
     }
 
+    public void loadServices() {
+        servicesPartialLst.postValue(repository.getServices().getValue());
+    }
+
 }
