@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.findyoursherutleumi.R;
@@ -42,6 +43,7 @@ public class SettingsFragment extends Fragment {
     EditServicesAdapter editServicesAdapter;
     List<Service> cServicesLst = new ArrayList<>();
     RecyclerView recyclerView;
+    TextView noItems;
 
     private int coordinatorId;
 
@@ -68,6 +70,7 @@ public class SettingsFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view =  inflater.inflate(R.layout.fragment_settings, container, false);
         apiInterface = APIClient.getInstance().create(APIInterface.class);
+        noItems = view.findViewById(R.id.no_items_text);
 
         recyclerView = view.findViewById(R.id.coordinator_services_list_edit);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
@@ -204,6 +207,11 @@ public class SettingsFragment extends Fragment {
                                 assert response.body() != null;
                                 cServicesLst.addAll(response.body());
                                 editServicesAdapter.notifyDataSetChanged();
+
+                                if (editServicesAdapter.getItemCount() == 0)
+                                    noItems.setVisibility(View.VISIBLE);
+                                else noItems.setVisibility(View.GONE);
+
                             }
                         }
                         @Override

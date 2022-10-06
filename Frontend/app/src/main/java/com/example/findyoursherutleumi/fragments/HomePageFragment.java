@@ -20,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.findyoursherutleumi.MainActivity;
 import com.example.findyoursherutleumi.R;
@@ -41,6 +42,7 @@ public class HomePageFragment extends Fragment {
     ServicesAdapter servicesAdapter;
     FloatingActionButton addServiceBtn;
     private EditText searchBar;
+    TextView searchNoResult;
 
     public static HomePageFragment newInstance() {
         return new HomePageFragment();
@@ -61,6 +63,7 @@ public class HomePageFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home_page, container, false);
         setHasOptionsMenu(true);
         addServiceBtn = view.findViewById(R.id.add_service_btn);
+        searchNoResult = view.findViewById(R.id.no_result_text);
 
         if (getArguments() != null) {
             userEmail = getArguments().getString("email");
@@ -105,6 +108,9 @@ public class HomePageFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 servicesAdapter.filter(charSequence);
+                if (servicesAdapter.getItemCount() == 0)
+                    searchNoResult.setVisibility(View.VISIBLE);
+                else searchNoResult.setVisibility(View.GONE);
             }
 
             @Override
