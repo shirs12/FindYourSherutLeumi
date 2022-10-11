@@ -23,7 +23,6 @@ exports.authenticateUser = async (req, res, next) => {
     const [result, _] = await pool.execute("CALL get_user_by_email(?)", [email]);
     const user = result[0][0];
     console.log(user);
-    console.log(user.u_password);
     if(user != undefined){
         const isvalid = await bcrypt.compare(password, user.u_password).then((valid) => {
           if(valid){
@@ -35,7 +34,7 @@ exports.authenticateUser = async (req, res, next) => {
         })
       .catch((err) => next(err)); 
     }
-    else res.status(401).json("Email does not exist");
+    else res.status(400).json("Email does not exist");
   } catch (err) {
     console.log(err);
     next(err);
