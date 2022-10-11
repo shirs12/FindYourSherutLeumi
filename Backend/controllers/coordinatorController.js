@@ -86,7 +86,11 @@ exports.updateCoordinatorById = async (req, res, next) => {
     organization_name,
   } = req.body;
   try {
-    const hash_password = await bcrypt.hash(u_password, 12);
+    let hash_password = u_password;
+    console.log("hello: " + u_password.length);
+    if(u_password.length != 60){
+      hash_password = await bcrypt.hash(u_password, 12);
+    }
     const coordinator = await pool.execute(
       "CALL update_coordinator(?,?,?,?,?,?,?)",
       [
