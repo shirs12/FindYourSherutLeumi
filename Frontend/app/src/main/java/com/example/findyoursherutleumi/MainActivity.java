@@ -72,18 +72,19 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
             builder.setCancelable(true);
 
             builder.setPositiveButton(R.string.yes, (dialogInterface, i) -> {
-                Fragment newFragment = new LoginFragment();
                 assert getFragmentManager() != null;
                 FragmentManager fragmentManager = getSupportFragmentManager();
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.fragmentContainerView, newFragment).disallowAddToBackStack();
-                transaction.commit();
 
                 // clears fragment's back stack to prevent user from going back after logging out.
                 int count = fragmentManager.getBackStackEntryCount();
                 for(int index = 0; index < count; ++index) {
                     fragmentManager.popBackStackImmediate();
                 }
+                Fragment newFragment = new LoginFragment();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.fragmentContainerView, newFragment).disallowAddToBackStack();
+                transaction.commit();
+
             });
             builder.setNegativeButton(R.string.no, (dialogInterface, i) -> dialogInterface.cancel());
             AlertDialog alertDialog = builder.create();
