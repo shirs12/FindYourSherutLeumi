@@ -30,20 +30,17 @@ import retrofit2.Response;
 
 public class SettingsApplicantFragment extends Fragment {
 
-    private int applicantId;
-    private String password;
-
     EditText firstNameInput;
     EditText lastNameInput;
     EditText phoneInput;
     EditText emailInput;
     EditText cityInput;
     EditText passwordInput;
-
     Button updateDetailsBtn;
     Button deleteApplicantBtn;
-
     APIInterface apiInterface;
+    private int applicantId;
+    private String password;
 
     public static SettingsApplicantFragment newInstance() {
         return new SettingsApplicantFragment();
@@ -67,11 +64,12 @@ public class SettingsApplicantFragment extends Fragment {
         fetchData();
 
         updateDetailsBtn = view.findViewById(R.id.update_applicant_edit_details_btn);
-        if (passwordInput.getText().length() < 6 && passwordInput.getText().length() > 0)
-            Toast.makeText(inflater.getContext(), R.string.pass_length_short, Toast.LENGTH_SHORT).show();
-        else if (passwordInput.getText().length() > 0) password = passwordInput.getText().toString();
-        else {
-            updateDetailsBtn.setOnClickListener(view1 -> {
+        updateDetailsBtn.setOnClickListener(view1 -> {
+            if (passwordInput.getText().toString().length() < 6 && passwordInput.getText().toString().length() > 0)
+                Toast.makeText(inflater.getContext(), R.string.pass_length_short, Toast.LENGTH_SHORT).show();
+            else {
+                if (passwordInput.getText().toString().length() > 0)
+                    password = passwordInput.getText().toString();
                 Call<Applicant> call = apiInterface.updateApplicantById(applicantId,
                         firstNameInput.getText().toString(),
                         lastNameInput.getText().toString(),
@@ -95,8 +93,8 @@ public class SettingsApplicantFragment extends Fragment {
                         Toast.makeText(inflater.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                     }
                 });
-            });
-        }
+            }
+        });
 
         deleteApplicantBtn.setOnClickListener(view12 -> {
 
@@ -115,7 +113,7 @@ public class SettingsApplicantFragment extends Fragment {
 
                 // clears fragment's back stack to prevent user from going back after logging out.
                 int count = fragmentManager.getBackStackEntryCount();
-                for(int index = 0; index < count; ++index) {
+                for (int index = 0; index < count; ++index) {
                     fragmentManager.popBackStackImmediate();
                 }
 
@@ -123,13 +121,14 @@ public class SettingsApplicantFragment extends Fragment {
                 call1.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
-                        if(!response.isSuccessful()) {
+                        if (!response.isSuccessful()) {
                             Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                             System.out.println("code1:        " + response.code());
-                        }else {
+                        } else {
                             Toast.makeText(newFragment.getContext(), R.string.user_deleted_toast, Toast.LENGTH_SHORT).show();
                         }
                     }
+
                     @Override
                     public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                         Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
@@ -146,16 +145,16 @@ public class SettingsApplicantFragment extends Fragment {
         return view;
     }
 
-    public void fetchData(){
+    public void fetchData() {
         assert getArguments() != null;
         Call<Applicant> call1 = apiInterface.getApplicantByEmail(getArguments().getString("email"));
         call1.enqueue(new Callback<Applicant>() {
             @Override
             public void onResponse(@NonNull Call<Applicant> call, @NonNull Response<Applicant> response) {
-                if(!response.isSuccessful()) {
+                if (!response.isSuccessful()) {
                     Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                     System.out.println("code1:        " + response.code());
-                } else{
+                } else {
                     assert response.body() != null;
                     password = response.body().getUPassword();
                     applicantId = response.body().getApplicantId();

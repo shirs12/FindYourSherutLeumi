@@ -44,21 +44,17 @@ public class SettingsFragment extends Fragment {
     List<Service> cServicesLst = new ArrayList<>();
     RecyclerView recyclerView;
     TextView noItems;
-
-    private int coordinatorId;
-    private String password;
-
     EditText firstNameInput;
     EditText lastNameInput;
     EditText emailInput;
     EditText phoneInput;
     EditText passwordInput;
     EditText organizationInput;
-
     Button updateDetailsBtn;
     Button deleteCoordinatorBtn;
-
     APIInterface apiInterface;
+    private int coordinatorId;
+    private String password;
 
     public static SettingsFragment newInstance() {
         return new SettingsFragment();
@@ -69,7 +65,7 @@ public class SettingsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_settings, container, false);
+        View view = inflater.inflate(R.layout.fragment_settings, container, false);
         apiInterface = APIClient.getInstance().create(APIInterface.class);
         noItems = view.findViewById(R.id.no_items_text);
 
@@ -91,11 +87,12 @@ public class SettingsFragment extends Fragment {
         fetchData();
 
         updateDetailsBtn = view.findViewById(R.id.update_edit_details_btn);
-        if (passwordInput.getText().length() < 6 && passwordInput.getText().length() > 0)
-            Toast.makeText(inflater.getContext(), R.string.pass_length_short, Toast.LENGTH_SHORT).show();
-        else if (passwordInput.getText().length() > 0) password = passwordInput.getText().toString();
-        else {
-            updateDetailsBtn.setOnClickListener(view12 -> {
+        updateDetailsBtn.setOnClickListener(view12 -> {
+            if (passwordInput.getText().toString().length() < 6 && passwordInput.getText().toString().length() > 0)
+                Toast.makeText(inflater.getContext(), R.string.pass_length_short, Toast.LENGTH_SHORT).show();
+            else {
+                if (passwordInput.getText().toString().length() > 0)
+                    password = passwordInput.getText().toString();
                 Call<Coordinator> call1 = apiInterface.updateCoordinatorById(coordinatorId,
                         firstNameInput.getText().toString(),
                         lastNameInput.getText().toString(),
@@ -120,8 +117,8 @@ public class SettingsFragment extends Fragment {
                         Toast.makeText(inflater.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                     }
                 });
-            });
-        }
+            }
+        });
 
         deleteCoordinatorBtn.setOnClickListener(view1 -> {
             final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -137,7 +134,7 @@ public class SettingsFragment extends Fragment {
 
                 // clears fragment's back stack to prevent user from going back after logging out.
                 int count = fragmentManager.getBackStackEntryCount();
-                for(int index = 0; index < count; ++index) {
+                for (int index = 0; index < count; ++index) {
                     fragmentManager.popBackStackImmediate();
                 }
 
@@ -146,21 +143,22 @@ public class SettingsFragment extends Fragment {
                 call1.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
-                        if(!response.isSuccessful()) {
+                        if (!response.isSuccessful()) {
                             Toast.makeText(newFragment.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                             System.out.println("code1:        " + response.code());
-                        }else {
+                        } else {
                             Call<ResponseBody> call2 = apiInterface.deleteCoordinatorById(coordinatorId);
                             call2.enqueue(new Callback<ResponseBody>() {
                                 @Override
                                 public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
-                                    if(!response.isSuccessful()) {
+                                    if (!response.isSuccessful()) {
                                         Toast.makeText(newFragment.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                                         System.out.println("code2:        " + response.code());
-                                    }else {
+                                    } else {
                                         Toast.makeText(newFragment.getContext(), R.string.user_deleted_toast, Toast.LENGTH_SHORT).show();
                                     }
                                 }
+
                                 @Override
                                 public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                                     Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
@@ -186,15 +184,15 @@ public class SettingsFragment extends Fragment {
         return view;
     }
 
-    public void fetchData(){
+    public void fetchData() {
         assert getArguments() != null;
         Call<Coordinator> call = apiInterface.getCoordinatorByEmail(getArguments().getString("email"));
         call.enqueue(new Callback<Coordinator>() {
             @Override
             public void onResponse(@NonNull Call<Coordinator> call, @NonNull Response<Coordinator> response) {
-                if(!response.isSuccessful()) {
+                if (!response.isSuccessful()) {
                     Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     assert response.body() != null;
                     password = response.body().getUPassword();
                     coordinatorId = response.body().getCoordinatorId();
@@ -209,9 +207,9 @@ public class SettingsFragment extends Fragment {
                         @SuppressLint("NotifyDataSetChanged")
                         @Override
                         public void onResponse(@NonNull Call<List<Service>> call, @NonNull Response<List<Service>> response) {
-                            if(!response.isSuccessful())
+                            if (!response.isSuccessful())
                                 Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
-                            else{
+                            else {
                                 assert response.body() != null;
                                 cServicesLst.addAll(response.body());
                                 editServicesAdapter.notifyDataSetChanged();
@@ -222,6 +220,7 @@ public class SettingsFragment extends Fragment {
 
                             }
                         }
+
                         @Override
                         public void onFailure(@NonNull Call<List<Service>> call, @NonNull Throwable t) {
                             Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
@@ -229,6 +228,7 @@ public class SettingsFragment extends Fragment {
                     });
                 }
             }
+
             @Override
             public void onFailure(@NonNull Call<Coordinator> call, @NonNull Throwable t) {
                 Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
@@ -236,7 +236,6 @@ public class SettingsFragment extends Fragment {
         });
 
     }
-
 
 
 }
