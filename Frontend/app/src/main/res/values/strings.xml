@@ -70,6 +70,8 @@
     <string name="email_address_not_valid">email address is not valid</string>
     <string name="new_service_added">New service added successfully</string>
     <string name="no_items">No items in the list yet</string>
+    <string name="email_does_not_exist">Email does not exist</string>
+    <string name="email_and_password_does_not_match">Email and password does not match</string>
 
     <string-array name="user_types_array">
         <item>Applicant</item>

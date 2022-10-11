@@ -80,7 +80,9 @@ public class LoginFragment extends Fragment {
                         @Override
                         public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
                             if (!response.isSuccessful()) {
-                                Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
+                                if (response.code() == 400) Toast.makeText(getContext(), R.string.email_does_not_exist, Toast.LENGTH_SHORT).show();
+                                else if (response.code() == 401) Toast.makeText(getContext(), R.string.email_and_password_does_not_match, Toast.LENGTH_SHORT).show();
+                                else Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                             } else {
                                 mCallback.communicate(response.body());
 
@@ -103,7 +105,6 @@ public class LoginFragment extends Fragment {
                                 transaction.commit();
                             }
                         }
-
                         @Override
                         public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
                             Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();

@@ -71,6 +71,8 @@
     <string name="email_address_not_valid">כתובת המייל לא תקינה</string>
     <string name="new_service_added">תקן חדש נוסף בהצלחה</string>
     <string name="no_items">אין פריטים ברשימה</string>
+    <string name="email_does_not_exist">כתובת מייל לא קיימת במערכת</string>
+    <string name="email_and_password_does_not_match">אימייל וסיסמה לא תואמים</string>
 
     <string-array name="user_types_array">
         <item>מתנדב/ת</item>
