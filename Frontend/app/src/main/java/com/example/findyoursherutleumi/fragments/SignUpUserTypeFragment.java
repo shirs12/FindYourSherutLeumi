@@ -35,7 +35,7 @@ public class SignUpUserTypeFragment extends Fragment {
 
         setHasOptionsMenu(true);
 
-        Spinner spinner = (Spinner) view.findViewById(R.id.user_type_spinner);
+        Spinner spinner = view.findViewById(R.id.user_type_spinner);
         spinner.setOnItemSelectedListener(new SpinnerAdapter());
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
                 R.array.user_types_array, android.R.layout.simple_spinner_item);
@@ -43,19 +43,17 @@ public class SignUpUserTypeFragment extends Fragment {
         spinner.setAdapter(adapter);
 
         nextBtn = view.findViewById(R.id.sign_up_next_btn);
-        nextBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (view.getId() == R.id.sign_up_next_btn){
-                    Fragment newFragment = null;
-                    if (chose == 0) newFragment = new ApplicantSignUpFragment();
-                    else if (chose == 1) newFragment = new CoordinatorSignUpFragment();
-                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                    transaction.replace(R.id.fragmentContainerView, newFragment);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
-                }
-
+        nextBtn.setOnClickListener(view1 -> {
+            if (view1.getId() == R.id.sign_up_next_btn){
+                Fragment newFragment = null;
+                if (chose == 0) newFragment = new ApplicantSignUpFragment();
+                else if (chose == 1) newFragment = new CoordinatorSignUpFragment();
+                assert getFragmentManager() != null;
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                assert newFragment != null;
+                transaction.replace(R.id.fragmentContainerView, newFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
 

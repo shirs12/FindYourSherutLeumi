@@ -60,49 +60,46 @@ public class CoordinatorSignUpFragment extends Fragment {
 
         submitBtn = view.findViewById(R.id.sign_in_btn);
 
-        submitBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (view.getId() == R.id.sign_in_btn) {
-                    boolean isComplete = isEmpty(firstNameInput.getText().toString(),
-                            lastNameInput.getText().toString(),
-                            phoneNumberInput.getText().toString(),
-                            emailInput.getText().toString(),
-                            passwordInput.getText().toString(),
+        submitBtn.setOnClickListener(view1 -> {
+            if (view1.getId() == R.id.sign_in_btn) {
+                boolean isComplete = isEmpty(firstNameInput.getText().toString(),
+                        lastNameInput.getText().toString(),
+                        phoneNumberInput.getText().toString(),
+                        emailInput.getText().toString(),
+                        passwordInput.getText().toString(),
+                        organizationInput.getText().toString());
+                if (isComplete) {
+                    Call<Coordinator> call = apiInterface.createNewCoordinator(firstNameInput.getText().toString(),
+                            lastNameInput.getText().toString(), phoneNumberInput.getText().toString(),
+                            emailInput.getText().toString(), passwordInput.getText().toString(),
                             organizationInput.getText().toString());
-                    if (isComplete) {
-                        Call<Coordinator> call = apiInterface.createNewCoordinator(firstNameInput.getText().toString(),
-                                lastNameInput.getText().toString(), phoneNumberInput.getText().toString(),
-                                emailInput.getText().toString(), passwordInput.getText().toString(),
-                                organizationInput.getText().toString());
-                        call.enqueue(new Callback<Coordinator>() {
-                            @Override
-                            public void onResponse(@NonNull Call<Coordinator> call, @NonNull Response<Coordinator> response) {
-                                if(!response.isSuccessful()) {
-                                    Toast.makeText(getContext(), "Connection Failed. try again later...", Toast.LENGTH_SHORT).show();
-                                } else{
-                                    firstNameInput.getText().clear();
-                                    lastNameInput.getText().clear();
-                                    phoneNumberInput.getText().clear();
-                                    emailInput.getText().clear();
-                                    passwordInput.getText().clear();
-                                    organizationInput.getText().clear();
+                    call.enqueue(new Callback<Coordinator>() {
+                        @Override
+                        public void onResponse(@NonNull Call<Coordinator> call, @NonNull Response<Coordinator> response) {
+                            if(!response.isSuccessful()) {
+                                Toast.makeText(getContext(), "Connection Failed. try again later...", Toast.LENGTH_SHORT).show();
+                            } else{
+                                firstNameInput.getText().clear();
+                                lastNameInput.getText().clear();
+                                phoneNumberInput.getText().clear();
+                                emailInput.getText().clear();
+                                passwordInput.getText().clear();
+                                organizationInput.getText().clear();
 
-                                    Fragment newFragment = new LoginFragment();
-                                    assert getFragmentManager() != null;
-                                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                                    transaction.replace(R.id.fragmentContainerView, newFragment);
-                                    transaction.addToBackStack(null);
-                                    transaction.commit();
-                                }
+                                Fragment newFragment = new LoginFragment();
+                                assert getFragmentManager() != null;
+                                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                                transaction.replace(R.id.fragmentContainerView, newFragment);
+                                transaction.addToBackStack(null);
+                                transaction.commit();
                             }
+                        }
 
-                            @Override
-                            public void onFailure(@NonNull Call<Coordinator> call, @NonNull Throwable t) {
-                                Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
+                        @Override
+                        public void onFailure(@NonNull Call<Coordinator> call, @NonNull Throwable t) {
+                            Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             }
         });

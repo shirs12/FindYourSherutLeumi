@@ -75,7 +75,7 @@ public class ServiceDetailsFragment extends Fragment {
             @Override
             public void onResponse(@NonNull Call<Service> call, @NonNull Response<Service> response) {
                 if (!response.isSuccessful())
-                    Toast.makeText(getContext(), "Response from server Failed. try again later...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                 else {
                     assert response.body() != null;
                     serviceTxt.setText(response.body().getServiceName());
@@ -94,9 +94,9 @@ public class ServiceDetailsFragment extends Fragment {
                     call1.enqueue(new Callback<Coordinator>() {
                         @SuppressLint("SetTextI18n")
                         @Override
-                        public void onResponse(Call<Coordinator> call, Response<Coordinator> response) {
+                        public void onResponse(@NonNull Call<Coordinator> call, @NonNull Response<Coordinator> response) {
                             if (!response.isSuccessful()){
-                                Toast.makeText(getContext(), "Response from server Failed. try again later...", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                             } else {
                                 assert response.body() != null;
                                 coordinatorNameTxt.setText(response.body().getFirstName() + " " + response.body().getLastName());
@@ -104,8 +104,8 @@ public class ServiceDetailsFragment extends Fragment {
                             }
                         }
                         @Override
-                        public void onFailure(Call<Coordinator> call, Throwable t) {
-                            Toast.makeText(getContext(), "Connection Failed. try again later... ", Toast.LENGTH_SHORT).show();
+                        public void onFailure(@NonNull Call<Coordinator> call, @NonNull Throwable t) {
+                            Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                             System.out.println(t.getMessage());
                         }
                     });
@@ -114,8 +114,8 @@ public class ServiceDetailsFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<Service> call, Throwable t) {
-                Toast.makeText(getContext(), "Connection Failed. try again later... ", Toast.LENGTH_SHORT).show();
+            public void onFailure(@NonNull Call<Service> call, @NonNull Throwable t) {
+                Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                 System.out.println(t.getMessage());
             }
         });

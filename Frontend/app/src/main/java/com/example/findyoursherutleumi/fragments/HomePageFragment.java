@@ -1,11 +1,9 @@
 package com.example.findyoursherutleumi.fragments;
 
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -25,12 +23,8 @@ import android.widget.TextView;
 import com.example.findyoursherutleumi.MainActivity;
 import com.example.findyoursherutleumi.R;
 import com.example.findyoursherutleumi.adapters.ServicesAdapter;
-import com.example.findyoursherutleumi.models.ServicePartial;
-import com.example.findyoursherutleumi.models.User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class HomePageFragment extends Fragment {
 

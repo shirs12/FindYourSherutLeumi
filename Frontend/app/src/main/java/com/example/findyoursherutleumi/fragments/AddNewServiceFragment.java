@@ -75,26 +75,11 @@ public class AddNewServiceFragment extends Fragment {
         apartmentRadio = view.findViewById(R.id.apartment_radio);
         apartmentRadio.setOnCheckedChangeListener((radioGroup, i) -> onRadioButtonClicked1(view));
         secondYearRadio = view.findViewById(R.id.second_year_radio);
-        secondYearRadio.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                onRadioButtonClicked2(view);
-            }
-        });
+        secondYearRadio.setOnCheckedChangeListener((radioGroup, i) -> onRadioButtonClicked2(view));
         morningRadio = view.findViewById(R.id.is_morning_radio);
-        morningRadio.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                onRadioButtonClicked3(view);
-            }
-        });
+        morningRadio.setOnCheckedChangeListener((radioGroup, i) -> onRadioButtonClicked3(view));
         eveningRadio = view.findViewById(R.id.is_evening_radio);
-        eveningRadio.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                onRadioButtonClicked4(view);
-            }
-        });
+        eveningRadio.setOnCheckedChangeListener((radioGroup, i) -> onRadioButtonClicked4(view));
 
         assert getArguments() != null;
         userEmail = getArguments().getString("email");

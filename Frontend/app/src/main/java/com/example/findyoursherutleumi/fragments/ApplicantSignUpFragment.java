@@ -60,51 +60,48 @@ public class ApplicantSignUpFragment extends Fragment {
 
         submitBtn = view.findViewById(R.id.sign_in_btn);
 
-        submitBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (view.getId() == R.id.sign_in_btn) {
-                    boolean isComplete = isEmpty(firstNameInput.getText().toString(),
-                            lastNameInput.getText().toString(),
-                            phoneNumberInput.getText().toString(),
-                            cityInput.getText().toString(),
-                            emailInput.getText().toString(),
+        submitBtn.setOnClickListener(view1 -> {
+            if (view1.getId() == R.id.sign_in_btn) {
+                boolean isComplete = isEmpty(firstNameInput.getText().toString(),
+                        lastNameInput.getText().toString(),
+                        phoneNumberInput.getText().toString(),
+                        cityInput.getText().toString(),
+                        emailInput.getText().toString(),
+                        passwordInput.getText().toString());
+                if (isComplete) {
+                    Call<Applicant> call = apiInterface.createNewApplicant(firstNameInput.getText().toString(),
+                            lastNameInput.getText().toString(), phoneNumberInput.getText().toString(),
+                            cityInput.getText().toString(), emailInput.getText().toString(),
                             passwordInput.getText().toString());
-                    if (isComplete) {
-                        Call<Applicant> call = apiInterface.createNewApplicant(firstNameInput.getText().toString(),
-                                lastNameInput.getText().toString(), phoneNumberInput.getText().toString(),
-                                cityInput.getText().toString(), emailInput.getText().toString(),
-                                passwordInput.getText().toString());
-                        call.enqueue(new Callback<Applicant>() {
-                            @Override
-                            public void onResponse(@NonNull Call<Applicant> call, @NonNull Response<Applicant> response) {
-                                if(!response.isSuccessful()) {
-                                    Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
-                                } else{
-                                    firstNameInput.getText().clear();
-                                    lastNameInput.getText().clear();
-                                    phoneNumberInput.getText().clear();
-                                    cityInput.getText().clear();
-                                    emailInput.getText().clear();
-                                    passwordInput.getText().clear();
-
-                                    Fragment newFragment = new LoginFragment();
-                                    assert getFragmentManager() != null;
-                                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                                    transaction.replace(R.id.fragmentContainerView, newFragment);
-                                    transaction.addToBackStack(null);
-                                    transaction.commit();
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(@NonNull Call<Applicant> call, @NonNull Throwable t) {
+                    call.enqueue(new Callback<Applicant>() {
+                        @Override
+                        public void onResponse(@NonNull Call<Applicant> call, @NonNull Response<Applicant> response) {
+                            if(!response.isSuccessful()) {
                                 Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
+                            } else{
+                                firstNameInput.getText().clear();
+                                lastNameInput.getText().clear();
+                                phoneNumberInput.getText().clear();
+                                cityInput.getText().clear();
+                                emailInput.getText().clear();
+                                passwordInput.getText().clear();
 
+                                Fragment newFragment = new LoginFragment();
+                                assert getFragmentManager() != null;
+                                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                                transaction.replace(R.id.fragmentContainerView, newFragment);
+                                transaction.addToBackStack(null);
+                                transaction.commit();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(@NonNull Call<Applicant> call, @NonNull Throwable t) {
+                            Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
+
             }
         });
 

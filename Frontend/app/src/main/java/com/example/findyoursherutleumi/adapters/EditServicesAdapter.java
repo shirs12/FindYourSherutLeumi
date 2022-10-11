@@ -2,6 +2,7 @@ package com.example.findyoursherutleumi.adapters;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ public class EditServicesAdapter extends RecyclerView.Adapter<EditServicesAdapte
 
     private final LayoutInflater inflater;
     int id;
+    static int deleted = 0;
     APIInterface apiInterface;
     private List<Service> servicesLst;
 
@@ -70,7 +72,6 @@ public class EditServicesAdapter extends RecyclerView.Adapter<EditServicesAdapte
                                 Toast.makeText(inflater.getContext(), R.string.item_deleted_toast, Toast.LENGTH_SHORT).show();
                             }
                         }
-
                         @Override
                         public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                             Toast.makeText(inflater.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
