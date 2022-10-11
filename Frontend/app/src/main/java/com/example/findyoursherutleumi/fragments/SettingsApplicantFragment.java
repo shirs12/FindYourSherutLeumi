@@ -4,7 +4,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -32,6 +31,7 @@ import retrofit2.Response;
 public class SettingsApplicantFragment extends Fragment {
 
     private int applicantId;
+    private String password;
 
     EditText firstNameInput;
     EditText lastNameInput;
@@ -67,23 +67,25 @@ public class SettingsApplicantFragment extends Fragment {
         fetchData();
 
         updateDetailsBtn = view.findViewById(R.id.update_applicant_edit_details_btn);
-        updateDetailsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        if (passwordInput.getText().length() < 6 && passwordInput.getText().length() > 0)
+            Toast.makeText(inflater.getContext(), R.string.pass_length_short, Toast.LENGTH_SHORT).show();
+        else if (passwordInput.getText().length() > 0) password = passwordInput.getText().toString();
+        else {
+            updateDetailsBtn.setOnClickListener(view1 -> {
                 Call<Applicant> call = apiInterface.updateApplicantById(applicantId,
                         firstNameInput.getText().toString(),
                         lastNameInput.getText().toString(),
                         phoneInput.getText().toString(),
                         cityInput.getText().toString(),
                         emailInput.getText().toString(),
-                        passwordInput.getText().toString());
+                        password);
                 call.enqueue(new Callback<Applicant>() {
                     @Override
                     public void onResponse(@NonNull Call<Applicant> call, @NonNull Response<Applicant> response) {
-                        if(!response.isSuccessful()) {
+                        if (!response.isSuccessful()) {
                             Toast.makeText(inflater.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                             System.out.println("code1:        " + response.code());
-                        }else {
+                        } else {
                             Toast.makeText(getContext(), R.string.details_updated_toast, Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -93,63 +95,52 @@ public class SettingsApplicantFragment extends Fragment {
                         Toast.makeText(inflater.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                     }
                 });
-            }
-        });
+            });
+        }
 
-        deleteApplicantBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        deleteApplicantBtn.setOnClickListener(view12 -> {
 
-                final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setMessage(R.string.delete_user_dialog);
-                builder.setCancelable(true);
+            final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setMessage(R.string.delete_user_dialog);
+            builder.setCancelable(true);
 
-                builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+            builder.setPositiveButton(R.string.yes, (dialogInterface, i) -> {
+
+                Fragment newFragment = new LoginFragment();
+                assert getFragmentManager() != null;
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.fragmentContainerView, newFragment).disallowAddToBackStack();
+                transaction.commit();
+
+                // clears fragment's back stack to prevent user from going back after logging out.
+                int count = fragmentManager.getBackStackEntryCount();
+                for(int index = 0; index < count; ++index) {
+                    fragmentManager.popBackStackImmediate();
+                }
+
+                Call<ResponseBody> call1 = apiInterface.deleteApplicantById(applicantId);
+                call1.enqueue(new Callback<ResponseBody>() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                        Fragment newFragment = new LoginFragment();
-                        assert getFragmentManager() != null;
-                        FragmentManager fragmentManager = getFragmentManager();
-                        FragmentTransaction transaction = fragmentManager.beginTransaction();
-                        transaction.replace(R.id.fragmentContainerView, newFragment).disallowAddToBackStack();
-                        transaction.commit();
-
-                        // clears fragment's back stack to prevent user from going back after logging out.
-                        int count = fragmentManager.getBackStackEntryCount();
-                        for(int index = 0; index < count; ++index) {
-                            fragmentManager.popBackStackImmediate();
+                    public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
+                        if(!response.isSuccessful()) {
+                            Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
+                            System.out.println("code1:        " + response.code());
+                        }else {
+                            Toast.makeText(newFragment.getContext(), R.string.user_deleted_toast, Toast.LENGTH_SHORT).show();
                         }
-
-                        Call<ResponseBody> call1 = apiInterface.deleteApplicantById(applicantId);
-                        call1.enqueue(new Callback<ResponseBody>() {
-                            @Override
-                            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
-                                if(!response.isSuccessful()) {
-                                    Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
-                                    System.out.println("code1:        " + response.code());
-                                }else {
-                                    Toast.makeText(newFragment.getContext(), R.string.user_deleted_toast, Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                            @Override
-                            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
-                                Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
-                            }
-                        });
                     }
-                });
-
-                builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.cancel();
+                    public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+                        Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                     }
                 });
+            });
 
-                AlertDialog alertDialog = builder.create();
-                alertDialog.show();
-            }
+            builder.setNegativeButton(R.string.no, (dialogInterface, i) -> dialogInterface.cancel());
+
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
         });
 
         return view;
@@ -166,6 +157,7 @@ public class SettingsApplicantFragment extends Fragment {
                     System.out.println("code1:        " + response.code());
                 } else{
                     assert response.body() != null;
+                    password = response.body().getUPassword();
                     applicantId = response.body().getApplicantId();
                     firstNameInput.setText(response.body().getFirstName());
                     lastNameInput.setText(response.body().getLastName());
