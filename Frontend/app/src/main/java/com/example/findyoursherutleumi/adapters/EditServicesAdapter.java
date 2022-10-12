@@ -2,7 +2,6 @@ package com.example.findyoursherutleumi.adapters;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,15 +9,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.findyoursherutleumi.R;
 import com.example.findyoursherutleumi.database.APIClient;
 import com.example.findyoursherutleumi.database.APIInterface;
-import com.example.findyoursherutleumi.fragments.HomePageFragment;
-import com.example.findyoursherutleumi.fragments.ServiceDetailsFragment;
 import com.example.findyoursherutleumi.models.Service;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -29,6 +24,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * This class is the adapter for the service's list in the 'SettingsFragment'.
+ */
 public class EditServicesAdapter extends RecyclerView.Adapter<EditServicesAdapter.ViewHolder> {
 
     private final LayoutInflater inflater;
@@ -58,10 +56,12 @@ public class EditServicesAdapter extends RecyclerView.Adapter<EditServicesAdapte
         holder.deleteBtn.setOnClickListener(view -> {
             if (view.getId() == holder.deleteBtn.findViewById(R.id.delete_service_edit_btn).getId()) {
                 id = servicesLst.get(holder.getAdapterPosition()).getServiceId();
+
+                // alert dialog to make sure the user actually wants to delete the current item
                 final AlertDialog.Builder builder = new AlertDialog.Builder(inflater.getContext());
                 builder.setMessage(R.string.delete_service_dialog);
                 builder.setCancelable(true);
-                builder.setPositiveButton(R.string.yes, (dialogInterface, i) -> {
+                builder.setPositiveButton(R.string.yes, (dialogInterface, i) -> {   // if the user click 'yes'
                     Call<ResponseBody> call = apiInterface.deleteServiceById(id);
                     call.enqueue(new Callback<ResponseBody>() {
                         @SuppressLint("NotifyDataSetChanged")
@@ -82,7 +82,7 @@ public class EditServicesAdapter extends RecyclerView.Adapter<EditServicesAdapte
                         }
                     });
                 });
-                builder.setNegativeButton(R.string.no, (dialogInterface, i) -> dialogInterface.cancel());
+                builder.setNegativeButton(R.string.no, (dialogInterface, i) -> dialogInterface.cancel());   // if the user click 'no'
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
             }

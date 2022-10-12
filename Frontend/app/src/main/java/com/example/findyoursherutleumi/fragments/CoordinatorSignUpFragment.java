@@ -26,6 +26,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * This class is the CoordinatorSignUp fragment,
+ * which user from type - coordinator can sign up to the app.
+ */
 public class CoordinatorSignUpFragment extends Fragment {
 
     APIInterface apiInterface;
@@ -62,6 +66,7 @@ public class CoordinatorSignUpFragment extends Fragment {
 
         submitBtn.setOnClickListener(view1 -> {
             if (view1.getId() == R.id.sign_in_btn) {
+                // checks if the user filled all the fields
                 boolean isComplete = isEmpty(firstNameInput.getText().toString(),
                         lastNameInput.getText().toString(),
                         phoneNumberInput.getText().toString(),
@@ -77,8 +82,9 @@ public class CoordinatorSignUpFragment extends Fragment {
                         @Override
                         public void onResponse(@NonNull Call<Coordinator> call, @NonNull Response<Coordinator> response) {
                             if(!response.isSuccessful()) {
-                                Toast.makeText(getContext(), "Connection Failed. try again later...", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                             } else{
+                                // all the fields is cleared after submission
                                 firstNameInput.getText().clear();
                                 lastNameInput.getText().clear();
                                 phoneNumberInput.getText().clear();
@@ -86,6 +92,7 @@ public class CoordinatorSignUpFragment extends Fragment {
                                 passwordInput.getText().clear();
                                 organizationInput.getText().clear();
 
+                                // transact back to the login screen
                                 Fragment newFragment = new LoginFragment();
                                 assert getFragmentManager() != null;
                                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -106,6 +113,11 @@ public class CoordinatorSignUpFragment extends Fragment {
         return view;
     }
 
+    /*
+    this method checks if one of the fields is empty,
+    or if some fields not filled correctly
+    before sign up the user.
+     */
     private boolean isEmpty(String input1, String input2, String input3,
                             String email, String pass, String input5) {
         if (input1.isEmpty() || input2.isEmpty() || input3.isEmpty()

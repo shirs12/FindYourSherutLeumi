@@ -25,9 +25,13 @@ import com.example.findyoursherutleumi.R;
 import com.example.findyoursherutleumi.adapters.ServicesAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-
+/**
+ * This class is the HomePage fragment,
+ * the main screen of the app, contains the list of all services.
+ */
 public class HomePageFragment extends Fragment {
 
+    // arguments from login
     private int userTypeId;
     private String userEmail;
 
@@ -66,7 +70,7 @@ public class HomePageFragment extends Fragment {
             userEmail = MainActivity.getUser().getEmail();
             userTypeId = MainActivity.getUser().getUserTypeId();
         }
-        if (userTypeId == 1) {
+        if (userTypeId == 1) {  // if the user type id is 1, the user cannot add new service to the app
             addServiceBtn.setVisibility(View.GONE);
         }
 
@@ -92,6 +96,7 @@ public class HomePageFragment extends Fragment {
         });
 
         searchBar = view.findViewById(R.id.search_bar);
+        // filters items from recyclerview while user is searching by search bar
         searchBar.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -117,6 +122,7 @@ public class HomePageFragment extends Fragment {
         return view;
     }
 
+    // initializing the recyclerview
     private void initRecyclerView() {
         servicesAdapter = new ServicesAdapter(getLayoutInflater(), mViewModel.getServices().getValue());
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
@@ -129,6 +135,9 @@ public class HomePageFragment extends Fragment {
         servicesAdapter.notifyDataSetChanged();
     }
 
+    /* when the fragment is restarting, the viewmodel gets all services from db,
+    and updating the range of the adapter.
+     */
     @Override
     public void onStart() {
         super.onStart();

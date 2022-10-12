@@ -28,9 +28,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * This class is the AddNewService fragment,
+ * which the authorized user can add service to the app
+ */
 public class AddNewServiceFragment extends Fragment {
 
     APIInterface apiInterface;
+
     Button addServiceBtn;
     EditText serviceNameInput;
     EditText organizationInput;
@@ -47,7 +52,9 @@ public class AddNewServiceFragment extends Fragment {
     RadioButton morningBtn;
     RadioGroup eveningRadio;
     RadioButton eveningBtn;
+
     private String userEmail;
+
     private int hasApartment = 0;
     private int isSecondYear = 0;
     private int isMorning = 0;
@@ -87,6 +94,7 @@ public class AddNewServiceFragment extends Fragment {
         addServiceBtn = view.findViewById(R.id.add_new_service_btn);
         addServiceBtn.setOnClickListener(view1 -> {
             if (view1.getId() == R.id.add_new_service_btn) {
+                // checks if the user filled all the fields
                 boolean isComplete = isEmpty(serviceNameInput.getText().toString(),
                         organizationInput.getText().toString(),
                         categoryInput.getText().toString(),
@@ -123,6 +131,7 @@ public class AddNewServiceFragment extends Fragment {
                                         if (!response.isSuccessful()) {
                                             Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                                         } else {
+                                            // after adding, all the fields cleared
                                             serviceNameInput.getText().clear();
                                             organizationInput.getText().clear();
                                             categoryInput.getText().clear();
@@ -164,6 +173,9 @@ public class AddNewServiceFragment extends Fragment {
         return view;
     }
 
+    /*
+    those radio methods for update the right value to the new item
+     */
     public void onRadioButtonClicked1(View view) {
         int radioId = apartmentRadio.getCheckedRadioButtonId();
         apartmentBtn = view.findViewById(radioId);
@@ -192,6 +204,10 @@ public class AddNewServiceFragment extends Fragment {
             isEvening = 1;
     }
 
+    /*
+    this method checks if one of the fields is empty,
+    before adding a new item.
+     */
     private boolean isEmpty(String input1, String input2, String input3,
                             String input4, String input5, String input6,
                             String input7) {

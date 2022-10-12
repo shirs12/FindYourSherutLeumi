@@ -3,6 +3,9 @@ package com.example.findyoursherutleumi.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * This class is partial service details model
+ */
 public class ServicePartial {
 
     @SerializedName("service_id")

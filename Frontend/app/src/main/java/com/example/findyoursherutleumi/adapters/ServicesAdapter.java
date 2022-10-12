@@ -22,6 +22,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * This class is the adapter for the service's list in the 'HomePageFragment'.
+ */
 public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHolder> {
 
     private final LayoutInflater inflater;
@@ -31,7 +34,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
     public ServicesAdapter(LayoutInflater inflater, List<ServicePartial> servicesLst){
         this.inflater = inflater;
         this.servicesLst = servicesLst;
-        this.filteredList = new ArrayList<>(servicesLst);
+        this.filteredList = new ArrayList<>(servicesLst);   // copy of the list for filtering
     }
 
     @NonNull
@@ -53,23 +56,21 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
         holder.descriptionTxt.setText(filteredList.get(position).getDescriptionService());
 
         int id = filteredList.get(position).getServiceId();
-        holder.detailsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (view.getId() == holder.detailsBtn.findViewById(R.id.show_details_btn).getId()) {
+        holder.detailsBtn.setOnClickListener(view -> {
+            if (view.getId() == holder.detailsBtn.findViewById(R.id.show_details_btn).getId()) {
 
-                    AppCompatActivity activity = (AppCompatActivity) view.getContext();
-                    Fragment newFragment = new ServiceDetailsFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("id", id);
-                    newFragment.setArguments(bundle);
+                // get to the specific 'ServiceDetailsFragment' by the service id
+                AppCompatActivity activity = (AppCompatActivity) view.getContext();
+                Fragment newFragment = new ServiceDetailsFragment();
+                Bundle bundle = new Bundle();
+                bundle.putInt("id", id);
+                newFragment.setArguments(bundle);
 
-                    activity.getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.fragmentContainerView, newFragment)
-                            .addToBackStack(null)
-                            .commit();
-                }
+                activity.getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainerView, newFragment)
+                        .addToBackStack(null)
+                        .commit();
             }
         });
     }
@@ -109,12 +110,15 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
 
     }
 
+    /*
+    this method is for filtering items from 'servicesLst',
+    by the text that the user write in the search box at 'HomePageFragment'.
+     */
     @SuppressLint("NotifyDataSetChanged")
     public void filter(CharSequence charSequence) {
-        List<ServicePartial> temp = new ArrayList<>();
         if (TextUtils.isEmpty(charSequence))
             this.filteredList = new ArrayList<>(servicesLst);
-        this.filteredList = (ArrayList<ServicePartial>) this.filteredList.stream()
+        this.filteredList = this.filteredList.stream()
                 .filter(data ->
                         data.getServiceName().toLowerCase().contains(charSequence) ||
                                 data.getCategory().toLowerCase().contains(charSequence) ||

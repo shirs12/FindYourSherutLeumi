@@ -23,6 +23,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * This class is the ServiceDetails fragment,
+ * where all service details is shown.
+ */
 public class ServiceDetailsFragment extends Fragment {
 
     private int serviceId;
@@ -67,6 +71,7 @@ public class ServiceDetailsFragment extends Fragment {
         coordinatorNameTxt = view.findViewById(R.id.coordinator_name_txt);
         coordinatorContactTxt = view.findViewById(R.id.coordinator_contact_txt);
 
+        // arguments from ServicesAdapter
         assert getArguments() != null;
         serviceId = getArguments().getInt("id");
 
@@ -77,6 +82,7 @@ public class ServiceDetailsFragment extends Fragment {
                 if (!response.isSuccessful())
                     Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                 else {
+                    // sets service details from db
                     assert response.body() != null;
                     serviceTxt.setText(response.body().getServiceName());
                     organizationTxt.setText(response.body().getOrganizationName());

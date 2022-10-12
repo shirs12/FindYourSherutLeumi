@@ -29,6 +29,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * This class is the Login fragment,
+ * which the user can login to the app by email and password.
+ */
 public class LoginFragment extends Fragment {
 
     Button signInBtn;
@@ -40,6 +44,7 @@ public class LoginFragment extends Fragment {
 
     private FragmentToActivity mCallback;
 
+    // load context from main activity, before the fragment is created
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -71,6 +76,7 @@ public class LoginFragment extends Fragment {
 
         signInBtn.setOnClickListener(view1 -> {
             if (view1.getId() == R.id.sign_in_btn){
+                // checks if the user filled all the fields
                 boolean isComplete = isEmpty(inputEmail.getText().toString(), inputPassword.getText().toString());
                 if (isComplete) {
                     Call<User> call = apiInterface.authenticateUser(inputEmail.getText().toString(), inputPassword.getText().toString());
@@ -82,8 +88,9 @@ public class LoginFragment extends Fragment {
                                 else if (response.code() == 401) Toast.makeText(getContext(), R.string.email_and_password_does_not_match, Toast.LENGTH_SHORT).show();
                                 else Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                             } else {
-                                mCallback.communicate(response.body());
+                                mCallback.communicate(response.body()); // sends user to the main activity
 
+                                // all the fields is cleared after login
                                 inputEmail.getText().clear();
                                 inputPassword.getText().clear();
 
@@ -126,6 +133,9 @@ public class LoginFragment extends Fragment {
         return view;
     }
 
+    /*
+    this method checks if one of the fields is empty
+     */
     private boolean isEmpty(String input1, String input2) {
         if (input1.isEmpty() || input2.isEmpty()) {
             Toast.makeText(getContext(), R.string.fields_not_filled, Toast.LENGTH_SHORT).show();

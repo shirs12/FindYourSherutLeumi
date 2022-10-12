@@ -3,6 +3,9 @@ package com.example.findyoursherutleumi.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * This class is coordinator model
+ */
 public class Coordinator {
 
     @SerializedName("coordinator_id")

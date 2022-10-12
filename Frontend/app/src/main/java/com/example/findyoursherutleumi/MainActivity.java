@@ -22,7 +22,10 @@ import com.example.findyoursherutleumi.models.User;
 
 import java.util.Locale;
 
-
+/**
+ * This class is the main activity,
+ * which all the fragments is shown
+ */
 public class MainActivity extends AppCompatActivity implements FragmentToActivity {
 
     private static User user;
@@ -30,13 +33,13 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        loadLocale();
+        loadLocale();   // load default language
         setContentView(R.layout.activity_main);
 
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
         actionBar.setTitle(getResources().getString(R.string.app_name));
-        if (user == null && savedInstanceState != null) {
+        if (user == null && savedInstanceState != null) {   // sets user details
             user = new User();
             user.setEmail(savedInstanceState.getString("email"));
             user.setUserTypeId(savedInstanceState.getInt("typeId"));
@@ -46,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
+        // saves bundles after configuration changes
         super.onSaveInstanceState(outState);
         if(user != null) {
             outState.putString("email", user.getEmail());
@@ -55,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // create menu
         getMenuInflater().inflate(R.menu.nav_menu, menu);
         MenuItem languagesItem = menu.findItem(R.id.languages_btn);
         MenuItem logoutItem = menu.findItem(R.id.logout_item);
@@ -65,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
             return true;
         });
 
-        logoutItem.setOnMenuItemClickListener(menuItem -> {
+        logoutItem.setOnMenuItemClickListener(menuItem -> {     // logout dialog
             final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
             builder.setMessage(R.string.logout_dialog);
             builder.setCancelable(true);
@@ -91,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
             return true;
         });
 
-        settingsItem.setOnMenuItemClickListener(menuItem -> {
+        settingsItem.setOnMenuItemClickListener(menuItem -> {   // user settings dialog
             Fragment newFragment;
             if (user.getUserTypeId() == 2){
                 newFragment = new SettingsFragment();
@@ -115,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
         return true;
     }
 
-
+    // change language method
     private void showChangeLanguageDialog() {
         final String [] languagesLst = {"עברית", "English"};
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
@@ -135,6 +140,7 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
         alertDialog.show();
     }
 
+    // sets the chosen language
     private void setLocale(String lang) {
         Locale locale = new Locale(lang);
         Locale.setDefault(locale);
@@ -146,6 +152,7 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
         editor.apply();
     }
 
+    // loads the language
     public void loadLocale(){
         SharedPreferences preferences = getSharedPreferences("Settings", MODE_PRIVATE);
         String language = preferences.getString("My_Lang","");
@@ -154,18 +161,23 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
 
     @Override
     public void communicate(User user) {
+        // communicate with fragment to get user details from login fragment
         this.user = user;
     }
 
+    // get user from activity to homepage fragment
     public static User getUser(){
         return user;
     }
 
+    /* when back button pressed on device and the user is already logged in,
+     homepage fragment is restarting to load recyclerview
+     */
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         assert getFragmentManager() != null;
-        if (getSupportFragmentManager().getBackStackEntryCount() > 1 && user != null) {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 1 && user != null) { // checks if user logged in
             Fragment newFragment = new HomePageFragment();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.fragmentContainerView, newFragment)

@@ -3,6 +3,9 @@ package com.example.findyoursherutleumi.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * This class is user model
+ */
 public class User {
 
     @SerializedName("email")

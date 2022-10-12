@@ -18,7 +18,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-// Singleton pattern
+// Singleton pattern - can have only one object
 public class ServicesPartialRepository {
 
     private static ServicesPartialRepository instance;

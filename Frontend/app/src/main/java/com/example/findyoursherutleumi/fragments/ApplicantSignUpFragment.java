@@ -26,6 +26,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * This class is the ApplicantSignUp fragment,
+ * which user from type - applicant can sign up to the app.
+ */
 public class ApplicantSignUpFragment extends Fragment {
 
     APIInterface apiInterface;
@@ -62,6 +66,7 @@ public class ApplicantSignUpFragment extends Fragment {
 
         submitBtn.setOnClickListener(view1 -> {
             if (view1.getId() == R.id.sign_in_btn) {
+                // checks if the user filled all the fields
                 boolean isComplete = isEmpty(firstNameInput.getText().toString(),
                         lastNameInput.getText().toString(),
                         phoneNumberInput.getText().toString(),
@@ -79,6 +84,7 @@ public class ApplicantSignUpFragment extends Fragment {
                             if(!response.isSuccessful()) {
                                 Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                             } else{
+                                // all the fields is cleared after submission
                                 firstNameInput.getText().clear();
                                 lastNameInput.getText().clear();
                                 phoneNumberInput.getText().clear();
@@ -86,6 +92,7 @@ public class ApplicantSignUpFragment extends Fragment {
                                 emailInput.getText().clear();
                                 passwordInput.getText().clear();
 
+                                // transact back to the login screen
                                 Fragment newFragment = new LoginFragment();
                                 assert getFragmentManager() != null;
                                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -101,13 +108,17 @@ public class ApplicantSignUpFragment extends Fragment {
                         }
                     });
                 }
-
             }
         });
 
         return view;
     }
 
+    /*
+    this method checks if one of the fields is empty,
+    or if some fields not filled correctly
+    before sign up the user.
+     */
     private boolean isEmpty(String input1, String input2, String input3,
                          String input4, String email, String pass) {
         if (input1.isEmpty() || input2.isEmpty() || input3.isEmpty()

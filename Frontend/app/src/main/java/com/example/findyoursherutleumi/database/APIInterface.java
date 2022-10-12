@@ -18,7 +18,13 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
+/**
+ * This interface has the http requests from the server,
+ * that the user needs while using the app.
+ */
 public interface APIInterface {
+
+    // GET requests
     @GET("applicants")
     Call<List<Applicant>> getAllApplicants();
 
@@ -44,6 +50,7 @@ public interface APIInterface {
     Call<Applicant> getApplicantByEmail(@Path("email") String email);
 
 
+    // POST requests
     @POST("login")
     @FormUrlEncoded
     Call<User> authenticateUser(@Field("email") String email,
@@ -84,6 +91,7 @@ public interface APIInterface {
                                            @Field("coordinator_id") int coordinatorId);
 
 
+    // PUT requests
     @PUT("coordinators/{id}")
     @FormUrlEncoded
     Call<Coordinator> updateCoordinatorById(@Path("id") int coordinator_id,
@@ -105,6 +113,7 @@ public interface APIInterface {
                                             @Field("u_password") String u_password);
 
 
+    // DELETE requests
     @DELETE("services/{id}")
     Call<ResponseBody> deleteServiceById(@Path("id") int service_id);
 

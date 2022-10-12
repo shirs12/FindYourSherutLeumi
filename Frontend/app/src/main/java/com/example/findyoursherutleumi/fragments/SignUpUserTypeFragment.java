@@ -19,6 +19,10 @@ import android.widget.Spinner;
 import com.example.findyoursherutleumi.R;
 import com.example.findyoursherutleumi.adapters.SpinnerAdapter;
 
+/**
+ * This is the SignUpUserType fragment,
+ * which the user chooses applicant/coordinator signing up.
+ */
 public class SignUpUserTypeFragment extends Fragment {
 
     Button nextBtn;

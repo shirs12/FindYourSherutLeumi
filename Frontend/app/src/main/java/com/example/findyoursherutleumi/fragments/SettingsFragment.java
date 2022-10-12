@@ -36,6 +36,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * This class is the SettingsApplicant fragment,
+ * which coordinator user type can edit it's own details
+ */
 public class SettingsFragment extends Fragment {
 
     EditServicesAdapter editServicesAdapter;
@@ -82,7 +86,7 @@ public class SettingsFragment extends Fragment {
 
         deleteCoordinatorBtn = view.findViewById(R.id.c_delete_user_edit_details_btn);
 
-        fetchData();
+        fetchData(); // gets user details from db
 
         updateDetailsBtn = view.findViewById(R.id.update_edit_details_btn);
         updateDetailsBtn.setOnClickListener(view12 -> {
@@ -119,10 +123,11 @@ public class SettingsFragment extends Fragment {
         });
 
         deleteCoordinatorBtn.setOnClickListener(view1 -> {
+            // alert dialog to make sure the user actually wants to delete the account.
             final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
             builder.setMessage(R.string.delete_user_dialog);
             builder.setCancelable(true);
-            builder.setPositiveButton(R.string.yes, (dialogInterface, i) -> {
+            builder.setPositiveButton(R.string.yes, (dialogInterface, i) -> {   // if the user click 'yes'
                 Fragment newFragment = new LoginFragment();
                 assert getFragmentManager() != null;
                 FragmentManager fragmentManager = getFragmentManager();
@@ -172,8 +177,7 @@ public class SettingsFragment extends Fragment {
                 });
             });
 
-            builder.setNegativeButton(R.string.no, (dialogInterface, i) -> dialogInterface.cancel());
-
+            builder.setNegativeButton(R.string.no, (dialogInterface, i) -> dialogInterface.cancel()); // if the user click 'no'
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
         });
@@ -182,6 +186,9 @@ public class SettingsFragment extends Fragment {
         return view;
     }
 
+    /*
+    this method gets the current user data from db
+     */
     public void fetchData() {
         assert getArguments() != null;
         Call<Coordinator> call = apiInterface.getCoordinatorByEmail(getArguments().getString("email"));

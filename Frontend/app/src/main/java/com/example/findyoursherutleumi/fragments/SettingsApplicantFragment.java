@@ -28,6 +28,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * This class is the SettingsApplicant fragment,
+ * which applicant user type can edit it's own details
+ */
 public class SettingsApplicantFragment extends Fragment {
 
     EditText firstNameInput;
@@ -61,10 +65,10 @@ public class SettingsApplicantFragment extends Fragment {
 
         deleteApplicantBtn = view.findViewById(R.id.a_delete_user_edit_details_btn);
 
-        fetchData();
+        fetchData(); // gets user details from db
 
         updateDetailsBtn = view.findViewById(R.id.update_applicant_edit_details_btn);
-        updateDetailsBtn.setOnClickListener(view1 -> {
+        updateDetailsBtn.setOnClickListener(view1 -> {  // update the new details from fields
             if (passwordInput.getText().toString().length() < 6 && passwordInput.getText().toString().length() > 0)
                 Toast.makeText(inflater.getContext(), R.string.pass_length_short, Toast.LENGTH_SHORT).show();
             else {
@@ -97,12 +101,12 @@ public class SettingsApplicantFragment extends Fragment {
         });
 
         deleteApplicantBtn.setOnClickListener(view12 -> {
-
+            // alert dialog to make sure the user actually wants to delete the account.
             final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
             builder.setMessage(R.string.delete_user_dialog);
             builder.setCancelable(true);
 
-            builder.setPositiveButton(R.string.yes, (dialogInterface, i) -> {
+            builder.setPositiveButton(R.string.yes, (dialogInterface, i) -> {   // if the user click 'yes'
 
                 Fragment newFragment = new LoginFragment();
                 assert getFragmentManager() != null;
@@ -136,8 +140,7 @@ public class SettingsApplicantFragment extends Fragment {
                 });
             });
 
-            builder.setNegativeButton(R.string.no, (dialogInterface, i) -> dialogInterface.cancel());
-
+            builder.setNegativeButton(R.string.no, (dialogInterface, i) -> dialogInterface.cancel()); // if the user click 'no'
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
         });
@@ -145,6 +148,9 @@ public class SettingsApplicantFragment extends Fragment {
         return view;
     }
 
+    /*
+    this method gets the current user data from db
+     */
     public void fetchData() {
         assert getArguments() != null;
         Call<Applicant> call1 = apiInterface.getApplicantByEmail(getArguments().getString("email"));

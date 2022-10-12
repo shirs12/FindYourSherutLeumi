@@ -6,6 +6,10 @@ import android.widget.Toast;
 
 import com.example.findyoursherutleumi.fragments.SignUpUserTypeFragment;
 
+/**
+ * This class is for the spinner at 'SignUpUserTypeFragment',
+ * where the user can choose the user type for signing up.
+ */
 public class SpinnerAdapter implements AdapterView.OnItemSelectedListener {
 
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {

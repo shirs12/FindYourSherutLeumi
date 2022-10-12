@@ -9,6 +9,10 @@ import com.example.findyoursherutleumi.repositories.ServicesPartialRepository;
 
 import java.util.List;
 
+/**
+ * This class is the HomePage viewmodel of the main screen,
+ * to set up the services list from db.
+ */
 public class HomePageViewModel extends ViewModel {
 
     private MutableLiveData<List<ServicePartial>> servicesPartialLst;
