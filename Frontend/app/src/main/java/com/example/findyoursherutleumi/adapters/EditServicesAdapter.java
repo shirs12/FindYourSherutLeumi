@@ -10,11 +10,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.findyoursherutleumi.R;
 import com.example.findyoursherutleumi.database.APIClient;
 import com.example.findyoursherutleumi.database.APIInterface;
+import com.example.findyoursherutleumi.fragments.HomePageFragment;
+import com.example.findyoursherutleumi.fragments.ServiceDetailsFragment;
 import com.example.findyoursherutleumi.models.Service;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 

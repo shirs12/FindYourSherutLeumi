@@ -48,7 +48,7 @@
     <string name="coordinator_hint">שם רכז/ת…</string>
     <string name="coordinator_contact_hint">פרטי קשר רכז/ת…</string>
     <string name="add_btn">הוסף</string>
-    <string name="search">חיפוש…</string>
+    <string name="search">חפש לפי כותרת, עיר או תחום…</string>
     <string name="yes">כן</string>
     <string name="no">לא</string>
     <string name="more_menu">עוד</string>

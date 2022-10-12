@@ -134,6 +134,7 @@ public class HomePageFragment extends Fragment {
         super.onStart();
         mViewModel.loadServices();
         updateAdapter();
+        servicesAdapter.notifyItemRangeChanged(0,recyclerView.getItemDecorationCount());
     }
 
     @SuppressLint("NotifyDataSetChanged")
