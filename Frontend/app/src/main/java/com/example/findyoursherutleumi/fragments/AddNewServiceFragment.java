@@ -149,7 +149,6 @@ public class AddNewServiceFragment extends Fragment {
 
                                             Toast.makeText(getContext(), R.string.new_service_added, Toast.LENGTH_SHORT).show();
                                         }
-
                                     }
 
                                     @Override
@@ -159,7 +158,6 @@ public class AddNewServiceFragment extends Fragment {
                                 });
                             }
                         }
-
 
                         @Override
                         public void onFailure(@NonNull Call<Coordinator> call, @NonNull Throwable t) {

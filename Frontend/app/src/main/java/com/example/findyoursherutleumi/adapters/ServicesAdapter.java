@@ -122,7 +122,8 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.ViewHo
                 .filter(data ->
                         data.getServiceName().toLowerCase().contains(charSequence) ||
                                 data.getCategory().toLowerCase().contains(charSequence) ||
-                                data.getCity().toLowerCase().contains(charSequence))
+                                data.getCity().toLowerCase().contains(charSequence) ||
+                                data.getOrganizationName().toLowerCase().contains(charSequence))
                 .collect(Collectors.toList());
         updateServicesList(filteredList);
         notifyDataSetChanged();
