@@ -141,11 +141,12 @@ public class AddNewServiceFragment extends Fragment {
                                             descriptionInput.getText().clear();
 
                                             assert getFragmentManager() != null;
-                                            Fragment newFragment = new HomePageFragment();
-                                            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                                            transaction.replace(R.id.fragmentContainerView, newFragment)
-                                                    .addToBackStack(null)
-                                                    .commit();
+                                            getFragmentManager().popBackStack();
+//                                            Fragment newFragment = new HomePageFragment();
+//                                            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//                                            transaction.replace(R.id.fragmentContainerView, newFragment)
+//                                                    .addToBackStack(null)
+//                                                    .commit();
 
                                             Toast.makeText(getContext(), R.string.new_service_added, Toast.LENGTH_SHORT).show();
                                         }
@@ -172,7 +173,7 @@ public class AddNewServiceFragment extends Fragment {
     }
 
     /*
-    those radio methods for update the right value to the new item
+    those radio button methods for update the right value to the new item
      */
     public void onRadioButtonClicked1(View view) {
         int radioId = apartmentRadio.getCheckedRadioButtonId();

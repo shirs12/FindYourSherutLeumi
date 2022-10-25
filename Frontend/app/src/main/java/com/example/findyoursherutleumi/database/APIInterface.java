@@ -25,12 +25,6 @@ import retrofit2.http.Path;
 public interface APIInterface {
 
     // GET requests
-    @GET("applicants")
-    Call<List<Applicant>> getAllApplicants();
-
-    @GET("applicants/{id}")
-    Call<Applicant> getApplicantById(@Path("id") int id);
-
     @GET("services/{id}")
     Call<Service> getServiceById(@Path("id") int id);
 

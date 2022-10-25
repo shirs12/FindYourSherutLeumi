@@ -31,7 +31,6 @@ public class EditServicesAdapter extends RecyclerView.Adapter<EditServicesAdapte
 
     private final LayoutInflater inflater;
     int id;
-    static int deleted = 0;
     APIInterface apiInterface;
     private List<Service> servicesLst;
 

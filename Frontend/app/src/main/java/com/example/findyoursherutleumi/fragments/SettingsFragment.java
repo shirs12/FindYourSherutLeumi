@@ -141,7 +141,6 @@ public class SettingsFragment extends Fragment {
                     fragmentManager.popBackStackImmediate();
                 }
 
-                // TODO: delete successfully but by login with another account it gets an error
                 Call<ResponseBody> call1 = apiInterface.deleteServicesByCoordinatorId(coordinatorId);
                 call1.enqueue(new Callback<ResponseBody>() {
                     @Override
@@ -222,7 +221,6 @@ public class SettingsFragment extends Fragment {
                                 if (editServicesAdapter.getItemCount() == 0)
                                     noItems.setVisibility(View.VISIBLE);
                                 else noItems.setVisibility(View.GONE);
-
                             }
                         }
 
