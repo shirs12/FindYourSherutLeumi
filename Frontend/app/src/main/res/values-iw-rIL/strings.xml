@@ -73,6 +73,11 @@
     <string name="no_items">אין פריטים ברשימה</string>
     <string name="email_does_not_exist">כתובת מייל לא קיימת במערכת</string>
     <string name="email_and_password_does_not_match">אימייל וסיסמה לא תואמים</string>
+    <string name="send_email">שלח/י מייל</string>
+    <string name="to">אל</string>
+    <string name="Subject">נושא</string>
+    <string name="message">הודעה</string>
+    <string name="send">שלח</string>
 
     <string-array name="user_types_array">
         <item>מתנדב/ת</item>

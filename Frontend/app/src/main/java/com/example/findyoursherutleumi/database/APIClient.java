@@ -17,8 +17,8 @@ public class APIClient extends AppCompatActivity {
     private static Retrofit instance;
     // TODO: switch BASE_URL if needed
 //    private static final String BASE_URL = "http://10.0.2.2:3000/";   // emulator
-//    private static final String BASE_URL = "http://192.168.1.108:3000/";  // home
-    private static final String BASE_URL = "http://10.9.2.167:3000/";   // au
+    private static final String BASE_URL = "http://192.168.1.103:3000/";  // home
+//    private static final String BASE_URL = "http://192.168.202.18:3000/";   // au
 
     public static Retrofit getInstance(){
         if (instance == null){

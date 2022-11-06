@@ -72,6 +72,11 @@
     <string name="no_items">No items in the list yet</string>
     <string name="email_does_not_exist">Email does not exist</string>
     <string name="email_and_password_does_not_match">Email and password does not match</string>
+    <string name="send_email">send email</string>
+    <string name="to">To</string>
+    <string name="Subject">subject</string>
+    <string name="message">Message</string>
+    <string name="send">send</string>
 
     <string-array name="user_types_array">
         <item>Applicant</item>

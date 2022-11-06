@@ -6,10 +6,12 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +32,7 @@ import retrofit2.Response;
 public class ServiceDetailsFragment extends Fragment {
 
     private int serviceId;
+    private Coordinator serviceCoordinator = null;
 
     TextView serviceTxt;
     TextView organizationTxt;
@@ -44,6 +47,8 @@ public class ServiceDetailsFragment extends Fragment {
     TextView descriptionTxt;
     TextView coordinatorNameTxt;
     TextView coordinatorContactTxt;
+
+    Button sendEmailBtn;
 
     APIInterface apiInterface;
 
@@ -70,6 +75,8 @@ public class ServiceDetailsFragment extends Fragment {
         descriptionTxt = view.findViewById(R.id.description_service_txt);
         coordinatorNameTxt = view.findViewById(R.id.coordinator_name_txt);
         coordinatorContactTxt = view.findViewById(R.id.coordinator_contact_txt);
+
+        sendEmailBtn = view.findViewById(R.id.send_email_btn);
 
         // arguments from ServicesAdapter
         assert getArguments() != null;
@@ -105,6 +112,7 @@ public class ServiceDetailsFragment extends Fragment {
                                 Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                             } else {
                                 assert response.body() != null;
+                                serviceCoordinator = response.body();
                                 coordinatorNameTxt.setText(response.body().getFirstName() + " " + response.body().getLastName());
                                 coordinatorContactTxt.setText(response.body().getPhoneNumber());
                             }
@@ -125,6 +133,22 @@ public class ServiceDetailsFragment extends Fragment {
                 System.out.println(t.getMessage());
             }
         });
+
+        sendEmailBtn.setOnClickListener(view1 -> {
+            Fragment newFragment = new SendEmailFragment();
+            if (serviceCoordinator != null){
+                Bundle bundle = new Bundle();
+                bundle.putString("coordinator_email", serviceCoordinator.getEmail());
+                bundle.putString("service_title", serviceTxt.getText().toString());
+                newFragment.setArguments(bundle);
+            }
+            assert getFragmentManager() != null;
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragmentContainerView, newFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        });
+
 
         return view;
     }
