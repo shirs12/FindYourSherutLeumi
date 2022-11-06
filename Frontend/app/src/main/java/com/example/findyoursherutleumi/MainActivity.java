@@ -178,6 +178,7 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
         super.onBackPressed();
         assert getFragmentManager() != null;
         if (getSupportFragmentManager().getBackStackEntryCount() > 1 && user != null) { // checks if user logged in
+            getSupportFragmentManager().popBackStackImmediate();
             Fragment newFragment = new HomePageFragment();
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.fragmentContainerView, newFragment)
