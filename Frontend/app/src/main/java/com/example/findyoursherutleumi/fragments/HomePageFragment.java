@@ -39,7 +39,7 @@ public class HomePageFragment extends Fragment {
     RecyclerView recyclerView;
     ServicesAdapter servicesAdapter;
     FloatingActionButton addServiceBtn;
-    private EditText searchBar;
+    EditText searchBar;
     TextView searchNoResult;
 
     public static HomePageFragment newInstance() {
@@ -144,6 +144,7 @@ public class HomePageFragment extends Fragment {
         mViewModel.loadServices();
         servicesAdapter.notifyItemRangeChanged(0,recyclerView.getItemDecorationCount());
         updateAdapter();
+        searchBar.getText().clear();
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -152,6 +153,7 @@ public class HomePageFragment extends Fragment {
         super.onResume();
         mViewModel.loadServices();
         updateAdapter();
+        searchBar.getText().clear();
     }
 
     @Override

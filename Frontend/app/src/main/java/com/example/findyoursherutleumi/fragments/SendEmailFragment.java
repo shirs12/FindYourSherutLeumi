@@ -19,8 +19,6 @@ import android.widget.EditText;
 
 import com.example.findyoursherutleumi.R;
 
-import java.util.Objects;
-
 public class SendEmailFragment extends Fragment {
 
     EditText coordinatorEmail;
@@ -36,7 +34,7 @@ public class SendEmailFragment extends Fragment {
             @Override
             public void handleOnBackPressed() {
                 assert getFragmentManager() != null;
-//                getFragmentManager().popBackStack();
+                getFragmentManager().popBackStack();
                 // TODO: get to back fragment
 
             }
@@ -49,7 +47,7 @@ public class SendEmailFragment extends Fragment {
     }
 
 
-    @SuppressLint({"SetTextI18n", "IntentReset"})
+    @SuppressLint("SetTextI18n")
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
