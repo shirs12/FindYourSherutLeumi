@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/send_email_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
@@ -15,26 +16,26 @@
             android:id="@+id/send_email_address_coordinator"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/rounded_corners"
             android:ems="10"
-            android:padding="5dp"
             android:hint="@string/to"
             android:inputType="textEmailAddress"
             android:minHeight="48dp"
-            android:layout_marginBottom="10dp"/>
+            android:padding="5dp" />
 
         <EditText
             android:id="@+id/subject_email_service_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/rounded_corners"
             android:ems="10"
-            android:padding="5dp"
             android:hint="@string/Subject"
             android:inputType="text"
             android:minHeight="48dp"
+            android:padding="5dp"
             android:text=""
-            android:layout_marginBottom="10dp"
             tools:ignore="TextFields" />
 
         <EditText
@@ -43,15 +44,15 @@
             android:layout_height="336dp"
             android:background="@drawable/rounded_corners"
             android:ems="10"
-            android:padding="5dp"
             android:gravity="start|top"
             android:hint="@string/message"
             android:inputType="textMultiLine"
             android:minHeight="48dp"
+            android:padding="5dp"
             tools:ignore="TextFields" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/send_email_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="80dp"

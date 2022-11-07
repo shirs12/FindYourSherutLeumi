@@ -76,7 +76,7 @@ public class ServiceDetailsFragment extends Fragment {
         coordinatorNameTxt = view.findViewById(R.id.coordinator_name_txt);
         coordinatorContactTxt = view.findViewById(R.id.coordinator_contact_txt);
 
-        sendEmailBtn = view.findViewById(R.id.send_email_btn);
+        sendEmailBtn = view.findViewById(R.id.send_email_nav_btn);
 
         // arguments from ServicesAdapter
         assert getArguments() != null;

@@ -346,7 +346,7 @@
                     </LinearLayout>
 
                     <Button
-                        android:id="@+id/send_email_btn"
+                        android:id="@+id/send_email_nav_btn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="50dp"

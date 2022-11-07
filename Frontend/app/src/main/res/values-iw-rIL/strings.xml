@@ -78,6 +78,7 @@
     <string name="Subject">נושא</string>
     <string name="message">הודעה</string>
     <string name="send">שלח</string>
+    <string name="open_with">בחר יישום אימייל</string>
 
     <string-array name="user_types_array">
         <item>מתנדב/ת</item>

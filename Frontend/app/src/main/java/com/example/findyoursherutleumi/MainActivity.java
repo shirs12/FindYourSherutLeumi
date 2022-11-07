@@ -16,6 +16,7 @@ import android.view.MenuItem;
 
 import com.example.findyoursherutleumi.fragments.HomePageFragment;
 import com.example.findyoursherutleumi.fragments.LoginFragment;
+import com.example.findyoursherutleumi.fragments.SendEmailFragment;
 import com.example.findyoursherutleumi.fragments.SettingsApplicantFragment;
 import com.example.findyoursherutleumi.fragments.SettingsFragment;
 import com.example.findyoursherutleumi.models.User;
