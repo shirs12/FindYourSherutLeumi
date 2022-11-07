@@ -4,7 +4,7 @@
     android:id="@+id/send_email_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
+    android:padding="20dp"
     tools:context=".fragments.SendEmailFragment">
 
     <LinearLayout
@@ -53,13 +53,17 @@
 
         <Button
             android:id="@+id/send_email_btn"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginLeft="80dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="80dp"
             android:layout_marginBottom="15dp"
             android:backgroundTint="@color/green_blue"
+            android:drawableLeft="@android:drawable/ic_dialog_email"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
             android:text="@string/send" />
 
     </LinearLayout>
