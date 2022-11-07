@@ -166,10 +166,5 @@ public class HomePageFragment extends Fragment {
         updateAdapter();
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        updateAdapter();
-    }
 
 }
