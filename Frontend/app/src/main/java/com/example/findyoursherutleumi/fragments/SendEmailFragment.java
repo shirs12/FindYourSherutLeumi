@@ -65,11 +65,11 @@ public class SendEmailFragment extends Fragment {
         subject.setText(requireContext().getResources().getString(R.string.service) + ": " + getArguments().getString("service_title"));
 
         sendBtn.setOnClickListener(view1 -> {
-            Intent intent = new Intent(Intent.ACTION_SEND);
+            Intent intent = new Intent(Intent.ACTION_SENDTO);
+            intent.setData(Uri.parse("mailto:"));  // only email apps should handle this
             intent.putExtra(Intent.EXTRA_EMAIL, new String[]{coordinatorEmail.getText().toString()});
             intent.putExtra(Intent.EXTRA_SUBJECT, subject.getText().toString());
             intent.putExtra(Intent.EXTRA_TEXT, message.getText().toString());
-            intent.setType("message/rfc822");
             startActivity(Intent.createChooser(intent, requireContext().getResources().getString(R.string.open_with)));
         });
 
