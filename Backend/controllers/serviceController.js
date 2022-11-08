@@ -105,11 +105,10 @@ exports.updateServiceById = async (req, res, next) => {
     is_morning_service,
     is_evening_service,
     description_service,
-    coordinator_name,
   } = req.body;
   try {
     const service = await pool.execute(
-      "CALL update_service(?,?,?,?,?,?,?,?,?,?,?,?,?)",
+      "CALL update_service(?,?,?,?,?,?,?,?,?,?,?,?)",
       [
         id,
         service_name,
@@ -123,7 +122,6 @@ exports.updateServiceById = async (req, res, next) => {
         is_morning_service,
         is_evening_service,
         description_service,
-        coordinator_name,
       ]
     );
     res.status(201).json(service[0]);
@@ -156,3 +154,5 @@ exports.deleteServicesByCoordinatorId = async (req, res, next) => {
     next(err);
   }
 };
+
+
