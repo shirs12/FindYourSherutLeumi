@@ -78,6 +78,7 @@
     <string name="message">Message</string>
     <string name="send">send</string>
     <string name="open_with">choose an email client</string>
+    <string name="edit_service">Edit service</string>
 
     <string-array name="user_types_array">
         <item>Applicant</item>

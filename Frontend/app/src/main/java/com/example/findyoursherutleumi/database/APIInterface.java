@@ -3,6 +3,7 @@ package com.example.findyoursherutleumi.database;
 import com.example.findyoursherutleumi.models.Applicant;
 import com.example.findyoursherutleumi.models.Coordinator;
 import com.example.findyoursherutleumi.models.Service;
+import com.example.findyoursherutleumi.models.ServiceEdit;
 import com.example.findyoursherutleumi.models.ServicePartial;
 import com.example.findyoursherutleumi.models.User;
 
@@ -105,6 +106,22 @@ public interface APIInterface {
                                             @Field("city") String city,
                                             @Field("email") String email,
                                             @Field("u_password") String u_password);
+
+    @PUT("services/{id}")
+    @FormUrlEncoded
+    Call<ServiceEdit> updateServiceById(@Path("id") int service_id,
+                                        @Field("service_name") String service_name,
+                                        @Field("organization_name") String organization_name,
+                                        @Field("category") String category,
+                                        @Field("country") String country,
+                                        @Field("city") String city,
+                                        @Field("address") String address,
+                                        @Field("has_apartment") int has_apartment,
+                                        @Field("is_second_year_only") int is_second_year_only,
+                                        @Field("is_morning_service") int is_morning_service,
+                                        @Field("is_evening_service") int is_evening_service,
+                                        @Field("description_service") String description_service
+                                    );
 
 
     // DELETE requests

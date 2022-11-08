@@ -2,9 +2,15 @@ package com.example.findyoursherutleumi.adapters;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,9 +21,11 @@ import com.example.findyoursherutleumi.R;
 import com.example.findyoursherutleumi.database.APIClient;
 import com.example.findyoursherutleumi.database.APIInterface;
 import com.example.findyoursherutleumi.models.Service;
+import com.example.findyoursherutleumi.models.ServiceEdit;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -86,6 +94,95 @@ public class EditServicesAdapter extends RecyclerView.Adapter<EditServicesAdapte
                 alertDialog.show();
             }
         });
+
+        holder.editBtn.setOnClickListener(view1 -> {
+            if (view1.getId() == holder.editBtn.findViewById(R.id.edit_service_list_btn).getId()) {
+                id = servicesLst.get(holder.getAdapterPosition()).getServiceId();
+
+                final Dialog dialog = new Dialog(inflater.getContext());
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setCancelable(true);
+                dialog.setContentView(R.layout.dialog_edit_service);
+
+                final EditText name = dialog.findViewById(R.id.edit_service_name);
+                final EditText organization = dialog.findViewById(R.id.edit_service_organization);
+                final EditText category = dialog.findViewById(R.id.edit_service_category);
+                final EditText country = dialog.findViewById(R.id.edit_service_country);
+                final EditText city = dialog.findViewById(R.id.edit_service_city);
+                final EditText address = dialog.findViewById(R.id.edit_service_address);
+                final EditText description = dialog.findViewById(R.id.edit_service_description);
+
+                Button submitButton = dialog.findViewById(R.id.submit_button);
+
+                Call<Service> call = apiInterface.getServiceById(id);
+                call.enqueue(new Callback<Service>() {
+                    @Override
+                    public void onResponse(@NonNull Call<Service> call, @NonNull Response<Service> response) {
+                        if (!response.isSuccessful()) {
+                            Toast.makeText(inflater.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
+                        } else {
+                            assert response.body() != null;
+                            name.setText(response.body().getServiceName());
+                            organization.setText(response.body().getOrganizationName());
+                            category.setText(response.body().getCategory());
+                            country.setText(response.body().getCountry());
+                            city.setText(response.body().getCity());
+                            address.setText(response.body().getAddress());
+                            description.setText(response.body().getDescriptionService());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<Service> call, @NonNull Throwable t) {
+                        Toast.makeText(inflater.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                submitButton.setOnClickListener(v -> {
+
+                    RadioGroup apartmentRadio = dialog.findViewById(R.id.edit_apartment_radio);
+                    RadioButton apartmentBtn = dialog.findViewById(apartmentRadio.getCheckedRadioButtonId());
+                    RadioGroup secondYearRadio = dialog.findViewById(R.id.edit_second_year_radio);
+                    RadioButton secondYearBtn = dialog.findViewById(secondYearRadio.getCheckedRadioButtonId());
+                    RadioGroup morningRadio = dialog.findViewById(R.id.edit_is_morning_radio);
+                    RadioButton morningBtn = dialog.findViewById(morningRadio.getCheckedRadioButtonId());
+                    RadioGroup eveningRadio = dialog.findViewById(R.id.edit_is_evening_radio);
+                    RadioButton eveningBtn = dialog.findViewById(eveningRadio.getCheckedRadioButtonId());
+
+                    Call<ServiceEdit> call1 = apiInterface.updateServiceById(id,
+                            name.getText().toString(),
+                            organization.getText().toString(),
+                            category.getText().toString(),
+                            country.getText().toString(),
+                            city.getText().toString(),
+                            address.getText().toString(),
+                            (apartmentBtn.getId() == dialog.findViewById(R.id.edit_has_apartment_yes).getId() ? 1 : 0),
+                            (secondYearBtn.getId() == dialog.findViewById(R.id.edit_second_year_yes).getId() ? 1 : 0),
+                            (morningBtn.getId() == dialog.findViewById(R.id.edit_morning_service_yes).getId() ? 1 : 0),
+                            (eveningBtn.getId() == dialog.findViewById(R.id.edit_evening_service_yes).getId() ? 1 : 0),
+                            description.getText().toString());
+                    call1.enqueue(new Callback<ServiceEdit>() {
+                        @Override
+                        public void onResponse(@NonNull Call<ServiceEdit> call, @NonNull Response<ServiceEdit> response) {
+                            if (!response.isSuccessful()) {
+                                Toast.makeText(inflater.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
+                            } else {
+                                assert response.body() != null;
+                                Toast.makeText(inflater.getContext(), R.string.details_updated_toast, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(@NonNull Call<ServiceEdit> call, @NonNull Throwable t) {
+                            Toast.makeText(inflater.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    dialog.dismiss();
+                });
+                dialog.show();
+            }
+        });
+
     }
 
 
@@ -102,12 +199,14 @@ public class EditServicesAdapter extends RecyclerView.Adapter<EditServicesAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        FloatingActionButton editBtn;
         FloatingActionButton deleteBtn;
         TextView serviceNameTxt;
         TextView cityTxt;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            editBtn = itemView.findViewById(R.id.edit_service_list_btn);
             deleteBtn = itemView.findViewById(R.id.delete_service_edit_btn);
             serviceNameTxt = itemView.findViewById(R.id.service_title_lst_edit);
             cityTxt = itemView.findViewById(R.id.service_city_lst_edit);
