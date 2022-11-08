@@ -95,6 +95,10 @@ public class EditServicesAdapter extends RecyclerView.Adapter<EditServicesAdapte
             }
         });
 
+        /**
+         * edit service dialog - fields fill with all the current details,
+         * which the user can change.
+         */
         holder.editBtn.setOnClickListener(view1 -> {
             if (view1.getId() == holder.editBtn.findViewById(R.id.edit_service_list_btn).getId()) {
                 id = servicesLst.get(holder.getAdapterPosition()).getServiceId();
@@ -129,6 +133,23 @@ public class EditServicesAdapter extends RecyclerView.Adapter<EditServicesAdapte
                             city.setText(response.body().getCity());
                             address.setText(response.body().getAddress());
                             description.setText(response.body().getDescriptionService());
+
+                            RadioGroup apartmentRadio = dialog.findViewById(R.id.edit_apartment_radio);
+                            if (response.body().getHasApartment()) apartmentRadio.check(dialog.findViewById(R.id.edit_has_apartment_yes).getId());
+                            else apartmentRadio.check(dialog.findViewById(R.id.edit_has_apartment_no).getId());
+
+                            RadioGroup secondYearRadio = dialog.findViewById(R.id.edit_second_year_radio);
+                            if (response.body().getIsSecondYearOnly()) secondYearRadio.check(dialog.findViewById(R.id.edit_second_year_yes).getId());
+                            else secondYearRadio.check(dialog.findViewById(R.id.edit_second_year_no).getId());
+
+                            RadioGroup morningRadio = dialog.findViewById(R.id.edit_is_morning_radio);
+                            if (response.body().getIsMorningService()) morningRadio.check(dialog.findViewById(R.id.edit_morning_service_yes).getId());
+                            else morningRadio.check(dialog.findViewById(R.id.edit_morning_service_no).getId());
+
+                            RadioGroup eveningRadio = dialog.findViewById(R.id.edit_is_evening_radio);
+                            if (response.body().getIsEveningService()) eveningRadio.check(dialog.findViewById(R.id.edit_evening_service_yes).getId());
+                            else eveningRadio.check(dialog.findViewById(R.id.edit_evening_service_no).getId());
+
                         }
                     }
 
@@ -182,7 +203,6 @@ public class EditServicesAdapter extends RecyclerView.Adapter<EditServicesAdapte
                 dialog.show();
             }
         });
-
     }
 
 
