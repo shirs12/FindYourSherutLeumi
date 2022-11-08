@@ -159,7 +159,7 @@ DELIMITER $$
 CREATE PROCEDURE `update_service`(IN id INT, IN p_service_name NVARCHAR(40), IN p_organization_name NVARCHAR(40),
  IN p_category NVARCHAR(50), IN p_country NVARCHAR(30), IN p_city NVARCHAR(30), IN p_address NVARCHAR(30),
  IN p_has_apartment BOOLEAN, IN p_is_second_year_only BOOLEAN, IN p_is_morning_service BOOLEAN,
- IN p_is_evening_service BOOLEAN, IN p_description_service NVARCHAR(200), IN p_coordinator_name NVARCHAR(25))
+ IN p_is_evening_service BOOLEAN, IN p_description_service NVARCHAR(200))
 BEGIN
     UPDATE service
 	SET service_name = p_service_name,
@@ -172,8 +172,7 @@ BEGIN
     is_second_year_only = p_is_second_year_only,
     is_morning_service = p_is_morning_service,
     is_evening_service = p_is_evening_service,
-    description_service = p_description_service,
-    coordinator_name = p_coordinator_name
+    description_service = p_description_service
 	WHERE service_id = id;
 END$$
 DELIMITER ;
