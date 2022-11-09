@@ -116,6 +116,7 @@ public class EditServicesAdapter extends RecyclerView.Adapter<EditServicesAdapte
                 final EditText description = dialog.findViewById(R.id.edit_service_description);
 
                 Button submitButton = dialog.findViewById(R.id.submit_button);
+                FloatingActionButton close = dialog.findViewById(R.id.edit_service_close_btn);
 
                 Call<Service> call = apiInterface.getServiceById(id);
                 call.enqueue(new Callback<Service>() {
@@ -206,6 +207,9 @@ public class EditServicesAdapter extends RecyclerView.Adapter<EditServicesAdapte
                     dialog.dismiss();
                     }
                 });
+
+                close.setOnClickListener(view2 -> dialog.dismiss());
+
                 dialog.show();
             }
         });
