@@ -2,6 +2,7 @@ package com.example.findyoursherutleumi.fragments;
 
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -14,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -24,6 +26,7 @@ import com.example.findyoursherutleumi.R;
 import com.example.findyoursherutleumi.database.APIClient;
 import com.example.findyoursherutleumi.database.APIInterface;
 import com.example.findyoursherutleumi.models.User;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,7 +41,7 @@ public class LoginFragment extends Fragment {
     Button signInBtn;
     EditText inputEmail;
     EditText inputPassword;
-    TextView signUpClickable;
+    TextView signUpClickable, forgotPassClickable;
 
     APIInterface apiInterface;
 
@@ -73,6 +76,7 @@ public class LoginFragment extends Fragment {
 
         signInBtn = view.findViewById(R.id.sign_in_btn);
         signUpClickable = view.findViewById(R.id.sign_up_clickable);
+        forgotPassClickable = view.findViewById(R.id.forgot_password_clickable);
 
         signInBtn.setOnClickListener(view1 -> {
             if (view1.getId() == R.id.sign_in_btn){
@@ -128,6 +132,21 @@ public class LoginFragment extends Fragment {
                 transaction.addToBackStack(null);
                 transaction.commit();
             }
+        });
+
+        forgotPassClickable.setOnClickListener(view13 -> {
+            // TODO: dialog with ET for email and send email with new password
+            final Dialog dialog = new Dialog(getContext());
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setCancelable(true);
+            dialog.setContentView(R.layout.dialog_forgot_password);
+
+            Button submitButton = dialog.findViewById(R.id.forgot_pass_enter_btn);
+            FloatingActionButton close = dialog.findViewById(R.id.forgot_password_close_btn);
+
+            dialog.dismiss();
+            close.setOnClickListener(view2 -> dialog.dismiss());
+            dialog.show();
         });
 
         return view;
