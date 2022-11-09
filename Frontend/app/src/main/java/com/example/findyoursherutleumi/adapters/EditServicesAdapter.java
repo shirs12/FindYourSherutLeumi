@@ -25,7 +25,6 @@ import com.example.findyoursherutleumi.models.ServiceEdit;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -149,10 +148,8 @@ public class EditServicesAdapter extends RecyclerView.Adapter<EditServicesAdapte
                             RadioGroup eveningRadio = dialog.findViewById(R.id.edit_is_evening_radio);
                             if (response.body().getIsEveningService()) eveningRadio.check(dialog.findViewById(R.id.edit_evening_service_yes).getId());
                             else eveningRadio.check(dialog.findViewById(R.id.edit_evening_service_no).getId());
-
                         }
                     }
-
                     @Override
                     public void onFailure(@NonNull Call<Service> call, @NonNull Throwable t) {
                         Toast.makeText(inflater.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
@@ -170,39 +167,63 @@ public class EditServicesAdapter extends RecyclerView.Adapter<EditServicesAdapte
                     RadioGroup eveningRadio = dialog.findViewById(R.id.edit_is_evening_radio);
                     RadioButton eveningBtn = dialog.findViewById(eveningRadio.getCheckedRadioButtonId());
 
-                    Call<ServiceEdit> call1 = apiInterface.updateServiceById(id,
-                            name.getText().toString(),
+                    boolean isComplete = isEmpty(name.getText().toString(),
                             organization.getText().toString(),
                             category.getText().toString(),
                             country.getText().toString(),
                             city.getText().toString(),
                             address.getText().toString(),
-                            (apartmentBtn.getId() == dialog.findViewById(R.id.edit_has_apartment_yes).getId() ? 1 : 0),
-                            (secondYearBtn.getId() == dialog.findViewById(R.id.edit_second_year_yes).getId() ? 1 : 0),
-                            (morningBtn.getId() == dialog.findViewById(R.id.edit_morning_service_yes).getId() ? 1 : 0),
-                            (eveningBtn.getId() == dialog.findViewById(R.id.edit_evening_service_yes).getId() ? 1 : 0),
-                            description.getText().toString());
-                    call1.enqueue(new Callback<ServiceEdit>() {
-                        @Override
-                        public void onResponse(@NonNull Call<ServiceEdit> call, @NonNull Response<ServiceEdit> response) {
-                            if (!response.isSuccessful()) {
-                                Toast.makeText(inflater.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
-                            } else {
-                                assert response.body() != null;
-                                Toast.makeText(inflater.getContext(), R.string.details_updated_toast, Toast.LENGTH_SHORT).show();
+                            description.getText().toString()
+                    );
+                    if (isComplete) {
+                        Call<ServiceEdit> call1 = apiInterface.updateServiceById(id,
+                                name.getText().toString(),
+                                organization.getText().toString(),
+                                category.getText().toString(),
+                                country.getText().toString(),
+                                city.getText().toString(),
+                                address.getText().toString(),
+                                (apartmentBtn.getId() == dialog.findViewById(R.id.edit_has_apartment_yes).getId() ? 1 : 0),
+                                (secondYearBtn.getId() == dialog.findViewById(R.id.edit_second_year_yes).getId() ? 1 : 0),
+                                (morningBtn.getId() == dialog.findViewById(R.id.edit_morning_service_yes).getId() ? 1 : 0),
+                                (eveningBtn.getId() == dialog.findViewById(R.id.edit_evening_service_yes).getId() ? 1 : 0),
+                                description.getText().toString());
+                        call1.enqueue(new Callback<ServiceEdit>() {
+                            @Override
+                            public void onResponse(@NonNull Call<ServiceEdit> call, @NonNull Response<ServiceEdit> response) {
+                                if (!response.isSuccessful()) {
+                                    Toast.makeText(inflater.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
+                                } else {
+                                    assert response.body() != null;
+                                    Toast.makeText(inflater.getContext(), R.string.details_updated_toast, Toast.LENGTH_SHORT).show();
+                                }
                             }
-                        }
-
-                        @Override
-                        public void onFailure(@NonNull Call<ServiceEdit> call, @NonNull Throwable t) {
-                            Toast.makeText(inflater.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                            @Override
+                            public void onFailure(@NonNull Call<ServiceEdit> call, @NonNull Throwable t) {
+                                Toast.makeText(inflater.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     dialog.dismiss();
+                    }
                 });
                 dialog.show();
             }
         });
+    }
+
+    /*
+    this method checks if one of the fields is empty,
+    before updating a service.
+     */
+    private boolean isEmpty(String input1, String input2, String input3,
+                            String input4, String input5, String input6,
+                            String input7) {
+        if (input1.isEmpty() || input2.isEmpty() || input3.isEmpty()
+                || input4.isEmpty() || input5.isEmpty() || input6.isEmpty() || input7.isEmpty()) {
+            Toast.makeText(inflater.getContext(), R.string.fields_not_filled, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 
 
