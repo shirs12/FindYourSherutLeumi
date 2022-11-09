@@ -9,7 +9,7 @@ exports.getUserByEmail = async (req, res, next) => {
         "CALL get_user_by_email(?)",
         [email]
       );
-      res.status(200).json(user[0]);
+      res.status(200).json(user[0][0]);
     } catch (err) {
       console.log(err);
       next(err);
