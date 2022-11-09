@@ -83,6 +83,8 @@
     <string name="forgot_password">שכחתי סיסמה</string>
     <string name="enter_btn">אישור</string>
     <string name="forgot_password_title">הכנס/י את כתובת המייל איתה נרשמת, על מנת לקבל סיסמה חדשה למייל:</string>
+    <string name="enter_email">נא להכניס כתובת מייל</string>
+    <string name="email_sent">מייל נשלח. בדוק את האימייל שלך</string>
 
     <string-array name="user_types_array">
         <item>מתנדב/ת</item>

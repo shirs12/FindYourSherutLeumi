@@ -44,6 +44,9 @@ public interface APIInterface {
     @GET("applicants/email/{email}")
     Call<Applicant> getApplicantByEmail(@Path("email") String email);
 
+    @GET("login/{email}")
+    Call<User> getUserByEmail(@Path("email") String email);
+
 
     // POST requests
     @POST("login")
@@ -122,6 +125,10 @@ public interface APIInterface {
                                         @Field("is_evening_service") int is_evening_service,
                                         @Field("description_service") String description_service
                                     );
+
+    @PUT("forgotpassword")
+    @FormUrlEncoded
+    Call<User> updateUserPassword(@Field("email") String email);
 
 
     // DELETE requests
