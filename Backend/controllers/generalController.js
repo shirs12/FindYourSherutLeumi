@@ -45,8 +45,8 @@ exports.authenticateUser = async (req, res, next) => {
 };
 
 exports.updateUserPassword = async (req, res, next) => {
-  const email = req.body.email;
-  const password = generator.generate({
+  const email = req.params.email;
+  const password = await generator.generate({
     length: 8,
     numbers: true
   });
@@ -57,7 +57,7 @@ exports.updateUserPassword = async (req, res, next) => {
       [email,hash_password]
     );
     if(user != undefined){
-      this.forgotPassword(email);
+      this.forgotPassword(email, password);
       res.status(201).json(user[0]);
     } else res.status(400).json("Email does not exist");
   } catch (err) {
@@ -67,13 +67,13 @@ exports.updateUserPassword = async (req, res, next) => {
 };
 
 // this method is generate a new password, and sends it to user's mail
-exports.forgotPassword = (email) => {
+exports.forgotPassword = (email, password) => {
   const mailOptions = {
     from: process.env.MAIL_ADDRESS,
     to: email,
-    subject: 'FindYourSherutLeumi: ResetPassword',
+    subject: 'FindYourSherutLeumi: Reset Password',
     text: `Your new password is: ${password} \nYou can chage this password in settings,
-       after login the app.\n\nFindYourSherutLeumi`
+       after login the app with this password.\n\nFindYourSherutLeumi`
   };
   
   transporter.sendMail(mailOptions, function(error, info){
@@ -81,7 +81,7 @@ exports.forgotPassword = (email) => {
       console.log(error);
     } else {
       console.log('Email sent: ' + info.response);
-      res.status(200).json({'message': 'Email sent successfully'});
+      res.status(250).json({'message': 'Email sent successfully'});
     }
   });
 }
