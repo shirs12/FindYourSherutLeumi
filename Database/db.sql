@@ -390,5 +390,16 @@ BEGIN
 END$$
 DELIMITER ;
 
+-- this procedure finds user(applicant or coordinator) by email address and updates its password
+DELIMITER $$
+CREATE PROCEDURE `update_user_password_by_email`(IN p_email INT, IN newPass CHAR(64))
+BEGIN
+	UPDATE coordinator SET u_password = newPass
+	WHERE email = p_email;
+	UPDATE applicant SET u_password = newPass
+	WHERE email = p_email;
+END$$
+DELIMITER ;
+
 
 

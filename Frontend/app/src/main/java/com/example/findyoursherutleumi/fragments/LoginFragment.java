@@ -2,7 +2,10 @@ package com.example.findyoursherutleumi.fragments;
 
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -24,6 +28,7 @@ import com.example.findyoursherutleumi.R;
 import com.example.findyoursherutleumi.database.APIClient;
 import com.example.findyoursherutleumi.database.APIInterface;
 import com.example.findyoursherutleumi.models.User;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,7 +43,7 @@ public class LoginFragment extends Fragment {
     Button signInBtn;
     EditText inputEmail;
     EditText inputPassword;
-    TextView signUpClickable;
+    TextView signUpClickable, forgotPassClickable;
 
     APIInterface apiInterface;
 
@@ -73,6 +78,7 @@ public class LoginFragment extends Fragment {
 
         signInBtn = view.findViewById(R.id.sign_in_btn);
         signUpClickable = view.findViewById(R.id.sign_up_clickable);
+        forgotPassClickable = view.findViewById(R.id.forgot_password_clickable);
 
         signInBtn.setOnClickListener(view1 -> {
             if (view1.getId() == R.id.sign_in_btn){
@@ -128,6 +134,60 @@ public class LoginFragment extends Fragment {
                 transaction.addToBackStack(null);
                 transaction.commit();
             }
+        });
+
+        forgotPassClickable.setOnClickListener(view13 -> {
+            // TODO: dialog with ET for email and send email with new password
+            final Dialog dialog = new Dialog(getContext());
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setCancelable(true);
+            dialog.setContentView(R.layout.dialog_forgot_password);
+
+            EditText emailET = dialog.findViewById(R.id.forgot_pass_email_et);
+            Button submitButton = dialog.findViewById(R.id.forgot_pass_enter_btn);
+            FloatingActionButton close = dialog.findViewById(R.id.forgot_password_close_btn);
+
+            submitButton.setOnClickListener(view14 -> {
+                if (emailET.getText().toString().isEmpty())
+                    Toast.makeText(getContext(), R.string.enter_email, Toast.LENGTH_SHORT).show();
+                Call<User> call = apiInterface.getUserByEmail(emailET.getText().toString());
+                call.enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
+                        if (!response.isSuccessful()) {
+                            if (response.code() == 400) Toast.makeText(getContext(), R.string.email_does_not_exist, Toast.LENGTH_SHORT).show();
+                            else Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
+                        } else {
+                            Call<User> call1 = apiInterface.updateUserPassword(emailET.getText().toString());
+                            call1.enqueue(new Callback<User>() {
+                                @Override
+                                public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
+                                    if (!response.isSuccessful()) {
+                                        if (response.code() == 400) Toast.makeText(getContext(), R.string.email_does_not_exist, Toast.LENGTH_SHORT).show();
+                                        else Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(getContext(), R.string.email_sent, Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
+                                    Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
+                        Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
+                    }
+                });
+            });
+
+            dialog.dismiss();
+            close.setOnClickListener(view2 -> dialog.dismiss());
+            dialog.show();
         });
 
         return view;

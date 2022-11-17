@@ -1,15 +1,18 @@
 const pool = require("../config/db");
 const bcrypt = require("bcrypt");
+const transporter = require("../config/nodemailer");
+const generator = require('generate-password');
 
 // gets user from db by email
 exports.getUserByEmail = async (req, res, next) => {
-    const email = req.body.email;
+    const email = req.params.email;
     try {
       const [user, _] = await pool.execute(
         "CALL get_user_by_email(?)",
         [email]
       );
-      res.status(200).json(user[0]);
+      if (user[0][0] != undefined) res.status(200).json(user[0][0]);
+      else res.status(400).json("Email does not exist");
     } catch (err) {
       console.log(err);
       next(err);
@@ -40,4 +43,48 @@ exports.authenticateUser = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.updateUserPassword = async (req, res, next) => {
+  const email = req.body.email;
+  const password = generator.generate({
+    length: 8,
+    numbers: true
+  });
+  try {
+    const hash_password = await bcrypt.hash(password, 12);
+    const [user, _] = await pool.execute(
+      "CALL update_user_password_by_email(?,?)",
+      [email,hash_password]
+    );
+    if(user != undefined){
+      this.forgotPassword(email);
+      res.status(201).json(user[0]);
+    } else res.status(400).json("Email does not exist");
+  } catch (err) {
+    console.log(err);
+    next(err);
+  }
+};
+
+// this method is generate a new password, and sends it to user's mail
+exports.forgotPassword = (email) => {
+  const mailOptions = {
+    from: process.env.MAIL_ADDRESS,
+    to: email,
+    subject: 'FindYourSherutLeumi: ResetPassword',
+    text: `Your new password is: ${password} \nYou can chage this password in settings,
+       after login the app.\n\nFindYourSherutLeumi`
+  };
+  
+  transporter.sendMail(mailOptions, function(error, info){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+      res.status(200).json({'message': 'Email sent successfully'});
+    }
+  });
+}
+
+
 

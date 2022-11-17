@@ -79,6 +79,11 @@
     <string name="send">send</string>
     <string name="open_with">choose an email client</string>
     <string name="edit_service">Edit service</string>
+    <string name="forgot_password">forgot password</string>
+    <string name="enter_btn">enter</string>
+    <string name="forgot_password_title">Please enter your registered email, to receive a new password to your email:</string>
+    <string name="enter_email">Please enter an email address</string>
+    <string name="email_sent">email sent. check your email</string>
 
     <string-array name="user_types_array">
         <item>Applicant</item>
