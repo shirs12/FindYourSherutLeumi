@@ -30,6 +30,7 @@ import com.example.findyoursherutleumi.database.APIInterface;
 import com.example.findyoursherutleumi.models.User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -136,8 +137,11 @@ public class LoginFragment extends Fragment {
             }
         });
 
+        /**
+         * this dialog is for registered users who forgot their password.
+         * they can type their email address to get a new password to their mail inbox.
+         */
         forgotPassClickable.setOnClickListener(view13 -> {
-            // TODO: dialog with ET for email and send email with new password
             final Dialog dialog = new Dialog(getContext());
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog.setCancelable(true);
@@ -150,28 +154,35 @@ public class LoginFragment extends Fragment {
             submitButton.setOnClickListener(view14 -> {
                 if (emailET.getText().toString().isEmpty())
                     Toast.makeText(getContext(), R.string.enter_email, Toast.LENGTH_SHORT).show();
+                else {
                 Call<User> call = apiInterface.getUserByEmail(emailET.getText().toString());
                 call.enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
                         if (!response.isSuccessful()) {
-                            if (response.code() == 400) Toast.makeText(getContext(), R.string.email_does_not_exist, Toast.LENGTH_SHORT).show();
-                            else Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
+                            if (response.code() == 400)
+                                Toast.makeText(getContext(), R.string.email_does_not_exist, Toast.LENGTH_SHORT).show();
+                            else
+                                Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                         } else {
-                            Call<User> call1 = apiInterface.updateUserPassword(emailET.getText().toString());
-                            call1.enqueue(new Callback<User>() {
+                            Call<ResponseBody> call1 = apiInterface.updateUserPassword(emailET.getText().toString());
+                            call1.enqueue(new Callback<ResponseBody>() {
                                 @Override
-                                public void onResponse(@NonNull Call<User> call, @NonNull Response<User> response) {
+                                public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                                     if (!response.isSuccessful()) {
-                                        if (response.code() == 400) Toast.makeText(getContext(), R.string.email_does_not_exist, Toast.LENGTH_SHORT).show();
-                                        else Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
+                                        if (response.code() == 400)
+                                            Toast.makeText(getContext(), R.string.email_does_not_exist, Toast.LENGTH_SHORT).show();
+                                        else
+                                            Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                                     } else {
+                                        emailET.getText().clear();
                                         Toast.makeText(getContext(), R.string.email_sent, Toast.LENGTH_SHORT).show();
+                                        dialog.dismiss();
                                     }
                                 }
 
                                 @Override
-                                public void onFailure(@NonNull Call<User> call, @NonNull Throwable t) {
+                                public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                                     Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                                 }
                             });
@@ -183,6 +194,7 @@ public class LoginFragment extends Fragment {
                         Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                     }
                 });
+            }
             });
 
             dialog.dismiss();

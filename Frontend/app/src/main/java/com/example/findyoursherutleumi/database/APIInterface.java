@@ -126,9 +126,8 @@ public interface APIInterface {
                                         @Field("description_service") String description_service
                                     );
 
-    @PUT("forgotpassword")
-    @FormUrlEncoded
-    Call<User> updateUserPassword(@Field("email") String email);
+    @PUT("login/forgotpassword/{email}")
+    Call<ResponseBody> updateUserPassword(@Path("email") String email);
 
 
     // DELETE requests
