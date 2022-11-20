@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const transporter = require("../config/nodemailer");
 const generator = require('generate-password');
 
-// gets user from db by email
+// GET - gets user from db by email
 exports.getUserByEmail = async (req, res, next) => {
     const email = req.params.email;
     try {
@@ -19,6 +19,7 @@ exports.getUserByEmail = async (req, res, next) => {
     }
   };
 
+// authenticate the user details - for login
 exports.authenticateUser = async (req, res, next) => {
   const email = req.body.email;
   const password = req.body.u_password;
@@ -44,6 +45,7 @@ exports.authenticateUser = async (req, res, next) => {
   }
 };
 
+// updates user's password - in case registered user forgot his password
 exports.updateUserPassword = async (req, res, next) => {
   const email = req.params.email;
   const password = await generator.generate({
@@ -66,7 +68,7 @@ exports.updateUserPassword = async (req, res, next) => {
   }
 };
 
-// this method is generate a new password, and sends it to user's mail
+// this method is generate a new password, and sends it to user's email
 exports.forgotPassword = (email, password) => {
   const mailOptions = {
     from: process.env.MAIL_ADDRESS,
@@ -85,5 +87,6 @@ exports.forgotPassword = (email, password) => {
     }
   });
 }
+
 
 
