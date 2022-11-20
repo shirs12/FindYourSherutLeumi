@@ -72,8 +72,8 @@ exports.forgotPassword = (email, password) => {
     from: process.env.MAIL_ADDRESS,
     to: email,
     subject: 'FindYourSherutLeumi: Reset Password',
-    text: `Your new password is: ${password} \nYou can chage this password in settings,
-       after login the app with this password.\n\nFindYourSherutLeumi`
+    text: `Your new password is: ${password}\nYou can change this password in settings,
+    after login the app with this password.\n\nFindYourSherutLeumi`
   };
   
   transporter.sendMail(mailOptions, function(error, info){
@@ -85,6 +85,5 @@ exports.forgotPassword = (email, password) => {
     }
   });
 }
-
 
 
