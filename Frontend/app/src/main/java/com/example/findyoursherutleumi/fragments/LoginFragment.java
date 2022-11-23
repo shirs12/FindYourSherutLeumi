@@ -126,6 +126,9 @@ public class LoginFragment extends Fragment {
             }
         });
 
+        /**
+         * navigate the user to the signup screen
+         */
         signUpClickable.setOnClickListener(view12 -> {
             if (view12.getId() == R.id.sign_up_clickable){
                 Fragment newFragment = new SignUpUserTypeFragment();
