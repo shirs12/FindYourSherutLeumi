@@ -31,6 +31,11 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
 
     private static User user;
 
+    // get user from activity to homepage fragment
+    public static User getUser() {
+        return user;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         // saves bundles after configuration changes
         super.onSaveInstanceState(outState);
-        if(user != null) {
+        if (user != null) {
             outState.putString("email", user.getEmail());
             outState.putInt("typeId", user.getUserTypeId());
         }
@@ -82,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
 
                 // clears fragment's back stack to prevent user from going back after logging out.
                 int count = fragmentManager.getBackStackEntryCount();
-                for(int index = 0; index < count; ++index) {
+                for (int index = 0; index < count; ++index) {
                     fragmentManager.popBackStackImmediate();
                 }
                 Fragment newFragment = new LoginFragment();
@@ -99,10 +104,9 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
 
         settingsItem.setOnMenuItemClickListener(menuItem -> {   // user settings dialog
             Fragment newFragment;
-            if (user.getUserTypeId() == 2){
+            if (user.getUserTypeId() == 2) {
                 newFragment = new SettingsFragment();
-            }
-            else {
+            } else {
                 newFragment = new SettingsApplicantFragment();
             }
             FragmentManager fragmentManager = getSupportFragmentManager();
@@ -123,15 +127,14 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
 
     // change language method
     private void showChangeLanguageDialog() {
-        final String [] languagesLst = {"עברית", "English"};
+        final String[] languagesLst = {"עברית", "English"};
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setTitle("Choose Language...");
         builder.setSingleChoiceItems(languagesLst, -1, (dialogInterface, i) -> {
             if (i == 0) {
                 setLocale("iw");
                 recreate();
-            }
-            else if (i == 1) {
+            } else if (i == 1) {
                 setLocale("en");
                 recreate();
             }
@@ -149,14 +152,14 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
         config.setLocale(locale);
         getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
         SharedPreferences.Editor editor = getSharedPreferences("Settings", MODE_PRIVATE).edit();
-        editor.putString("My_Lang",lang);
+        editor.putString("My_Lang", lang);
         editor.apply();
     }
 
     // loads the language
-    public void loadLocale(){
+    public void loadLocale() {
         SharedPreferences preferences = getSharedPreferences("Settings", MODE_PRIVATE);
-        String language = preferences.getString("My_Lang","");
+        String language = preferences.getString("My_Lang", "");
         setLocale(language);
     }
 
@@ -164,11 +167,6 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
     public void communicate(User user) {
         // communicate with fragment to get user details from login fragment
         this.user = user;
-    }
-
-    // get user from activity to homepage fragment
-    public static User getUser(){
-        return user;
     }
 
     /* when back button pressed on device and the user is already logged in,
@@ -186,6 +184,7 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
                     .addToBackStack(null)
                     .commit();
         }
+
     }
 
 

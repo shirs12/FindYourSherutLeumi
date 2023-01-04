@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -41,6 +42,7 @@ public class HomePageFragment extends Fragment {
     FloatingActionButton addServiceBtn;
     EditText searchBar;
     TextView searchNoResult;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     public static HomePageFragment newInstance() {
         return new HomePageFragment();
@@ -60,6 +62,7 @@ public class HomePageFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_page, container, false);
         setHasOptionsMenu(true);
+        swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_list);
         addServiceBtn = view.findViewById(R.id.add_service_btn);
         searchNoResult = view.findViewById(R.id.no_result_text);
 
@@ -81,6 +84,11 @@ public class HomePageFragment extends Fragment {
         });
 
         initRecyclerView();
+
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            refreshData();
+            swipeRefreshLayout.setRefreshing(false);
+        });
 
         addServiceBtn.setOnClickListener(view1 -> {
             Fragment newFragment = new AddNewServiceFragment();
@@ -120,6 +128,12 @@ public class HomePageFragment extends Fragment {
 
         servicesAdapter.notifyDataSetChanged();
         return view;
+    }
+
+    private void refreshData() {
+        mViewModel.loadServices();
+        servicesAdapter.notifyItemRangeChanged(0,recyclerView.getItemDecorationCount());
+        updateAdapter();
     }
 
     // initializing the recyclerview

@@ -32,7 +32,7 @@
             android:layout_gravity="end|top"
             android:layout_weight="1"
             android:clickable="true"
-            android:contentDescription="todo"
+            android:contentDescription="@string/add"
             android:src="@android:drawable/ic_input_add"
             app:backgroundTint="@color/light_blue"
             app:tint="#EEE"
@@ -63,10 +63,16 @@
         android:layout_margin="10dp"
         android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/services_lst"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/services_lst"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <TextView
             android:id="@+id/no_result_text"
