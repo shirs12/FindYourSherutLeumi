@@ -19,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.findyoursherutleumi.MainActivity;
@@ -43,6 +44,7 @@ public class HomePageFragment extends Fragment {
     EditText searchBar;
     TextView searchNoResult;
     SwipeRefreshLayout swipeRefreshLayout;
+
 
     public static HomePageFragment newInstance() {
         return new HomePageFragment();
@@ -85,6 +87,7 @@ public class HomePageFragment extends Fragment {
 
         initRecyclerView();
 
+        // refresh recyclerview
         swipeRefreshLayout.setOnRefreshListener(() -> {
             refreshData();
             swipeRefreshLayout.setRefreshing(false);
@@ -130,6 +133,7 @@ public class HomePageFragment extends Fragment {
         return view;
     }
 
+
     private void refreshData() {
         mViewModel.loadServices();
         servicesAdapter.notifyItemRangeChanged(0,recyclerView.getItemDecorationCount());
@@ -166,6 +170,7 @@ public class HomePageFragment extends Fragment {
     public void onResume() {
         super.onResume();
         mViewModel.loadServices();
+        servicesAdapter.notifyItemRangeChanged(0,recyclerView.getItemDecorationCount());
         updateAdapter();
         searchBar.getText().clear();
     }
@@ -181,6 +186,7 @@ public class HomePageFragment extends Fragment {
         super.onStop();
         updateAdapter();
     }
+
 
 
 }

@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -14,7 +16,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.findyoursherutleumi.adapters.ServicesAdapter;
 import com.example.findyoursherutleumi.fragments.HomePageFragment;
+import com.example.findyoursherutleumi.fragments.HomePageViewModel;
 import com.example.findyoursherutleumi.fragments.LoginFragment;
 import com.example.findyoursherutleumi.fragments.SendEmailFragment;
 import com.example.findyoursherutleumi.fragments.SettingsApplicantFragment;
@@ -22,6 +26,7 @@ import com.example.findyoursherutleumi.fragments.SettingsFragment;
 import com.example.findyoursherutleumi.models.User;
 
 import java.util.Locale;
+import java.util.Objects;
 
 /**
  * This class is the main activity,
@@ -176,14 +181,17 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
     public void onBackPressed() {
         super.onBackPressed();
         assert getFragmentManager() != null;
+        // TODO: reload homepage
         if (getSupportFragmentManager().getBackStackEntryCount() > 1 && user != null) { // checks if user logged in
-            getSupportFragmentManager().popBackStackImmediate();
-            Fragment newFragment = new HomePageFragment();
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.fragmentContainerView, newFragment)
-                    .addToBackStack(null)
-                    .commit();
+//            getSupportFragmentManager().popBackStackImmediate();
+//            Fragment newFragment = new HomePageFragment();
+//            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//            transaction.replace(R.id.fragmentContainerView, newFragment)
+//                    .addToBackStack(null)
+//                    .commit();
+
         }
+
 
     }
 
