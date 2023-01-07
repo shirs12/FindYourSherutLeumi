@@ -13,6 +13,7 @@ app.use("/coordinators", require("./routes/coordinatorRoute"));
 
 app.use("/login", require("./routes/generalRoute"));
 
+// manages the errors
 app.use((err, req, res, next) => {
   console.log(err.stack);
   console.log(err.name);
@@ -23,6 +24,7 @@ app.use((err, req, res, next) => {
   });
 });
 
+// manages non existing paths
 app.all("/*", (req, res) => {
   res.status(404)
   .json({massage : `${req.method} on ${req.originalUrl} not found`});
