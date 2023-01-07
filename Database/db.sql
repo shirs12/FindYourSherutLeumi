@@ -67,14 +67,10 @@ VALUES('Applicant'),('Coordinator');
 SELECT * FROM user_level;
 
 -- applicant
-INSERT INTO applicant(first_name,last_name,phone_number,city,email,u_password)
-VALUES('דנה','לוי','0501223334','מודיעין','dana11@gmail.com','$2a$12$AoRs14RsX0vzf2mAQEo1j.Ohc2V6Vxh046/cEJFg.maKTGo06QA4m'),
-	  ('שרה','אליהו','0525555566','מודיעין','sara78@gmail.com','$2a$12$W2n6wjSMt23YFgmj1Ti0/.ZCUaritxmwizEwSxiCKaW9.PpM1o7.e');
+
 
 -- coordinator
-INSERT INTO coordinator(first_name,last_name,phone_number,email,u_password,organization_name)
-VALUES('יערה','רון כהן','050-7521671','YaelCohenAguda@gmail.com','$2a$12$APEp.5Wx96HEIBnBG5Ve4ukTy7j2AQ6LgbZlnZOOuT4wzjEpGPDte','האגודה להתנדבות'),
-	  ('שרית','ויזנר','054-2610679','SaritVisnerShilo@gmail.com','$2a$12$.PNuTXPH20G6WnacEDiU5.JxeW48263TJXiBq.9010xDKLWWZ4KiW','עמותת ש"ל לשירות לאומי');
+
 
 -- service
 INSERT INTO service(service_name,organization_name,category,country,city,address,has_apartment,
@@ -279,7 +275,6 @@ BEGIN
     VALUES(p_first_name,p_last_name,p_phone_number,p_city,p_email,p_u_password);
 END$$
 DELIMITER ;
-CALL `add_new_applicant`('אור','אליה','0503758493','ראש העין','orEli123@gmail.com','$2a$12$SKpY0i8YKFvFNKv6hq1CAeKMJt504H3lDElSQPu1CxkRRobMxdxhi'); -- test
 
 -- procedure that updates applicant in db
 DELIMITER $$
@@ -297,7 +292,6 @@ BEGIN
 	WHERE applicant_id = id;
 END$$
 DELIMITER ;
-CALL `update_applicant`(6,'אביה','אליה','0503758483','ראש העין','orEli123@gmail.com','$2a$12$wIeStYcwiypjfmix1m5lX.aNWzD5Mamg1gXiNHu8v4OWPLls6.DW2');
 
 -- procedure that deletes applicant by id from db
 DELIMITER $$
@@ -347,7 +341,6 @@ BEGIN
     VALUES(p_first_name,p_last_name,p_phone_number,p_email,p_u_password,p_organization_name);
 END$$
 DELIMITER ;
-CALL `add_new_coordinator`('אילה','שוורץ','0528990468','ayalas@bat-ami.org.il','$2a$12$y9MshxcZguGenSOyZv0BLONHr31FqxNOJuYbnBTJsvQ8pgOIJaxFy','בת עמי [אמונה-אלומה]'); -- test
 
 -- procedure that updates coordinator in db
 DELIMITER $$
@@ -365,7 +358,6 @@ BEGIN
 	WHERE coordinator_id = id;
 END$$
 DELIMITER ;
-CALL `update_coordinator`('אילה','שוורץ','0528990468','ayalas@bat-ami.org.il','8bb0cf6eb9b17d0f7d22b456f121257dc1254e1f01665370476383ea776df414','בת עמי [אמונה-אלומה]'); -- test
 
 -- procedure that deletes coordinator by id from db
 DELIMITER $$
