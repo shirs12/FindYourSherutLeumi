@@ -1,5 +1,6 @@
 const nodemailer = require('nodemailer');
 
+// creates a transporter to allow easy email sendings
 const transporter = nodemailer.createTransport({
     service: 'zoho',
     auth: {
