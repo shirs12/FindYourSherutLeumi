@@ -4,6 +4,7 @@ const PORT = process.env.PORT || 3000;
 
 const server = require("./server");
 
+// creates an http object and turns the machine to a server
 const connect = require("http").createServer(server);
 module.exports = { connect };
 
