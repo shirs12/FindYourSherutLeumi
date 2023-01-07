@@ -18,7 +18,7 @@ CREATE TABLE applicant(
     phone_number NVARCHAR(13) UNIQUE,
     city NVARCHAR(25),
     email NVARCHAR(40) NOT NULL UNIQUE,
-    u_password CHAR(64) NOT NULL,
+    u_password CHAR(64) NOT NULL,  -- output of hashing algorithms is consistent regardless of the length of input
     level_user_id INT DEFAULT 1,
     FOREIGN KEY (level_user_id) REFERENCES user_level(level_id)
 );
@@ -30,7 +30,7 @@ CREATE TABLE coordinator(
     last_name NVARCHAR(25) NOT NULL,
     phone_number NVARCHAR(13) UNIQUE,
 	email NVARCHAR(40) NOT NULL UNIQUE,
-    u_password CHAR(64) NOT NULL,
+    u_password CHAR(64) NOT NULL,  -- output of hashing algorithms is consistent regardless of the length of input
     organization_name NVARCHAR(40),
     level_user_id INT DEFAULT 2,
     FOREIGN KEY (level_user_id) REFERENCES user_level(level_id)
