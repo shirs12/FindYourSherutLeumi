@@ -39,6 +39,7 @@ public class SignUpUserTypeFragment extends Fragment {
 
         setHasOptionsMenu(true);
 
+        // user type options for sign up
         Spinner spinner = view.findViewById(R.id.user_type_spinner);
         spinner.setOnItemSelectedListener(new SpinnerAdapter());
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
@@ -50,14 +51,17 @@ public class SignUpUserTypeFragment extends Fragment {
         nextBtn.setOnClickListener(view1 -> {
             if (view1.getId() == R.id.sign_up_next_btn){
                 Fragment newFragment = null;
+                // applicant
                 if (chose == 0) newFragment = new ApplicantSignUpFragment();
+                // coordinator
                 else if (chose == 1) newFragment = new CoordinatorSignUpFragment();
                 assert getFragmentManager() != null;
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                assert newFragment != null;
-                transaction.replace(R.id.fragmentContainerView, newFragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
+                if (newFragment != null) {
+                    transaction.replace(R.id.fragmentContainerView, newFragment);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+                }
             }
         });
 

@@ -33,6 +33,7 @@ public class ServicesPartialRepository {
         return instance;
     }
 
+    // sets a mutable list of all services
     public MutableLiveData<List<ServicePartial>> getServices(){
         setServices();
         MutableLiveData<List<ServicePartial>> data = new MutableLiveData<>();
@@ -40,6 +41,7 @@ public class ServicesPartialRepository {
         return data;
     }
 
+    // gets all services from db by server request
     public void setServices(){
         apiInterface = APIClient.getInstance().create(APIInterface.class);
         Call<List<ServicePartial>> call = apiInterface.getAllServicesPartially();
@@ -48,9 +50,10 @@ public class ServicesPartialRepository {
             public void onResponse(@NonNull Call<List<ServicePartial>> call, @NonNull Response<List<ServicePartial>> response) {
                 if (!response.isSuccessful())
                     Toast.makeText(detailsBtn.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
-                assert response.body() != null;
-                dataSet.clear();
-                dataSet.addAll(response.body());
+                else if (response.body() != null) {
+                    dataSet.clear();
+                    dataSet.addAll(response.body());
+                }
             }
             @Override
             public void onFailure(@NonNull Call<List<ServicePartial>> call, @NonNull Throwable t) {

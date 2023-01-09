@@ -1,12 +1,10 @@
 package com.example.findyoursherutleumi.fragments;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -32,7 +30,7 @@ public class SendEmailFragment extends Fragment {
     }
 
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n")  // -> Internationalization
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -43,9 +41,10 @@ public class SendEmailFragment extends Fragment {
         message = view.findViewById(R.id.send_email_message);
         sendBtn = view.findViewById(R.id.send_email_btn);
 
-        assert getArguments() != null;
-        coordinatorEmail.setText(getArguments().getString("coordinator_email"));
-        subject.setText(requireContext().getResources().getString(R.string.service) + ": " + getArguments().getString("service_title"));
+        if (getArguments() != null) {
+            coordinatorEmail.setText(getArguments().getString("coordinator_email"));
+            subject.setText(requireContext().getResources().getString(R.string.service) + ": " + getArguments().getString("service_title"));  // annotation
+        }
 
         sendBtn.setOnClickListener(view1 -> {
             Intent intent = new Intent(Intent.ACTION_SENDTO);

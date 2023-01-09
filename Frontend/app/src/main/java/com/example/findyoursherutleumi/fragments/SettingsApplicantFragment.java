@@ -86,7 +86,6 @@ public class SettingsApplicantFragment extends Fragment {
                     public void onResponse(@NonNull Call<Applicant> call, @NonNull Response<Applicant> response) {
                         if (!response.isSuccessful()) {
                             Toast.makeText(inflater.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
-                            System.out.println("code1:        " + response.code());
                         } else {
                             Toast.makeText(getContext(), R.string.details_updated_toast, Toast.LENGTH_SHORT).show();
                         }
@@ -127,7 +126,6 @@ public class SettingsApplicantFragment extends Fragment {
                     public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                         if (!response.isSuccessful()) {
                             Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
-                            System.out.println("code1:        " + response.code());
                         } else {
                             Toast.makeText(newFragment.getContext(), R.string.user_deleted_toast, Toast.LENGTH_SHORT).show();
                         }
@@ -159,7 +157,6 @@ public class SettingsApplicantFragment extends Fragment {
             public void onResponse(@NonNull Call<Applicant> call, @NonNull Response<Applicant> response) {
                 if (!response.isSuccessful()) {
                     Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
-                    System.out.println("code1:        " + response.code());
                 } else {
                     assert response.body() != null;
                     password = response.body().getUPassword();

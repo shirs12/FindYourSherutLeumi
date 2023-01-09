@@ -4,8 +4,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -72,7 +70,7 @@ public class LoginFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         apiInterface = APIClient.getInstance().create(APIInterface.class);
 
-        setHasOptionsMenu(true);
+        setHasOptionsMenu(true);  // sets the options menu
 
         inputEmail = view.findViewById(R.id.email_address_input);
         inputPassword = view.findViewById(R.id.password_input);
@@ -104,11 +102,11 @@ public class LoginFragment extends Fragment {
                                 Fragment newFragment = new HomePageFragment();
 
                                 Bundle bundle = new Bundle();
-                                assert response.body() != null;
-
-                                bundle.putInt("typeId", response.body().getUserTypeId());
-                                bundle.putString("email", response.body().getEmail());
-                                newFragment.setArguments(bundle);
+                                if (response.body() != null) {
+                                    bundle.putInt("typeId", response.body().getUserTypeId());
+                                    bundle.putString("email", response.body().getEmail());
+                                    newFragment.setArguments(bundle);
+                                }
 
                                 assert getFragmentManager() != null;
                                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -219,6 +217,10 @@ public class LoginFragment extends Fragment {
         return true;
     }
 
+    /*
+    hides the 'more options' item of menu,
+    which includes - user's settings and logout
+     */
     @Override
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
         MenuItem item = menu.findItem(R.id.more_item);

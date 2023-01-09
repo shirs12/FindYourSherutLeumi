@@ -107,7 +107,6 @@ public class SettingsFragment extends Fragment {
                     public void onResponse(@NonNull Call<Coordinator> call, @NonNull Response<Coordinator> response) {
                         if (!response.isSuccessful()) {
                             Toast.makeText(inflater.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
-                            System.out.println("code1:        " + response.code());
                         } else {
                             assert response.body() != null;
                             Toast.makeText(getContext(), R.string.details_updated_toast, Toast.LENGTH_SHORT).show();
@@ -141,13 +140,13 @@ public class SettingsFragment extends Fragment {
                     fragmentManager.popBackStackImmediate();
                 }
 
+                // deletes all coordinator's services
                 Call<ResponseBody> call1 = apiInterface.deleteServicesByCoordinatorId(coordinatorId);
                 call1.enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                         if (!response.isSuccessful()) {
                             Toast.makeText(newFragment.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
-                            System.out.println("code1:        " + response.code());
                         } else {
                             Call<ResponseBody> call2 = apiInterface.deleteCoordinatorById(coordinatorId);
                             call2.enqueue(new Callback<ResponseBody>() {
@@ -155,7 +154,6 @@ public class SettingsFragment extends Fragment {
                                 public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                                     if (!response.isSuccessful()) {
                                         Toast.makeText(newFragment.getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
-                                        System.out.println("code2:        " + response.code());
                                     } else {
                                         Toast.makeText(newFragment.getContext(), R.string.user_deleted_toast, Toast.LENGTH_SHORT).show();
                                     }
@@ -176,7 +174,8 @@ public class SettingsFragment extends Fragment {
                 });
             });
 
-            builder.setNegativeButton(R.string.no, (dialogInterface, i) -> dialogInterface.cancel()); // if the user click 'no'
+            // if the user click 'no'
+            builder.setNegativeButton(R.string.no, (dialogInterface, i) -> dialogInterface.cancel());
             AlertDialog alertDialog = builder.create();
             alertDialog.show();
         });
@@ -218,6 +217,7 @@ public class SettingsFragment extends Fragment {
                                 cServicesLst.addAll(response.body());
                                 editServicesAdapter.notifyDataSetChanged();
 
+                                // 'no items' title in case the current coordinator has no services yet
                                 if (editServicesAdapter.getItemCount() == 0)
                                     noItems.setVisibility(View.VISIBLE);
                                 else noItems.setVisibility(View.GONE);

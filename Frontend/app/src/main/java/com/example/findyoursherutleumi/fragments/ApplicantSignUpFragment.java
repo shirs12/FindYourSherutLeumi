@@ -130,6 +130,7 @@ public class ApplicantSignUpFragment extends Fragment {
             Toast.makeText(getContext(), R.string.pass_length_short, Toast.LENGTH_SHORT).show();
             return false;
         }
+        // checks if 'email' matches email address pattern
         else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             Toast.makeText(getContext(), R.string.email_address_not_valid, Toast.LENGTH_SHORT).show();
             return false;
@@ -137,6 +138,7 @@ public class ApplicantSignUpFragment extends Fragment {
         return true;
     }
 
+    // hides the 'more options' item of menu, which includes - user's settings and logout
     @Override
     public void onPrepareOptionsMenu(@NonNull Menu menu) {
         MenuItem item = menu.findItem(R.id.more_item);

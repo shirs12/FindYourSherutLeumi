@@ -1,6 +1,8 @@
 package com.example.findyoursherutleumi.fragments;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -79,8 +81,8 @@ public class ServiceDetailsFragment extends Fragment {
         sendEmailBtn = view.findViewById(R.id.send_email_nav_btn);
 
         // arguments from ServicesAdapter
-        assert getArguments() != null;
-        serviceId = getArguments().getInt("id");
+        if (getArguments() != null)
+            serviceId = getArguments().getInt("id");
 
         Call<Service> call = apiInterface.getServiceById(serviceId);
         call.enqueue(new Callback<Service>() {
@@ -105,22 +107,22 @@ public class ServiceDetailsFragment extends Fragment {
 
                     Call<Coordinator> call1 = apiInterface.getCoordinatorById(response.body().getCoordinatorId());
                     call1.enqueue(new Callback<Coordinator>() {
-                        @SuppressLint("SetTextI18n")
+                        @SuppressLint("SetTextI18n")  // -> Internationalization
                         @Override
                         public void onResponse(@NonNull Call<Coordinator> call, @NonNull Response<Coordinator> response) {
                             if (!response.isSuccessful()){
                                 Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
                             } else {
-                                assert response.body() != null;
-                                serviceCoordinator = response.body();
-                                coordinatorNameTxt.setText(response.body().getFirstName() + " " + response.body().getLastName());
-                                coordinatorContactTxt.setText(response.body().getPhoneNumber());
+                                if (response.body() != null) {
+                                    serviceCoordinator = response.body();
+                                    coordinatorNameTxt.setText(response.body().getFirstName() + " " + response.body().getLastName());  // annotation
+                                    coordinatorContactTxt.setText(response.body().getPhoneNumber());
+                                }
                             }
                         }
                         @Override
                         public void onFailure(@NonNull Call<Coordinator> call, @NonNull Throwable t) {
                             Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
-                            System.out.println(t.getMessage());
                         }
                     });
 
@@ -130,10 +132,10 @@ public class ServiceDetailsFragment extends Fragment {
             @Override
             public void onFailure(@NonNull Call<Service> call, @NonNull Throwable t) {
                 Toast.makeText(getContext(), R.string.connection_failed_toast, Toast.LENGTH_SHORT).show();
-                System.out.println(t.getMessage());
             }
         });
 
+        // goes to the 'SendEmailFragment' fragment with arguments
         sendEmailBtn.setOnClickListener(view1 -> {
             Fragment newFragment = new SendEmailFragment();
             if (serviceCoordinator != null){
@@ -149,8 +151,21 @@ public class ServiceDetailsFragment extends Fragment {
             transaction.commit();
         });
 
+        // if coordinator phone number the dial options will appear
+        coordinatorContactTxt.setOnClickListener(view12 -> {
+            dialCoordinator();
+        });
 
         return view;
+    }
+
+    // opens dial options
+    private void dialCoordinator() {
+        if (coordinatorContactTxt.getText().length() != 0) {
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+            intent.setData(Uri.parse("tel:" + coordinatorContactTxt.getText()));
+            startActivity(intent);
+        }
     }
 
 

@@ -6,9 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -16,17 +14,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.findyoursherutleumi.adapters.ServicesAdapter;
-import com.example.findyoursherutleumi.fragments.HomePageFragment;
-import com.example.findyoursherutleumi.fragments.HomePageViewModel;
 import com.example.findyoursherutleumi.fragments.LoginFragment;
-import com.example.findyoursherutleumi.fragments.SendEmailFragment;
 import com.example.findyoursherutleumi.fragments.SettingsApplicantFragment;
 import com.example.findyoursherutleumi.fragments.SettingsFragment;
 import com.example.findyoursherutleumi.models.User;
 
 import java.util.Locale;
-import java.util.Objects;
 
 /**
  * This class is the main activity,
@@ -48,13 +41,17 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
         setContentView(R.layout.activity_main);
 
         ActionBar actionBar = getSupportActionBar();
-        assert actionBar != null;
-        actionBar.setTitle(getResources().getString(R.string.app_name));
-        if (user == null && savedInstanceState != null) {   // sets user details
-            user = new User();
-            user.setEmail(savedInstanceState.getString("email"));
-            user.setUserTypeId(savedInstanceState.getInt("typeId"));
-            user.setUPassword("");
+        if (actionBar != null) {
+            // sets the app name as the title
+            actionBar.setTitle(getResources().getString(R.string.app_name));
+
+            // sets user object details from saved instance state - in case the activity is restarting
+            if (user == null && savedInstanceState != null) {
+                user = new User();
+                user.setEmail(savedInstanceState.getString("email"));
+                user.setUserTypeId(savedInstanceState.getInt("typeId"));
+                user.setUPassword("");
+            }
         }
     }
 
@@ -81,7 +78,8 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
             return true;
         });
 
-        logoutItem.setOnMenuItemClickListener(menuItem -> {     // logout dialog
+        // logout dialog
+        logoutItem.setOnMenuItemClickListener(menuItem -> {
             final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
             builder.setMessage(R.string.logout_dialog);
             builder.setCancelable(true);
@@ -107,7 +105,8 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
             return true;
         });
 
-        settingsItem.setOnMenuItemClickListener(menuItem -> {   // user settings dialog
+        // user settings dialog
+        settingsItem.setOnMenuItemClickListener(menuItem -> {
             Fragment newFragment;
             if (user.getUserTypeId() == 2) {
                 newFragment = new SettingsFragment();
@@ -130,11 +129,11 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
         return true;
     }
 
-    // change language method
+    // change language dialog
     private void showChangeLanguageDialog() {
         final String[] languagesLst = {"עברית", "English"};
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setTitle("Choose Language...");
+        builder.setTitle(R.string.choose_language);
         builder.setSingleChoiceItems(languagesLst, -1, (dialogInterface, i) -> {
             if (i == 0) {
                 setLocale("iw");
@@ -168,9 +167,12 @@ public class MainActivity extends AppCompatActivity implements FragmentToActivit
         setLocale(language);
     }
 
+    /* communicate with fragments, to get user details from login fragment,
+    by the FragmentToActivity interface
+     */
     @Override
     public void communicate(User user) {
-        // communicate with fragment to get user details from login fragment
+
         this.user = user;
     }
 

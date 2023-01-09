@@ -27,6 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true"
+            android:fadeScrollbars="false"
             tools:ignore="SpeakableTextPresentCheck">
 
             <LinearLayout
@@ -219,6 +220,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
                     android:layout_marginBottom="30dp"
+                    android:scrollbars="vertical"
                     android:background="@drawable/rounded_corners"/>
 
                     <TextView

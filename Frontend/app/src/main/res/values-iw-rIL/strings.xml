@@ -86,6 +86,8 @@
     <string name="enter_email">נא להכניס כתובת מייל</string>
     <string name="email_sent">מייל נשלח. בדוק את האימייל שלך</string>
     <string name="add">הוסף</string>
+    <string name="choose_language">בחר שפה…</string>
+    <string name="question_mark">\?</string>
 
     <string-array name="user_types_array">
         <item>מתנדב/ת</item>

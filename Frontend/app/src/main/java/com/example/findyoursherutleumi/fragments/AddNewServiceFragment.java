@@ -1,7 +1,5 @@
 package com.example.findyoursherutleumi.fragments;
 
-import androidx.fragment.app.FragmentTransaction;
-
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
@@ -88,8 +86,7 @@ public class AddNewServiceFragment extends Fragment {
         eveningRadio = view.findViewById(R.id.is_evening_radio);
         eveningRadio.setOnCheckedChangeListener((radioGroup, i) -> onRadioButtonClicked4(view));
 
-        assert getArguments() != null;
-        userEmail = getArguments().getString("email");
+        if (getArguments() != null) userEmail = getArguments().getString("email");
 
         addServiceBtn = view.findViewById(R.id.add_new_service_btn);
         addServiceBtn.setOnClickListener(view1 -> {
@@ -142,11 +139,6 @@ public class AddNewServiceFragment extends Fragment {
 
                                             assert getFragmentManager() != null;
                                             getFragmentManager().popBackStack();
-//                                            Fragment newFragment = new HomePageFragment();
-//                                            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-//                                            transaction.replace(R.id.fragmentContainerView, newFragment)
-//                                                    .addToBackStack(null)
-//                                                    .commit();
 
                                             Toast.makeText(getContext(), R.string.new_service_added, Toast.LENGTH_SHORT).show();
                                         }

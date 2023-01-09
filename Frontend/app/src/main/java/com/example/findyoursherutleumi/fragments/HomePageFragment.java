@@ -20,7 +20,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.findyoursherutleumi.MainActivity;
@@ -150,7 +149,6 @@ public class HomePageFragment extends Fragment {
         }, delay);
     }
 
-
     private void refreshData() {
         searchBar.getText().clear();
         mViewModel.loadServices();
@@ -170,6 +168,40 @@ public class HomePageFragment extends Fragment {
     public void updateAdapter() {
         servicesAdapter.notifyDataSetChanged();
     }
+
+//    /* when the fragment is restarting, the viewmodel gets all services from db,
+//    and updating the range of the adapter.
+//     */
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        mViewModel.loadServices();
+//        servicesAdapter.notifyItemRangeChanged(0,recyclerView.getItemDecorationCount());
+//        updateAdapter();
+//        searchBar.getText().clear();
+//    }
+//
+//    @SuppressLint("NotifyDataSetChanged")
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        mViewModel.loadServices();
+//        servicesAdapter.notifyItemRangeChanged(0,recyclerView.getItemDecorationCount());
+//        updateAdapter();
+//        searchBar.getText().clear();
+//    }
+//
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+//        updateAdapter();
+//    }
+//
+//    @Override
+//    public void onStop() {
+//        super.onStop();
+//        updateAdapter();
+//    }
 
 
 

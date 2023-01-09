@@ -12,6 +12,7 @@ import java.util.List;
 /**
  * This class is the HomePage viewmodel of the main screen,
  * to set up the services list from db.
+ * Viewmodel aware of android app lifecycle, and makes it easy to handle the data.
  */
 public class HomePageViewModel extends ViewModel {
 

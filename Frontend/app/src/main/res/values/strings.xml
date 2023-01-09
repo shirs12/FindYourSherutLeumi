@@ -85,6 +85,8 @@
     <string name="enter_email">Please enter an email address</string>
     <string name="email_sent">email sent. check your email</string>
     <string name="add">add</string>
+    <string name="choose_language">Choose Language…</string>
+    <string name="question_mark">\?</string>
 
     <string-array name="user_types_array">
         <item>Applicant</item>

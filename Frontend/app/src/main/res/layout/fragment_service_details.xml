@@ -43,6 +43,7 @@
             android:background="@color/light_blue"
             android:fillViewport="true"
             android:padding="10dp"
+            android:fadeScrollbars="false"
             tools:ignore="SpeakableTextPresentCheck">
 
             <androidx.cardview.widget.CardView
@@ -79,7 +80,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="5dp"
-                            android:text="TextView"
+                            android:text="@string/organization_hint"
                             android:textSize="16sp" />
                     </LinearLayout>
 
@@ -105,7 +106,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="5dp"
-                            android:text="TextView"
+                            android:text="@string/category_hint"
                             android:textSize="16sp" />
                     </LinearLayout>
 
@@ -131,7 +132,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="5dp"
-                            android:text="TextView"
+                            android:text="@string/country_hint"
                             android:textSize="16sp" />
                     </LinearLayout>
 
@@ -157,7 +158,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="5dp"
-                            android:text="TextView"
+                            android:text="@string/city_hint"
                             android:textSize="16sp" />
                     </LinearLayout>
 
@@ -183,7 +184,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="5dp"
-                            android:text="TextView"
+                            android:text="@string/address_hint"
                             android:textSize="16sp" />
                     </LinearLayout>
 
@@ -209,7 +210,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="5dp"
-                            android:text="TextView"
+                            android:text="@string/question_mark"
                             android:textSize="16sp" />
                     </LinearLayout>
 
@@ -235,7 +236,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="5dp"
-                            android:text="TextView"
+                            android:text="@string/question_mark"
                             android:textSize="16sp" />
                     </LinearLayout>
 
@@ -261,7 +262,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="5dp"
-                            android:text="TextView"
+                            android:text="@string/question_mark"
                             android:textSize="16sp" />
                     </LinearLayout>
 
@@ -287,7 +288,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="5dp"
-                            android:text="TextView"
+                            android:text="@string/question_mark"
                             android:textSize="16sp" />
                     </LinearLayout>
 
@@ -313,7 +314,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="5dp"
-                            android:text="TextView"
+                            android:text="@string/description_hint"
                             android:textSize="16sp" />
                     </LinearLayout>
 
@@ -339,7 +340,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="5dp"
-                            android:text="TextView"
+                            android:text="@string/coordinator_hint"
                             android:textSize="16sp" />
                     </LinearLayout>
 
@@ -365,7 +366,9 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="5dp"
-                            android:text="TextView"
+                            android:autoLink="phone"
+                            android:linksClickable="true"
+                            android:text="@string/coordinator_contact_hint"
                             android:textSize="16sp" />
                     </LinearLayout>
 

@@ -20,6 +20,7 @@ public class APIClient extends AppCompatActivity {
     private static final String BASE_URL = "http://192.168.1.104:3000/";  // home
 //    private static final String BASE_URL = "http://192.168.202.18:3000/";   // au
 
+    // creates a retrofit instance to adapt java interface to http calls
     public static Retrofit getInstance(){
         if (instance == null){
             Gson gson = new GsonBuilder().setLenient().create();
@@ -31,11 +32,11 @@ public class APIClient extends AppCompatActivity {
         return instance;
     }
 
-    public static User getUserService(){
-        User userService = getInstance().create(User.class);
-
-        return userService;
-    }
+//    public static User getUserService(){
+//        User userService = getInstance().create(User.class);
+//
+//        return userService;
+//    }
 
 
 
