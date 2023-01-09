@@ -136,7 +136,7 @@ public class HomePageFragment extends Fragment {
     }
 
     /*
-    refresh the data every second, unless search bar has text
+    refresh the data every second, unless search bar has some text
      */
     public void setHandler(){
         final Handler handler = new Handler();
@@ -152,6 +152,7 @@ public class HomePageFragment extends Fragment {
 
 
     private void refreshData() {
+        searchBar.getText().clear();
         mViewModel.loadServices();
         servicesAdapter.notifyItemRangeChanged(0,recyclerView.getItemDecorationCount());
         updateAdapter();
@@ -168,40 +169,6 @@ public class HomePageFragment extends Fragment {
     @SuppressLint("NotifyDataSetChanged")
     public void updateAdapter() {
         servicesAdapter.notifyDataSetChanged();
-    }
-
-    /* when the fragment is restarting, the viewmodel gets all services from db,
-    and updating the range of the adapter.
-     */
-    @Override
-    public void onStart() {
-        super.onStart();
-        mViewModel.loadServices();
-        servicesAdapter.notifyItemRangeChanged(0,recyclerView.getItemDecorationCount());
-        updateAdapter();
-        searchBar.getText().clear();
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    @Override
-    public void onResume() {
-        super.onResume();
-        mViewModel.loadServices();
-        servicesAdapter.notifyItemRangeChanged(0,recyclerView.getItemDecorationCount());
-        updateAdapter();
-        searchBar.getText().clear();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        updateAdapter();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        updateAdapter();
     }
 
 
