@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -129,8 +130,24 @@ public class HomePageFragment extends Fragment {
             }
         });
 
+        setHandler();
         servicesAdapter.notifyDataSetChanged();
         return view;
+    }
+
+    /*
+    refresh the data every second, unless search bar has text
+     */
+    public void setHandler(){
+        final Handler handler = new Handler();
+        final int delay = 1000 ; //1000 milliseconds = 1 sec
+
+        handler.postDelayed(new Runnable(){
+            public void run(){
+                if (searchBar.getText().length() == 0) refreshData();
+                handler.postDelayed(this, delay);
+            }
+        }, delay);
     }
 
 
