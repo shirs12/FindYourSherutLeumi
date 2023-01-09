@@ -27,21 +27,6 @@ public class SendEmailFragment extends Fragment {
     Button sendBtn;
 
 
-//    @Override
-//    public void onAttach(@NonNull Context context) {
-//        super.onAttach(context);
-//        OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
-//            @Override
-//            public void handleOnBackPressed() {
-//                assert getFragmentManager() != null;
-//                getFragmentManager().popBackStack();
-//                // TODO: get to back fragment
-//
-//            }
-//        };
-//        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
-//    }
-
     public static SendEmailFragment newInstance() {
         return new SendEmailFragment();
     }
