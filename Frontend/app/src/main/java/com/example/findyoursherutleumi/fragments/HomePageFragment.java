@@ -140,7 +140,7 @@ public class HomePageFragment extends Fragment {
      */
     public void setHandler(){
         final Handler handler = new Handler();
-        final int delay = 1000 ; //1000 milliseconds = 1 sec
+        final int delay = 1000;  // 1000 milliseconds = 1 second
 
         handler.postDelayed(new Runnable(){
             public void run(){
